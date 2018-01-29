@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!--[if lt IE 9]>
+    <style>body {display: none !important; background: none !important} </style>
+    <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+  <![endif]-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Open Graph Start -->
+  <meta name="description" content="JavaScript变量声明">
+<meta name="keywords" content="js, 变量, 声明提升">
+<meta property="og:type" content="website">
+<meta property="og:title" content="javascript之变量声明">
+<meta property="og:url" content="http://blog.suiga.com.cn/2017/08/26/javascript变量声明/index.html">
+<meta property="og:site_name" content="地平线">
+<meta property="og:description" content="JavaScript变量声明">
+<meta property="og:updated_time" content="2018-01-22T01:47:36.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript之变量声明">
+<meta name="twitter:description" content="JavaScript变量声明">
+<meta name="twitter:creator" content="@wayowe">
+<meta name="twitter:site" content="https://twitter.com/wayowe">
+<link rel="publisher" href="https://plus.google.com/u/0/101488006507001343157">
+  <!-- Open Graph End -->
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+  <title>javascript之变量声明 | 地平线</title>
+  <link rel="stylesheet" href="/style.css">
+      <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?05bd41e919685f4690c3df329812250d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+  
+    <script src="/lib/clipboard.min.js"></script>
+  
+</head>
+
+<body style="background: url(https://miao.su/content/images/system/home_cover_20170309061116.jpg) 0% 0% / cover fixed;">
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>地平线</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>javascript之变量声明</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <time>2017年08月26日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术类/">技术类</a>/ <a class="article-category-link" href="/categories/技术类/JavaScript/">JavaScript</a>
+  </div>
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#variable" class='tag'>variable</a>
+
+
+            
+          </div>
+          
+          <p>JavaScript是一门弱类型语言，它并不像其他强类型语言那样有多种变量类型的声明形式，如：int, double, string… 等，在JavaScript中声明变量统一使用 var 关键字。</p>
+<p>例如想要声明一个整数来使用，可以使用 <code>var num = 1;</code> 这样的语句，声明一串字符串也一样 <code>var str = &#39;string&#39;;</code> ,<a id="more"></a>声明一个布尔值、数组、对象都是使用 <code>var</code> 这个关键字： <code>var boo = true; var arr = [1,2,3]; var obj = { x: 1, y: 2};</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>; <span class="comment">// 声明一个整数</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"string"</span>; <span class="comment">// 声明一串字符串</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>; <span class="comment">// 声明一个布尔值</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">// 声明一个数组</span></span><br><span class="line"><span class="keyword">var</span> point = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;; <span class="comment">// 声明一个对象</span></span><br></pre></td></tr></table></figure>
+<p>在ES5标准之前，只有 <code>var</code> 这一个关键字用来声明一个可以使用的变量（函数暂不讨论）。而在ES6标准中，在此之上添加了两个新的声明变量的关键字，<code>let</code> 和 <code>const</code>。严格说起来应该是一个声明变量，一个声明常量， <code>const</code> 就是用来声明常量的关键字。</p>
+<h2 id="let与var有什么不同？"><a href="#let与var有什么不同？" class="headerlink" title="let与var有什么不同？"></a>let与var有什么不同？</h2><p>这需要从变量的作用域说起。在ES5标准之前，JavaScript中只有两种作用域：全局作用域与函数作用域。全局作用域的变量可以在代码运行中的任何位置访问到，而函数作用域的变量只有在该函数内部能够访问到。而在ES6标准中新增了一个块级作用域的概念，let关键字就是对应块级作用域的概念的变量声明。通过let声明的变量只有在声明时所在的块级作用域的范围内能访问，所谓块级作用域指的是代码中被<code>{}</code>包裹起来的代码（对象除外），函数体也属于代码块。</p>
+<p><code>let</code> 与 <code>var</code> 另一个不同的地方在于：</p>
+<ul>
+<li><p><code>var</code> 声明的变量可以重复声明，但只有第一次声明有效，且有声明提升；</p>
+</li>
+<li><p><code>let</code> 声明的变量不能再次声明，否则会报错，且let声明的变量并没有声明提升。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// ReferenceError: y is not defined</span></span><br><span class="line"><span class="comment">// let声明的变量在他所在的块级范围之外无法访问</span></span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="built_in">console</span>.log(a); </span><br><span class="line"><span class="comment">// undefined: 因为var声明有变量名提升，所以运行代码时，</span></span><br><span class="line"><span class="comment">// 系统就知道a是一个变量，只是这个变量并没有被赋值，因此是undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// ReferenceError: b is not defined</span></span><br><span class="line"><span class="comment">// 因为let声明没有变量名提升，所以运行到这句代码时，</span></span><br><span class="line"><span class="comment">// b还没有定义，不能作为一个变量使用</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>; <span class="comment">// SyntaxError: Identifier 'c' has already been declared</span></span><br><span class="line"><span class="comment">// let 无法重复声明已有变量</span></span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
+<h2 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h2><p>所谓常量，与变量相反。变量就是可以改变的量，而常量则是一旦声明，就无法改变的量。有些数据在使用过程中是不会改变的，甚至有些就是固定不变的值，如圆周率PI，像这样的数据，使用 <code>var</code> 声明，之后一直不做改动自然也是不算错的，但是使用 <code>const</code> 声明的话，更能够表达出符合的语义，用 <code>const PI = 3.14;</code> 代替 <code>var PI = 3.14;</code> 更能让人清楚地知道这是一个常量。</p>
+<p>const声明的变量的作用域范围同let关键字，也是声明变量所在的块级作用域，用const声明的变量也不能重复声明，且没有变量声明提升，另外不能通过赋值来改变常量的值。</p>
+<p>基于这几点，在声明一个常量的时候就要将这个常量的值赋给它，而不能先声明一个没有值的常量，再在之后赋值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> RWBY;</span><br><span class="line">RWBY = [<span class="string">"ruby"</span>,<span class="string">"weiss"</span>,<span class="string">"blake"</span>,<span class="string">"yang"</span>]; <span class="comment">// SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"><span class="comment">// 虽然错误是在重新给常量赋值时抛出的，也就是说 const RWBY; 这一步并没有错</span></span><br><span class="line"><span class="comment">// 但是很显然这样的语句毫无意义，所以通常声明一个常量时应该直接将值赋予该常量</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于变量声明提升"><a href="#关于变量声明提升" class="headerlink" title="关于变量声明提升"></a>关于变量声明提升</h2><p>JavaScript是解释型语言，解析一句执行一句，为了提高效率，在代码解析执行之前，有一个预解析的过程。在预解析时，代码并不会执行，系统只会检查当前作用域（函数内部的代码不会检查，只有在调用函数时，才会重复 <code>“预解析-&gt;执行”</code> 这样的步骤）的代码有没有语法上的错误和代码中的变量声明关键字 <code>var</code> 和函数声明的关键字 <code>function</code>。</p>
+<p>在遇到这两种声明时，系统会在内存中预先记录下声明的变量名和函数名，也就是标识符。在预解析结束后，运行代码之前，系统就得到了有哪些标识符是可以作为变量来使用的，如果使用了系统未记录的标识符，也就是没有声明的变量，这时系统就会抛出一个引用错误 <code>ReferenceError: xxx is not defined</code> 。</p>
+<p>在预解析过程中，如果遇到了同一个标识符多次声明，是不会多次记录的，只会记录第一次。如果同一个标识符既有变量声明var，又有函数声明function，最终记录下来的标识符是一个函数，遵循的原则是先有什么就记录什么，函数声明会记录两件事，一个同变量声明，记录该标识符可以使用，第二个记录该标识符指向一个函数。<br>所以有说法 <em>函数是JavaScript中的一等公民</em>。<br>但要知道该记录只保持在预解析结束，运行代码之前。<br>在运行代码过程中，需要根据实际情况判断标识符到底是一个变量还是一个函数。</p>
+
+        </section>
+        
+          <div class="copyright">
+            <p>
+              <span>本文标题：</span>
+              <a href="/2017/08/26/javascript变量声明/">javascript之变量声明</a>
+            </p>
+            <p>
+              <span>文章作者：</span>
+              <a href="/" title="回到主页">Wang Youwei</a>
+            </p>
+            <p>
+              <span>发布时间：</span>
+              2017年08月26日 09:33:22
+            </p>
+            <p>
+              <span>最后更新：</span>
+              2018年01月22日 09:47:36
+            </p>
+            <p>
+              <span>原始链接：</span>
+              <a href="/2017/08/26/javascript变量声明/" title="javascript之变量声明">http://blog.suiga.com.cn/2017/08/26/javascript变量声明/</a>
+              <span class="copy-path" data-clipboard-text="http://blog.suiga.com.cn/2017/08/26/javascript变量声明/    作者：Wang Youwei" title="点击复制文章链接">
+                <i class="fa fa-clipboard"></i>
+              </span>
+              <script>
+                new Clipboard('.copy-path');
+              </script>
+            </p>
+          </div>
+        
+    </article>
+    
+      <div class="pager">
+        
+          <div class="prev">
+            <a href="/2017/12/16/语句结束符/">
+              <i class="fa fa-arrow-left"></i>
+              JavaScript中的语句结束符
+            </a>
+          </div>
+        
+        
+          <div class="next">
+            <a href="/2017/07/17/CSS之BFC/">
+              CSS之BFC
+              <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        
+      </div>
+    
+    
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+            <div id="disqus_thread" class="disqus-thread">
+              <i>加载评论框需要翻墙</i>
+            </div>
+        </div>
+        <!-- disqus 评论框 end -->
+    
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let与var有什么不同？"><span class="toc-number">1.</span> <span class="toc-text">let与var有什么不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const常量"><span class="toc-number">2.</span> <span class="toc-text">const常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于变量声明提升"><span class="toc-number">3.</span> <span class="toc-text">关于变量声明提升</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "wayowe";
+  var disqus_identifier = "http://blog.suiga.com.cn/2017/08/26/javascript变量声明/";
+  var disqus_url = "http://blog.suiga.com.cn/2017/08/26/javascript变量声明/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp;
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('visibilitychange', function(){
+    var icon = document.querySelector('link[rel=icon]');
+    if (document.hidden) {
+      icon.href = '/favicon-hide.ico';
+    } else {
+      icon.href = '/favicon.ico';
+    }
+  })
+</script>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

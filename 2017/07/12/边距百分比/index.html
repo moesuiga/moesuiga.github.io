@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!--[if lt IE 9]>
+    <style>body {display: none !important; background: none !important} </style>
+    <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+  <![endif]-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Open Graph Start -->
+  <meta name="description" content="盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。">
+<meta name="keywords" content="margin-top, margin-bottom, padding-top, padding-bottom, 边距百分比">
+<meta property="og:type" content="website">
+<meta property="og:title" content="盒子边距百分比计算">
+<meta property="og:url" content="http://blog.suiga.com.cn/2017/07/12/边距百分比/index.html">
+<meta property="og:site_name" content="地平线">
+<meta property="og:description" content="盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。">
+<meta property="og:image" content="https://miao.su/images/2018/01/17/margind6856.png">
+<meta property="og:image" content="https://miao.su/images/2018/01/17/margin28db32.png">
+<meta property="og:updated_time" content="2018-01-22T01:46:45.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="盒子边距百分比计算">
+<meta name="twitter:description" content="盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。">
+<meta name="twitter:image" content="https://miao.su/images/2018/01/17/margind6856.png">
+<meta name="twitter:creator" content="@wayowe">
+<meta name="twitter:site" content="https://twitter.com/wayowe">
+<link rel="publisher" href="https://plus.google.com/u/0/101488006507001343157">
+  <!-- Open Graph End -->
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+  <title>盒子边距百分比计算 | 地平线</title>
+  <link rel="stylesheet" href="/style.css">
+      <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?05bd41e919685f4690c3df329812250d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+  
+    <script src="/lib/clipboard.min.js"></script>
+  
+</head>
+
+<body style="background: url(https://miao.su/content/images/system/home_cover_20170309061116.jpg) 0% 0% / cover fixed;">
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>地平线</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>盒子边距百分比计算</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <time>2017年07月12日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术类/">技术类</a>/ <a class="article-category-link" href="/categories/技术类/CSS/">CSS</a>
+  </div>
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#边距高度百分比" class='tag'>边距高度百分比</a>
+
+
+            
+          </div>
+          
+          <p>之前一直认为 <code>margin-top</code> 和 <code>margin-bottom</code> 设置百分比以父容器的高度计算，而 <code>margin-left</code> 和 <code>margin-right</code> 设置百分比以父容器的宽度计算，直到今天群里一个群友问：</p>
+<blockquote>
+<p>boostrap 中的栅格系统是如何设置 margin-top 百分比以宽度计算的?</p>
+</blockquote>
+<p>原因是他发现设置的 <code>margin: 10% 10%;</code> 中 <code>top</code> 和 <code>bottom</code> 值是以父容器的宽度计算得到的结果。</p>
+<p>经过一番测试及网上查找，才发现：原来 <code>margin-top</code> 和 <code>margin-bottom</code> 并不是以父容器的高度计算百分比的，而是同样以父容器宽度来计算，同样的 <code>padding</code> 内边距也是一样。</p>
+<p>如按照以下样式设置</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.son</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10%</span> <span class="number">10%</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ff0000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"son"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>得到的结果是：</p>
+<p><img src="https://miao.su/images/2018/01/17/margind6856.png" alt="margind6856.png"></p>
+<p>不过也不是绝对这样，如果设置了 <code>writing-mode</code> 为纵向书写，比如 <code>-webkit-writing-mode: vertical-lr;</code> 此时按百分比书写的margin就会参照容器的高度来计算了。</p>
+<p>在上例中的 father 中添加 <code>-webkit-writing-mode: vertical-lr;</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">-webkit-writing-mode</span>: vertical-lr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>得到的结果就是：</p>
+<p><img src="https://miao.su/images/2018/01/17/margin28db32.png" alt="margin28db32.png"></p>
+
+        </section>
+        
+          <div class="copyright">
+            <p>
+              <span>本文标题：</span>
+              <a href="/2017/07/12/边距百分比/">盒子边距百分比计算</a>
+            </p>
+            <p>
+              <span>文章作者：</span>
+              <a href="/" title="回到主页">Wang Youwei</a>
+            </p>
+            <p>
+              <span>发布时间：</span>
+              2017年07月12日 13:57:58
+            </p>
+            <p>
+              <span>最后更新：</span>
+              2018年01月22日 09:46:45
+            </p>
+            <p>
+              <span>原始链接：</span>
+              <a href="/2017/07/12/边距百分比/" title="盒子边距百分比计算">http://blog.suiga.com.cn/2017/07/12/边距百分比/</a>
+              <span class="copy-path" data-clipboard-text="http://blog.suiga.com.cn/2017/07/12/边距百分比/    作者：Wang Youwei" title="点击复制文章链接">
+                <i class="fa fa-clipboard"></i>
+              </span>
+              <script>
+                new Clipboard('.copy-path');
+              </script>
+            </p>
+          </div>
+        
+    </article>
+    
+      <div class="pager">
+        
+          <div class="prev">
+            <a href="/2017/07/17/清除浮动/">
+              <i class="fa fa-arrow-left"></i>
+              清除浮动
+            </a>
+          </div>
+        
+        
+          <div class="next">
+            <a href="/2017/07/04/hexo博客/">
+              hexo + github 快速创建个人博客
+              <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        
+      </div>
+    
+    
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+            <div id="disqus_thread" class="disqus-thread">
+              <i>加载评论框需要翻墙</i>
+            </div>
+        </div>
+        <!-- disqus 评论框 end -->
+    
+    
+    
+  </div>
+  <aside>
+    
+      
+<div class="search">
+  <div class="content">
+    <form action="//www.google.com/search" target="_blank" class="search-form">
+      <input type="text" name="q" maxlength="20" placeholder="搜索">
+      <input type="hidden" name='sitesearch' value="http://blog.suiga.com.cn">
+    </form>
+  </div>
+</div>
+
+<div class="avatar">
+  <img class="circle" src="https://miao.su/images/2018/01/16/timg1b15f.jpg" alt="avatar">
+  
+  
+    <div class="content">
+        <span>在真相永无人知的情况下，一个人的所作所为，最能显示他的品格。</span>
+    </div>
+  
+</div>
+
+
+
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "wayowe";
+  var disqus_identifier = "http://blog.suiga.com.cn/2017/07/12/边距百分比/";
+  var disqus_url = "http://blog.suiga.com.cn/2017/07/12/边距百分比/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp;
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('visibilitychange', function(){
+    var icon = document.querySelector('link[rel=icon]');
+    if (document.hidden) {
+      icon.href = '/favicon-hide.ico';
+    } else {
+      icon.href = '/favicon.ico';
+    }
+  })
+</script>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

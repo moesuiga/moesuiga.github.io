@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!--[if lt IE 9]>
+    <style>body {display: none !important; background: none !important} </style>
+    <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+  <![endif]-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Open Graph Start -->
+  <meta name="description" content="CSS选择器的大致整理">
+<meta name="keywords" content="web, 前端, CSS, CSS选择器">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSS选择器">
+<meta property="og:url" content="http://blog.suiga.com.cn/2018/01/11/css-selectors/index.html">
+<meta property="og:site_name" content="地平线">
+<meta property="og:description" content="CSS选择器的大致整理">
+<meta property="og:updated_time" content="2018-01-22T01:47:04.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS选择器">
+<meta name="twitter:description" content="CSS选择器的大致整理">
+<meta name="twitter:creator" content="@wayowe">
+<meta name="twitter:site" content="https://twitter.com/wayowe">
+<link rel="publisher" href="https://plus.google.com/u/0/101488006507001343157">
+  <!-- Open Graph End -->
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+  <title>CSS选择器 | 地平线</title>
+  <link rel="stylesheet" href="/style.css">
+      <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?05bd41e919685f4690c3df329812250d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+  
+    <script src="/lib/clipboard.min.js"></script>
+  
+</head>
+
+<body style="background: url(https://miao.su/content/images/system/home_cover_20170309061116.jpg) 0% 0% / cover fixed;">
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>地平线</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>CSS选择器</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <time>2018年01月11日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术类/">技术类</a>/ <a class="article-category-link" href="/categories/技术类/CSS/">CSS</a>
+  </div>
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#selectors" class='tag'>selectors</a>
+
+
+            
+          </div>
+          
+          <p>CSS-<em>Cascading Style Sheet(层叠样式表)</em>，给HTML元素添加各种样式的文件。CSS选择器就是用来匹配要添加样式的元素的。<br><a id="more"></a><br><a href="http://www.w3school.com.cn/cssref/css_selectors.asp" target="_blank" rel="noopener">W3school</a></p>
+<p><a href="/demo/icss/selector.html">CSS选择器演示</a></p>
+<p>按照我个人的理解，将其分为：</p>
+<ul>
+<li><a href="#基础选择器">基础选择器</a></li>
+<li><a href="#属性选择器">属性选择器</a></li>
+<li><a href="#伪类、伪元素选择器">伪类、伪元素选择器</a></li>
+<li><a href="#组合选择器">组合选择器</a></li>
+</ul>
+<h3 id="基础选择器"><a href="#基础选择器" class="headerlink" title="基础选择器"></a>基础选择器</h3><p>基础选择器就相当于选择器的基础组成部分一样。</p>
+<ul>
+<li><p>通配符选择器(*)<br>匹配所有的标签，但权重最低(比继承高)</p>
+</li>
+<li><p>标签(元素)选择器(tag/element)<br>匹配对应的标签。<br><em>tips</em>: 标签就是元素，元素就是标签，不同的叫法而已</p>
+</li>
+<li><p>类选择器(.class)<br>选择属性<code>class</code>中有对应名称的元素</p>
+</li>
+<li><p>ID选择器(#id)<br>选择属性<code>id</code>中有对应名称的元素</p>
+</li>
+</ul>
+<p>其实属性选择器应该也可以归为基础选择器，但是因为属性选择器里有多种匹配模式，所以单独提出来了。</p>
+<h3 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h3><p>属性选择器一般都会与其他选择器组合使用。</p>
+<ul>
+<li><p>[attribute]<br>选择具有<code>attribute</code>属性的元素</p>
+</li>
+<li><p>[attribute=value]<br>选择具有属性<code>attribute</code>且值为<code>value</code>的元素</p>
+</li>
+<li><p>[attribute~=value]<br>选择属性<code>attribute</code>中含有单词<code>value</code>的元素</p>
+</li>
+<li><p>[attribute|=value]<br>选择属性<code>attribute</code>以单词<code>value</code>开头的元素</p>
+</li>
+<li><p>[attribute*=value]<br>选择属性<code>attribute</code>中包含字符串<code>value</code>的元素</p>
+</li>
+<li><p>[attribute^=value]<br>选择属性<code>attribute</code>以字符串<code>value</code>开头的元素</p>
+</li>
+<li><p>[attribute$=value]<br>选择属性<code>attribute</code>以字符串<code>value</code>结尾的元素</p>
+</li>
+</ul>
+<h4 id="attribute-value-与-attribute-value-的区别"><a href="#attribute-value-与-attribute-value-的区别" class="headerlink" title="[attribute~=value]与[attribute*=value]的区别"></a>[attribute~=value]与[attribute*=value]的区别</h4><p><code>[attribute~=value]</code>匹配的是<em>单词</em>，表示的是某个属性attribute的值里有value这个词，而<code>[attribute*=value]</code>匹配的是<em>字符串</em>，表示attribute的值里包含value这串字符。</p>
+<p>举个例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[class~=err]</span> &#123;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-attr">[class*=err]</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span></span><br><span class="line">  错误信息</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"err or"</span>&gt;</span></span><br><span class="line">  另一条</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子中<code>[class~=err]</code>并不会选中<code>class=&quot;error&quot;</code>只会选中<code>class=&quot;err or&quot;</code>，而<code>[class*=err]</code>则两个都能选中。</p>
+<p>也就是说<code>[attribute~=value]</code>是以<em>单词</em>为度量进行匹配，而<code>[attribute*=value]</code>则以<em>字符串</em>的形式进行匹配，不论是否是完整的一个单词。</p>
+<blockquote>
+<p>同样的<code>[attribute|=value]</code>与<code>[attribute^=value]</code>的区别也是如此。</p>
+</blockquote>
+<h3 id="伪类、伪元素选择器"><a href="#伪类、伪元素选择器" class="headerlink" title="伪类、伪元素选择器"></a>伪类、伪元素选择器</h3><p><code>伪类/伪元素</code>就是一种拥有类似<code>类/元素</code>的性质却又不是<code>类/元素</code>的东西。一般的，伪类选择器以<code>:</code>开头，伪元素选择器以<code>::</code>开头。</p>
+<blockquote>
+<p>伪类、伪元素选择器一般不会单独使用，而是与其他选择器组合在一起使用。</p>
+</blockquote>
+<ul>
+<li><p><code>:before/:after/::before/::after</code></p>
+<blockquote>
+<p>tips: <code>:before/:after</code>与<code>::before/::after</code>实际上的用法完全相同，之所以一个是伪类一个是伪元素只是不同时期的归类不同而已。<br>早期将其归类为<em>伪类</em>，而后来则归为了<em>伪元素</em>。<br>不过现代浏览器也支持伪类写法，所以如果需要兼容旧版浏览器的话，可以直接以伪类形式书写。<br>另外该选择器有一个必须的样式属性<code>content</code>，否则该选择器不生效。</p>
+</blockquote>
+<ul>
+<li><code>:before/::before</code>在某个元素的内容之前插入</li>
+<li><code>:after/::after</code>在某个元素的内容之后插入</li>
+</ul>
+</li>
+<li><p><code>:link/:visited/:active/:hover/:focus</code></p>
+<ul>
+<li><code>:link</code>用于选择未被访问过的链接</li>
+<li><code>:visited</code>用于选择已被访问过的链接</li>
+<li><code>:active</code>用于选择活动<strong>元素</strong>(即当前选中的元素，直观点表达就是按下鼠标不松开的状态)</li>
+<li><code>:hover</code>用于选择鼠标悬浮于其上的<strong>元素</strong>(即鼠标指针指向的元素)</li>
+<li><code>:focus</code>用于选择获得焦点的<strong>可获取焦点的元素</strong>(一般是表单元素和超链接)</li>
+</ul>
+</li>
+<li><p><code>:first-letter/:first-line</code></p>
+<ul>
+<li><code>:first-letter</code>选择首字母，中文下选择首字</li>
+<li><code>:first-line</code>选择首行</li>
+</ul>
+</li>
+<li><p>子元素伪类(需要有父元素)</p>
+<ul>
+<li><code>:first-child</code>选择首个子元素</li>
+<li><code>:last-child</code>选择最后一个子元素</li>
+<li><code>:nth-child(n)</code>选择第n个子元素<blockquote>
+<p>可以使用数学表达式来选择多个子元素。<br>如：<code>:nth-child(n + 2)</code>选择第2个以后的子元素，<code>nth-child(2n)</code>选择偶数子元素<br>还可以使用负数表示：`nth-child(-n + 2)选择最后两个</p>
+</blockquote>
+</li>
+<li><code>nth-last-child(n)</code>同上，从最后一个开始计数</li>
+<li><code>:only-child</code>选择唯一的子元素</li>
+<li><code>:first-of-type</code>选择首个(某一类型的)子元素</li>
+<li><code>:last-of-type</code>选择最后一个(某一类型的)子元素</li>
+<li><code>:nth-of-type(n)</code>选择第n个(某一类型的)子元素</li>
+<li><code>:nth-last-of-type(n)</code>同上，从最后一个开始计数</li>
+<li><code>:only-of-type</code>选择唯一的(某一类型的)子元素</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>child</code>与<code>of-type</code>的区别：<br><code>child</code>是包含所有子元素进行计算的，<br>而<code>of-type</code>则只包含先通过与其组合的其他选择器匹配后得到的子元素，而非全部子元素。</p>
+</blockquote>
+<ul>
+<li>其他<ul>
+<li><code>:root</code>选择根元素，HTML里的根元素就是<code>html</code>标签</li>
+<li><code>:lang(language)</code>选择带有以<code>language</code>开头的<code>lang</code>属性值的元素<blockquote>
+<p>如：<code>p:lang(it)</code>表示选择带有以<code>it</code>开头的<code>lang</code>属性的p元素</p>
+</blockquote>
+</li>
+<li><code>:empty</code>选择没有子元素(包括文本节点)的元素</li>
+<li><code>:target</code>选择当前活动的元素(url中的锚点指向的ID元素)</li>
+<li><code>:enabled</code>选择启用的元素</li>
+<li><code>:disabled</code>选择禁用的元素</li>
+<li><code>:checked</code>选择被选中的元素</li>
+<li><code>:not(selector)</code>选择不是selector选中的元素</li>
+<li><code>::selection</code>选择被用户选取的元素部分<blockquote>
+<p>应用了<code>:first-letter</code>样式的元素，不会应用<code>::selection</code>的样式</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合选择器"><a href="#组合选择器" class="headerlink" title="组合选择器"></a>组合选择器</h3><p>顾名思义，组合选择器就是由两个或多个基础选择器组合成的选择器。</p>
+<blockquote>
+<p>以下用a, b, … 等表示基础选择器</p>
+</blockquote>
+<ul>
+<li>并集选择器(a, b)</li>
+<li>交集选择器(ab)</li>
+<li>兄弟选择器(a ~ b)</li>
+<li>直接兄弟选择器(a + b)</li>
+<li>父子选择器(a &gt; b)</li>
+<li>后代选择器(a b)</li>
+<li>其他由以上多种选择器进行组合的选择器(a &gt; b c, d + e f ~ g)</li>
+</ul>
+<blockquote>
+<p>注意后代选择器之间是<strong>有空格</strong>的，而交集选择器之间是<strong>没有空格</strong>的<br><code>a ~ b</code>是选择与a元素同级的后面所有的b元素，<br>而<code>a + b</code>则是选择紧跟着a元素后面的b元素，如果a元素后面的元素不是b，则不匹配</p>
+</blockquote>
+
+        </section>
+        
+          <div class="copyright">
+            <p>
+              <span>本文标题：</span>
+              <a href="/2018/01/11/css-selectors/">CSS选择器</a>
+            </p>
+            <p>
+              <span>文章作者：</span>
+              <a href="/" title="回到主页">Wang Youwei</a>
+            </p>
+            <p>
+              <span>发布时间：</span>
+              2018年01月11日 16:57:12
+            </p>
+            <p>
+              <span>最后更新：</span>
+              2018年01月22日 09:47:04
+            </p>
+            <p>
+              <span>原始链接：</span>
+              <a href="/2018/01/11/css-selectors/" title="CSS选择器">http://blog.suiga.com.cn/2018/01/11/css-selectors/</a>
+              <span class="copy-path" data-clipboard-text="http://blog.suiga.com.cn/2018/01/11/css-selectors/    作者：Wang Youwei" title="点击复制文章链接">
+                <i class="fa fa-clipboard"></i>
+              </span>
+              <script>
+                new Clipboard('.copy-path');
+              </script>
+            </p>
+          </div>
+        
+    </article>
+    
+      <div class="pager">
+        
+          <div class="prev">
+            <a href="/2018/01/18/photos/">
+              <i class="fa fa-arrow-left"></i>
+              Photos
+            </a>
+          </div>
+        
+        
+          <div class="next">
+            <a href="/2018/01/07/console/">
+              console function
+              <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        
+      </div>
+    
+    
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+            <div id="disqus_thread" class="disqus-thread">
+              <i>加载评论框需要翻墙</i>
+            </div>
+        </div>
+        <!-- disqus 评论框 end -->
+    
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础选择器"><span class="toc-number">1.</span> <span class="toc-text">基础选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性选择器"><span class="toc-number">2.</span> <span class="toc-text">属性选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attribute-value-与-attribute-value-的区别"><span class="toc-number">2.1.</span> <span class="toc-text">[attribute~=value]与[attribute*=value]的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类、伪元素选择器"><span class="toc-number">3.</span> <span class="toc-text">伪类、伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合选择器"><span class="toc-number">4.</span> <span class="toc-text">组合选择器</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "wayowe";
+  var disqus_identifier = "http://blog.suiga.com.cn/2018/01/11/css-selectors/";
+  var disqus_url = "http://blog.suiga.com.cn/2018/01/11/css-selectors/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp;
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('visibilitychange', function(){
+    var icon = document.querySelector('link[rel=icon]');
+    if (document.hidden) {
+      icon.href = '/favicon-hide.ico';
+    } else {
+      icon.href = '/favicon.ico';
+    }
+  })
+</script>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
