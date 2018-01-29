@@ -52,7 +52,8 @@ main {
   main aside {
     user-select: none; }
   main blockquote > footer {
-    text-align: right; }
+    text-align: right;
+    font-family: 'Monotype Corsiva', Pristina, '华文楷体', '华文隶书'; }
     main blockquote > footer cite::before {
       content: '——';
       padding: 0 .3em; }
@@ -133,6 +134,8 @@ aside {
         height: 150px;
         margin: 15px auto;
         border-radius: 50%; }
+    aside .avatar .content {
+      font-family: 'Monotype Corsiva', Pristina, '华文新魏', '方正舒体', sans-serif; }
     aside .avatar .social {
       padding: 0 20px;
       display: flex;
