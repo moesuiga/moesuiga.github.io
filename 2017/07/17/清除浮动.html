@@ -107,7 +107,7 @@
 <meta property="og:description" content="清除浮动并不是将浮动的样式清除掉，而是闭合浮动，使得添加了清除浮动样式的元素，检测其前面的浮动元素并将浮动闭合起来，让其后的元素不受影响。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://miao.su/images/2019/01/12/02174bc6.jpg">
-<meta property="og:updated_time" content="2019-06-28T08:29:10.720Z">
+<meta property="og:updated_time" content="2019-06-28T09:10:26.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清除浮动">
 <meta name="twitter:description" content="清除浮动并不是将浮动的样式清除掉，而是闭合浮动，使得添加了清除浮动样式的元素，检测其前面的浮动元素并将浮动闭合起来，让其后的元素不受影响。">
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-28 16:29:10" itemprop="dateModified" datetime="2019-06-28T16:29:10+08:00">2019-06-28</time>
+                <time title="修改时间：2019-06-28 17:10:26" itemprop="dateModified" datetime="2019-06-28T17:10:26+08:00">2019-06-28</time>
               
             
           </span>
@@ -492,16 +492,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/17/清除浮动.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2017/07/17/清除浮动.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -542,7 +532,7 @@
       
         
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          <a href="https://miao.su/images/2019/01/12/02174bc6.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/01/12/02174bc6.jpg);" rel="gallery_cjxfu5n6o0010i0q46cmp80rx" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
+          <a href="https://miao.su/images/2019/01/12/02174bc6.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/01/12/02174bc6.jpg);" rel="gallery_cjxfvmph9000wkhua1mj7abjw" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
         </div>
       
 
@@ -650,10 +640,7 @@
           
 
   
-    <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
+    <div class="comments" id="gitalk-container">
     </div>
 
   
@@ -1077,48 +1064,29 @@
 
   
   
-    <!-- LOCAL: You can save these files to your site and update links -->
+    
 
-  
-  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
-<!-- END LOCAL -->
 
-<style>
-#gitment-container a {
-  border-bottom: none;
-}
 
-</style>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
 
 <script>
-  function renderGitment() {
-    var gitment = new Gitmint({
-      // id: window.location.pathname,
-      // use page date to void `Error: validation failed`
-      // GitHub issues label's max-length limits 50
-      // See: https://www.jianshu.com/p/57afa4844aaa
-      id: '1500294518000',
-      owner: 'moesuiga',
-      repo: 'blog-comments-by-gitment',
-      
-        lang: '' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-      
-      oauth: {
-      
-      
-        client_secret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
-      
-        client_id: '827326488d2cde661c88'
-      }
-    });
-    gitment.render('gitment-container');
-  }
-
-  
-    renderGitment();
-  
+  var gitalk = new Gitalk({
+    clientID: '827326488d2cde661c88',
+    clientSecret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
+    repo: 'blog-comments-by-gitalk',
+    owner: 'moesuiga',
+    admin: ['moesuiga'],
+    id: md5(location.pathname),
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
 </script>
 
   
