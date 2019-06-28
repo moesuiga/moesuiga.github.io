@@ -160,7 +160,9 @@ live2d:
   display:
     position: right
     width: 300
-    height: 600
+    height: 400
+    hOffset: 0
+    vOffset: 0
   mobile:
     show: false
   dialog:

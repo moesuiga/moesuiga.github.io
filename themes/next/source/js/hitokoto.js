@@ -4,7 +4,7 @@ document.head.innerHTML += `
     width: 100%;
     position: absolute;
     z-index: -1;
-    bottom: 80%;
+    bottom: 100%;
     left: 0;
     padding: 12px;
     box-sizing: border-box;
@@ -92,6 +92,49 @@ document.head.innerHTML += `
       } else {
         console.error('Can not find live2d element');
       }
+
+
+      // drag live2d-widget
+      var live2dWidget = document.getElementById('live2d-widget');
+      if (live2dWidget) {
+        // set draggable
+        live2dWidget.setAttribute('draggable', true);
+        live2dWidget.style.pointerEvents = '';
+        live2dWidget.style.cursor = 'move';
+        var posXRight = parseFloat(live2dWidget.style.right);
+        var posYBottom = parseFloat(live2dWidget.style.bottom);
+
+        var dragstartX, dragstartY;
+        var draggingWidget = false;
+        live2dWidget.addEventListener('dragstart', function (e) {
+          // e.preventDefault();
+          // e.dropEffect = 'move';
+          // set start coordinate
+          draggingWidget = true;
+          dragstartX = e.screenX;
+          dragstartY = e.screenY;
+        });
+
+        document.addEventListener('dragover', function (e) {
+          e.preventDefault();
+          if (draggingWidget) {
+            var movedX = e.screenX - dragstartX;
+            var movedY = e.screenY - dragstartY;
+            live2dWidget.style.right = `${posXRight - movedX}px`;
+            live2dWidget.style.bottom = `${posYBottom - movedY}px`;
+          }
+        });
+
+        document.addEventListener('dragend', function (e) {
+          e.preventDefault();
+          if (draggingWidget) {
+            posXRight -= e.screenX - dragstartX;
+            posYBottom -= e.screenY - dragstartY;
+            draggingWidget = false;
+          }
+        })
+      }
     }
   });
+
 })();
