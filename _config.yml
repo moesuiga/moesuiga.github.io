@@ -8,9 +8,7 @@ subtitle: 与其临渊羡鱼，不如退而结网
 description: 小小西瓜棚
 keywords: suiga, watermelon, blog, website, front-end
 author: Suiga
-language:
-  - zh-Hans
-  - en
+language: zh-CN
 timezone: Asia/ShangHai
 
 # Extensions
