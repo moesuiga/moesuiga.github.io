@@ -90,9 +90,11 @@ footer:
   # -------------------------------------------------------------
   # Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
   # http://www.miitbeian.gov.cn
+  # URL above can't be found
+  # It's http://www.beian.miit.gov.cn
   beian:
-    enable: false
-    icp:
+    enable: true
+    icp: 豫ICP备19018274号-1
 
   # -------------------------------------------------------------
   # Any custom text can be defined here.
@@ -177,7 +179,7 @@ site_state: true
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  Suiga: https://suiga.win/ || user
+  Suiga: https://www.childish.site/ || user
   GitHub: https://github.com/moesuiga || github
   E-Mail: mailto:moesuiga@gmail.com || envelope
   # Weibo: https://weibo.com/yourname || weibo
