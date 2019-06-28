@@ -572,16 +572,16 @@ valine:
 # Gitment
 # Introduction: https://github.com/imsun/gitment
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
-  github_user: moesuiga # MUST HAVE, Your Github Username
-  github_repo: blog-comments-by-gitment # MUST HAVE, The name of the repo you use to store Gitment comments
-  client_id: 827326488d2cde661c88 # MUST HAVE, Github client id for the Gitment
-  client_secret: 0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0 # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  github_user:  # MUST HAVE, Your Github Username
+  github_repo:  # MUST HAVE, The name of the repo you use to store Gitment comments
+  client_id:  # MUST HAVE, Github client id for the Gitment
+  client_secret:  # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 
@@ -589,12 +589,12 @@ gitment:
 # Demo: https://gitalk.github.io
 # Reference: https://asdfv1929.github.io/2018/01/20/gitalk/, https://liujunzhou.cn/2018/8/10/gitalk-error/#more
 gitalk:
-  enable: false
-  github_id:  # Github repo owner
-  repo:  # Repository name to store issues.
-  client_id:  # Github Application Client ID
-  client_secret:  # Github Application Client Secret
-  admin_user:  # GitHub repo owner and collaborators, only these guys can initialize github issues
+  enable: true
+  github_id: moesuiga # Github repo owner
+  repo: blog-comments-by-gitalk # Repository name to store issues.
+  client_id: 827326488d2cde661c88 # Github Application Client ID
+  client_secret: 0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0 # Github Application Client Secret
+  admin_user: moesuiga # GitHub repo owner and collaborators, only these guys can initialize github issues
   distraction_free_mode: true # Facebook-like distraction free mode
 
 # Baidu Share
