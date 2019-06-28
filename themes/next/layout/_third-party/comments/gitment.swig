@@ -23,7 +23,11 @@
 <script>
   function renderGitment() {
     var gitment = new {{ CommentsClass }}({
-      id: window.location.pathname,
+      // id: window.location.pathname,
+      // use page date to void `Error: validation failed`
+      // GitHub issues label's max-length limits 50
+      // See: https://www.jianshu.com/p/57afa4844aaa
+      id: '{{ page.date }}',
       owner: '{{ theme.gitment.github_user }}',
       repo: '{{ theme.gitment.github_repo }}',
       {% if theme.gitment.mint %}
