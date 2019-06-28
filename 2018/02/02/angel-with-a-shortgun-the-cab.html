@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="地平线·梦">
 <meta property="og:description" content="I’m an angel with a shortgun, shortgun, shortgun.An angel with a shortgun, shortgun, shortgun.Get out your guns, battle’s begun,are you a saint or a sinner?If love’s a fight, then I shall die,with my">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-28T05:36:10.464Z">
+<meta property="og:updated_time" content="2019-06-28T07:55:47.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ANGEL WITH A SHORTGUN - THE CAB">
 <meta name="twitter:description" content="I’m an angel with a shortgun, shortgun, shortgun.An angel with a shortgun, shortgun, shortgun.Get out your guns, battle’s begun,are you a saint or a sinner?If love’s a fight, then I shall die,with my">
@@ -464,7 +464,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 13:36:10" itemprop="dateModified" datetime="2019-06-28T13:36:10+08:00">2019-06-28</time>
+                <time title="Modified: 2019-06-28 15:55:47" itemprop="dateModified" datetime="2019-06-28T15:55:47+08:00">2019-06-28</time>
               
             
           </span>
@@ -497,8 +497,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/02/02/angel-with-a-shortgun-the-cab.html#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/02/02/angel-with-a-shortgun-the-cab.html" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/02/angel-with-a-shortgun-the-cab.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -646,9 +645,9 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-      </div>
+      
+        <div id="gitment-container"></div>
+      
     </div>
 
   
@@ -799,7 +798,7 @@
                   
                     
                   
-                  <span class="exturl" data-url="aHR0cHM6Ly9zdWlnYS53aW4v" title="Suiga &rarr; https://suiga.win/"><i class="fa fa-fw fa-user"></i></span>
+                  <a href="https://www.childish.site/" title="Suiga &rarr; https://www.childish.site/"><i class="fa fa-fw fa-user"></i></a>
                 </span>
               
                 <span class="links-of-author-item">
@@ -904,7 +903,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">豫ICP备19018274号-1 </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1072,24 +1071,43 @@
 
   
   
-    
-  <script id="dsq-count-scr" src="https://wayowe.disqus.com/count.js" async></script>
+    <!-- LOCAL: You can save these files to your site and update links -->
 
+  
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
+<!-- END LOCAL -->
+
+<style>
+#gitment-container a {
+  border-bottom: none;
+}
+
+</style>
 
 <script>
-  var disqus_config = function () {
-    this.page.url = "https://www.childish.site/2018/02/02/angel-with-a-shortgun-the-cab.html";
-    this.page.identifier = "/2018/02/02/angel-with-a-shortgun-the-cab.html";
-    this.page.title = 'ANGEL WITH A SHORTGUN - THE CAB';
-    };
-  function loadComments () {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://wayowe.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', '' + +new Date());
-    (d.head || d.body).appendChild(s);
+  function renderGitment() {
+    var gitment = new Gitmint({
+      id: window.location.pathname,
+      owner: 'moesuiga',
+      repo: 'blog-comments-by-gitment',
+      
+        lang: '' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+      
+      oauth: {
+      
+      
+        client_secret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
+      
+        client_id: '827326488d2cde661c88'
+      }
+    });
+    gitment.render('gitment-container');
   }
+
   
-    loadComments();
+    renderGitment();
   
 </script>
 
