@@ -1,0 +1,15 @@
+language: node_js
+sudo: required
+node_js:
+  - lts/*
+script:
+  - npm run build:nocache
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: public
+  target_branch: master
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: primitive
