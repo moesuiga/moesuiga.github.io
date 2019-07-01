@@ -1,5 +1,5 @@
 ---
-en_title: css bfc
+en_title: CSS_BFC
 title: CSS之BFC
 keywords: CSS, BFC, Block Formatting Context, 清除浮动, 自适应盒子
 description: BFC 是一个独立的渲染区域，只有块级元素参与，它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。BFC内部的任何布局都不影响其外部区域。

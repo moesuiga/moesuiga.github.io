@@ -1,5 +1,5 @@
 ---
-en_title: JavaScript convert to number
+en_title: JavaScript_Convert_To_Number
 title: JavaScript 其他类型为数字类型的方式
 keywords: JavaScript, JS, Transfer Number, 转换数字类型
 description: 记录一些JavaScript中的数据类型转换——数字类型

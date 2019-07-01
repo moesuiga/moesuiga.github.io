@@ -1,5 +1,5 @@
 ---
-en_title: build personal blog to use hexo and github
+en_title: Build_Personal_Blog_To_Use_Hexo_And_Github
 title: hexo + github 快速创建个人博客
 keywords: github, hexo, 博客
 description: github搭配hexo快速创建个人博客

@@ -1,5 +1,5 @@
 ---
-en_title: Sass and SCSS
+en_title: Sass_and_SCSS
 title: 【转】Sass 与 SCSS 的异同
 keywords: CSS, Sass, SCSS, CSS预处理器, PreCSS
 description: Sass 是一种 CSS 的预处理语言，提供了许多便利的写法，大大节省了设计者的时间，使得CSS的开发变得简单和可维护。SCSS 是 Sass 引入的新语法，其语法完全兼容 CSS3，并且继承了 Sass 的强大功能。也就是说，任何标准的 CSS3 样式表都是具有相同语义的有效的 SCSS 文件。

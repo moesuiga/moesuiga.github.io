@@ -1,5 +1,5 @@
 ---
-en_title: css selectors
+en_title: CSS_Selectors
 title: CSS选择器
 keywords: CSS, selectors, CSS选择器
 description: CSS选择器的大致整理

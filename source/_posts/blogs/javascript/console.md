@@ -1,5 +1,5 @@
 ---
-en_title: console function
+en_title: Console_Function_In_JavaScript
 title: console function
 keywords: js, javascript, console, 控制台
 description: 控制台console的一些方法记录

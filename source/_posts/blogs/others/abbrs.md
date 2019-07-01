@@ -1,5 +1,5 @@
 ---
-en_title: Some Abbreviations
+en_title: Some_Abbreviations
 title: 记一些英文简写
 date: 2019-1-8 12:46:49
 keywords: abbr, abbreviation, 英文缩写

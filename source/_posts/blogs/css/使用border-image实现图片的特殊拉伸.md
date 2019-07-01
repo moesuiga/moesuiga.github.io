@@ -1,5 +1,5 @@
 ---
-en_title: css border-image
+en_title: CSS_border-image
 title: 使用 border-image 实现图片的特殊拉伸
 date: 2019-3-12 16:16:26
 keywords: css, border-image, image, background, stretch, 图片, 拉伸
