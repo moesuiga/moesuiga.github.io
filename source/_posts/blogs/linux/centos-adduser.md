@@ -1,5 +1,5 @@
 ---
-en_title: How to add user in CentOS
+en_title: How_To_Add_User_In_CentOS
 title: CentOS 添加用户并授权 sudo
 date: 2018-09-01
 keywords: Linux, add user, sudo

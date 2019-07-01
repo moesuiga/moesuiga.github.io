@@ -1,5 +1,6 @@
 ---
-title: ANGEL WITH A SHORTGUN - THE CAB
+en_title: Angel_With_A_Shotgun
+title: ANGEL WITH A SHOTGUN - THE CAB
 date: 2018-2-2 22:36:31
 category:
   - Media
@@ -9,8 +10,8 @@ tags:
 
 {% youtube pdwgRKMTcgk %}
 
-*I'm an angel with a shortgun, shortgun, shortgun.
-An angel with a shortgun, shortgun, shortgun.
+*I'm an angel with a shotgun, shotgun, shotgun.
+An angel with a shotgun, shotgun, shotgun.
 Get out your guns, battle's begun,
 are you a saint or a sinner?
 If love's a fight, then I shall die,
@@ -21,7 +22,7 @@ you better know what you're fighting for.
 Well baby, you are all that I adore,
 if love is what you need, a soldier I will be.*
 <!-- more -->
-*I'm an angel with a shortgun,
+*I'm an angel with a shotgun,
 fighting til' the war's won.
 I don't care if heaven won't take me back.
 I'll throw away my faith, babe, just to keep you safe.*
@@ -39,23 +40,23 @@ you better know what you're fighting for.
 Well baby, you are all that I adore,
 if love is what you need, a soldier I will be.*
 
-*I'm an angel with a shortgun,
+*I'm an angel with a shotgun,
 fighting til' the war's won.
 I don't care if heaven won't take me back.
 I'll throw away my faith, babe, just to keep you safe.
 Don't you know you're everything I have?
 and I, wanna live, not just survive, tonight.*
 
-*I'm an angel with a shortgun,
+*I'm an angel with a shotgun,
 fighting til' the war's won
 I don't care if heaven won't take me back.*
 
-*I'm an angel with a shortgun
+*I'm an angel with a shotgun
 fighting til' the war's won.
 I don't care if heaven won't take me back.
 I'll throw away faith, babe, just to keep you safe.
 Don't you know you're everything I have?
-(I'm an angel with a shortgun)
+(I'm an angel with a shotgun)
 and I, want to live, not just survive, tonight.
 (Live, not just survive)
 and I'm gonna hide, hide, hide my wings tonight.*

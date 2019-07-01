@@ -1,5 +1,5 @@
 ---
-en_title: tsconfig.json Error no inputs in vscode
+en_title: tsconfig_Error_No_Inputs_In_VSCode
 title: 在 tsconfig.json 配置中找不到任何输入
 date: 2019-3-12 08:59:18
 keywords: typescript, ts, tslint, tsconfig, vscode, no inputs, 找不到输入

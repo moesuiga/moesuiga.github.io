@@ -1,5 +1,5 @@
 ---
-en_title: javascript variable declare
+en_title: JavaScript_Variable_Declare
 title: javascript之变量声明
 keywords: js, javascript, 变量, 声明提升
 description: JavaScript变量声明

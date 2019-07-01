@@ -1,5 +1,5 @@
 ---
-en_title: How to add context variables in Linux
+en_title: How_To_Add_Context_Variables_In_Linux
 title: Linux 添加环境变量的方法
 date: 2019-3-3 16:02:21
 keywords: Linux, PATH, $PATH, export, 环境变量

@@ -1,5 +1,5 @@
 ﻿---
-en_title: nth-child and nth-of-type
+en_title: nth-child_and_nth-of-type
 title: 关于 nth-child 和 nth-of-type 选择器
 date: 2018-05-22 16:45:51
 keywords: CSS, nth-child, nth-of-type, pseudo class, 伪类选择器

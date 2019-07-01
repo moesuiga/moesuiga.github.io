@@ -1,5 +1,5 @@
 ---
-en_title: Swiper component in mini-program
+en_title: Swiper_Component_In_Mini-program
 title: 小程序踩坑之 swiper 组件
 date: 2018-12-4 17:22:23
 category:
