@@ -616,6 +616,16 @@ pre,
   background: #000;
   line-height: 1.6;
 }
+pre ::-moz-selection,
+.highlight ::-moz-selection {
+  background: #eaeaea;
+  color: #000;
+}
+pre ::selection,
+.highlight ::selection {
+  background: #eaeaea;
+  color: #000;
+}
 pre,
 code {
   font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas, monospace, consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
@@ -2127,7 +2137,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0b8c44;
+  background: #acffff;
 }
 .links-of-blogroll {
   font-size: 13px;
