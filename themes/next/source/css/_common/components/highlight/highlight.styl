@@ -12,6 +12,11 @@ $code-block {
   color: $highlight-foreground;
   background: $highlight-background;
   line-height: $line-height-code-block;
+
+  ::selection {
+    background: $highlight-foreground;
+    color: $highlight-background;
+  }
 }
 
 pre, code { font-family: $code-font-family; }
