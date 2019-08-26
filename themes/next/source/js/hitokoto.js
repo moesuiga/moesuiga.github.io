@@ -12,6 +12,7 @@ document.head.innerHTML += `
   .live2d-widget-dialog-2 {
     width: 100%;
     height: 100%;
+    min-height: 60px;
     color: #917159;
     font-size: 16px;
     padding: 12px;
@@ -19,22 +20,17 @@ document.head.innerHTML += `
     background: rgb(252, 248, 244);
     box-sizing: border-box;
     border-radius: 10px;
-    transform: rotate(-2deg) translateZ(0);
     -webkit-font-smoothing: antialiased;
     opacity: 0;
     transition: 200ms opacity;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-    animation: live2d-widget-dialog-tingle-2 4s linear 0s infinite alternate;
-  }
-  @keyframes live2d-widget-dialog-tingle-2 {
-    0% { transform: rotate(-2deg) translateZ(0); }
-    100% { transform: rotate(2deg) translateZ(0); }
+    word-break: break-all;
   }
 </style>
 `;
 
 (function myLive2dWidgetDialog() {
-  var containerElement,dialogElement,closeTimer;
+  var containerElement,dialogElement,closeTimer,timer;
   var dialogShowTime = 10000;
 
   /**
@@ -63,11 +59,30 @@ document.head.innerHTML += `
 
   function alertText(text) {
     displayDialog();
-    dialogElement.innerText = text;
+    var sep = '|';
+    var interval = 300;
+    var i = 0;
+    var len = text.length;
+    dialogElement.innerText = sep;
+    clearInterval(timer);
     clearTimeout(closeTimer);
-    closeTimer = setTimeout(function () {
-      hiddenDialog();
-    }, dialogShowTime);
+    timer = setInterval(() => {
+      if (i >= len) {
+        clearInterval(timer);
+
+        closeTimer = setTimeout(function () {
+          hiddenDialog();
+          setTimeout(showHitokotoLoop, dialogShowTime);
+        }, dialogShowTime);
+        return;
+      }
+      dialogElement.innerText =
+        dialogElement.innerText.slice(0, -1) +
+        // (i > 0 && /\s/.test(text[i - 1]) ? ' ' : '') +
+        text[i] +
+        ( i === len - 1 ? '' : sep);
+      i++;
+    }, interval);
   }
 
   function showHitokotoLoop() {
@@ -77,8 +92,8 @@ document.head.innerHTML += `
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         var data = JSON.parse(xhr.responseText);
-        alertText(data.hitokoto);
-        setTimeout(showHitokotoLoop, dialogShowTime * 2)
+        alertText(data.hitokoto.trim());
+        // setTimeout(showHitokotoLoop, dialogShowTime * 2)
       }
     }
     xhr.send();
