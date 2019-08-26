@@ -25,6 +25,7 @@ document.head.innerHTML += `
     transition: 200ms opacity;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
     word-break: break-all;
+    font-family: STXinwei, STKaiTi, STHeiti, STLiTi, Roboto, "Open Sans", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", "Source Han Sans CN", FZYiHei-M20S, "PingFang SC", "Microsoft YaHei", sans-serif;
   }
 </style>
 `;
