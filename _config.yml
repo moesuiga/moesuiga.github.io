@@ -156,7 +156,33 @@ live2d:
   tagMode: false
   log: false
   model:
-    use: live2d-widget-model-miku
+    # use: live2d-widget-model-miku # 39 miku
+    # use: live2d-widget-model-cirno # ⑨ Cirno 琪露诺
+    use: live2d-widget-model-rem # 雷姆
+    # use: live2d-widget-model-z16 # 舰R z16
+    # use: live2d-widget-model-gf
+    # use: live2d-widget-model-platelet
+    # use: live2d-widget-model-jth
+    # use: live2d-widget-model-chitose
+    # use: live2d-widget-model-izumi
+    # use: live2d-widget-model-shizuku
+    # use: live2d-widget-model-wanko # a dog
+    # use: live2d-widget-model-hibiki # too height
+    # use: live2d-widget-model-tororo # a white cat
+    # use: live2d-widget-model-hijiki # a black cat
+    # use: live2d-widget-model-tsumiki
+    # use: live2d-widget-model-haruto
+    # use: live2d-widget-model-unitychan
+    # use: live2d-widget-model-epsilon2_1
+    # use: live2d-widget-model-nico
+    # use: live2d-widget-model-nito
+    # use: live2d-widget-model-koharu
+    # use: live2d-widget-model-nipsilon
+    # use: live2d-widget-model-nietzsche
+    # use: live2d-widget-model-ni-j
+    # use: live2d-widget-model-haru/01 #! package.json json parse error, need `{}` at least, 02 is the same
+    # use: live2d-widget-model-haru/02
+    # use: live2d-widget-model-beigege
   display:
     position: right
     width: 300
