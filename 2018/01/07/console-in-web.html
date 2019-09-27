@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.7.0">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="控制台console的一些方法记录">
+<meta name="keywords" content="console, 控制台, js, javascript, web, browser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="console in web">
+<meta property="og:url" content="https://www.childish.site/2018/01/07/console-in-web.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="控制台console的一些方法记录">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://miao.su/images/2019/02/23/16d2d6.jpg">
+<meta property="og:updated_time" content="2019-09-27T03:24:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="console in web">
+<meta name="twitter:description" content="控制台console的一些方法记录">
+<meta name="twitter:image" content="https://miao.su/images/2019/02/23/16d2d6.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.childish.site/2018/01/07/console-in-web.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>console in web | 地平线·梦</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-135498029-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">地平线·梦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">23</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2018/01/07/console-in-web.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Suiga">
+      <meta itemprop="description" content="小小西瓜棚">
+      <meta itemprop="image" content="/images/suiga.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">console in web
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-07 18:11:53" itemprop="dateCreated datePublished" datetime="2018-01-07T18:11:53+08:00">2018-01-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-27 11:24:41" itemprop="dateModified" datetime="2019-09-27T11:24:41+08:00">2019-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-description">控制台console的一些方法记录</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+          
+          
+
+      
+      
+        
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          <a href="https://miao.su/images/2019/02/23/16d2d6.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/02/23/16d2d6.jpg);" rel="gallery_ck11owh0n003twsvszfyknc7q" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
+        </div>
+      
+
+      
+        <p>一般我们要在控制台输出一些信息的时候，大多数情况都只是使用 <code>console.log</code> 来输出。但是，你知道吗？其实 <code>console</code> 还有很多其他的方法。</p>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><p>在控制台打印内容，一般的用法——也是我们常用的用法——就是<code>console.log(info[,info,...])</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'c.c.'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'I like '</span>, name);</span><br><span class="line"><span class="comment">// =&gt; I like c.c.</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="格式化占位符"><a href="#格式化占位符" class="headerlink" title="格式化占位符"></a>格式化占位符</h3><p><code>console.log</code> 第一个参数中还支持 <code>printf</code> 的占位符哦，后续参数根据位置对应填入占位符的位置输出。</p>
+<p>支持的格式化占位符列表：</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%d, %i</td>
+<td>整型（暂不支持数字型字符串）</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点型（暂不支持数字型字符串）</td>
+</tr>
+<tr>
+<td>%o, %O</td>
+<td>链接对象</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>CSS格式字符串</td>
+</tr>
+</tbody>
+</table>
+<p><code>%s</code> 是字符串的占位符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'%s placeholder'</span>, <span class="string">'hello'</span>); <span class="comment">// =&gt; hello placeholder</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%s'</span>, &#123;&#125;); <span class="comment">// Chrome =&gt; Object</span></span><br><span class="line"><span class="comment">// FireFox =&gt; [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%s'</span>, []); <span class="comment">// Chrome =&gt; Array(0)</span></span><br><span class="line"><span class="comment">// FireFox =&gt; &lt;null character&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>%d</code>、<code>%i</code>、<code>%f</code>, 虽然在 JS 中不区分整型与浮点型，只有 <code>Number</code>。但是在占位符中，<code>%d</code> 与 <code>%i</code> 只会输出整数部分，而 <code>%f</code> 则能输出浮点数。如果对应占位符的参数不是 <code>Number</code> 类型，则会输出 <code>NaN</code>。</p>
+<blockquote>
+<p>在 Chrome 中的表现：<code>%d</code>,<code>%i</code>,<code>%f</code> 只能作为 <code>Number</code> 的占位符，即使是数字型的字符串(e.g. “123”) 也会输出成 NaN<br>在 FireFox 中可以输出 numeric 的字符串，如果是不能转成数字的字符串，则会输出 0，另 <code>%f</code> 固定会输出一个 6 位小数位的浮点数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1 + 2 = %d'</span>, <span class="number">1</span> + <span class="number">2</span>); <span class="comment">// =&gt; 1 + 2 = 3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1 + 2 = %f'</span>, <span class="number">1</span> + <span class="number">2</span>); <span class="comment">// Chrome =&gt; 1 + 2 = 3</span></span><br><span class="line"><span class="comment">// FireFox =&gt; 1 + 2 = 3.000000</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'0.1 + 0.2 = %f'</span>, <span class="number">0.1</span> + <span class="number">0.2</span>); <span class="comment">// Chrome =&gt; 0.1 + 0.2 = 0.30000000000000004</span></span><br><span class="line"><span class="comment">// FireFox =&gt; 0.1 + 0.2 =  0.300000</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1.2 + 1.3 &gt; %i'</span>, <span class="number">1.2</span> + <span class="number">1.3</span>); <span class="comment">// =&gt; 1.2 + 1.3 &gt; 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'numeric will be %d'</span>, <span class="string">'123'</span>); <span class="comment">// Chrome =&gt; numeric will be NaN</span></span><br><span class="line"><span class="comment">// FireFox =&gt; numeric will be 123</span></span><br></pre></td></tr></table></figure>
+<p><code>%o</code>, <code>%O</code> 都是对象的占位符。</p>
+<p>在 FireFox 浏览器中表现相同，在 Chrome 浏览器中的表现则不同。</p>
+<p>Chrome 中的不同之处在于：<code>%o</code> 是对象引用，会直接将对象内的属性展示出来，对于 DOM 节点对象则是展示类似 Element 的节点；而 <code>%O</code> 则是折叠起来的对象，在不点击展开的情况下，无法看到对象内的属性，对于 DOM 节点对象也是如此。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in Chrome</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%o'</span>, &#123;<span class="attr">name</span>: <span class="string">'obj'</span>&#125;); <span class="comment">// =&gt; &#123;name: 'obj'&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%O'</span>, &#123;<span class="attr">name</span>: <span class="string">'obj'</span>&#125;); <span class="comment">// =&gt; Object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%o'</span>, <span class="built_in">document</span>.getElementById(<span class="string">'header'</span>)); <span class="comment">// =&gt; &lt;header id="header"&gt;...&lt;/header&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%O'</span>, <span class="built_in">document</span>.getElementById(<span class="string">'header'</span>)); <span class="comment">// =&gt; header#header&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的情况不清楚是怎么回事，有兴趣的可以深入研究一下</span></span><br><span class="line"><span class="comment">// 后面的圆括号备注的类型，是根据 Chrome 的输出颜色得出的判断，也不一定准确</span></span><br><span class="line"><span class="comment">// 欢迎有了解的人解惑</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%d'</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (string)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%o'</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (number)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%O'</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (string)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%s'</span>, <span class="string">'string'</span>); <span class="comment">// =&gt; string</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%o'</span>, <span class="string">'string'</span>); <span class="comment">// =&gt; "string" (注意这里的双引号是输出的)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%O'</span>, <span class="string">'string'</span>); <span class="comment">// =&gt; string</span></span><br></pre></td></tr></table></figure>
+<p><code>%c</code> 是 CSS 格式字符串的占位符。可以通过 <code>%c</code> 占位符给输出的文本添加一些样式，比如更大的字号、更醒目的颜色、添加背景色等，使得输出更加醒目。</p>
+<p>因为每个浏览器的具体实现不同，更多的 CSS 效果可以自己动手试试看。</p>
+<blockquote>
+<p>每个输出默认是 <code>inline</code> 盒子，且无法使用 <code>display</code> 转换成 <code>block</code>。<br>也因此，<code>width</code>, <code>height</code> 属性无效，但可以通过 <code>line-height</code> 来撑起高度。<br><code>padding/margin</code> 的 <code>top</code>/<code>bottom</code> 在 FireFox 下没有效果，但 <code>left</code> 与 <code>right</code> 有效<br><code>-webkit-background-clip: text;</code> 在 FireFox 中有效，但在 Chrome 中无效<br>… 还有其他很多属性等你探索</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'%cRainbowGirl'</span>, <span class="string">'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%c3D TEXT'</span>, <span class="string">'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;'</span>);</span><br><span class="line"><span class="comment">// FireFox</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'%cRainbowGirl'</span>, <span class="string">'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="debug-info"><a href="#debug-info" class="headerlink" title="debug/info"></a>debug/info</h2><p><code>info</code> 是 <code>log</code> 的别名，在某些地方见有人说过 <code>console.info</code> 会在输出的文本前加上一个小三角标示，但我在浏览器控制台实测并没有小三角标示。</p>
+<p><code>debug</code> 也类似 <code>log</code>，不同的是在分级上 <code>debug</code> 属于调试信息，一般在控制台会被过滤掉，需要在控制台选中 <code>Verbose</code> 来查看。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">'Without a date'</span>;</span><br><span class="line"><span class="built_in">console</span>.debug(<span class="string">'debug: %s'</span>, text);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">'info: %s'</span>, text);</span><br></pre></td></tr></table></figure>
+<h2 id="warn-error"><a href="#warn-error" class="headerlink" title="warn/error"></a>warn/error</h2><p><code>warn</code> 在控制台输出一条带有 “警告” 图标的消息和一个指向该代码调用的追溯引用信息，文字与背景颜色为黄色。<br><code>error</code> 在控制台输出一条带有“错误”图标的消息和一个指向该代码调用的追溯引用信息，文字与背景颜色为红色。</p>
+<p><code>warn</code>, <code>error</code> 除了上面的说明外，还有一个输出级别的区分，我们可以通过不同的条件来过滤，只查看 <code>warn</code> 级别或者 <code>error</code> 级别的输出信息。这在一些具有较多输出日志的情况下，能更快速的找到自己需要的一些信息。</p>
+<h2 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h2><p>在控制台输出该代码调用的追溯引用信息。</p>
+<p>实际项目中，一个函数可能在多个地方有调用，还有多个函数嵌套。<br>有时候想要知道这个函数在某时刻具体是在哪个函数调用的，就可以通过追溯找到嵌套的调用函数路径。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.trace(<span class="string">'追溯调用位置'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1();</span><br></pre></td></tr></table></figure>
+<h2 id="time-timeLog-timeEnd"><a href="#time-timeLog-timeEnd" class="headerlink" title="time/timeLog/timeEnd"></a>time/timeLog/timeEnd</h2><p>想知道某段代码的运行时间？你还在用下面这种方式吗？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"><span class="comment">// ... codes</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'cost: '</span>, <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() - start);</span><br></pre></td></tr></table></figure>
+<p>快来试试 <code>console.time/console.timeEnd</code> 组合吧。</p>
+<p><code>console.time(label)</code> 创建一个索引为 <code>label</code> 的计时器，<br><code>console.timeLog(label)</code> 输出索引为 <code>label</code> 的计时器经历的时间，<br><code>console.timeEnd(label)</code> 停止索引为 <code>label</code> 的计时器，并输出从创建到停止所耗的时间（毫秒）。常用来查看代码运行的效率性能。</p>
+<blockquote>
+<p>使用 <code>timeLog/timeEnd</code> 时，必须有一个通过 <code>time</code> 创建了的定时器。<br>如果没有创建或 label 参数错误无法找到创建的定时器，会输出一个警告 <code>Timer &#39;default(or input label)&#39; does not exist</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.time(<span class="string">'Sum'</span>);</span><br><span class="line"><span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> end = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; end; i++) &#123;</span><br><span class="line">  sum += i;</span><br><span class="line">  <span class="keyword">if</span> (i === end / <span class="number">2</span>) <span class="built_in">console</span>.timeLog(<span class="string">'Sum'</span>); <span class="comment">// =&gt; Sum: 0.06396484375ms</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1~1000之和: '</span>, sum); <span class="comment">// =&gt; 1~1000之和:  499500</span></span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'Sum'</span>); <span class="comment">// =&gt; Sum: 0.26708984375ms</span></span><br></pre></td></tr></table></figure>
+<h2 id="group-groupEnd-groupCollapsed"><a href="#group-groupEnd-groupCollapsed" class="headerlink" title="group/groupEnd/groupCollapsed"></a>group/groupEnd/groupCollapsed</h2><p><code>group</code>方法输出一条消息，并打开一个分组的嵌套块，块中的内容都会缩进，调用<code>console.groupEnd()</code>关闭嵌套块。<br><code>groupCollapsed</code> 方法与 <code>group</code> 方法一样，唯一的区别是该组的内容，在第一次显示时是收起而非展开的。</p>
+<p>通过这个方法，我们可以很清楚的了解到代码的运行顺序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.group(<span class="string">'group demo'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'program start ...'</span>);</span><br><span class="line">  <span class="built_in">console</span>.groupCollapsed(<span class="string">'loop'</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.groupEnd();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'program end ...'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.groupEnd();</span><br></pre></td></tr></table></figure>
+<h2 id="profile-profileEnd"><a href="#profile-profileEnd" class="headerlink" title="profile/profileEnd"></a>profile/profileEnd</h2><p><code>console.profile([title])</code> 打开JavaScript性能测试开关，可选参数title会在打印性能测试报告时在报告的开头输出。这两个 API 尚未标准化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTask</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  doTaskA(<span class="number">1000</span>);</span><br><span class="line">  doTaskA(<span class="number">100000</span>);</span><br><span class="line">  doTaskB(<span class="number">10000</span>);</span><br><span class="line">  doTaskC(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskA</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskB</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskC</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.profile(<span class="string">'testTitle'</span>);</span><br><span class="line">doTask();</span><br><span class="line"><span class="built_in">console</span>.profileEnd(<span class="string">'testTitle'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><p>对于某些复合类型的数据，<code>console.table(object)</code>方法可以将其转为表格显示。条件是必须拥有主键。<br>对于数组来说，主键就是数字键；对于对象来说，主键就是它的最外层键。</p>
+<p>表格可以用于数据统计，如果要查看一个结构相同或类似的列表时，就可以使用 <code>console.table</code> 。另外 <code>console.table</code> 还可以根据第二个参数，来过滤要展示的属性列表，在 Chrome 浏览器中还能够点击第一行的索引来重新排序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [&#123;</span><br><span class="line">  name: <span class="string">'RWBY'</span>,</span><br><span class="line">  year: <span class="number">2013</span>,</span><br><span class="line">  series: <span class="number">6</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'OVERLORD'</span>,</span><br><span class="line">  year: <span class="number">2015</span>,</span><br><span class="line">  series: <span class="number">3</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'狐妖小红娘'</span>,</span><br><span class="line">  year: <span class="number">2015</span>,</span><br><span class="line">  series: <span class="number">5</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">'JOJO'</span>,</span><br><span class="line">  year: <span class="number">2012</span>,</span><br><span class="line">  series: <span class="number">6</span>,</span><br><span class="line">&#125;];</span><br><span class="line"><span class="built_in">console</span>.table(arr);</span><br><span class="line"><span class="built_in">console</span>.table(arr, [<span class="string">'name'</span>, <span class="string">'year'</span>])</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    -----------------------------------------</span></span><br><span class="line"><span class="comment">    | (index) | name       | year | series  |</span></span><br><span class="line"><span class="comment">    |---------------------------------------|</span></span><br><span class="line"><span class="comment">    | 0      | "RWBY"      | 2013 | 6       |</span></span><br><span class="line"><span class="comment">    | 1      | "OVERLORD"  | 2015 | 3       |</span></span><br><span class="line"><span class="comment">    | 2      | "狐妖小红娘" | 2015 | 5       |</span></span><br><span class="line"><span class="comment">    | 3      | "JOJO"      | 2012 | 6       |</span></span><br><span class="line"><span class="comment">    ----------------------------------------</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="count-countReset"><a href="#count-countReset" class="headerlink" title="count/countReset"></a>count/countReset</h2><p><code>count</code> 计数器，输出它被调用了多少次，有一个可选参数，会在显示计数时在开头输出，并用于区分不同的计数器。</p>
+<p><code>countReset</code> 重置 <code>count</code> 计数器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i % <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.count(<span class="string">'odd'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.count(<span class="string">'even'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.countReset(<span class="string">'odd'</span>); <span class="comment">// in FireFox =&gt; odd: 0  in Chrome: no output</span></span><br><span class="line"><span class="built_in">console</span>.countReset(<span class="string">'even'</span>); <span class="comment">// in FireFox =&gt; even: 0  in Chrome: no output</span></span><br></pre></td></tr></table></figure>
+<h2 id="dir-dirxml"><a href="#dir-dirxml" class="headerlink" title="dir/dirxml"></a>dir/dirxml</h2><p><code>dir</code> 方法用于显示指定对象的属性，并以易于阅读的格式——类似文件树样式的交互列表——显示，该方法对于输出DOM对象非常有用。(在 FireFox 中会直接展开)<br><code>dirxml</code> 方法主要用于显示一个明确的 XML/HTML 元素的 DOM 节点对象，可以让你看到该节点的所有子节点内容。如果参数不是 DOM 节点，而是普通的JavaScript对象，<code>console.dirxml</code> 等同于 <code>console.dir</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(<span class="built_in">document</span>.getElementById(<span class="string">'header'</span>));</span><br><span class="line"><span class="built_in">console</span>.dirxml(<span class="built_in">document</span>.getElementById(<span class="string">'header'</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h2><p><code>assert</code>方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序的执行。这样就相当于提示用户，内部状态不正确。</p>
+<p>它接收两个参数，第一个是表达式，第二个是字符串。只有当第一个参数为<code>false</code>时，才会提示有错误，在控制台输出第二个参数，否则不会有任何结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.assert(<span class="number">1</span> &gt; <span class="number">2</span>, <span class="string">'判断错误'</span>);</span><br><span class="line"><span class="comment">//=&gt; Assertion failed: 判断错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="number">1</span> &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'判断错误'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>console.assert()</code>方法在 Node.js 中的实现和浏览器中可用的 <code>console.assert()</code> 方法实现是不同的。<br>在<strong>浏览器</strong>中当 <code>console.assert()</code> 方法接受到一个值为假断言（assertion）的时候，会向控制台输出传入的内容，但是<strong>并不会中断代码的执行</strong>，而在 <strong>Node.js v10.0.0</strong> 之前，一个值为假的断言也将<strong>会导致一个AssertionError被抛出，使得代码执行被打断</strong>。<br>v10.0.0修复了此差异，所以现在console.assert()在node和浏览器中执行行为相同。<br>引自: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQVBJL0NvbnNvbGUvYXNzZXJ0" title="https://developer.mozilla.org/zh-CN/docs/Web/API/Console/assert">MDN-Console.assert<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h2 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h2><p>一个可以查看 JS 堆栈内存使用情况的对象，Chrome 浏览器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.momery;</span><br><span class="line"><span class="comment">// MemoryInfo&#123;totalJSHeapSize: 35100000, usedJSHeapSize: 29400000, jsHeapSizeLimit: 1136000000&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h2><p>clear方法用于清除当前控制台的所有输出，将光标回置到第一行。</p>
+<!-- console demo script -->
+<script>
+(function () {
+  // log
+  var name = 'c.c.';
+  console.log('I like ', name);
+
+  // placeholder
+  console.log('%s placeholder', 'hello');
+  console.log('%s', {}); // => Object
+  console.log('%s', []); // => Array(0)
+  console.log('1 + 2 = %d', 1 + 2);
+  console.log('1 + 2 = %f', 1 + 2); // 1 + 2 = 3 (FireFox: 3.000000)
+  console.log('0.1 + 0.2 = %f', 0.1 + 0.2);
+  console.log('1.2 + 1.3 > %i', 1.2 + 1.3);
+  console.log('numeric will be %d', '123');
+
+  console.log('小o %o', {name: 'obj'});
+  console.log('大O %O', {name: 'obj'});
+  console.log('小o %o', document.getElementById('header'));
+  console.log('大O %O', document.getElementById('header'));
+  console.log('整型d %d', 123);
+  console.log('小o %o', 123);
+  console.log('大O %O', 123);
+  console.log('字符串s %s', 'string');
+  console.log('小o %o', 'string');
+  console.log('大O %O', 'string');
+
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
+
+  // rainbow in Chrome
+  console.log('%cRainbowGirl', 'font-size: 40px; padding: 100px 80px 50px; color: #bdbdbd; background: radial-gradient(at 50% 100%, transparent 0%, transparent 35%, #8b00ff 40%, #0000ff 45%, #00ffff 50%, #00ff00 55%, #ffff00 60%, #ff7f00 65%, #ff0000 70%); background-repeat: no-repeat;background-position: 0 0; border-radius: 200px 200px 0 0;');
+  // rainbow text in FireFox
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
+
+  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
+  console.log('%c%s', 'color: white; font-size: 20px;', 'you cant see me.');
+
+  // debug info
+  var text = 'Without a date';
+  console.debug('debug: %s', text);
+  console.info('info: %s', text);
+
+  // warn error
+  var loser = '人生的败犬';
+  console.warn('I am really a ', loser);
+  var error = '注孤生';
+  console.error('%cMy Error: %c%s', 'color: purple;', 'color: black; font: 700 22px "方正舒体", "华文行楷", simsun;', error);
+
+  // trace
+  function fn1() {
+    function fn2() {
+      console.trace('追溯调用位置');
+    }
+    fn2();
+  }
+  fn1();
+
+  // time timeEnd
+  console.time('Sum');
+  var sum = 0;
+  var end = 1000;
+  for (var i = 1; i < end; i++) {
+    sum += i;
+    if (i === end / 2) console.timeLog('Sum');
+  }
+  console.log('1~1000之和: ', sum);
+  console.timeEnd('Sum');
+
+  // group groupEnd groupCollapsed
+  console.group('group demo');
+    console.log('program start ...');
+    console.groupCollapsed('loop');
+    for (var i = 0; i < 10; i++) {
+      console.log(i);
+    }
+    console.groupEnd();
+    console.log('program end ...');
+  console.groupEnd();
+
+  // profile
+  function doTask() {
+    doTaskA(1000);
+    doTaskA(100000);
+    doTaskB(10000);
+    doTaskC(1000);
+  }
+  function doTaskA(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  function doTaskB(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  function doTaskC(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  console.profile('testTitle');
+  doTask();
+  console.profileEnd('testTitle');
+
+  // table
+  var arr = [{
+    name: 'RWBY',
+    year: 2013,
+    series: 6,
+  }, {
+    name: 'OVERLORD',
+    year: 2015,
+    series: 3,
+  }, {
+    name: '狐妖小红娘',
+    year: 2015,
+    series: 5,
+  }, {
+    name: 'JOJO',
+    year: 2012,
+    series: 6,
+  }];
+  console.table(arr);
+  console.table(arr, ['name', 'year']);
+
+  // count countReset
+  console.log('%c%s', 'font-size: 20px; color: gold; background:  DarkSlateGrey;', '记录0~10之间的奇偶数的个数')
+  for (var i = 0; i < 10; i++) {
+    if (i % 2) {
+      console.count('odd');
+    } else {
+      console.count('even');
+    }
+  }
+  console.countReset('odd');
+  console.countReset('even');
+
+  // dir dirxml
+  console.dir(document.getElementById('header'));
+  console.dirxml(document.getElementById('header'));
+
+  // assert
+  console.assert(1 < 2, '正确');
+  console.assert(1 > 2, '判断错误');
+
+  // memory
+  console.log('memory', console.memory);
+})()
+</script>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/console/" rel="tag"># console</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/【转】sass-与-scss-的异同.html" rel="next" title="【转】Sass 与 SCSS 的异同">
+                <i class="fa fa-chevron-left"></i> 【转】Sass 与 SCSS 的异同
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/11/css选择器.html" rel="prev" title="CSS选择器">
+                CSS选择器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/suiga.gif" alt="Suiga">
+            
+              <p class="site-author-name" itemprop="name">Suiga</p>
+              <p class="site-description motion-element" itemprop="description">小小西瓜棚</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.childish.site/" title="Suiga &rarr; https://www.childish.site/"><i class="fa fa-fw fa-user"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub &rarr; https://github.com/moesuiga"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:moesuiga@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS93YXlvd2U=" title="Twitter &rarr; https://twitter.com/wayowe"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8=" title="https://www.google.com/">谷歌</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tLw==" title="https://segmentfault.com/">SegmentFault</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS8=" title="https://stackoverflow.com/">StackOverflow</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==" title="https://www.baidu.com/">百度</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0v" title="https://juejin.im/">掘金</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20v" title="https://www.jianshu.com/">简书</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tLw==" title="https://www.zhihu.com/">知乎</span>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">1.</span> <span class="nav-text">log</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化占位符"><span class="nav-number">1.1.</span> <span class="nav-text">格式化占位符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug-info"><span class="nav-number">2.</span> <span class="nav-text">debug/info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#warn-error"><span class="nav-number">3.</span> <span class="nav-text">warn/error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trace"><span class="nav-number">4.</span> <span class="nav-text">trace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time-timeLog-timeEnd"><span class="nav-number">5.</span> <span class="nav-text">time/timeLog/timeEnd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-groupEnd-groupCollapsed"><span class="nav-number">6.</span> <span class="nav-text">group/groupEnd/groupCollapsed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#profile-profileEnd"><span class="nav-number">7.</span> <span class="nav-text">profile/profileEnd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#table"><span class="nav-number">8.</span> <span class="nav-text">table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count-countReset"><span class="nav-number">9.</span> <span class="nav-text">count/countReset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dir-dirxml"><span class="nav-number">10.</span> <span class="nav-text">dir/dirxml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assert"><span class="nav-number">11.</span> <span class="nav-text">assert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memory"><span class="nav-number">12.</span> <span class="nav-text">memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">13.</span> <span class="nav-text">clear</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">豫ICP备19018274号-1 </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+  <script src="/js/hitokoto.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '827326488d2cde661c88',
+    clientSecret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
+    repo: 'blog-comments-by-gitalk',
+    owner: 'moesuiga',
+    admin: ['moesuiga'],
+    // id: md5(location.pathname),
+    id: md5('1515319913000'),
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "default";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,Twitter,Facebook,Tumblr,GoogleBookmarks";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>
