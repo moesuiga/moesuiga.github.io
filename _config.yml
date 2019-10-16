@@ -17,10 +17,10 @@ timezone: Asia/ShangHai
 theme: next
 # theme: -w-
 
-autoprefixer:
-  browsers:
-    - '> 1%'
-    - 'last 2 version'
+# autoprefixer:
+#   browsers:
+#     - '> 1%'
+#     - 'last 2 version'
 
 # Menu
 menu:

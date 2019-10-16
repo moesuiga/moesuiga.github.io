@@ -8,7 +8,7 @@ category:
 tags:
   - console
 date: 2018/1/7 18:11:53
-updated: 2019/9/27 11:24:41
+updated: 2019/10/16 15:46:38
 photos:
   - https://miao.su/images/2019/02/23/16d2d6.jpg
 ---
@@ -25,87 +25,6 @@ console.log('I like ', name);
 // => I like c.c.
 ```
 <!-- more -->
-
-### 格式化占位符
-
-`console.log` 第一个参数中还支持 `printf` 的占位符哦，后续参数根据位置对应填入占位符的位置输出。
-
-支持的格式化占位符列表：
-
-| 占位符 |             意义             |
-|--------|-----------------------------|
-|   %s   |             字符串           |
-| %d, %i |  整型（暂不支持数字型字符串）  |
-|   %f   | 浮点型（暂不支持数字型字符串） |
-| %o, %O |           链接对象           |
-|   %c   |         CSS格式字符串        |
-
-`%s` 是字符串的占位符。
-
-```js
-console.log('%s placeholder', 'hello'); // => hello placeholder
-console.log('%s', {}); // Chrome => Object
-// FireFox => [object Object]
-console.log('%s', []); // Chrome => Array(0)
-// FireFox => <null character>
-```
-
-`%d`、`%i`、`%f`, 虽然在 JS 中不区分整型与浮点型，只有 `Number`。但是在占位符中，`%d` 与 `%i` 只会输出整数部分，而 `%f` 则能输出浮点数。如果对应占位符的参数不是 `Number` 类型，则会输出 `NaN`。
-
-> 在 Chrome 中的表现：`%d`,`%i`,`%f` 只能作为 `Number` 的占位符，即使是数字型的字符串(e.g. "123") 也会输出成 NaN
-> 在 FireFox 中可以输出 numeric 的字符串，如果是不能转成数字的字符串，则会输出 0，另 `%f` 固定会输出一个 6 位小数位的浮点数
-
-```js
-console.log('1 + 2 = %d', 1 + 2); // => 1 + 2 = 3
-console.log('1 + 2 = %f', 1 + 2); // Chrome => 1 + 2 = 3
-// FireFox => 1 + 2 = 3.000000
-console.log('0.1 + 0.2 = %f', 0.1 + 0.2); // Chrome => 0.1 + 0.2 = 0.30000000000000004
-// FireFox => 0.1 + 0.2 =  0.300000
-console.log('1.2 + 1.3 > %i', 1.2 + 1.3); // => 1.2 + 1.3 > 2
-console.log('numeric will be %d', '123'); // Chrome => numeric will be NaN
-// FireFox => numeric will be 123
-```
-
-`%o`, `%O` 都是对象的占位符。
-
-在 FireFox 浏览器中表现相同，在 Chrome 浏览器中的表现则不同。
-
-Chrome 中的不同之处在于：`%o` 是对象引用，会直接将对象内的属性展示出来，对于 DOM 节点对象则是展示类似 Element 的节点；而 `%O` 则是折叠起来的对象，在不点击展开的情况下，无法看到对象内的属性，对于 DOM 节点对象也是如此。
-
-```js
-// in Chrome
-console.log('%o', {name: 'obj'}); // => {name: 'obj'}
-console.log('%O', {name: 'obj'}); // => Object
-console.log('%o', document.getElementById('header')); // => <header id="header">...</header>
-console.log('%O', document.getElementById('header')); // => header#header{}
-
-// 下面的情况不清楚是怎么回事，有兴趣的可以深入研究一下
-// 后面的圆括号备注的类型，是根据 Chrome 的输出颜色得出的判断，也不一定准确
-// 欢迎有了解的人解惑
-console.log('%d', 123); // => 123 (string)
-console.log('%o', 123); // => 123 (number)
-console.log('%O', 123); // => 123 (string)
-console.log('%s', 'string'); // => string
-console.log('%o', 'string'); // => "string" (注意这里的双引号是输出的)
-console.log('%O', 'string'); // => string
-```
-
-`%c` 是 CSS 格式字符串的占位符。可以通过 `%c` 占位符给输出的文本添加一些样式，比如更大的字号、更醒目的颜色、添加背景色等，使得输出更加醒目。
-
-因为每个浏览器的具体实现不同，更多的 CSS 效果可以自己动手试试看。
-
-> 每个输出默认是 `inline` 盒子，且无法使用 `display` 转换成 `block`。
-> 也因此，`width`, `height` 属性无效，但可以通过 `line-height` 来撑起高度。
-> `padding/margin` 的 `top`/`bottom` 在 FireFox 下没有效果，但 `left` 与 `right` 有效
-> `-webkit-background-clip: text;` 在 FireFox 中有效，但在 Chrome 中无效
-> ... 还有其他很多属性等你探索
-
-```js
-  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
-  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
-  // FireFox
-  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
-```
 
 ## debug/info
 
@@ -325,43 +244,156 @@ console.momery;
 
 clear方法用于清除当前控制台的所有输出，将光标回置到第一行。
 
+## console 的其他小知识
+
+### 打印对象
+
+以前遇到过好些人问，用 `console.log` 去调试的时候，打印一个对象，查看发现某个属性明明是有值的，可是代码运行却是按照无值来运行的。这是怎么回事？
+
+```js
+var yakumo = {
+  name: 'Yukari',
+  age: Infinity,
+};
+
+console.log(yakumo); // You think: { name: 'Yukari', age: Infinity }, in fact: ??
+
+if (yakumo.age > 18) {
+  console.log('before changed'); // this will be output
+} else {
+  console.log('after changed');
+}
+// 👁👁 Spell Card: 年长与年轻的境界 😏
+yakumo.age = 17;
+```
+
+把上面的代码复制，放到浏览器的控制台中运行一遍，你可能会说：我这边输出的是 `{ name: 'Yukari', age: Infinity }` 啊。
+但是接下来，点击一下对象左侧的三角，展开对象，你会发现该对象 `age` 的值成了 `17`。
+
+其实 `console.log` 打印出来的对象并非该对象的当时值(深拷贝)，打印出来的其实是对象的一个地址引用。
+在展开对象之前以文本形式展示出来的，是对象被打印时刻的状态转成字符串的输出。
+当你**第一次**展开对象时，会获取到最新的对象属性进行查看，之后关闭再展开时，则固定成了第一次的属性了（排除使用 getter 或类似的属性）。
+我们都知道代码运行时很快的，所以当你在控制台上看到这个被打印出来的对象时，这个对象内的一些属性也许早已在某些地方被改变了。
+
+### 格式化占位符
+
+`console.log` 第一个参数中还支持 `printf` 的占位符哦，后续参数根据位置对应填入占位符的位置输出。
+
+支持的格式化占位符列表：
+
+| 占位符 |             意义             |
+|--------|-----------------------------|
+|   %s   |             字符串           |
+| %d, %i |  整型（暂不支持数字型字符串）  |
+|   %f   | 浮点型（暂不支持数字型字符串） |
+| %o, %O |           链接对象           |
+|   %c   |         CSS格式字符串        |
+
+`%s` 是字符串的占位符。
+
+```js
+console.log('%s placeholder', 'hello'); // => hello placeholder
+console.log('%s', {}); // Chrome => Object
+// FireFox => [object Object]
+console.log('%s', []); // Chrome => Array(0)
+// FireFox => <null character>
+```
+
+`%d`、`%i`、`%f`, 虽然在 JS 中不区分整型与浮点型，只有 `Number`。但是在占位符中，`%d` 与 `%i` 只会输出整数部分，而 `%f` 则能输出浮点数。如果对应占位符的参数不是 `Number` 类型，则会输出 `NaN`。
+
+> 在 Chrome 中的表现：`%d`,`%i`,`%f` 只能作为 `Number` 的占位符，即使是数字型的字符串(e.g. "123") 也会输出成 NaN
+> 在 FireFox 中可以输出 numeric 的字符串，如果是不能转成数字的字符串，则会输出 0，另 `%f` 固定会输出一个 6 位小数位的浮点数
+
+```js
+console.log('1 + 2 = %d', 1 + 2); // => 1 + 2 = 3
+console.log('1 + 2 = %f', 1 + 2); // Chrome => 1 + 2 = 3
+// FireFox => 1 + 2 = 3.000000
+console.log('0.1 + 0.2 = %f', 0.1 + 0.2); // Chrome => 0.1 + 0.2 = 0.30000000000000004
+// FireFox => 0.1 + 0.2 =  0.300000
+console.log('1.2 + 1.3 > %i', 1.2 + 1.3); // => 1.2 + 1.3 > 2
+console.log('numeric will be %d', '123'); // Chrome => numeric will be NaN
+// FireFox => numeric will be 123
+```
+
+`%o`, `%O` 都是对象的占位符。
+
+在 FireFox 浏览器中表现相同，在 Chrome 浏览器中的表现则不同。
+
+Chrome 中的不同之处在于：`%o` 是对象引用，会直接将对象内的属性展示出来，对于 DOM 节点对象则是展示类似 Element 的节点；而 `%O` 则是折叠起来的对象，在不点击展开的情况下，无法看到对象内的属性，对于 DOM 节点对象也是如此。
+
+```js
+// in Chrome
+console.log('%o', {name: 'obj'}); // => {name: 'obj'}
+console.log('%O', {name: 'obj'}); // => Object
+console.log('%o', document.getElementById('header')); // => <header id="header">...</header>
+console.log('%O', document.getElementById('header')); // => header#header{}
+
+// 下面的情况不清楚是怎么回事，有兴趣的可以深入研究一下
+// 后面的圆括号备注的类型，是根据 Chrome 的输出颜色得出的判断，也不一定准确
+// 欢迎有了解的人解惑
+console.log('%d', 123); // => 123 (string)
+console.log('%o', 123); // => 123 (number)
+console.log('%O', 123); // => 123 (string)
+console.log('%s', 'string'); // => string
+console.log('%o', 'string'); // => "string" (注意这里的双引号是输出的)
+console.log('%O', 'string'); // => string
+```
+
+`%c` 是 CSS 格式字符串的占位符。可以通过 `%c` 占位符给输出的文本添加一些样式，比如更大的字号、更醒目的颜色、添加背景色等，使得输出更加醒目。
+
+因为每个浏览器的具体实现不同，更多的 CSS 效果可以自己动手试试看。
+
+> 每个输出默认是 `inline` 盒子，且无法使用 `display` 转换成 `block`。
+> 也因此，`width`, `height` 属性无效，但可以通过 `line-height` 来撑起高度。
+> `padding/margin` 的 `top`/`bottom` 在 FireFox 下没有效果，但 `left` 与 `right` 有效
+> `-webkit-background-clip: text;` 在 FireFox 中有效，但在 Chrome 中无效
+> ... 还有其他很多属性等你探索
+
+```js
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
+  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
+  // FireFox
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
+```
+
+### console 中的 await
+
+我们知道在 ES2017 中新增了 `async/await` 两个关键字，用于更方便的异步操作。
+
+```js
+async function fn() {
+  const n = await new Promise(resolve => {
+    setTimeout(() => resolve(123), 1000);
+  });
+  return n;
+}
+fn().then(n => console.log(n));
+```
+
+`async/await` 是成对使用的。`await` 只能使用在 `async` 声明的异步函数中。
+
+但是，浏览器中的 `console` 对象下的方法内其实也可以使用 `await`，不过这种用法只能用于直接在控制台中调试时。
+
+如果用在 script 脚本中的话，会报语法错误。
+
+```js
+// in browser console
+console.log(await new Promise(resolve => setTimeout(() => resolve(), 1000)).then(() => 123)); // 123
+```
+
+```html
+<!-- in web script -->
+<script>
+  console.log(await new Promise(resolve => setTimeout(() => resolve(), 1000)).then(() => 123)); // Syntax Error
+</script>
+```
+
 <!-- console demo script -->
 <script>
 (function () {
   // log
   var name = 'c.c.';
   console.log('I like ', name);
-
-  // placeholder
-  console.log('%s placeholder', 'hello');
-  console.log('%s', {}); // => Object
-  console.log('%s', []); // => Array(0)
-  console.log('1 + 2 = %d', 1 + 2);
-  console.log('1 + 2 = %f', 1 + 2); // 1 + 2 = 3 (FireFox: 3.000000)
-  console.log('0.1 + 0.2 = %f', 0.1 + 0.2);
-  console.log('1.2 + 1.3 > %i', 1.2 + 1.3);
-  console.log('numeric will be %d', '123');
-
-  console.log('小o %o', {name: 'obj'});
-  console.log('大O %O', {name: 'obj'});
-  console.log('小o %o', document.getElementById('header'));
-  console.log('大O %O', document.getElementById('header'));
-  console.log('整型d %d', 123);
-  console.log('小o %o', 123);
-  console.log('大O %O', 123);
-  console.log('字符串s %s', 'string');
-  console.log('小o %o', 'string');
-  console.log('大O %O', 'string');
-
-  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
-
-  // rainbow in Chrome
-  console.log('%cRainbowGirl', 'font-size: 40px; padding: 100px 80px 50px; color: #bdbdbd; background: radial-gradient(at 50% 100%, transparent 0%, transparent 35%, #8b00ff 40%, #0000ff 45%, #00ffff 50%, #00ff00 55%, #ffff00 60%, #ff7f00 65%, #ff0000 70%); background-repeat: no-repeat;background-position: 0 0; border-radius: 200px 200px 0 0;');
-  // rainbow text in FireFox
-  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
-
-  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
-  console.log('%c%s', 'color: white; font-size: 20px;', 'you cant see me.');
 
   // debug info
   var text = 'Without a date';
@@ -468,5 +500,52 @@ clear方法用于清除当前控制台的所有输出，将光标回置到第一
 
   // memory
   console.log('memory', console.memory);
+
+  // console object
+  console.log('%c%s', 'font-size: 17px; padding: 17px; background: #888; color: purple;', 'Yakumo Yukari')
+  var yakumo = {
+    name: 'Yukari',
+    age: Infinity,
+  };
+  console.log(yakumo); // You think: { name: 'Yukari', age: Infinity }, in fact: { name: 'Yukari', age: 17 }
+
+  if (yakumo.age > 18) {
+    console.log('before changed'); // this will be output
+  } else {
+    console.log('after changed');
+  }
+  yakumo.age = 17;
+
+  // placeholder
+  console.log('%s placeholder', 'hello');
+  console.log('%s', {}); // => Object
+  console.log('%s', []); // => Array(0)
+  console.log('1 + 2 = %d', 1 + 2);
+  console.log('1 + 2 = %f', 1 + 2); // 1 + 2 = 3 (FireFox: 3.000000)
+  console.log('0.1 + 0.2 = %f', 0.1 + 0.2);
+  console.log('1.2 + 1.3 > %i', 1.2 + 1.3);
+  console.log('numeric will be %d', '123');
+
+  console.log('小o %o', {name: 'obj'});
+  console.log('大O %O', {name: 'obj'});
+  console.log('小o %o', document.getElementById('header'));
+  console.log('大O %O', document.getElementById('header'));
+  console.log('整型d %d', 123);
+  console.log('小o %o', 123);
+  console.log('大O %O', 123);
+  console.log('字符串s %s', 'string');
+  console.log('小o %o', 'string');
+  console.log('大O %O', 'string');
+
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
+
+  // rainbow in Chrome
+  console.log('%cRainbowGirl', 'font-size: 40px; padding: 100px 80px 50px; color: #bdbdbd; background: radial-gradient(at 50% 100%, transparent 0%, transparent 35%, #8b00ff 40%, #0000ff 45%, #00ffff 50%, #00ff00 55%, #ffff00 60%, #ff7f00 65%, #ff0000 70%); background-repeat: no-repeat;background-position: 0 0; border-radius: 200px 200px 0 0;');
+  // rainbow text in FireFox
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
+
+  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
+  console.log('%c%s', 'color: white; font-size: 20px;', 'you cant see me.');
+
 })()
 </script>
