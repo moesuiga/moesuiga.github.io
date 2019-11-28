@@ -107,7 +107,7 @@
 <meta property="og:description" content="记录一下关于 vscode 中，tsconfig.json 报错 “在配置文件 tsconfig.json 中找不到任何输入” 的情况">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://miao.su/images/2019/03/03/5163278b6.jpg">
-<meta property="og:updated_time" content="2019-10-16T11:12:02.633Z">
+<meta property="og:updated_time" content="2019-11-28T11:15:13.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 tsconfig.json 配置中找不到任何输入">
 <meta name="twitter:description" content="记录一下关于 vscode 中，tsconfig.json 报错 “在配置文件 tsconfig.json 中找不到任何输入” 的情况">
@@ -276,7 +276,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">23</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">24</span></a>
 
   </li>
         
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
 
   </li>
         
@@ -314,7 +314,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
 
   </li>
 
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-16 19:12:02" itemprop="dateModified" datetime="2019-10-16T19:12:02+08:00">2019-10-16</time>
+                <time title="修改时间：2019-11-28 19:15:13" itemprop="dateModified" datetime="2019-11-28T19:15:13+08:00">2019-11-28</time>
               
             
           </span>
@@ -532,7 +532,7 @@
       
         
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          <a href="https://miao.su/images/2019/03/03/5163278b6.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/03/03/5163278b6.jpg);" rel="gallery_ck1t6ev7t0022y4vgerpjem61" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
+          <a href="https://miao.su/images/2019/03/03/5163278b6.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/03/03/5163278b6.jpg);" rel="gallery_ck3imgp72002d1cl8gw1h8uy7" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
         </div>
       
 
@@ -544,7 +544,7 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="attr">"outDir"</span>: <span class="string">"dist"</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"esnext"</span>,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"es2016"</span>,</span><br><span class="line">    <span class="attr">"noImplicitAny"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"moduleResolution"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"paths"</span>: &#123;</span><br><span class="line">      <span class="attr">"*"</span>: [</span><br><span class="line">        <span class="string">"node_modules/*"</span>,</span><br><span class="line">        <span class="string">"src/types/*"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"typeRoots"</span>: [<span class="string">"typings"</span>, <span class="string">"node_modules/@types"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>只需要添加一个 <em>include</em> 数组指定包含的目录即可，或者也可以添加一个 <em>files</em> 数组指定包含的文件列表。</p>
 <p>比如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"include"</span>: [</span><br><span class="line">    <span class="string">"src/**/*"</span></span><br><span class="line">  ],</span><br><span class="line">  // Or/And files</span><br><span class="line">  "files": [</span><br><span class="line">    <span class="string">"src/app.ts"</span></span><br><span class="line">  ],</span><br><span class="line">  "exclude": [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"include"</span>: [</span><br><span class="line">    <span class="string">"src/**/*"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// Or/And files</span></span><br><span class="line">  <span class="attr">"files"</span>: [</span><br><span class="line">    <span class="string">"src/app.ts"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是不能设置为一个空数组，<code>&quot;include&quot;: []</code> 这样还是会找不到任何输入的，同样的，如果设置的路径不对，依然有这个错误。</p>
 <p>附带一提，<code>tslint.json</code> 文件可以用 <code>tslint.js</code> 替代，使用 <code>module.exports</code> 导出。<br>这样可以根据环境配置来设置不同的 lint 规则。</p>
 
@@ -686,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -715,7 +715,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -786,7 +788,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">29</span>
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

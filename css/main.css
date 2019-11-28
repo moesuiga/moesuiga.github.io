@@ -616,8 +616,7 @@ pre,
   background: #000;
   line-height: 1.6;
 }
-pre ::-moz-selection,
-.highlight ::-moz-selection {
+pre ::-moz-selection, .highlight ::-moz-selection {
   background: #eaeaea;
   color: #000;
 }
@@ -2137,7 +2136,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff5c;
+  background: #ff9a39;
 }
 .links-of-blogroll {
   font-size: 13px;
