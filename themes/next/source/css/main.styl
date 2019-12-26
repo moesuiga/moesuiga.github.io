@@ -16,6 +16,27 @@ $mixins    = base $scheme $custom_mixins;
 for $variable in $variables
   @import "_variables/" + $variable;
 
+body {
+  cursor: $cursor-default, auto;
+}
+
+input,
+textarea {
+  cursor: $cursor-beam, auto;
+}
+
+a[href],
+button,
+input[type=button],
+input[type=file] {
+  cursor: $cursor-pointer, auto;
+}
+
+input[disabled],
+button[disabled],
+textarea[disabled] {
+  cursor: $cursor-disabled, auto;
+}
 
 // Mixins Layer
 // --------------------------------------------------
