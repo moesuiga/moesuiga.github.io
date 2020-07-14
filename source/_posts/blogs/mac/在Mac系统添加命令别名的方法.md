@@ -1,13 +1,13 @@
 ---
 title: 在Mac的终端添加命令别名的方法
 keywords: Mac, bash, zsh, alias, .zshrc, .bash_profile, .bashrc
-description: 在 Mac 里使用 `zsh` 时，添加自定义命令的方法。1. 临时使用，在命令行通过 `alias <cmd>="<command>"` 进行设置。 2. 永久添加，在 `~/.zshrc` 文件中写入配置。 3. 永久添加，在 `~/.zshrc` 文件中加载 `~/.bash_profile` 文件，然后在 `~/.bash_profile` 文件中写入配置。
+description: 在 Mac 里使用 `zsh` 时，添加自定义命令的方法。1. 临时使用，在命令行通过 `alias cmd="command"` 进行设置。 2. 永久添加，在 `~/.zshrc` 文件中写入配置。 3. 永久添加，在 `~/.zshrc` 文件中加载 `~/.bash_profile` 文件，然后在 `~/.bash_profile` 文件中写入配置。
 category:
   - Command
 tags:
   - Mac
 date: 2020-7-14 01:24:33
-updated: 2020-07-14 12:42:33
+updated: 2020-07-14 16:30:29
 photos:
   - /images/pcr1.jpg
 ---
