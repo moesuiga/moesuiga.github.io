@@ -1220,6 +1220,30 @@
       </tags>
   </entry>
   <entry>
+    <title>在Mac的终端添加命令别名的方法</title>
+    <url>//2020/07/13/%E5%9C%A8mac%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
+    <content><![CDATA[<p>第一次使用 Mac 电脑，在配置一些自定义的命令时遇到了问题。</p>
+<p>在网上搜索好些都是说直接在 <code>~/.bashrc</code> 或者 <code>~/.bash_profile</code> 文件中写入配置就行，可是这样并不能解决问题。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.bash_profile</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">"ls -alFG"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># command line</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>上面这种做法和直接在终端上输入 <code>alias ll=&quot;ls -alFG&quot;</code> 的结果一样，都是只能在当前进程起效果，结束进程，再启动一个终端进程，就没有 <code>ll</code> 这个别名了。</p>
+<p>后来终于找到了一篇记录博客，提到使用的 <code>zsh</code>，我才恍然。</p>
+<p>最开始打开 Mac 上的终端时，title 里是有显示 <code>zsh</code> 的，只是我以前没听过 <code>zsh</code>，不清楚这是什么意思。原来它就类似 <code>bash</code> 这样是一个命令行程序，也就是说 Mac 默认使用的命令行程序不是 <code>bash</code> 而是 <code>zsh</code>。也因此并不会在启动时运行 <code>~/.bash_profile</code> 文件，运行的是 <code>~/.zshrc</code>。</p>
+<p>如此只需在 <code>~/.zshrc</code> 文件中引入 <code>~/.bash_profile</code> 文件运行一次就能解决了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.zshrc</span></span><br><span class="line"><span class="comment"># 当有 ~/.bash_profile 文件时，才加载这个文件</span></span><br><span class="line"><span class="built_in">test</span> -f ~/.bash_profile &amp;&amp; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>之后在 <code>~/.bash_profile</code> 文件中添加的别名就可以安心使用了。</p>
+<p>参考资料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE5ODA5OTQvYXJ0aWNsZS9kZXRhaWxzLzc3OTQwMzc5" title="https://blog.csdn.net/u011980994/article/details/77940379">CSDN-fool宋-Mac下配置alias，zsh终端命令别名<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Command</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>小程序踩坑之 swiper 组件</title>
     <url>//2018/12/04/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B8%A9%E5%9D%91%E4%B9%8B-swiper-%E7%BB%84%E4%BB%B6.html</url>
     <content><![CDATA[<p>之前小程序测试出来一个bug。在管理车型页面删除一辆车型后，在点击第一辆车型返回到车型档案页时，最上面的车型卡片消失了。</p>
