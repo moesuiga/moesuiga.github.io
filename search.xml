@@ -1456,6 +1456,35 @@
       </tags>
   </entry>
   <entry>
+    <title>crontab创建定时任务</title>
+    <url>//2019/12/11/crontab%E5%88%9B%E5%BB%BA%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html</url>
+    <content><![CDATA[<h2 id="etc-crontab"><a href="#etc-crontab" class="headerlink" title="/etc/crontab"></a><code>/etc/crontab</code></h2><p>在 Linux 服务器中创建定时任务，可以在 <code>/etc/crontab</code> 文件中设置。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /etc/crontab</span></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin</span><br><span class="line">MAILTO=root</span><br><span class="line">HOME=/</span><br><span class="line"></span><br><span class="line"><span class="comment"># For details see man 4 crontabs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example of job definition:</span></span><br><span class="line"><span class="comment"># .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="comment"># |  |  |  |  |</span></span><br><span class="line"><span class="comment"># *  *  *  *  * user-name  command to be executed</span></span><br><span class="line"></span><br><span class="line">  00 00 1  *  * root <span class="built_in">echo</span> <span class="string">"test crontab"</span></span><br></pre></td></tr></table></figure>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>首先来看最上面的几行内容：</p>
+<p><code>SHELL</code> 设置了定时任务运行的终端<br><code>PATH</code> 设置了定时任务运行时的环境<br><code>MAILTO</code> 设置的是任务运行结束后发送邮件给谁<br><code>HOME</code> 则是设置当前的主页目录</p>
+<p>需要注意的一个地方在于 <code>PATH</code>，定时任务的环境配置和手动运行某个命令时的环境配置并不一定是一样的。<br>有时候你会发现一个命令，自己手动运行时没有问题，可是放在定时任务里运行却报错误说“找不到某某命令”，原因很可能就是这个命令不再这里的 <code>PATH</code> 中。</p>
+<h3 id="基本参数"><a href="#基本参数" class="headerlink" title="基本参数"></a>基本参数</h3><p>然后就是设置具体的定时任务：</p>
+<p>就像文件注释中给出的提示一样，每一行就是一个定时任务；其中前五个参数是设置定时任务的时间，接着是运行命令的用户，最后则是运行任务的命令。</p>
+<p>第一个参数表示分钟：你可以设置 0 - 59，意味着在一个小时的具体某分运行任务；<br>第二个参数表示小时：区间为 0 - 23，分别表示在具体某个时点运行任务，比如设置为 23，意思就是在晚上11点运行定时任务；<br>第三个参数表示月份的天数：取值范围是 1 - 31，也就是说只有在每个月某一日运行；<br>第四个参数是月份：范围区间 1 - 12，或者是月份英文的前三个字母缩写，表示只在某个月份执行任务；<br>第五个参数表示星期：范围是 0 - 6，<strong>注意这里的 0 是指的周日</strong>，同样可以用英文前三个字母的缩写表示，意思就是只在每周的固定哪一天执行。</p>
+<p>像上面的示例: <code>00 00 1 * * root echo &quot;test crontab&quot;</code>，就是在每个月的1号，在终端输出一串字符 <code>test crontab</code></p>
+<h3 id="高级一点的用法"><a href="#高级一点的用法" class="headerlink" title="高级一点的用法"></a>高级一点的用法</h3><p>除此以外，还有高级一点的用法，比如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 分别在 1/4/7/10 月份的 1/11/21 号 输出一下日期</span></span><br><span class="line">0 0 1,11,21 1,4,7,10 * root <span class="built_in">echo</span> `date +%x`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔 5 分钟执行一次</span></span><br><span class="line">*/5 * * * * root &lt;<span class="built_in">command</span> whatever you want&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个周末的 1 点到 6 点的 30 分执行</span></span><br><span class="line">30 1-6 * * 0,6 root &lt;just <span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：<br>你可能会突发奇想的设置一个类似这样的定时参数 <code>0 23 24 12 0,6</code>。<br>你以为它应该在 12 月 24 日并且这一天还是周末的情况下执行任务；<br>但是遗憾的是这样不行，它可能会分别在 12 月 24 日和周末时执行<br>周和日月不能并存。</p>
+</blockquote>
+<h2 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h2><p>除了直接编辑 <code>/etc/crontab</code> 文件之外，还可以通过 <code>crontab -e</code> 命令来编辑设定定时任务。</p>
+<p>这里的设置和 <code>/etc/crontab</code> 的不同之处在于 <code>crontab -e</code> 命令设置的定时任务中，没有 <code>user</code> 参数。<br>因为 <code>crontab</code> 就是针对用户级别的，也就是说 <code>crontab -e</code> 命令设置的定时任务中的 <code>user</code> 就是运行 <code>crontab -e</code> 命令时的用户。<br>除此之外，其他与 <code>/etc/crontab</code> 文件一样。</p>
+<h3 id="crontab的参数"><a href="#crontab的参数" class="headerlink" title="crontab的参数"></a>crontab的参数</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab [-u username] [-l|-e|-r]</span><br><span class="line"><span class="comment"># 选项与参数：</span></span><br><span class="line"><span class="comment"># -u：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作排程；</span></span><br><span class="line"><span class="comment"># -e：编辑 crontab 的工作内容</span></span><br><span class="line"><span class="comment"># -l：查阅 crontab 的工作内容</span></span><br><span class="line"><span class="comment"># -r：移除所有的 crontab 的工作内容，若仅要移除一项，请用 -e 去编辑</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veGQ1MDJkamovcC80MjkyNzgxLmh0bWw=" title="https://www.cnblogs.com/xd502djj/p/4292781.html">https://www.cnblogs.com/xd502djj/p/4292781.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3ZiaXJkLmRpYy5rc3UuZWR1LnR3L2xpbnV4X2Jhc2ljLzA0MzBjcm9uXzMucGhw" title="http://vbird.dic.ksu.edu.tw/linux_basic/0430cron_3.php">http://vbird.dic.ksu.edu.tw/linux_basic/0430cron_3.php<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS9jcm9udGFi" title="https://baike.baidu.com/item/crontab">https://baike.baidu.com/item/crontab<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZ2dqdWNoZW5nL2FyY2hpdmUvMjAxMi8wOC8xOS8yNjQ2NzYzLmh0bWw=" title="https://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html">https://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html<i class="fa fa-external-link"></i></span></p>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>crontab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>忘记了 MySQL 8.0 密码, 如何重置</title>
     <url>//2019/11/28/%E5%BF%98%E8%AE%B0%E4%BA%86-mysql-8-0-%E5%AF%86%E7%A0%81-%E5%A6%82%E4%BD%95%E9%87%8D%E7%BD%AE.html</url>
     <content><![CDATA[<p>起因是安装了 8.0 版本的 MySQL，结果后来忘记了密码，上网查了好多 5.x 版本的重置密码方法，在 8.0 版本都不行。<br>后来找到了一篇同样是 8.0 版本的文章才修改成功。</p>
@@ -1483,9 +1512,10 @@
 <p>使用 <code>ALTER</code> 修改密码。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'123456'</span>;</span><br></pre></td></tr></table></figure>
 <p>至此，密码修改成功，可以退出重新使用用户名密码登录了。</p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01hbmFnZW1lbnRBbmRKYXZhL2FydGljbGUvZGV0YWlscy84MDA5ODUyNQ==" title="https://blog.csdn.net/ManagementAndJava/article/details/80098525">https://blog.csdn.net/ManagementAndJava/article/details/80098525<i class="fa fa-external-link"></i></span></p>
 ]]></content>
       <categories>
-        <category>server</category>
+        <category>Server</category>
       </categories>
       <tags>
         <tag>mysql</tag>

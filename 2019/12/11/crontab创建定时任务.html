@@ -98,27 +98,27 @@
 
 
 
-  <meta name="description" content="transform 属性会将后代元素的 fixed 定位效果降级到 absolute，还有提升元素层级的效果，同时还会影响 absolute 定位元素在 overflow 属性不为 visible 内的表现以及宽度百分比的容器基准。">
-<meta name="keywords" content="CSS3, transform, position, fixed, absolute, overflow, z-index, width percent">
+  <meta name="description" content="使用 `/etc/crontab` 和 `crontab -e` 创建定时任务，以及它们的区别">
+<meta name="keywords" content="&#x2F;etc&#x2F;crontab, crontab -e, crontab, Linux, task, 定时任务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS3 属性 transform 对其他元素的一些渲染影响">
-<meta property="og:url" content="https://www.childish.site/2019/03/05/css3-属性-transform-对其他元素的一些渲染影响.html">
+<meta property="og:title" content="crontab创建定时任务">
+<meta property="og:url" content="https://www.childish.site/2019/12/11/crontab创建定时任务.html">
 <meta property="og:site_name" content="地平线·梦">
-<meta property="og:description" content="transform 属性会将后代元素的 fixed 定位效果降级到 absolute，还有提升元素层级的效果，同时还会影响 absolute 定位元素在 overflow 属性不为 visible 内的表现以及宽度百分比的容器基准。">
+<meta property="og:description" content="使用 `/etc/crontab` 和 `crontab -e` 创建定时任务，以及它们的区别">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://miao.su/images/2019/03/03/51570e7d4.jpg">
-<meta property="og:updated_time" content="2020-07-19T08:33:26.752Z">
+<meta property="og:image" content="https://www.childish.site/images/2B-1.jpg">
+<meta property="og:updated_time" content="2020-07-19T02:46:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS3 属性 transform 对其他元素的一些渲染影响">
-<meta name="twitter:description" content="transform 属性会将后代元素的 fixed 定位效果降级到 absolute，还有提升元素层级的效果，同时还会影响 absolute 定位元素在 overflow 属性不为 visible 内的表现以及宽度百分比的容器基准。">
-<meta name="twitter:image" content="https://miao.su/images/2019/03/03/51570e7d4.jpg">
+<meta name="twitter:title" content="crontab创建定时任务">
+<meta name="twitter:description" content="使用 `/etc/crontab` 和 `crontab -e` 创建定时任务，以及它们的区别">
+<meta name="twitter:image" content="https://www.childish.site/images/2B-1.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://www.childish.site/2019/03/05/css3-属性-transform-对其他元素的一些渲染影响.html">
+  <link rel="canonical" href="https://www.childish.site/2019/12/11/crontab创建定时任务.html">
 
 
 
@@ -128,7 +128,7 @@
   };
 </script>
 
-  <title>CSS3 属性 transform 对其他元素的一些渲染影响 | 地平线·梦</title>
+  <title>crontab创建定时任务 | 地平线·梦</title>
   
 
 
@@ -406,7 +406,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2019/03/05/css3-属性-transform-对其他元素的一些渲染影响.html">
+    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2019/12/11/crontab创建定时任务.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Suiga">
@@ -423,7 +423,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CSS3 属性 transform 对其他元素的一些渲染影响
+          <h2 class="post-title" itemprop="name headline">crontab创建定时任务
 
               
             
@@ -449,7 +449,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 10:18:22" itemprop="dateCreated datePublished" datetime="2019-03-05T10:18:22+08:00">2019-03-05</time>
+              <time title="创建时间：2019-12-11 18:23:09" itemprop="dateCreated datePublished" datetime="2019-12-11T18:23:09+08:00">2019-12-11</time>
             
 
             
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-19 16:33:26" itemprop="dateModified" datetime="2020-07-19T16:33:26+08:00">2020-07-19</time>
+                <time title="修改时间：2020-07-19 10:46:51" itemprop="dateModified" datetime="2020-07-19T10:46:51+08:00">2020-07-19</time>
               
             
           </span>
@@ -483,7 +483,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Server/" itemprop="url" rel="index"><span itemprop="name">Server</span></a></span>
 
                 
                 
@@ -510,7 +510,7 @@
           
 
           
-            <div class="post-description">transform 属性会将后代元素的 fixed 定位效果降级到 absolute，还有提升元素层级的效果，同时还会影响 absolute 定位元素在 overflow 属性不为 visible 内的表现以及宽度百分比的容器基准。</div>
+            <div class="post-description">使用 `/etc/crontab` 和 `crontab -e` 创建定时任务，以及它们的区别</div>
           
 
         </div>
@@ -532,25 +532,29 @@
       
         
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          <a href="https://miao.su/images/2019/03/03/51570e7d4.jpg" class="post-gallery-img fancybox" style="background-image: url(https://miao.su/images/2019/03/03/51570e7d4.jpg);" rel="gallery_ckcstptik000yz7qgnldxqks4" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
+          <a href="/images/2B-1.jpg" class="post-gallery-img fancybox" style="background-image: url(/images/2B-1.jpg);" rel="gallery_ckcstptjp002tz7qg2i43dc1n" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
         </div>
       
 
       
-        <p>一个偶然的情况下，发现了这样一个问题：</p>
+        <h2 id="etc-crontab"><a href="#etc-crontab" class="headerlink" title="/etc/crontab"></a><code>/etc/crontab</code></h2><p>在 Linux 服务器中创建定时任务，可以在 <code>/etc/crontab</code> 文件中设置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/crontab</span></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin</span><br><span class="line">MAILTO=root</span><br><span class="line">HOME=/</span><br><span class="line"></span><br><span class="line"><span class="comment"># For details see man 4 crontabs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example of job definition:</span></span><br><span class="line"><span class="comment"># .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="comment"># |  |  |  |  |</span></span><br><span class="line"><span class="comment"># *  *  *  *  * user-name  command to be executed</span></span><br><span class="line"></span><br><span class="line">  00 00 1  *  * root <span class="built_in">echo</span> <span class="string">"test crontab"</span></span><br></pre></td></tr></table></figure>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>首先来看最上面的几行内容：</p>
+<p><code>SHELL</code> 设置了定时任务运行的终端<br><code>PATH</code> 设置了定时任务运行时的环境<br><code>MAILTO</code> 设置的是任务运行结束后发送邮件给谁<br><code>HOME</code> 则是设置当前的主页目录</p>
+<p>需要注意的一个地方在于 <code>PATH</code>，定时任务的环境配置和手动运行某个命令时的环境配置并不一定是一样的。<br>有时候你会发现一个命令，自己手动运行时没有问题，可是放在定时任务里运行却报错误说“找不到某某命令”，原因很可能就是这个命令不再这里的 <code>PATH</code> 中。</p>
+<h3 id="基本参数"><a href="#基本参数" class="headerlink" title="基本参数"></a>基本参数</h3><p>然后就是设置具体的定时任务：</p>
+<p>就像文件注释中给出的提示一样，每一行就是一个定时任务；其中前五个参数是设置定时任务的时间，接着是运行命令的用户，最后则是运行任务的命令。</p>
+<p>第一个参数表示分钟：你可以设置 0 - 59，意味着在一个小时的具体某分运行任务；<br>第二个参数表示小时：区间为 0 - 23，分别表示在具体某个时点运行任务，比如设置为 23，意思就是在晚上11点运行定时任务；<br>第三个参数表示月份的天数：取值范围是 1 - 31，也就是说只有在每个月某一日运行；<br>第四个参数是月份：范围区间 1 - 12，或者是月份英文的前三个字母缩写，表示只在某个月份执行任务；<br>第五个参数表示星期：范围是 0 - 6，<strong>注意这里的 0 是指的周日</strong>，同样可以用英文前三个字母的缩写表示，意思就是只在每周的固定哪一天执行。</p>
+<p>像上面的示例: <code>00 00 1 * * root echo &quot;test crontab&quot;</code>，就是在每个月的1号，在终端输出一串字符 <code>test crontab</code></p>
+<h3 id="高级一点的用法"><a href="#高级一点的用法" class="headerlink" title="高级一点的用法"></a>高级一点的用法</h3><p>除此以外，还有高级一点的用法，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分别在 1/4/7/10 月份的 1/11/21 号 输出一下日期</span></span><br><span class="line">0 0 1,11,21 1,4,7,10 * root <span class="built_in">echo</span> `date +%x`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔 5 分钟执行一次</span></span><br><span class="line">*/5 * * * * root &lt;<span class="built_in">command</span> whatever you want&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个周末的 1 点到 6 点的 30 分执行</span></span><br><span class="line">30 1-6 * * 0,6 root &lt;just <span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>给一个设置了 <em>transform</em> 属性的元素的子元素设置 <code>position: fixed</code>，实际表现却并非 <em>fixed</em> 定位的效果。</p>
+<p><strong>注意</strong>：<br>你可能会突发奇想的设置一个类似这样的定时参数 <code>0 23 24 12 0,6</code>。<br>你以为它应该在 12 月 24 日并且这一天还是周末的情况下执行任务；<br>但是遗憾的是这样不行，它可能会分别在 12 月 24 日和周末时执行<br>周和日月不能并存。</p>
 </blockquote>
-<p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="PLbMza" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="PLbMza"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9QTGJNemEv" title="https://codepen.io/moesuiga/pen/PLbMza/"><br>  PLbMza<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p><br><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br><br>之后在搜资料的时候看到了这样一篇文章 <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span><br><br>里面介绍了 <em>transform</em> 属性的多种影响，然后才知道，原来 <em>transform</em> 属性有这么多值得注意的地方。<br><br>1. transform 提升元素的垂直地位，类似添加了 <code>position: relative;</code> 的效果。<br><br>    两个元素如果有 <em>margin</em> 负值，然后出现部分重叠的时候，在没有 <em>static</em> 以外的定位时，都是后面的元素覆盖前面的元素，这样后来居上的渲染。<br><br>    可是如果这时候，给前面的元素添加了 <em>transform</em> 属性，就会发现，原本应该被覆盖的前面的元素，反而覆盖了后面的元素。<br><br>    这就是 <em>transform</em> 带来的垂直提升效果。<br><br>2. transform 限制 <code>position: fixed;</code> 的跟随效果，也就是我最初发现的问题点。<br><br>3. transform 改变 <em>overflow</em> 对 <em>absolute</em> 定位元素的限制。<br><br>    <code>position: absolute;</code> 绝对定位的元素，如果有一个 <em>overflow</em> 不为 <em>visible</em> 的祖先元素，并且这个祖先元素一直到定位的元素之间的所有嵌套元素都没有设置了非 <em>static</em> 的 <em>position</em> 属性，那么祖先元素的 <em>overflow</em> 属性对该定位元素不起作用。<br><br>    这一点是我们的一贯认知，但是加了 <em>transform</em> 的话，就会改变这一点，致使 <em>absolute</em> 定位的元素也会被 <em>overflow</em> 影响。<br><br>4. transform 限制 <em>absolute</em> 定位元素的 <em>100%</em> 宽度大小。<br><br>    我们都知道 <em>absolute</em> 定位元素的宽度百分比是基于该元素最近的带有非 <em>static</em> 定位属性的祖先元素的宽度。<br><br>    可是如果在这两个元素之间插入一个带有 <em>transform</em> 属性的元素，就会改变这一状况，使得 <em>absolute</em> 定位元素的宽度百分比基于 <em>transform</em> 元素，而非外部带有定位属性的祖先元素。<br><br>上面四点就是张鑫旭大神的文章中提到的几点影响。<br><br>然后我在实践过程中，发现了第5点影响：<br><br>&gt; 5、transform 会限制 <em>absolute</em> 定位元素的定位基准。<br><br>我们知道有那么几个方位属性是跟定位紧密结合的: <em>top</em>、<em>right</em>、<em>bottom</em> 以及 <em>left</em>。<br><br><em>absolute</em> 定位元素的方位属性就是基于其 <em>包含块</em> 的边界来处理的。<br><br>一般来说，<em>absolute</em> 定位的元素，其包含块就是距离该元素最近的带有非 <em>static</em> 定位的祖先元素。<br>然而 <em>transform</em> 就可以改变这一点，使得 <em>absolute</em> 的方位属性以 <em>transform</em> 元素的边界来处理。<br>当然，前提条件是带有 <em>transform</em> 属性的元素和带有 <em>absolute</em> 定位的元素之间没有其他带有非 <em>static</em> 定位属性的元素。<br><br>啰嗦这一堆好像有点绕，还是直接上效果看的方便。<br><br><p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="ZPLEJm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="ZPLEJm"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9aUExFSm0v" title="https://codepen.io/moesuiga/pen/ZPLEJm/"><br>  ZPLEJm<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
-
-<p>可以看到，在示例中，最里面的 <em>absolute</em> 定位元素是定位在了右上角，而中间的 <code>.transform</code> 并没有定位属性。</p>
-<p>按照常理来想，黑色方块部分应该是定位在红色边框盒子的右上角的，可实际上其却被 <em>transform</em> 属性限制在了蓝色边框的盒子里，定位在了蓝色边框的盒子右上角。</p>
-<p>结合上面第 4 点，<em>transform</em> 属性其实就是截断了 <em>absolute</em> 寻找其包含块的正常路径，使其本身成为了 <em>absolute</em> 定位元素的包含块。</p>
-<hr>
-<p>参考链接：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span></li>
-</ul>
+<h2 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h2><p>除了直接编辑 <code>/etc/crontab</code> 文件之外，还可以通过 <code>crontab -e</code> 命令来编辑设定定时任务。</p>
+<p>这里的设置和 <code>/etc/crontab</code> 的不同之处在于 <code>crontab -e</code> 命令设置的定时任务中，没有 <code>user</code> 参数。<br>因为 <code>crontab</code> 就是针对用户级别的，也就是说 <code>crontab -e</code> 命令设置的定时任务中的 <code>user</code> 就是运行 <code>crontab -e</code> 命令时的用户。<br>除此之外，其他与 <code>/etc/crontab</code> 文件一样。</p>
+<h3 id="crontab的参数"><a href="#crontab的参数" class="headerlink" title="crontab的参数"></a>crontab的参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u username] [-l|-e|-r]</span><br><span class="line"><span class="comment"># 选项与参数：</span></span><br><span class="line"><span class="comment"># -u：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作排程；</span></span><br><span class="line"><span class="comment"># -e：编辑 crontab 的工作内容</span></span><br><span class="line"><span class="comment"># -l：查阅 crontab 的工作内容</span></span><br><span class="line"><span class="comment"># -r：移除所有的 crontab 的工作内容，若仅要移除一项，请用 -e 去编辑</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veGQ1MDJkamovcC80MjkyNzgxLmh0bWw=" title="https://www.cnblogs.com/xd502djj/p/4292781.html">https://www.cnblogs.com/xd502djj/p/4292781.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3ZiaXJkLmRpYy5rc3UuZWR1LnR3L2xpbnV4X2Jhc2ljLzA0MzBjcm9uXzMucGhw" title="http://vbird.dic.ksu.edu.tw/linux_basic/0430cron_3.php">http://vbird.dic.ksu.edu.tw/linux_basic/0430cron_3.php<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS9jcm9udGFi" title="https://baike.baidu.com/item/crontab">https://baike.baidu.com/item/crontab<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZ2dqdWNoZW5nL2FyY2hpdmUvMjAxMi8wOC8xOS8yNjQ2NzYzLmh0bWw=" title="https://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html">https://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646763.html<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -578,7 +582,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/transform/" rel="tag"># transform</a>
+            <a href="/tags/crontab/" rel="tag"># crontab</a>
           
         </div>
       
@@ -611,8 +615,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/03/linux-添加环境变量的方法.html" rel="next" title="Linux 添加环境变量的方法">
-                <i class="fa fa-chevron-left"></i> Linux 添加环境变量的方法
+              <a href="/2019/12/11/css-属性-writing-mode-的妙用.html" rel="next" title="CSS 属性 `writing-mode` 的妙用">
+                <i class="fa fa-chevron-left"></i> CSS 属性 `writing-mode` 的妙用
               </a>
             
           </div>
@@ -621,8 +625,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/12/在-tsconfig-json-配置中找不到任何输入.html" rel="prev" title="在 tsconfig.json 配置中找不到任何输入">
-                在 tsconfig.json 配置中找不到任何输入 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/12/使用-textencoder-获取字符串的字节数.html" rel="prev" title="使用 TextEncoder 获取字符串的字节数">
+                使用 TextEncoder 获取字符串的字节数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -672,8 +676,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -907,6 +920,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#etc-crontab"><span class="nav-number">1.</span> <span class="nav-text">/etc/crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">1.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本参数"><span class="nav-number">1.2.</span> <span class="nav-text">基本参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级一点的用法"><span class="nav-number">1.3.</span> <span class="nav-text">高级一点的用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab"><span class="nav-number">2.</span> <span class="nav-text">crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab的参数"><span class="nav-number">2.1.</span> <span class="nav-text">crontab的参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">3.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -1115,7 +1145,7 @@
     owner: 'moesuiga',
     admin: ['moesuiga'],
     // id: md5(location.pathname),
-    id: md5('1551752302000'),
+    id: md5('1576059789000'),
     distractionFreeMode: 'true'
   });
   gitalk.render('gitalk-container');
