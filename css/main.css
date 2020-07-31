@@ -207,7 +207,7 @@ th {
 }
 body {
   position: relative;
-  font-family: Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans", "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN", FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei", sans-serif, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Source Han Sans CN, FZYiHei-M20S, STLiTi, STXinwei, STHeiti, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 18px;
   line-height: 2;
   color: #555;
@@ -238,7 +238,11 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Weibei SC", "Xingkai SC", STXingkai, FZShuTi, sans-serif, Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans", "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN", FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei", sans-serif, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Shrikhand, Ma Shan Zheng, Chalkboard, HanziPenSC-W5, STXingkai, Xingkai SC, cursive;
+}
+h5,
+h6 {
+  font-family: Recursive, sans-serif;
 }
 h1,
 h2,
@@ -645,7 +649,7 @@ pre ::selection,
 }
 pre,
 code {
-  font-family: Source Code Pro, Consolas, Monaco, Menlo, Consolas, monospace, consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: Monaco, Consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   overflow-wrap: break-word;
@@ -1296,7 +1300,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans", "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN", FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei", sans-serif, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Source Han Sans CN, FZYiHei-M20S, STLiTi, STXinwei, STHeiti, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1439,7 +1443,7 @@ pre .javascript .function {
 .post-body {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: Cambria, Georgia, "Times New Roman", "YaPi SC", STKaiti, STXinwei, STSong, FangSong, NSimSun, SimSun, serif, Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans", "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN", FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei", sans-serif, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Cambria, Times New Roman, STSong, FangSong, SimSun, serif, Source Han Sans CN, FZYiHei-M20S, STLiTi, STXinwei, STHeiti, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .post-body .exturl .fa {
   font-size: 14px;
@@ -1724,7 +1728,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: Cambria, Georgia, "Times New Roman", "YaPi SC", STKaiti, STXinwei, STSong, FangSong, NSimSun, SimSun, serif, Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans", "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN", FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei", sans-serif, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Cambria, Times New Roman, STSong, FangSong, SimSun, serif, Source Han Sans CN, FZYiHei-M20S, STLiTi, STXinwei, STHeiti, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -2154,7 +2158,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff3700;
+  background: #05ffa3;
 }
 .links-of-blogroll {
   font-size: 13px;
