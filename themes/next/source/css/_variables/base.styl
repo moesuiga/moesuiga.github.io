@@ -63,17 +63,18 @@ $font-family-base         = get_font_family('global'), $font-family-chinese, san
 $font-family-logo         = $font-family-base
 $font-family-logo         = get_font_family('logo'), $font-family-base if get_font_family('logo')
 
-$font-family-headings     = $font-family-base
-$font-family-headings     = get_font_family('headings'), $font-family-base if get_font_family('headings')
+$font-family-headings     = Chalkboard, HanziPenSC-W5, STXingkai, Xingkai SC, cursive
+$font-family-headings     = get_font_family('headings'), Chalkboard, HanziPenSC-W5, STXingkai, Xingkai SC, cursive if get_font_family('headings')
 
 $font-family-posts        = $font-family-base
 $font-family-posts        = get_font_family('posts'), $font-family-base if get_font_family('posts')
 
-$font-family-monospace    = consolas, Menlo, $font-family-chinese, monospace
-$font-family-monospace    = get_font_family('codes'), consolas, Menlo, $font-family-chinese, monospace if get_font_family('codes')
+$font-family-monospace    = Monaco, Consolas, Menlo, $font-family-chinese, monospace
+$font-family-monospace    = get_font_family('codes'), Monaco, Consolas, Menlo, $font-family-chinese, monospace if get_font_family('codes')
 
 $font-family-icons        = 'FontAwesome'
 
+$font-family-sans-serif   = Recursive, sans-serif
 
 // Font Weight
 $font-weight-lighter      = 200

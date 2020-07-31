@@ -66,6 +66,7 @@
 {% endif %}
 
 {% include "./external-fonts.swig" %}
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
 
 {% set font_awesome_uri = url_for(theme.vendors._internal + '/font-awesome/css/font-awesome.min.css?v=4.6.2') %}
 {% if theme.vendors.fontawesome %}

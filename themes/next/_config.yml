@@ -416,46 +416,33 @@ font:
   # Global font settings used for all elements in <body>.
   global:
     external: true
-    family: Calibri, "Segoe UI", Roboto, "Droid Sans", "Open Sans",
-      "PingFang SC", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", STHeiti, "Source Han Sans CN",
-      FZYiHei-M20S, STLiTi, STXinwei, "Microsoft YaHei",
-      sans-serif
+    family: Source Han Sans CN, FZYiHei-M20S, STLiTi, STXinwei, STHeiti
     size: 18
 
   # Font settings for Headlines (H1, H2, H3, H4, H5, H6).
   # Fallback to `global` font settings.
   headings:
     external: true
-    family: -apple-system, BlinkMacSystemFont,
-      "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-      "Fira Sans", "Droid Sans", "Helvetica Neue",
-      "Weibei SC", "Xingkai SC",
-      STXingkai, FZShuTi,
-      sans-serif
+    family: Shrikhand, Ma Shan Zheng
     size:
 
   # Font settings for posts.
   # Fallback to `global` font settings.
   posts:
     external: true
-    family: Cambria, Georgia, "Times New Roman",
-      "YaPi SC", STKaiti, STXinwei, STSong, FangSong, NSimSun, SimSun,
-      serif
+    family: Cambria, Times New Roman, STSong, FangSong, SimSun, serif
 
   # Font settings for Logo.
   # Fallback to `global` font settings.
   logo:
     external: true
-    family: -apple-system, BlinkMacSystemFont,
-      "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-      "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif
+    family:
     size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: Source Code Pro, Consolas, Monaco, Menlo, Consolas, monospace
+    family:
     size:
 
 
