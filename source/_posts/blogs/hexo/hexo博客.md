@@ -8,8 +8,9 @@ category:
 tags:
   - Hexo
 date: 2017-07-04 21:23:25
+updated: 2020-08-11 23:29:08
 photos:
-  - https://miao.su/images/2019/02/23/91cd756.jpg
+  - /images/gallery/2017070401.png
 ---
 
 使用 hexo + github 快速创建个人博客方法记录。

@@ -3,13 +3,13 @@ title: crontab创建定时任务
 keywords: /etc/crontab, crontab -e, crontab, Linux, task, 定时任务
 description: 使用 `/etc/crontab` 和 `crontab -e` 创建定时任务，以及它们的区别
 date: 2019-12-11 18:23:09
-updated: 2020-07-19 10:46:51
+updated: 2020-08-11 23:04:34
 category:
   - Server
 tags:
   - crontab
 photos:
-  - /images/2B-1.jpg
+  - /images/gallery/2019121102.png
 ---
 
 ## `/etc/crontab`

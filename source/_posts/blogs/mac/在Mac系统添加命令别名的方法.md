@@ -6,10 +6,10 @@ category:
   - Command
 tags:
   - Mac
-date: 2020-7-14 01:24:33
-updated: 2020-07-14 16:30:29
+date: 2020-07-14 01:24:33
+updated: 2020-08-11 22:52:50
 photos:
-  - /images/pcr1.jpg
+  - /images/gallery/2020071401.png
 ---
 
 第一次使用 Mac 电脑，在配置一些自定义的命令时遇到了问题。

@@ -9,8 +9,9 @@ tags:
   - undefined
   - 'null'
 date: 2019-7-9 13:59:33
+updated: 2020-08-11 23:35:44
 photos:
-  - https://miao.su/images/2019/03/09/5711f4bc.png
+  - /images/gallery/2019070901.png
 ---
 
 前几天，朋友在看 JavaScript 关键字的时候，发现了这样一个小问题：
