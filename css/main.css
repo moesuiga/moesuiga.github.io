@@ -1,15 +1,15 @@
 body {
-  cursor: url("https://wayowe.com/s/mouse/miku/Arrow.ani"), url("https://wayowe.com/s/mouse/angelo_black/Arrow.cur"), auto;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Arrow.cur"), auto;
 }
 input,
 textarea {
-  cursor: url("https://wayowe.com/s/mouse/miku/IBeam.ani"), url("https://wayowe.com/s/mouse/angelo_black/beam.cur"), auto;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/beam.cur"), auto;
 }
 a[href],
 button,
 input[type=button],
 input[type=file] {
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), auto;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), auto;
 }
 input[disabled],
 button[disabled],
@@ -141,7 +141,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button; /* 2 */
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer; /* 3 */
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer; /* 3 */
 }
 button[disabled],
 html input[disabled] {
@@ -348,7 +348,7 @@ span.exturl {
   text-decoration: none;
   outline: none;
   border-bottom: 1px solid #999;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
 }
 a:hover,
 span.exturl:hover {
@@ -1079,7 +1079,7 @@ pre .javascript .function {
   }
 }
 .post-body .tabs ul.nav-tabs li.tab.active a {
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), default;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), default;
   color: #555;
 }
 .post-body .tabs .tab-content {
@@ -1232,7 +1232,7 @@ pre .javascript .function {
   background: #eee;
   font-size: 12px;
   opacity: 0.6;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
   text-align: center;
   -webkit-transform: translateZ(0);
 }
@@ -1746,7 +1746,7 @@ pre .javascript .function {
 }
 .posts-expand .post-meta time {
   border-bottom: 1px dashed #999;
-  cursor: url("https://wayowe.com/s/mouse/miku/Help.ani"), url("https://wayowe.com/s/mouse/angelo_black/Help.cur"), help;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Help.cur"), help;
 }
 .post-meta-divider {
   margin: 0 0.5em;
@@ -2031,7 +2031,7 @@ pre .javascript .function {
   background: #222;
   line-height: 0;
   z-index: 1050;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
   -webkit-transform: translateZ(0);
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -2158,7 +2158,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #390fff;
+  background: #c24aab;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2192,7 +2192,7 @@ pre .javascript .function {
 }
 .sidebar-nav li {
   display: inline-block;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
   border-bottom: 1px solid transparent;
   font-size: 14px;
   color: #555;
@@ -2435,7 +2435,7 @@ pre .javascript .function {
 .local-search-popup .popup-btn-close {
   border-left: 1px solid #eee;
   float: right;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
 }
 .local-search-popup #no-result {
   position: absolute;
@@ -2448,7 +2448,7 @@ pre .javascript .function {
 }
 #needsharebutton-postbottom {
   position: relative;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
   height: 26px;
 }
 #needsharebutton-postbottom .btn {
@@ -2462,7 +2462,7 @@ pre .javascript .function {
   bottom: 38px;
   left: -8px;
   z-index: 9999;
-  cursor: url("https://wayowe.com/s/mouse/miku/hand.ani"), url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
+  cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), pointer;
 }
 #needsharebutton-float .btn {
   padding: 0 10px 0 14px;

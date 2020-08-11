@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>字符编码笔记</title>
+    <url>//2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html</url>
+    <content><![CDATA[<p>我们知道，计算机是二进制存储的，所有的内容，在计算机内存储下来的都是 <code>0</code> 和 <code>1</code> 来表示的二进制数字。<br>早期的计算机在设计时，采用 8 个二进制位 (<code>bit</code>) 作为一个字节 (<code>byte</code>)，因为每个二进制位都有 <code>0</code> 和 <code>1</code> 两种状态，所以一个字节一共可以表示 2<sup>8</sup> = 256 种状态。</p>
+<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><p>字符集，从字面上来拆解，其实就是字符的集合；就是把我们使用到的字符整合在一起，并为每一个符号指定一个唯一的编号（叫作 <code>码点</code>）。</p>
+<p>因为计算机只能处理二进制数字，那么如果要处理文本内容时，就需要先把文本转换成数字；<br>将字符集中每一个字符唯一的编号，按照某种规则映射到二进制存储，这就是所谓的 <code>字符编码</code>。<br>比如最早给英文字符、数字、标点符号等制定了一套编码的 <code>ASCII</code>（<em>American Standard Code for Information Interchange</em>, <em>美国信息交换标准代码</em>）。</p>
+<p>简单来说，字符集是一套被分配了唯一编号的字符的集合，而字符编码则是对字符集映射到二进制的一个实现方式。</p>
+<h2 id="字符编码的历史演变"><a href="#字符编码的历史演变" class="headerlink" title="字符编码的历史演变"></a>字符编码的历史演变</h2><h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>在 20 世纪 60 年代，美国制定了一套字符编码，对英语字符和二进制之间的关系，做了统一规定，这被称为 <code>ASCII</code>，一直沿用至今。</p>
+<p><code>ASCII</code> 码一共规定了128个字符的编码，比如空格 <code>SPACE</code> 是 <code>32</code>（二进制<code>00100000</code>），大写的字母<code>A</code>是<code>65</code>（二进制<code>01000001</code>）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为<code>0</code>。</p>
+<h3 id="扩展ASCII"><a href="#扩展ASCII" class="headerlink" title="扩展ASCII"></a>扩展ASCII</h3><p>对英语来说，<code>ASCII</code> 内这 128 个字符就够用了，但是对欧洲其他一些国家来说，就不够用了；比如法国、德国等。<br>然后这些国家就对 <code>ASCII</code> 码做了扩展，利用字节中闲置的最高位编入新的符号，比如法语中的<code>é</code>的编码为<code>130</code>（二进制<code>10000010</code>），如此一来，这些欧洲国家就多出了128个字符可以存储；扩展后的 <code>ASCII</code> 码最多可以表示 <code>256</code> 个字符。<br>这些扩展编码中，比较流行的编码有 <code>latin-1</code>, <code>ISO-8859-1</code> 等。</p>
+<p>可这里也有一个问题：不同的国家有不同的字母，那么不同的扩展，势必会有同一个码点却代表不同的字母这样的情况出现。</p>
+<h3 id="其他编码"><a href="#其他编码" class="headerlink" title="其他编码"></a>其他编码</h3><p>上面说的只是欧洲这种以字母为主的语种国家，而像我们中国、日本等东亚语系的国家，需要使用的语言符号更多，只用一个字节，根本不够，如此就需要使用多个字节来表示一个字符。比如简体中文 <code>GB2312</code> 编码，就是使用两个字节表示一个汉字，所以理论上最多可以表示出 <code>256 * 256 = 65536</code> 个汉字。</p>
+<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>每个国家都有一套自己的编码方式，尤其是码点在 <code>128-255</code> 之间的字符，每套编码代表的字符都不一样；<br>如果将一个以A编码方式存储的文件，以B编码方式打开，就会出现乱码的问题。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>如上所说，世界上存在很多编码方式，同一个二进制数字可以被解释成不同的字符；因此，要想正常打开一个文本文件，就必须知道它的编码方式，否则就会出现乱码。<br>可以想象，如果存在一种编码，将世界上所有的字符都纳入其中；每个字符都有一个独一无二的码点，大家都使用这同一套编码，那么乱码问题就会消失。<br>这就是 <code>Unicode</code> 字符集。</p>
+<h3 id="UCS与Unicode"><a href="#UCS与Unicode" class="headerlink" title="UCS与Unicode"></a>UCS与Unicode</h3><p>人们开始迫切的需要一套统一的字符集，能够包含世界上所有的符号。<br>1988 年成立的 Unicode 团队和 1989 年成立的 UCS 团队，这两个团队就是想要搞出一套统一字符集成立的。<br>只是一开始他们并不知道彼此的存在。<br>1990 年，开发进度较快的 UCS 团队公布了第一套编码方法 <code>UCS-2</code>，使用2个字节表示已有码点的字符，同时这也是 <code>JavaScript</code> 中使用的编码方式。<br>而等到两个团队发现了对方存在之后，很快达成一致：世界上不需要两套统一字符集。在 1991 年 10 月，两个团队决定合并字符集；以后只发布一套字符集，就是 <code>Unicode</code>；并修复此前发布的字符集，使 <code>UCS</code> 的码点与 <code>Unicode</code> 完全一致。</p>
+<blockquote>
+<p>也由于 <code>JavaScript</code> 使用的是 <code>UCS-2</code> 编码，所以 <code>JavaScript</code> 的字符处理是有一些问题的，遇到4字节字符时，会当成两个2字节的字符来处理。<br>即使 ECMAScript6 扩展增强了 <code>Unicode</code> 的支持，基本解决了这个问题，但是为了兼容性，一些问题还是被保留了下来。<br>比如 <code>&quot;𝓂&quot;.length === 2</code>。<br>不过因为时间上的原因，<code>JavaScript</code> 也只能选择 <code>UCS-2</code>，而不是现在支持的 <code>UTF-16</code>。<br><code>JavaScript</code> 诞生于 1995年5月，<em>Brendan Eich</em> 用了 10 天设计了这套语言；同年10月，第一个解释引擎问世；<br>而 <code>UTF-16</code> 的发布时间却是在 1996年7月。</p>
+</blockquote>
+<h3 id="Unicode与UTF"><a href="#Unicode与UTF" class="headerlink" title="Unicode与UTF"></a>Unicode与UTF</h3><p>需要注意的是，<code>Unicode</code> 只是一个字符集，它只规定了符号的二进制代码，却没有规定这个二进制代码如何存储。<br>也就是说有许多中不同的二进制格式，可以用来表示 <code>Unicode</code>。<br>直到互联网普及，出现了几种使用较为广泛的编码方式，其中就有我们现在常用的 <code>UTF-8</code>，其他还有 <code>UTF-16</code> 和 <code>UTF-32</code>。<br><code>UTF</code> 的全称是 <em>Unicode/UCS Transformation Format</em>，亦即把 <code>Unicode</code> 字符转换为某种格式。</p>
+<h4 id="平面"><a href="#平面" class="headerlink" title="平面"></a>平面</h4><p><code>Unicode</code> 的编码空间从 <code>U+0000</code> 到 <code>U+10FFFF</code>，一共有 1,112,064 个码点可以用来映射字符。<br>这么多字符，<code>Unicode</code> 也并不是一次性定义的，而是分区定义的。<br>每个区可以存放 65536 个字符（16位，2<sup>16</sup>），这样一个分区称为一个“平面”。<br>而目前一共有 17 个平面，也就是说，整个 <code>Unicode</code> 字符集的大小是 2<sup>21</sup>。</p>
+<p>在这 17 个平面里，前 65536 个字符，也就是第一个平面，也被称为<strong>基本平面</strong>（<em>Basic Multilingual Plane,基本多语言平面</em>, <strong>BMP</strong>），其他平面称为<strong>辅助平面</strong>（<em>Supplementary Planes</em>）。</p>
+<p>你可能偷偷计算了一下，发现 2<sup>21</sup> 远大于上面说的 1,112,064 个码点。<br>其实在这 2<sup>21</sup> 个码点里，并不是每个码点都用来映射字符。<br>在基本平面内，从 <code>U+D800</code> 到 <code>U+DFFF</code> 之间的码点区段是永久保留不映射到 <code>Unicode</code> 字符的；<br>而辅助平面码点的编码就是利用这个区段的码点来进行的。</p>
+<h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>这个仅了解一些就好，因为实际上很少会使用这个编码，甚至HTML5标准中明文规定，禁止支持 <code>UTF-32</code> 编码。</p>
+<p><code>UTF-32</code> 的编解码规则简单，所有字符都用四个字节表示，并完全对应 <code>Unicode</code> 码点，查找效率很高；但是它的缺点是很浪费空间，如果是纯英文文本，<code>UTF-32</code> 编码的占用空间是 <code>ASCII</code> 编码的四倍，在以前那个空间并不充足的年代，这几乎是无法容忍的；即使是现在，这也是一个致命的缺点。</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy8jY2hhcmFjdGVyLWVuY29kaW5ncw==" title="https://html.spec.whatwg.org/#character-encodings">https://html.spec.whatwg.org/#character-encodings<i class="fa fa-external-link"></i></span><br>Note<br>The above prohibits supporting, for example, CESU-8, UTF-7, BOCU-1, SCSU, EBCDIC, and UTF-32. This specification does not make any attempt to support prohibited encodings in its algorithms; support and use of prohibited encodings would thus lead to unexpected behavior.</p>
+</blockquote>
+<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p><code>UTF-16</code> 可以说是 <code>UCS-2</code> 的一个扩展，基本平面内的字符使用 2 个字节表示，辅助平面的字符使用 4 个字节表示。</p>
+<table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-16 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U+0000</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>xxxxxxxx</code> <code>xxxxxxxx</code></td>
+<td>基本平面内，使用两个字节表示，<code>U+D800</code> - <code>U+DFFF</code> 是保留区段</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>110110xx</code> <code>xxxxxxxx</code> <code>110111yy</code> <code>yyyyyyyy</code></td>
+<td>辅助平面，使用四个字节表示，并有前缀标识</td>
+</tr>
+</tbody>
+</table>
+<h5 id="从U-D800到U-DFFF"><a href="#从U-D800到U-DFFF" class="headerlink" title="从U+D800到U+DFFF"></a>从U+D800到U+DFFF</h5><p><code>Unicode</code> 标准规定从 <code>U+D800</code> 到 <code>U+DFFF</code> 的码点不对应任何字符。<br>但是在使用 <code>UCS-2</code> 的时代，这些码点是有对应字符的。因此，只要不构成代理对，许多 <code>UTF-16</code> 编码解码还是会把这些不符合 <code>Unicode</code> 标准的字符映射正确的辨识并转换成合规的码元。<br>但是按照 <code>Unicode</code> 标准来说，这种码元序列本来应该算作是编码错误。</p>
+<h5 id="代理对与UTF-16辅助平面编码方式"><a href="#代理对与UTF-16辅助平面编码方式" class="headerlink" title="代理对与UTF-16辅助平面编码方式"></a>代理对与UTF-16辅助平面编码方式</h5><p><code>Unicode</code> 辅助平面中码点，在 <code>UTF-16</code> 中被编码为<strong>一对</strong>16bit的码元（即32位，4字节），称作<em>代理对</em>（<em>Surrogate Pair</em>）。<br>具体方法是：</p>
+<ol>
+<li>码点减去 <code>0x10000</code>，得到的值的范围为 20 比特长的 <code>0...0xFFFFF</code>。</li>
+<li>高位的 10 比特的值（范围为 <code>0...0x3FF</code>）被加上 <code>0xD800</code> 得到第一个码元，称作高位代理（<em>high surrogate</em>），新值的范围是 <code>0xD800...0xDBFF</code>。【由于高位代理比低位代理的值要小，为了避免混淆使用，<code>Unicode</code> 标准现在称高位代理为<strong>前导代理</strong>（<em>lead surrogate</em>）</li>
+<li>低位的 10 比特的值（范围也是 <code>0...0x3FF</code>）被加上 <code>0xDC00</code> 得到第二个码元，称作低位代理（<em>low surrogate</em>），新值的范围是 <code>0xDC00...0xDFFF</code>。【由于低位代理比高位代理的值要大，为了避免混淆使用，<code>Unicode</code> 标准现在成低位代理为<strong>后尾代理</strong>（<em>trail surrogate</em>）</li>
+</ol>
+<p>上述算法可以这样理解：<br>辅助平面中的码点范围是 <code>U+010000</code> 到 <code>U+10FFFF</code>，共计 0xFFFFF 个，即 2<sup>20</sup>个，也就是需要 20 个二进制位来表示。<br>如果用两个 16 位长的整数组成的序列来表示，第一个整数（即前导代理）要容纳 20 位中的前 10 位，第二个整数（即后尾代理）容纳 20 位中的后 10 位。<br>因为 <code>UTF-16</code> 基本平面的字符就是由一个 16 位长的整数表示的，这里的两个 16 位整数序列就需要一个区分标识。<br>一是与基本平面码点的区分，二是前导代理与后尾代理的区分。</p>
+<p><strong>与基本平面码点的区分</strong>，就来自于之前讲的 <code>Unicode</code> 保留区段 <code>U+D800...U+DFFF</code>，因为两个整数中只容纳了 20 位中的 10 位二进制数字，也就是最大只有 <code>0x3FF</code>，那么就可以通过给这两个整数增加一个固定数字，使其位于 <code>U+D800...U+DFFF</code> 这个区段内，就可以与基本平面的码点区分开来。</p>
+<p><strong>前导代理与后尾代理的区分</strong>，则通过增加不同的数字，使二者落入 <code>U+D800...U+DFFF</code> 区段的不同部分来区分。<br>你会发现，<code>U+D800...U+DFFF</code> 的区间长度是 2047，<code>0x3FF</code> 的十进制是 1023，刚好是区段一半的大小；<br>那么以区段的初始值 <code>U+D800</code> 和中间值 <code>U+DC00</code> 分别作为前导代理和后尾代理增加的值，就可以刚好将两个值分别放入 <code>U+D800...U+DFFF</code> 区间的前半段 <code>U+D800...U+DBFF</code> 和后半段 <code>U+DC00...U+DFFF</code>。</p>
+<p>所以，<code>UTF-16</code> 遇到两个字节，码点位于 <code>U+D800...U+DBFF</code> 之间时，就可以断定，后续的两个字节码点位于 <code>U+DC00...U+DFFF</code> 之间，并将这四个字节一起解读为一个字符。</p>
+<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><code>UTF-16</code> 编码是一个很不错的编码方式，因为大部分常用字符都位于基本平面内，也就是使用2字节就可以表示大部分的常用字符。<br>可是也同样是因为使用 2 个字节存储，导致它不能兼容 <code>ASCII</code> 编码。</p>
+<p>而 <code>UTF-8</code> 就是一种可以兼容 <code>ASCII</code> 编码的<strong>变长</strong>的 <code>Unicode</code> 的编码实现。</p>
+<p><code>UTF-8</code> 是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码。<br>它可以用一至四个字节对 <code>Unicode</code> 字符集中的所有有效编码码点进行编码。<br>由于较小值的编码点一般使用频率较高，直接使用 <code>Unicode</code> 编码【此处指<code>UTF-32</code>编码】效率低下，大量浪费内存空间。<br><code>UTF-8</code> 就是为了解决向后兼容 <code>ASCII</code> 码而设计的， <code>Unicode</code> 中前 128 个字符，使用与 <code>ASCII</code> 码相同的二进制值的单个字节进行编码，这使得原来处理 <code>ASCII</code> 字符的软件无需或只需做少部分修改，即可继续使用。<br>也因此，它逐渐成为电子邮件、网页及其他存储或发送文字优先采用的编码方式。</p>
+<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-8 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U+0000</code> - <code>U+007F</code></td>
+<td><code>0xxxxxxx</code></td>
+<td><code>ASCII</code> 字符范围，单字节，字节由 <code>0</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0080</code> - <code>U+07FF</code></td>
+<td><code>110xxxxx</code> <code>10yyyyyy</code></td>
+<td>双字节字符，第一个字节由 <code>110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0800</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code></td>
+<td>三字节字符，第一个字节由 <code>1110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>11110xxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code> <code>10wwwwww</code></td>
+<td>四字节字符，第一个字节由 <code>11110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+</tbody>
+</table>
+<p>从上面的表格中，你应该能够直观的看出来，在 <code>UTF-8</code> 编码中，从一个字节开始的二进制位，就能判断出这个字节的大致位置。</p>
+<ol>
+<li>如果字节以 <code>0</code> 开始，那么它单独表示一个 <code>ASCII</code> 字符</li>
+<li>如果字节以 <code>10</code> 开始，那么它是一个多字节字符的非首字节</li>
+<li>如果字节以 <code>110</code> 开始，那么它是一个二字节字符的首字节，且后续会有一个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>1110</code> 开始，那么它是一个三字节字符的首字节，且后续会有两个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>11110</code> 开始，那么它是一个四字节字符的首字节，且后续会有三个以 <code>10</code> 开头的字节</li>
+</ol>
+<p>可以很明显的看到，除了前面 128 个字符，跟 <code>ASCII</code> 码保持相同之外，<code>UTF-8</code> 的多字节字符，首字节起始的连续的 1 的数量就是它所占用的字节数，后续字节之所以用 <code>10</code> 开头，也是为了与单字节做区分，避免混淆。</p>
+<p>那么 <code>UTF-8</code> 具体是怎么编码的呢？</p>
+<ol>
+<li>查看字符在 <code>Unicode</code> 的码点所处区间，来确定字节数<ol>
+<li><code>U+0000</code> 至 <code>U+007F</code> 一个字节</li>
+<li><code>U+0080</code> 至 <code>U+07FF</code> 两个字节</li>
+<li><code>U+0800</code> 至 <code>U+FFFF</code> 三个字节</li>
+<li><code>U+010000</code> 至 <code>U+10FFFF</code> （即16个辅助平面）四个字符</li>
+</ol>
+</li>
+<li>如果是一个字节，直接使用码点对应的8位二进制码</li>
+<li>如果是多字节，那么将码点对应的二进制码，从右到左，一个个填充到上面表格对应字节中的待填充区域【就是表格里的 <code>x</code>,<code>y</code>,<code>z</code>,<code>w</code>的位置】，待右侧填充完毕，如果左侧还有未填充的位置，则统一填 0，就得到了 <code>UTF-8</code> 中对应的二进制码。</li>
+</ol>
+<p>比如：<code>好</code> 在 <code>Unicode</code> 中的码点是十六进制的 <code>0x597D</code>，落在区间 <code>U+0800</code> - <code>U+FFFF</code> 内，所以在 <code>UTF-8</code> 中表示是三字节：<code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code>。<br><code>0x597D</code> 转成二进制表示是 <code>0b101100101111101</code>，然后从右向左填充，切出最右边的6位 <code>111101</code> 填入第三个字节右侧 6 个 <code>z</code> 的位置，再切出余下的右侧 6 位 <code>100101</code> 填入第二个字节右侧 6 个 <code>y</code> 的位置，余下 3 位 <code>101</code> 填入首字节的最右侧，最后还有一个 <code>x</code> 未填充，补上 0，就得到了 <code>好</code> 字在 <code>UTF-8</code> 中的二进制码 <code>11100101</code> <code>10100101</code> <code>10111101</code>。</p>
+<p><img src="/images/posts/2020081101.png" alt></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">https://blog.csdn.net/yaomingyang/article/details/79374209<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTQvMTIvdW5pY29kZS5odG1s" title="http://www.ruanyifeng.com/blog/2014/12/unicode.html">http://www.ruanyifeng.com/blog/2014/12/unicode.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMDcvMTAvYXNjaWlfdW5pY29kZV9hbmRfdXRmLTguaHRtbA==" title="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8wZjVmZDkzZWZjNDY=" title="https://www.jianshu.com/p/0f5fd93efc46">https://www.jianshu.com/p/0f5fd93efc46<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3MDc1MzIzNjMyODk2" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896">https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZW5vbmcuY29tLzEwNjExNDU1Lw==" title="https://www.codenong.com/10611455/">https://www.codenong.com/10611455/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvamkud2FuZy9qYXZhc2NyaXB0LW5vdGUtMS1jaGFyYWN0ZXItZW5jb2Rpbmcv" title="https://zhaoji.wang/javascript-note-1-character-encoding/">https://zhaoji.wang/javascript-note-1-character-encoding/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTE2" title="https://zh.wikipedia.org/wiki/UTF-16">https://zh.wikipedia.org/wiki/UTF-16<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTg=" title="https://zh.wikipedia.org/wiki/UTF-8">https://zh.wikipedia.org/wiki/UTF-8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MTIwMjQxMg==" title="https://zhuanlan.zhihu.com/p/51202412">https://zhuanlan.zhihu.com/p/51202412<i class="fa fa-external-link"></i></span></p>
+]]></content>
+      <categories>
+        <category>Encoding</category>
+      </categories>
+      <tags>
+        <tag>Unicode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS之BFC</title>
     <url>//2017/07/17/css%E4%B9%8Bbfc.html</url>
     <content><![CDATA[<p>BFC(<em>Block Formatting Context 块级格式化上下文</em>)是一个独立的渲染区域，只有块级元素参与，它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。</p>
@@ -254,42 +380,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS 属性 `writing-mode` 的妙用</title>
-    <url>//2019/12/11/css-%E5%B1%9E%E6%80%A7-writing-mode-%E7%9A%84%E5%A6%99%E7%94%A8.html</url>
-    <content><![CDATA[<p>纵向的滚动写多了，来看看横向的滚动吧。而且不是普通的一行同级元素，而是多行同级元素自上而下排列的横向滚动。</p>
-<h2 id="flex-布局"><a href="#flex-布局" class="headerlink" title="flex 布局"></a>flex 布局</h2><p>可以通过结合 <code>flex-direction: column</code> 和 <code>flex-wrap: wrap</code> 来达成。</p>
-<p>就像下面这样:</p>
-<p class="codepen" data-height="383" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="ZEYyeQO" style="height: 383px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="[CSS] flex 实现多行纵向排列并横向滚动"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9aRVl5ZVFP" title="https://codepen.io/moesuiga/pen/ZEYyeQO"><br>  [CSS] flex 实现多行纵向排列并横向滚动<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
-
-<p>但是这里有一点需要注意的地方：<strong><code>display: flex</code> 的容器盒子必须要给定一个宽度</strong>。<br>如果没有设置宽度的话，容器是不会被容器给撑开的。</p>
-<p>这对于静态内容来说也无所谓，不就是要个宽度吗，给设置一个就是了。<br>可是当内容是动态改变的呢？比如内容列表是由接口返回的，数量不定？比如来一个触底加载更多？<br>这时候要怎么办呢？</p>
-<p>当然，你可以通过js来计算一下，一般这种情况，子元素 item 都是定宽定高的，容器肯定也是定高的，所以每列能放几个 item 也是可以计算得出的，然后总的 item 数量你也知道，那么就能计算出总共要放多少列，然后就能得出容器的宽度应该设置为多少了。</p>
-<p>但是如果可以只使用 CSS 样式来完成的话，又何必使用 js 计算的方式呢？要知道 <em>能使用 CSS 解决的问题，就不要用 js 来解决</em>。</p>
-<h2 id="writing-mode"><a href="#writing-mode" class="headerlink" title="writing-mode"></a>writing-mode</h2><p>在 CSS 中有这样一个属性: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQ1NTL3dyaXRpbmctbW9kZQ==" title="https://developer.mozilla.org/zh-CN/docs/Web/CSS/writing-mode"><code>writing-mode</code><i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>它定义了文本水平或垂直排布以及在块级元素中文本的行进方向。</p>
-</blockquote>
-<p>一般我们会使用它来更改文字的排列，比如我们一般看的文字都是水平方向，从左到右，自上而下的顺序。<br>但是偶尔可能会需要排布一个垂直方向自上而下，从右到左的顺序，就像古时竹简上书写内容的顺序一样。</p>
-<p>就像下面这样</p>
-<p class="codepen" data-height="503" data-theme-id="36319" data-default-tab="result" data-user="moesuiga" data-slug-hash="ExaXEXj" style="height: 503px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="writing-mode更改文字排版"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9FeGFYRVhq" title="https://codepen.io/moesuiga/pen/ExaXEXj"><br>  writing-mode更改文字排版<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
-
-<blockquote>
-<p>此属性指定块流动方向，即块级容器堆叠的方向，以及行内内容在块级容器中的流动方向。<br>因此，它也确定块级内容的顺序</p>
-</blockquote>
-<p>也就是说，<code>writing-mode</code> 属性除了上面那种更改文字排版的用法以外，我们还可以用它来更改块级内容的排版。</p>
-<p>因此，我们就可以这样做。</p>
-<h2 id="flex-结合-writing-mode"><a href="#flex-结合-writing-mode" class="headerlink" title="flex 结合 writing-mode"></a>flex 结合 writing-mode</h2><p>flex 元素定高不定宽，由子元素来撑开宽度。</p>
-<p></p><p class="codepen" data-height="358" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="LYELxbR" style="height: 358px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="[CSS] flex 结合 writing-mode 实现多行纵向排列并横向滚动"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9MWUVMeGJS" title="https://codepen.io/moesuiga/pen/LYELxbR"><br>  [CSS] flex 结合 writing-mode 实现多行纵向排列并横向滚动<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>style</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>z-index与堆叠上下文</title>
     <url>//2020/07/07/z-index%E4%B8%8E%E5%A0%86%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87.html</url>
     <content><![CDATA[<h2 id="z-index"><a href="#z-index" class="headerlink" title="z-index"></a>z-index</h2><blockquote>
@@ -329,6 +419,42 @@
       <tags>
         <tag>z-index</tag>
         <tag>堆叠上下文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS 属性 `writing-mode` 的妙用</title>
+    <url>//2019/12/11/css-%E5%B1%9E%E6%80%A7-writing-mode-%E7%9A%84%E5%A6%99%E7%94%A8.html</url>
+    <content><![CDATA[<p>纵向的滚动写多了，来看看横向的滚动吧。而且不是普通的一行同级元素，而是多行同级元素自上而下排列的横向滚动。</p>
+<h2 id="flex-布局"><a href="#flex-布局" class="headerlink" title="flex 布局"></a>flex 布局</h2><p>可以通过结合 <code>flex-direction: column</code> 和 <code>flex-wrap: wrap</code> 来达成。</p>
+<p>就像下面这样:</p>
+<p class="codepen" data-height="383" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="ZEYyeQO" style="height: 383px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="[CSS] flex 实现多行纵向排列并横向滚动"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9aRVl5ZVFP" title="https://codepen.io/moesuiga/pen/ZEYyeQO"><br>  [CSS] flex 实现多行纵向排列并横向滚动<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
+
+<p>但是这里有一点需要注意的地方：<strong><code>display: flex</code> 的容器盒子必须要给定一个宽度</strong>。<br>如果没有设置宽度的话，容器是不会被容器给撑开的。</p>
+<p>这对于静态内容来说也无所谓，不就是要个宽度吗，给设置一个就是了。<br>可是当内容是动态改变的呢？比如内容列表是由接口返回的，数量不定？比如来一个触底加载更多？<br>这时候要怎么办呢？</p>
+<p>当然，你可以通过js来计算一下，一般这种情况，子元素 item 都是定宽定高的，容器肯定也是定高的，所以每列能放几个 item 也是可以计算得出的，然后总的 item 数量你也知道，那么就能计算出总共要放多少列，然后就能得出容器的宽度应该设置为多少了。</p>
+<p>但是如果可以只使用 CSS 样式来完成的话，又何必使用 js 计算的方式呢？要知道 <em>能使用 CSS 解决的问题，就不要用 js 来解决</em>。</p>
+<h2 id="writing-mode"><a href="#writing-mode" class="headerlink" title="writing-mode"></a>writing-mode</h2><p>在 CSS 中有这样一个属性: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQ1NTL3dyaXRpbmctbW9kZQ==" title="https://developer.mozilla.org/zh-CN/docs/Web/CSS/writing-mode"><code>writing-mode</code><i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>它定义了文本水平或垂直排布以及在块级元素中文本的行进方向。</p>
+</blockquote>
+<p>一般我们会使用它来更改文字的排列，比如我们一般看的文字都是水平方向，从左到右，自上而下的顺序。<br>但是偶尔可能会需要排布一个垂直方向自上而下，从右到左的顺序，就像古时竹简上书写内容的顺序一样。</p>
+<p>就像下面这样</p>
+<p class="codepen" data-height="503" data-theme-id="36319" data-default-tab="result" data-user="moesuiga" data-slug-hash="ExaXEXj" style="height: 503px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="writing-mode更改文字排版"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9FeGFYRVhq" title="https://codepen.io/moesuiga/pen/ExaXEXj"><br>  writing-mode更改文字排版<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
+
+<blockquote>
+<p>此属性指定块流动方向，即块级容器堆叠的方向，以及行内内容在块级容器中的流动方向。<br>因此，它也确定块级内容的顺序</p>
+</blockquote>
+<p>也就是说，<code>writing-mode</code> 属性除了上面那种更改文字排版的用法以外，我们还可以用它来更改块级内容的排版。</p>
+<p>因此，我们就可以这样做。</p>
+<h2 id="flex-结合-writing-mode"><a href="#flex-结合-writing-mode" class="headerlink" title="flex 结合 writing-mode"></a>flex 结合 writing-mode</h2><p>flex 元素定高不定宽，由子元素来撑开宽度。</p>
+<p></p><p class="codepen" data-height="358" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="LYELxbR" style="height: 358px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="[CSS] flex 结合 writing-mode 实现多行纵向排列并横向滚动"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9MWUVMeGJS" title="https://codepen.io/moesuiga/pen/LYELxbR"><br>  [CSS] flex 结合 writing-mode 实现多行纵向排列并横向滚动<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>style</tag>
       </tags>
   </entry>
   <entry>
@@ -464,132 +590,6 @@
       </tags>
   </entry>
   <entry>
-    <title>字符编码笔记</title>
-    <url>//2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html</url>
-    <content><![CDATA[<p>我们知道，计算机是二进制存储的，所有的内容，在计算机内存储下来的都是 <code>0</code> 和 <code>1</code> 来表示的二进制数字。<br>早期的计算机在设计时，采用 8 个二进制位 (<code>bit</code>) 作为一个字节 (<code>byte</code>)，因为每个二进制位都有 <code>0</code> 和 <code>1</code> 两种状态，所以一个字节一共可以表示 2<sup>8</sup> = 256 种状态。</p>
-<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><p>字符集，从字面上来拆解，其实就是字符的集合；就是把我们使用到的字符整合在一起，并为每一个符号指定一个唯一的编号（叫作 <code>码点</code>）。</p>
-<p>因为计算机只能处理二进制数字，那么如果要处理文本内容时，就需要先把文本转换成数字；<br>将字符集中每一个字符唯一的编号，按照某种规则映射到二进制存储，这就是所谓的 <code>字符编码</code>。<br>比如最早给英文字符、数字、标点符号等制定了一套编码的 <code>ASCII</code>（<em>American Standard Code for Information Interchange</em>, <em>美国信息交换标准代码</em>）。</p>
-<p>简单来说，字符集是一套被分配了唯一编号的字符的集合，而字符编码则是对字符集映射到二进制的一个实现方式。</p>
-<h2 id="字符编码的历史演变"><a href="#字符编码的历史演变" class="headerlink" title="字符编码的历史演变"></a>字符编码的历史演变</h2><h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>在 20 世纪 60 年代，美国制定了一套字符编码，对英语字符和二进制之间的关系，做了统一规定，这被称为 <code>ASCII</code>，一直沿用至今。</p>
-<p><code>ASCII</code> 码一共规定了128个字符的编码，比如空格 <code>SPACE</code> 是 <code>32</code>（二进制<code>00100000</code>），大写的字母<code>A</code>是<code>65</code>（二进制<code>01000001</code>）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为<code>0</code>。</p>
-<h3 id="扩展ASCII"><a href="#扩展ASCII" class="headerlink" title="扩展ASCII"></a>扩展ASCII</h3><p>对英语来说，<code>ASCII</code> 内这 128 个字符就够用了，但是对欧洲其他一些国家来说，就不够用了；比如法国、德国等。<br>然后这些国家就对 <code>ASCII</code> 码做了扩展，利用字节中闲置的最高位编入新的符号，比如法语中的<code>é</code>的编码为<code>130</code>（二进制<code>10000010</code>），如此一来，这些欧洲国家就多出了128个字符可以存储；扩展后的 <code>ASCII</code> 码最多可以表示 <code>256</code> 个字符。<br>这些扩展编码中，比较流行的编码有 <code>latin-1</code>, <code>ISO-8859-1</code> 等。</p>
-<p>可这里也有一个问题：不同的国家有不同的字母，那么不同的扩展，势必会有同一个码点却代表不同的字母这样的情况出现。</p>
-<h3 id="其他编码"><a href="#其他编码" class="headerlink" title="其他编码"></a>其他编码</h3><p>上面说的只是欧洲这种以字母为主的语种国家，而像我们中国、日本等东亚语系的国家，需要使用的语言符号更多，只用一个字节，根本不够，如此就需要使用多个字节来表示一个字符。比如简体中文 <code>GB2312</code> 编码，就是使用两个字节表示一个汉字，所以理论上最多可以表示出 <code>256 * 256 = 65536</code> 个汉字。</p>
-<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>每个国家都有一套自己的编码方式，尤其是码点在 <code>128-255</code> 之间的字符，每套编码代表的字符都不一样；<br>如果将一个以A编码方式存储的文件，以B编码方式打开，就会出现乱码的问题。</p>
-<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>如上所说，世界上存在很多编码方式，同一个二进制数字可以被解释成不同的字符；因此，要想正常打开一个文本文件，就必须知道它的编码方式，否则就会出现乱码。<br>可以想象，如果存在一种编码，将世界上所有的字符都纳入其中；每个字符都有一个独一无二的码点，大家都使用这同一套编码，那么乱码问题就会消失。<br>这就是 <code>Unicode</code> 字符集。</p>
-<h3 id="UCS与Unicode"><a href="#UCS与Unicode" class="headerlink" title="UCS与Unicode"></a>UCS与Unicode</h3><p>人们开始迫切的需要一套统一的字符集，能够包含世界上所有的符号。<br>1988 年成立的 Unicode 团队和 1989 年成立的 UCS 团队，这两个团队就是想要搞出一套统一字符集成立的。<br>只是一开始他们并不知道彼此的存在。<br>1990 年，开发进度较快的 UCS 团队公布了第一套编码方法 <code>UCS-2</code>，使用2个字节表示已有码点的字符，同时这也是 <code>JavaScript</code> 中使用的编码方式。<br>而等到两个团队发现了对方存在之后，很快达成一致：世界上不需要两套统一字符集。在 1991 年 10 月，两个团队决定合并字符集；以后只发布一套字符集，就是 <code>Unicode</code>；并修复此前发布的字符集，使 <code>UCS</code> 的码点与 <code>Unicode</code> 完全一致。</p>
-<blockquote>
-<p>也由于 <code>JavaScript</code> 使用的是 <code>UCS-2</code> 编码，所以 <code>JavaScript</code> 的字符处理是有一些问题的，遇到4字节字符时，会当成两个2字节的字符来处理。<br>即使 ECMAScript6 扩展增强了 <code>Unicode</code> 的支持，基本解决了这个问题，但是为了兼容性，一些问题还是被保留了下来。<br>比如 <code>&quot;𝓂&quot;.length === 2</code>。<br>不过因为时间上的原因，<code>JavaScript</code> 也只能选择 <code>UCS-2</code>，而不是现在支持的 <code>UTF-16</code>。<br><code>JavaScript</code> 诞生于 1995年5月，<em>Brendan Eich</em> 用了 10 天设计了这套语言；同年10月，第一个解释引擎问世；<br>而 <code>UTF-16</code> 的发布时间却是在 1996年7月。</p>
-</blockquote>
-<h3 id="Unicode与UTF"><a href="#Unicode与UTF" class="headerlink" title="Unicode与UTF"></a>Unicode与UTF</h3><p>需要注意的是，<code>Unicode</code> 只是一个字符集，它只规定了符号的二进制代码，却没有规定这个二进制代码如何存储。<br>也就是说有许多中不同的二进制格式，可以用来表示 <code>Unicode</code>。<br>直到互联网普及，出现了几种使用较为广泛的编码方式，其中就有我们现在常用的 <code>UTF-8</code>，其他还有 <code>UTF-16</code> 和 <code>UTF-32</code>。<br><code>UTF</code> 的全称是 <em>Unicode/UCS Transformation Format</em>，亦即把 <code>Unicode</code> 字符转换为某种格式。</p>
-<h4 id="平面"><a href="#平面" class="headerlink" title="平面"></a>平面</h4><p><code>Unicode</code> 的编码空间从 <code>U+0000</code> 到 <code>U+10FFFF</code>，一共有 1,112,064 个码点可以用来映射字符。<br>这么多字符，<code>Unicode</code> 也并不是一次性定义的，而是分区定义的。<br>每个区可以存放 65536 个字符（16位，2<sup>16</sup>），这样一个分区称为一个“平面”。<br>而目前一共有 17 个平面，也就是说，整个 <code>Unicode</code> 字符集的大小是 2<sup>21</sup>。</p>
-<p>在这 17 个平面里，前 65536 个字符，也就是第一个平面，也被称为<strong>基本平面</strong>（<em>Basic Multilingual Plane,基本多语言平面</em>, <strong>BMP</strong>），其他平面称为<strong>辅助平面</strong>（<em>Supplementary Planes</em>）。</p>
-<p>你可能偷偷计算了一下，发现 2<sup>21</sup> 远大于上面说的 1,112,064 个码点。<br>其实在这 2<sup>21</sup> 个码点里，并不是每个码点都用来映射字符。<br>在基本平面内，从 <code>U+D800</code> 到 <code>U+DFFF</code> 之间的码点区段是永久保留不映射到 <code>Unicode</code> 字符的；<br>而辅助平面码点的编码就是利用这个区段的码点来进行的。</p>
-<h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>这个仅了解一些就好，因为实际上很少会使用这个编码，甚至HTML5标准中明文规定，禁止支持 <code>UTF-32</code> 编码。</p>
-<p><code>UTF-32</code> 的编解码规则简单，所有字符都用四个字节表示，并完全对应 <code>Unicode</code> 码点，查找效率很高；但是它的缺点是很浪费空间，如果是纯英文文本，<code>UTF-32</code> 编码的占用空间是 <code>ASCII</code> 编码的四倍，在以前那个空间并不充足的年代，这几乎是无法容忍的；即使是现在，这也是一个致命的缺点。</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy8jY2hhcmFjdGVyLWVuY29kaW5ncw==" title="https://html.spec.whatwg.org/#character-encodings">https://html.spec.whatwg.org/#character-encodings<i class="fa fa-external-link"></i></span><br>Note<br>The above prohibits supporting, for example, CESU-8, UTF-7, BOCU-1, SCSU, EBCDIC, and UTF-32. This specification does not make any attempt to support prohibited encodings in its algorithms; support and use of prohibited encodings would thus lead to unexpected behavior.</p>
-</blockquote>
-<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p><code>UTF-16</code> 可以说是 <code>UCS-2</code> 的一个扩展，基本平面内的字符使用 2 个字节表示，辅助平面的字符使用 4 个字节表示。</p>
-<table>
-<thead>
-<tr>
-<th>Unicode 码点</th>
-<th>UTF-16 编码</th>
-<th>注释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>U+0000</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
-<td><code>xxxxxxxx</code> <code>xxxxxxxx</code></td>
-<td>基本平面内，使用两个字节表示，<code>U+D800</code> - <code>U+DFFF</code> 是保留区段</td>
-</tr>
-<tr>
-<td><code>U+010000</code> - <code>U+10FFFF</code></td>
-<td><code>110110xx</code> <code>xxxxxxxx</code> <code>110111yy</code> <code>yyyyyyyy</code></td>
-<td>辅助平面，使用四个字节表示，并有前缀标识</td>
-</tr>
-</tbody>
-</table>
-<h5 id="从U-D800到U-DFFF"><a href="#从U-D800到U-DFFF" class="headerlink" title="从U+D800到U+DFFF"></a>从U+D800到U+DFFF</h5><p><code>Unicode</code> 标准规定从 <code>U+D800</code> 到 <code>U+DFFF</code> 的码点不对应任何字符。<br>但是在使用 <code>UCS-2</code> 的时代，这些码点是有对应字符的。因此，只要不构成代理对，许多 <code>UTF-16</code> 编码解码还是会把这些不符合 <code>Unicode</code> 标准的字符映射正确的辨识并转换成合规的码元。<br>但是按照 <code>Unicode</code> 标准来说，这种码元序列本来应该算作是编码错误。</p>
-<h5 id="代理对与UTF-16辅助平面编码方式"><a href="#代理对与UTF-16辅助平面编码方式" class="headerlink" title="代理对与UTF-16辅助平面编码方式"></a>代理对与UTF-16辅助平面编码方式</h5><p><code>Unicode</code> 辅助平面中码点，在 <code>UTF-16</code> 中被编码为<strong>一对</strong>16bit的码元（即32位，4字节），称作<em>代理对</em>（<em>Surrogate Pair</em>）。<br>具体方法是：</p>
-<ol>
-<li>码点减去 <code>0x10000</code>，得到的值的范围为 20 比特长的 <code>0...0xFFFFF</code>。</li>
-<li>高位的 10 比特的值（范围为 <code>0...0x3FF</code>）被加上 <code>0xD800</code> 得到第一个码元，称作高位代理（<em>high surrogate</em>），新值的范围是 <code>0xD800...0xDBFF</code>。【由于高位代理比低位代理的值要小，为了避免混淆使用，<code>Unicode</code> 标准现在称高位代理为<strong>前导代理</strong>（<em>lead surrogate</em>）</li>
-<li>低位的 10 比特的值（范围也是 <code>0...0x3FF</code>）被加上 <code>0xDC00</code> 得到第二个码元，称作低位代理（<em>low surrogate</em>），新值的范围是 <code>0xDC00...0xDFFF</code>。【由于低位代理比高位代理的值要大，为了避免混淆使用，<code>Unicode</code> 标准现在成低位代理为<strong>后尾代理</strong>（<em>trail surrogate</em>）</li>
-</ol>
-<p>上述算法可以这样理解：<br>辅助平面中的码点范围是 <code>U+010000</code> 到 <code>U+10FFFF</code>，共计 0xFFFFF 个，即 2<sup>20</sup>个，也就是需要 20 个二进制位来表示。<br>如果用两个 16 位长的整数组成的序列来表示，第一个整数（即前导代理）要容纳 20 位中的前 10 位，第二个整数（即后尾代理）容纳 20 位中的后 10 位。<br>因为 <code>UTF-16</code> 基本平面的字符就是由一个 16 位长的整数表示的，这里的两个 16 位整数序列就需要一个区分标识。<br>一是与基本平面码点的区分，二是前导代理与后尾代理的区分。</p>
-<p><strong>与基本平面码点的区分</strong>，就来自于之前讲的 <code>Unicode</code> 保留区段 <code>U+D800...U+DFFF</code>，因为两个整数中只容纳了 20 位中的 10 位二进制数字，也就是最大只有 <code>0x3FF</code>，那么就可以通过给这两个整数增加一个固定数字，使其位于 <code>U+D800...U+DFFF</code> 这个区段内，就可以与基本平面的码点区分开来。</p>
-<p><strong>前导代理与后尾代理的区分</strong>，则通过增加不同的数字，使二者落入 <code>U+D800...U+DFFF</code> 区段的不同部分来区分。<br>你会发现，<code>U+D800...U+DFFF</code> 的区间长度是 2047，<code>0x3FF</code> 的十进制是 1023，刚好是区段一半的大小；<br>那么以区段的初始值 <code>U+D800</code> 和中间值 <code>U+DC00</code> 分别作为前导代理和后尾代理增加的值，就可以刚好将两个值分别放入 <code>U+D800...U+DFFF</code> 区间的前半段 <code>U+D800...U+DBFF</code> 和后半段 <code>U+DC00...U+DFFF</code>。</p>
-<p>所以，<code>UTF-16</code> 遇到两个字节，码点位于 <code>U+D800...U+DBFF</code> 之间时，就可以断定，后续的两个字节码点位于 <code>U+DC00...U+DFFF</code> 之间，并将这四个字节一起解读为一个字符。</p>
-<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><code>UTF-16</code> 编码是一个很不错的编码方式，因为大部分常用字符都位于基本平面内，也就是使用2字节就可以表示大部分的常用字符。<br>可是也同样是因为使用 2 个字节存储，导致它不能兼容 <code>ASCII</code> 编码。</p>
-<p>而 <code>UTF-8</code> 就是一种可以兼容 <code>ASCII</code> 编码的<strong>变长</strong>的 <code>Unicode</code> 的编码实现。</p>
-<p><code>UTF-8</code> 是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码。<br>它可以用一至四个字节对 <code>Unicode</code> 字符集中的所有有效编码码点进行编码。<br>由于较小值的编码点一般使用频率较高，直接使用 <code>Unicode</code> 编码【此处指<code>UTF-32</code>编码】效率低下，大量浪费内存空间。<br><code>UTF-8</code> 就是为了解决向后兼容 <code>ASCII</code> 码而设计的， <code>Unicode</code> 中前 128 个字符，使用与 <code>ASCII</code> 码相同的二进制值的单个字节进行编码，这使得原来处理 <code>ASCII</code> 字符的软件无需或只需做少部分修改，即可继续使用。<br>也因此，它逐渐成为电子邮件、网页及其他存储或发送文字优先采用的编码方式。</p>
-<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><table>
-<thead>
-<tr>
-<th>Unicode 码点</th>
-<th>UTF-8 编码</th>
-<th>注释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>U+0000</code> - <code>U+007F</code></td>
-<td><code>0xxxxxxx</code></td>
-<td><code>ASCII</code> 字符范围，单字节，字节由 <code>0</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+0080</code> - <code>U+07FF</code></td>
-<td><code>110xxxxx</code> <code>10yyyyyy</code></td>
-<td>双字节字符，第一个字节由 <code>110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+0800</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
-<td><code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code></td>
-<td>三字节字符，第一个字节由 <code>1110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+010000</code> - <code>U+10FFFF</code></td>
-<td><code>11110xxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code> <code>10wwwwww</code></td>
-<td>四字节字符，第一个字节由 <code>11110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-</tbody>
-</table>
-<p>从上面的表格中，你应该能够直观的看出来，在 <code>UTF-8</code> 编码中，从一个字节开始的二进制位，就能判断出这个字节的大致位置。</p>
-<ol>
-<li>如果字节以 <code>0</code> 开始，那么它单独表示一个 <code>ASCII</code> 字符</li>
-<li>如果字节以 <code>10</code> 开始，那么它是一个多字节字符的非首字节</li>
-<li>如果字节以 <code>110</code> 开始，那么它是一个二字节字符的首字节，且后续会有一个以 <code>10</code> 开头的字节</li>
-<li>如果字节以 <code>1110</code> 开始，那么它是一个三字节字符的首字节，且后续会有两个以 <code>10</code> 开头的字节</li>
-<li>如果字节以 <code>11110</code> 开始，那么它是一个四字节字符的首字节，且后续会有三个以 <code>10</code> 开头的字节</li>
-</ol>
-<p>可以很明显的看到，除了前面 128 个字符，跟 <code>ASCII</code> 码保持相同之外，<code>UTF-8</code> 的多字节字符，首字节起始的连续的 1 的数量就是它所占用的字节数，后续字节之所以用 <code>10</code> 开头，也是为了与单字节做区分，避免混淆。</p>
-<p>那么 <code>UTF-8</code> 具体是怎么编码的呢？</p>
-<ol>
-<li>查看字符在 <code>Unicode</code> 的码点所处区间，来确定字节数<ol>
-<li><code>U+0000</code> 至 <code>U+007F</code> 一个字节</li>
-<li><code>U+0080</code> 至 <code>U+07FF</code> 两个字节</li>
-<li><code>U+0800</code> 至 <code>U+FFFF</code> 三个字节</li>
-<li><code>U+010000</code> 至 <code>U+10FFFF</code> （即16个辅助平面）四个字符</li>
-</ol>
-</li>
-<li>如果是一个字节，直接使用码点对应的8位二进制码</li>
-<li>如果是多字节，那么将码点对应的二进制码，从右到左，一个个填充到上面表格对应字节中的待填充区域【就是表格里的 <code>x</code>,<code>y</code>,<code>z</code>,<code>w</code>的位置】，待右侧填充完毕，如果左侧还有未填充的位置，则统一填 0，就得到了 <code>UTF-8</code> 中对应的二进制码。</li>
-</ol>
-<p>比如：<code>好</code> 在 <code>Unicode</code> 中的码点是十六进制的 <code>0x597D</code>，落在区间 <code>U+0800</code> - <code>U+FFFF</code> 内，所以在 <code>UTF-8</code> 中表示是三字节：<code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code>。<br><code>0x597D</code> 转成二进制表示是 <code>0b101100101111101</code>，然后从右向左填充，切出最右边的6位 <code>111101</code> 填入第三个字节右侧 6 个 <code>z</code> 的位置，再切出余下的右侧 6 位 <code>100101</code> 填入第二个字节右侧 6 个 <code>y</code> 的位置，余下 3 位 <code>101</code> 填入首字节的最右侧，最后还有一个 <code>x</code> 未填充，补上 0，就得到了 <code>好</code> 字在 <code>UTF-8</code> 中的二进制码 <code>11100101</code> <code>10100101</code> <code>10111101</code>。</p>
-<p><img src="/images/posts/2020081101.png" alt></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">https://blog.csdn.net/yaomingyang/article/details/79374209<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTQvMTIvdW5pY29kZS5odG1s" title="http://www.ruanyifeng.com/blog/2014/12/unicode.html">http://www.ruanyifeng.com/blog/2014/12/unicode.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMDcvMTAvYXNjaWlfdW5pY29kZV9hbmRfdXRmLTguaHRtbA==" title="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8wZjVmZDkzZWZjNDY=" title="https://www.jianshu.com/p/0f5fd93efc46">https://www.jianshu.com/p/0f5fd93efc46<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3MDc1MzIzNjMyODk2" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896">https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZW5vbmcuY29tLzEwNjExNDU1Lw==" title="https://www.codenong.com/10611455/">https://www.codenong.com/10611455/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvamkud2FuZy9qYXZhc2NyaXB0LW5vdGUtMS1jaGFyYWN0ZXItZW5jb2Rpbmcv" title="https://zhaoji.wang/javascript-note-1-character-encoding/">https://zhaoji.wang/javascript-note-1-character-encoding/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTE2" title="https://zh.wikipedia.org/wiki/UTF-16">https://zh.wikipedia.org/wiki/UTF-16<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTg=" title="https://zh.wikipedia.org/wiki/UTF-8">https://zh.wikipedia.org/wiki/UTF-8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MTIwMjQxMg==" title="https://zhuanlan.zhihu.com/p/51202412">https://zhuanlan.zhihu.com/p/51202412<i class="fa fa-external-link"></i></span></p>
-]]></content>
-      <categories>
-        <category>Encoding</category>
-      </categories>
-      <tags>
-        <tag>Unicode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo + github 快速创建个人博客</title>
     <url>//2017/07/04/hexo-github-%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html</url>
     <content><![CDATA[<p>使用 hexo + github 快速创建个人博客方法记录。</p>
@@ -645,39 +645,76 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 TextEncoder 获取字符串的字节数</title>
-    <url>//2020/05/12/%E4%BD%BF%E7%94%A8-textencoder-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E8%8A%82%E6%95%B0.html</url>
-    <content><![CDATA[<p>之前有同事因为一段文本超出规定字节数，询问过我，怎么知道一段文字有多少个字节。<br>当时只是简单的回他一般英文与数字每个字符占一个字节，而中文字符占多少个字节需要根据字符编码来判断。比如中国的GBK/GB2312/GB18030等，一个中文字符就是两个字节；而现在主流的编码方式UTF-8中，一个中文字符则是三个字节。</p>
-<a id="more"></a>
-<h2 id="TextEncoder"><a href="#TextEncoder" class="headerlink" title="TextEncoder"></a>TextEncoder</h2><p>后来无意中在 MDN 里看到这么一个方法，可以将一段文本字符生成采用UTF-8编码的字节流（它还有一个作用相反的配套方法 TextDecoder）。如此很简单的一个查询字符串字节数的方法就出来了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> encoder = <span class="keyword">new</span> TextEncoder();</span><br><span class="line"><span class="keyword">const</span> view = encoder.encode(<span class="string">'一'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(view); <span class="comment">// Uint8Array(3) [228, 184, 128]</span></span><br><span class="line"><span class="built_in">console</span>.log(view.length); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原本 TextEncoder 还应该有一个参数 encoding，可以指定编码，但是因为标准规定 encoding 始终返回 “utf-8”，所以只能获取到UTF-8编码下的字符串的字节数。<br>不过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZXhvcmFibGV0YXNoL3RleHQtZW5jb2Rpbmc=" title="https://github.com/inexorabletash/text-encoding">GitHub<i class="fa fa-external-link"></i></span> 上倒是有一个polyfill支持非utf-8的编码。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> enc = <span class="keyword">new</span> TextEncoder(<span class="string">'gbk'</span>);</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br><span class="line">enc.encoding = <span class="string">'gbk'</span>;</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br></pre></td></tr></table></figure>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><h3 id="String-property-codePointAt-String-fromCodePoint"><a href="#String-property-codePointAt-String-fromCodePoint" class="headerlink" title="String.property.codePointAt/String.fromCodePoint"></a>String.property.codePointAt/String.fromCodePoint</h3><p>随着查询字符编码，还让我了解了一个字符串的方法 <code>String.property.codePointAt</code>。</p>
-<p>这个方法的作用类似于 <code>String.property.charCodeAt</code>，都是返回字符串某一位置的字符代码点的值，用法也和 <code>String.property.charCodeAt</code> 一样。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">0</span>);  <span class="comment">// 31505</span></span><br><span class="line">str.codePointAt(<span class="number">0</span>); <span class="comment">// 31505</span></span><br></pre></td></tr></table></figure>
-<p>那么它们的区别是什么？这里就要说到<em>四字节</em>的字符了。</p>
-<p>我们平时使用的Unicode编码字符，都是 U+0000 - U+FFFF 来标识的。而 U+FFFF 则是三字节能表示的最大字符数了，那么四字节要怎么标识呢？答案是用两个Unicode字符来标识，比如上面的笑脸emoji😀，它的Unicode编码其实是 <code>\ud83d\ude00</code>，而且其长度为2。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'😀'</span>.length === <span class="number">2</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>像这样用两个Unicode字符来标识的四字节字符，是无法使用 <code>String.property.charCodeAt</code> 来获取其完整代码点的，该方法只能获取到一个Unicode代码单元的代码点，即<code>String.property.charCodeAt</code>只能获取一个长度的Unicode的字符代码点。<br>而要获取这种四字节字符的完整代码点，则要使用 <code>String.property.codePointAt</code> 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">3</span>);  <span class="comment">// 55357 =&gt; 其实就是 '\ud83d' 的代码点</span></span><br><span class="line">str.codePointAt(<span class="number">3</span>); <span class="comment">// 128512</span></span><br></pre></td></tr></table></figure>
-<p>就如同 <code>String.property.charCodeAt</code> 有一个对应的方法 <code>String.fromCharCode</code>，<code>String.property.codePointAt</code> 也有一个对应的从代码点得到对应字符的方法 <code>String.fromCodePoint</code>。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCodePoint(<span class="number">128512</span>); <span class="comment">// 😀</span></span><br></pre></td></tr></table></figure>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RW5jb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextEncoder">TextEncoder<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RGVjb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextDecoder">TextDecoder<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jb2RlUG9pbnRBdA==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt">String.property.codePointAt<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jaGFyQ29kZUF0" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">String.property.charCodeAt<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">中文汉字占二个字节还是三个字节长度<i class="fa fa-external-link"></i></span></li>
+    <title>CentOS 添加用户并授权 sudo</title>
+    <url>//2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html</url>
+    <content><![CDATA[<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHeGlhb2JhaS9hcnRpY2xlL2RldGFpbHMvNTM1MDQ5ODk=" title="https://blog.csdn.net/GGxiaobai/article/details/53504989">CentOS 7中添加一个新用户并授权<i class="fa fa-external-link"></i></span></p>
+<h1 id="CentOS-7添加用户并授权"><a href="#CentOS-7添加用户并授权" class="headerlink" title="CentOS 7添加用户并授权"></a>CentOS 7添加用户并授权</h1><h2 id="1-创建新用户"><a href="#1-创建新用户" class="headerlink" title="1. 创建新用户"></a>1. 创建新用户</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@vultr ~]<span class="comment"># adduser suiga</span></span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">[root@vultr ~]<span class="comment"># passwd suiga</span></span><br><span class="line">Changing password <span class="keyword">for</span> user suiga.</span><br><span class="line">New password:</span><br><span class="line"><span class="comment"># 初始化密码有复杂度判断，如果过于简单，会有提示</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 7 characters</span><br><span class="line">New password:</span><br></pre></td></tr></table></figure>
+<h2 id="2-授权"><a href="#2-授权" class="headerlink" title="2. 授权"></a>2. 授权</h2><p>新创建的用户并不能使用sudo命令，需要给他添加授权。</p>
+<p>sudo命令的授权管理是在sudoers文件里的。可以看看sudoers：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># sudoers</span></span><br><span class="line">-bash: sudoers: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># whereis 查找位置</span></span><br><span class="line">[root@vultr ~]<span class="comment"># whereis sudoers</span></span><br><span class="line">sudoers: /etc/sudoers /etc/sudoers.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># ls -l 查看权限</span></span><br><span class="line">[root@vultr ~]<span class="comment"># ls -l /etc/sudoers</span></span><br><span class="line">-r--r----- 1 root root 3938 Apr 10 20:27 /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>只有只读权限，如果想要修改，需要先添加<code>w</code>权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u+w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0440 (r--r-----) to 0640 (rw-r-----)</span><br></pre></td></tr></table></figure>
+<p>然后就可以添加内容了，在下面一行追加新增的用户</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># vi /etc/sudoers</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">root    ALL=(ALL)       ALL</span><br><span class="line">suiga   ALL=(ALL)       ALL <span class="comment"># 这个是新增的用户</span></span><br></pre></td></tr></table></figure>
+<p>保存退出(<code>:x</code>/<code>:wq</code>)，记得将之前加的写入权限收回：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u-w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0640 (rw-r-----) to 0440 (r--r-----)</span><br></pre></td></tr></table></figure>
+<p>切换新用户，使用sudo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># su suiga</span></span><br><span class="line">[suiga@vultr root]$ sudo cat /etc/passwd</span><br><span class="line"></span><br><span class="line">We trust you have received the usual lecture from the <span class="built_in">local</span> System</span><br><span class="line">Administrator. It usually boils down to these three things:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#1) Respect the privacy of others.</span></span><br><span class="line">    <span class="comment">#2) Think before you type.</span></span><br><span class="line">    <span class="comment">#3) With great power comes great responsibility.</span></span><br><span class="line"></span><br><span class="line">[sudo] password <span class="keyword">for</span> suiga:</span><br></pre></td></tr></table></figure>
+<p>第一次使用会有提示，且需要输入用户密码，如果想不需要输入密码，可以将之前设置的最后一个<code>ALL</code>改为<code>NOPASSWD: ALL</code>。</p>
+<h1 id="删除用户密码、禁止登陆"><a href="#删除用户密码、禁止登陆" class="headerlink" title="删除用户密码、禁止登陆"></a>删除用户密码、禁止登陆</h1><h2 id="删除密码"><a href="#删除密码" class="headerlink" title="删除密码"></a>删除密码</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo passwd --delete &lt;username&gt;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ sudo passwd -d &lt;username&gt;</span><br></pre></td></tr></table></figure>
+<p>没有密码就无法登录，对于有些不应该有密码、不允许登录的账户就可以这样来禁止。</p>
+<p>还有一种更安全的方式，设置用户为nologin。</p>
+<h2 id="设置用户为-nologin"><a href="#设置用户为-nologin" class="headerlink" title="设置用户为 nologin"></a>设置用户为 nologin</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
+<p>可以结合两种方式来禁止用户的登录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo passwd -d &lt;username&gt;</span><br><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>sudo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 命令行操作多个文件</title>
+    <url>//2019/02/21/linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6.html</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; cp &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; mv &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; rm &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>这里主要是通过 <em>find</em> 和 <em>xargs</em> 命令配合使用。</p>
+<p><em>find</em> 来根据范本样式查找需要操作的文件，<br>命令为 <code>find &lt;查找目录&gt; -name &lt;范本样式&gt;</code> 。</p>
+<p><code>|</code> 是管道，负责将前面的输出作为后面的输入。</p>
+<p><em>xargs</em> 命令负责将输入流转换成命令行参数，<br><code>xargs -I [替换字符串]</code> 使用 <code>-I</code> 选项指定一个替换字符串，<br>如果省略替换字符串，则默认使用 <code>{}</code> 。<br>这个字符串在后面使用时会被依次替换成输入流转换的参数。</p>
+<hr>
+<p>参考资料</p>
+<p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC9maW5k" title="http://man.linuxde.net/find">find命令<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC94YXJncw==" title="http://man.linuxde.net/xargs">xargs命令<i class="fa fa-external-link"></i></span></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Command</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 添加环境变量的方法</title>
+    <url>//2019/03/03/linux-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
+    <content><![CDATA[<p>在 Linux 服务器上使用 NodeJS 时，明明通过 <code>npm install --global</code> 进行了包的全局安装，可是安装完了之后却发现在命令行里还是无法使用。<br>原因就是没有将其加入环境变量。</p>
+<p>我的 node 包目录为 <code>~/node-v10.9.0-linux-x64/bin/</code>，<br>那么可以通过如下三种方式来把这个目录加入环境变量。</p>
+<h2 id="1-直接在命令行通过-export-命令加入"><a href="#1-直接在命令行通过-export-命令加入" class="headerlink" title="1. 直接在命令行通过 export 命令加入"></a>1. 直接在命令行通过 export 命令加入</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls ~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">node  npm  npx  pm2  pm2-dev  pm2-docker  pm2-runtime  yarn  yarnpkg</span><br><span class="line">$ npx -v</span><br><span class="line">-bash: npx: <span class="built_in">command</span> not found</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin:/home/suiga/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ npx -v</span><br><span class="line">6.8.0</span><br></pre></td></tr></table></figure>
+<p>这种方式添加起来确实快捷，添加后直接就能使用。但是注销重新登录后，你会发现之前加入的环境变量没有了。<br>也就是说这种方式属于临时性添加的。</p>
+<p>想要永久的添加还是需要使用下面的方式。</p>
+<h2 id="2-修改-etc-profile-文件"><a href="#2-修改-etc-profile-文件" class="headerlink" title="2. 修改 /etc/profile 文件"></a>2. 修改 /etc/profile 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vi /etc/profile</span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注销重新登录后生效</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-修改-bashrc-文件"><a href="#3-修改-bashrc-文件" class="headerlink" title="3. 修改 .bashrc 文件"></a>3. 修改 .bashrc 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi ~/.bashrc <span class="comment"># 或者 sudo vi /root/.bashrc</span></span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同样需要先注销才能生效</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYW1ib3luYS9hcmNoaXZlLzIwMDgvMDMvMDgvMTA5NjAyNC5odG1s" title="https://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">在Linux里设置环境变量的方法（export PATH） - 玉米疯收 - 博客园<i class="fa fa-external-link"></i></span></li>
 </ul>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>TextEncoder</tag>
+        <tag>PATH</tag>
       </tags>
   </entry>
   <entry>
@@ -952,6 +989,42 @@
       </categories>
       <tags>
         <tag>console</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 TextEncoder 获取字符串的字节数</title>
+    <url>//2020/05/12/%E4%BD%BF%E7%94%A8-textencoder-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E8%8A%82%E6%95%B0.html</url>
+    <content><![CDATA[<p>之前有同事因为一段文本超出规定字节数，询问过我，怎么知道一段文字有多少个字节。<br>当时只是简单的回他一般英文与数字每个字符占一个字节，而中文字符占多少个字节需要根据字符编码来判断。比如中国的GBK/GB2312/GB18030等，一个中文字符就是两个字节；而现在主流的编码方式UTF-8中，一个中文字符则是三个字节。</p>
+<a id="more"></a>
+<h2 id="TextEncoder"><a href="#TextEncoder" class="headerlink" title="TextEncoder"></a>TextEncoder</h2><p>后来无意中在 MDN 里看到这么一个方法，可以将一段文本字符生成采用UTF-8编码的字节流（它还有一个作用相反的配套方法 TextDecoder）。如此很简单的一个查询字符串字节数的方法就出来了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> encoder = <span class="keyword">new</span> TextEncoder();</span><br><span class="line"><span class="keyword">const</span> view = encoder.encode(<span class="string">'一'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(view); <span class="comment">// Uint8Array(3) [228, 184, 128]</span></span><br><span class="line"><span class="built_in">console</span>.log(view.length); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原本 TextEncoder 还应该有一个参数 encoding，可以指定编码，但是因为标准规定 encoding 始终返回 “utf-8”，所以只能获取到UTF-8编码下的字符串的字节数。<br>不过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZXhvcmFibGV0YXNoL3RleHQtZW5jb2Rpbmc=" title="https://github.com/inexorabletash/text-encoding">GitHub<i class="fa fa-external-link"></i></span> 上倒是有一个polyfill支持非utf-8的编码。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> enc = <span class="keyword">new</span> TextEncoder(<span class="string">'gbk'</span>);</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br><span class="line">enc.encoding = <span class="string">'gbk'</span>;</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br></pre></td></tr></table></figure>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><h3 id="String-property-codePointAt-String-fromCodePoint"><a href="#String-property-codePointAt-String-fromCodePoint" class="headerlink" title="String.property.codePointAt/String.fromCodePoint"></a>String.property.codePointAt/String.fromCodePoint</h3><p>随着查询字符编码，还让我了解了一个字符串的方法 <code>String.property.codePointAt</code>。</p>
+<p>这个方法的作用类似于 <code>String.property.charCodeAt</code>，都是返回字符串某一位置的字符代码点的值，用法也和 <code>String.property.charCodeAt</code> 一样。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">0</span>);  <span class="comment">// 31505</span></span><br><span class="line">str.codePointAt(<span class="number">0</span>); <span class="comment">// 31505</span></span><br></pre></td></tr></table></figure>
+<p>那么它们的区别是什么？这里就要说到<em>四字节</em>的字符了。</p>
+<p>我们平时使用的Unicode编码字符，都是 U+0000 - U+FFFF 来标识的。而 U+FFFF 则是三字节能表示的最大字符数了，那么四字节要怎么标识呢？答案是用两个Unicode字符来标识，比如上面的笑脸emoji😀，它的Unicode编码其实是 <code>\ud83d\ude00</code>，而且其长度为2。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'😀'</span>.length === <span class="number">2</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>像这样用两个Unicode字符来标识的四字节字符，是无法使用 <code>String.property.charCodeAt</code> 来获取其完整代码点的，该方法只能获取到一个Unicode代码单元的代码点，即<code>String.property.charCodeAt</code>只能获取一个长度的Unicode的字符代码点。<br>而要获取这种四字节字符的完整代码点，则要使用 <code>String.property.codePointAt</code> 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">3</span>);  <span class="comment">// 55357 =&gt; 其实就是 '\ud83d' 的代码点</span></span><br><span class="line">str.codePointAt(<span class="number">3</span>); <span class="comment">// 128512</span></span><br></pre></td></tr></table></figure>
+<p>就如同 <code>String.property.charCodeAt</code> 有一个对应的方法 <code>String.fromCharCode</code>，<code>String.property.codePointAt</code> 也有一个对应的从代码点得到对应字符的方法 <code>String.fromCodePoint</code>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCodePoint(<span class="number">128512</span>); <span class="comment">// 😀</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RW5jb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextEncoder">TextEncoder<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RGVjb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextDecoder">TextDecoder<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jb2RlUG9pbnRBdA==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt">String.property.codePointAt<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jaGFyQ29kZUF0" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">String.property.charCodeAt<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">中文汉字占二个字节还是三个字节长度<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>TextEncoder</tag>
       </tags>
   </entry>
   <entry>
@@ -1270,79 +1343,6 @@
       </categories>
       <tags>
         <tag>语句结束符</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS 添加用户并授权 sudo</title>
-    <url>//2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html</url>
-    <content><![CDATA[<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHeGlhb2JhaS9hcnRpY2xlL2RldGFpbHMvNTM1MDQ5ODk=" title="https://blog.csdn.net/GGxiaobai/article/details/53504989">CentOS 7中添加一个新用户并授权<i class="fa fa-external-link"></i></span></p>
-<h1 id="CentOS-7添加用户并授权"><a href="#CentOS-7添加用户并授权" class="headerlink" title="CentOS 7添加用户并授权"></a>CentOS 7添加用户并授权</h1><h2 id="1-创建新用户"><a href="#1-创建新用户" class="headerlink" title="1. 创建新用户"></a>1. 创建新用户</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@vultr ~]<span class="comment"># adduser suiga</span></span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">[root@vultr ~]<span class="comment"># passwd suiga</span></span><br><span class="line">Changing password <span class="keyword">for</span> user suiga.</span><br><span class="line">New password:</span><br><span class="line"><span class="comment"># 初始化密码有复杂度判断，如果过于简单，会有提示</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 7 characters</span><br><span class="line">New password:</span><br></pre></td></tr></table></figure>
-<h2 id="2-授权"><a href="#2-授权" class="headerlink" title="2. 授权"></a>2. 授权</h2><p>新创建的用户并不能使用sudo命令，需要给他添加授权。</p>
-<p>sudo命令的授权管理是在sudoers文件里的。可以看看sudoers：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># sudoers</span></span><br><span class="line">-bash: sudoers: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># whereis 查找位置</span></span><br><span class="line">[root@vultr ~]<span class="comment"># whereis sudoers</span></span><br><span class="line">sudoers: /etc/sudoers /etc/sudoers.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># ls -l 查看权限</span></span><br><span class="line">[root@vultr ~]<span class="comment"># ls -l /etc/sudoers</span></span><br><span class="line">-r--r----- 1 root root 3938 Apr 10 20:27 /etc/sudoers</span><br></pre></td></tr></table></figure>
-<p>只有只读权限，如果想要修改，需要先添加<code>w</code>权限。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u+w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0440 (r--r-----) to 0640 (rw-r-----)</span><br></pre></td></tr></table></figure>
-<p>然后就可以添加内容了，在下面一行追加新增的用户</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># vi /etc/sudoers</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">root    ALL=(ALL)       ALL</span><br><span class="line">suiga   ALL=(ALL)       ALL <span class="comment"># 这个是新增的用户</span></span><br></pre></td></tr></table></figure>
-<p>保存退出(<code>:x</code>/<code>:wq</code>)，记得将之前加的写入权限收回：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u-w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0640 (rw-r-----) to 0440 (r--r-----)</span><br></pre></td></tr></table></figure>
-<p>切换新用户，使用sudo</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># su suiga</span></span><br><span class="line">[suiga@vultr root]$ sudo cat /etc/passwd</span><br><span class="line"></span><br><span class="line">We trust you have received the usual lecture from the <span class="built_in">local</span> System</span><br><span class="line">Administrator. It usually boils down to these three things:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#1) Respect the privacy of others.</span></span><br><span class="line">    <span class="comment">#2) Think before you type.</span></span><br><span class="line">    <span class="comment">#3) With great power comes great responsibility.</span></span><br><span class="line"></span><br><span class="line">[sudo] password <span class="keyword">for</span> suiga:</span><br></pre></td></tr></table></figure>
-<p>第一次使用会有提示，且需要输入用户密码，如果想不需要输入密码，可以将之前设置的最后一个<code>ALL</code>改为<code>NOPASSWD: ALL</code>。</p>
-<h1 id="删除用户密码、禁止登陆"><a href="#删除用户密码、禁止登陆" class="headerlink" title="删除用户密码、禁止登陆"></a>删除用户密码、禁止登陆</h1><h2 id="删除密码"><a href="#删除密码" class="headerlink" title="删除密码"></a>删除密码</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo passwd --delete &lt;username&gt;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ sudo passwd -d &lt;username&gt;</span><br></pre></td></tr></table></figure>
-<p>没有密码就无法登录，对于有些不应该有密码、不允许登录的账户就可以这样来禁止。</p>
-<p>还有一种更安全的方式，设置用户为nologin。</p>
-<h2 id="设置用户为-nologin"><a href="#设置用户为-nologin" class="headerlink" title="设置用户为 nologin"></a>设置用户为 nologin</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
-<p>可以结合两种方式来禁止用户的登录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo passwd -d &lt;username&gt;</span><br><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>sudo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 添加环境变量的方法</title>
-    <url>//2019/03/03/linux-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
-    <content><![CDATA[<p>在 Linux 服务器上使用 NodeJS 时，明明通过 <code>npm install --global</code> 进行了包的全局安装，可是安装完了之后却发现在命令行里还是无法使用。<br>原因就是没有将其加入环境变量。</p>
-<p>我的 node 包目录为 <code>~/node-v10.9.0-linux-x64/bin/</code>，<br>那么可以通过如下三种方式来把这个目录加入环境变量。</p>
-<h2 id="1-直接在命令行通过-export-命令加入"><a href="#1-直接在命令行通过-export-命令加入" class="headerlink" title="1. 直接在命令行通过 export 命令加入"></a>1. 直接在命令行通过 export 命令加入</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls ~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">node  npm  npx  pm2  pm2-dev  pm2-docker  pm2-runtime  yarn  yarnpkg</span><br><span class="line">$ npx -v</span><br><span class="line">-bash: npx: <span class="built_in">command</span> not found</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin:/home/suiga/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ npx -v</span><br><span class="line">6.8.0</span><br></pre></td></tr></table></figure>
-<p>这种方式添加起来确实快捷，添加后直接就能使用。但是注销重新登录后，你会发现之前加入的环境变量没有了。<br>也就是说这种方式属于临时性添加的。</p>
-<p>想要永久的添加还是需要使用下面的方式。</p>
-<h2 id="2-修改-etc-profile-文件"><a href="#2-修改-etc-profile-文件" class="headerlink" title="2. 修改 /etc/profile 文件"></a>2. 修改 /etc/profile 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vi /etc/profile</span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注销重新登录后生效</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-修改-bashrc-文件"><a href="#3-修改-bashrc-文件" class="headerlink" title="3. 修改 .bashrc 文件"></a>3. 修改 .bashrc 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi ~/.bashrc <span class="comment"># 或者 sudo vi /root/.bashrc</span></span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同样需要先注销才能生效</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>参考链接：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYW1ib3luYS9hcmNoaXZlLzIwMDgvMDMvMDgvMTA5NjAyNC5odG1s" title="https://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">在Linux里设置环境变量的方法（export PATH） - 玉米疯收 - 博客园<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>PATH</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 命令行操作多个文件</title>
-    <url>//2019/02/21/linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6.html</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; cp &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; mv &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; rm &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>这里主要是通过 <em>find</em> 和 <em>xargs</em> 命令配合使用。</p>
-<p><em>find</em> 来根据范本样式查找需要操作的文件，<br>命令为 <code>find &lt;查找目录&gt; -name &lt;范本样式&gt;</code> 。</p>
-<p><code>|</code> 是管道，负责将前面的输出作为后面的输入。</p>
-<p><em>xargs</em> 命令负责将输入流转换成命令行参数，<br><code>xargs -I [替换字符串]</code> 使用 <code>-I</code> 选项指定一个替换字符串，<br>如果省略替换字符串，则默认使用 <code>{}</code> 。<br>这个字符串在后面使用时会被依次替换成输入流转换的参数。</p>
-<hr>
-<p>参考资料</p>
-<p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC9maW5k" title="http://man.linuxde.net/find">find命令<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC94YXJncw==" title="http://man.linuxde.net/xargs">xargs命令<i class="fa fa-external-link"></i></span></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Command</tag>
       </tags>
   </entry>
   <entry>
@@ -1714,6 +1714,27 @@ CSI(0x9B)等同于 ESC [;
       </tags>
   </entry>
   <entry>
+    <title>在 tsconfig.json 配置中找不到任何输入</title>
+    <url>//2019/03/12/%E5%9C%A8-tsconfig-json-%E9%85%8D%E7%BD%AE%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0%E4%BB%BB%E4%BD%95%E8%BE%93%E5%85%A5.html</url>
+    <content><![CDATA[<p><code>tsconfig.json</code> 文件内容如下，这种情况下很可能就会出现错误</p>
+<blockquote>
+<p>在配置文件 /path/to/program/tsconfig.json 中找不到任何输入</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="attr">"outDir"</span>: <span class="string">"dist"</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"esnext"</span>,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"es2016"</span>,</span><br><span class="line">    <span class="attr">"noImplicitAny"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"moduleResolution"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"paths"</span>: &#123;</span><br><span class="line">      <span class="attr">"*"</span>: [</span><br><span class="line">        <span class="string">"node_modules/*"</span>,</span><br><span class="line">        <span class="string">"src/types/*"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"typeRoots"</span>: [<span class="string">"typings"</span>, <span class="string">"node_modules/@types"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只需要添加一个 <em>include</em> 数组指定包含的目录即可，或者也可以添加一个 <em>files</em> 数组指定包含的文件列表。</p>
+<p>比如：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"include"</span>: [</span><br><span class="line">    <span class="string">"src/**/*"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// Or/And files</span></span><br><span class="line">  <span class="attr">"files"</span>: [</span><br><span class="line">    <span class="string">"src/app.ts"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是不能设置为一个空数组，<code>&quot;include&quot;: []</code> 这样还是会找不到任何输入的，同样的，如果设置的路径不对，依然有这个错误。</p>
+<p>附带一提，<code>tslint.json</code> 文件可以用 <code>tslint.js</code> 替代，使用 <code>module.exports</code> 导出。<br>这样可以根据环境配置来设置不同的 lint 规则。</p>
+]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>tsconfig</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>忘记了 MySQL 8.0 密码, 如何重置</title>
     <url>//2019/11/28/%E5%BF%98%E8%AE%B0%E4%BA%86-mysql-8-0-%E5%AF%86%E7%A0%81-%E5%A6%82%E4%BD%95%E9%87%8D%E7%BD%AE.html</url>
     <content><![CDATA[<p>起因是安装了 8.0 版本的 MySQL，结果后来忘记了密码，上网查了好多 5.x 版本的重置密码方法，在 8.0 版本都不行。<br>后来找到了一篇同样是 8.0 版本的文章才修改成功。</p>
@@ -1748,27 +1769,6 @@ CSI(0x9B)等同于 ESC [;
       </categories>
       <tags>
         <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在 tsconfig.json 配置中找不到任何输入</title>
-    <url>//2019/03/12/%E5%9C%A8-tsconfig-json-%E9%85%8D%E7%BD%AE%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0%E4%BB%BB%E4%BD%95%E8%BE%93%E5%85%A5.html</url>
-    <content><![CDATA[<p><code>tsconfig.json</code> 文件内容如下，这种情况下很可能就会出现错误</p>
-<blockquote>
-<p>在配置文件 /path/to/program/tsconfig.json 中找不到任何输入</p>
-</blockquote>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="attr">"outDir"</span>: <span class="string">"dist"</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"esnext"</span>,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"es2016"</span>,</span><br><span class="line">    <span class="attr">"noImplicitAny"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"moduleResolution"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"paths"</span>: &#123;</span><br><span class="line">      <span class="attr">"*"</span>: [</span><br><span class="line">        <span class="string">"node_modules/*"</span>,</span><br><span class="line">        <span class="string">"src/types/*"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"typeRoots"</span>: [<span class="string">"typings"</span>, <span class="string">"node_modules/@types"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>只需要添加一个 <em>include</em> 数组指定包含的目录即可，或者也可以添加一个 <em>files</em> 数组指定包含的文件列表。</p>
-<p>比如：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"include"</span>: [</span><br><span class="line">    <span class="string">"src/**/*"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// Or/And files</span></span><br><span class="line">  <span class="attr">"files"</span>: [</span><br><span class="line">    <span class="string">"src/app.ts"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是不能设置为一个空数组，<code>&quot;include&quot;: []</code> 这样还是会找不到任何输入的，同样的，如果设置的路径不对，依然有这个错误。</p>
-<p>附带一提，<code>tslint.json</code> 文件可以用 <code>tslint.js</code> 替代，使用 <code>module.exports</code> 导出。<br>这样可以根据环境配置来设置不同的 lint 规则。</p>
-]]></content>
-      <categories>
-        <category>TypeScript</category>
-      </categories>
-      <tags>
-        <tag>tsconfig</tag>
       </tags>
   </entry>
   <entry>
