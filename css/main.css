@@ -240,6 +240,7 @@ h6 {
   line-height: 1.5;
   font-family: Shrikhand, Ma Shan Zheng, Chalkboard, HanziPenSC-W5, STXingkai, Xingkai SC, cursive;
 }
+h4,
 h5,
 h6 {
   font-family: Recursive, sans-serif;
@@ -2158,7 +2159,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ee3e14;
+  background: #2dfff4;
 }
 .links-of-blogroll {
   font-size: 13px;

@@ -1,217 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>字符编码笔记</title>
-    <url>//2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html</url>
-    <content><![CDATA[<p>我们知道，计算机是二进制存储的，所有的内容，在计算机内存储下来的都是 <code>0</code> 和 <code>1</code> 来表示的二进制数字。<br>早期的计算机在设计时，采用 8 个二进制位 (<code>bit</code>) 作为一个字节 (<code>byte</code>)，因为每个二进制位都有 <code>0</code> 和 <code>1</code> 两种状态，所以一个字节一共可以表示 2<sup>8</sup> = 256 种状态。</p>
-<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><p>字符集，从字面上来拆解，其实就是字符的集合；就是把我们使用到的字符整合在一起，并为每一个符号指定一个唯一的编号（叫作 <code>码点</code>）。</p>
-<p>因为计算机只能处理二进制数字，那么如果要处理文本内容时，就需要先把文本转换成数字；<br>将字符集中每一个字符唯一的编号，按照某种规则映射到二进制存储，这就是所谓的 <code>字符编码</code>。<br>比如最早给英文字符、数字、标点符号等制定了一套编码的 <code>ASCII</code>（<em>American Standard Code for Information Interchange</em>, <em>美国信息交换标准代码</em>）。</p>
-<p>简单来说，字符集是一套被分配了唯一编号的字符的集合，而字符编码则是对字符集映射到二进制的一个实现方式。</p>
-<h2 id="字符编码的历史演变"><a href="#字符编码的历史演变" class="headerlink" title="字符编码的历史演变"></a>字符编码的历史演变</h2><h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>在 20 世纪 60 年代，美国制定了一套字符编码，对英语字符和二进制之间的关系，做了统一规定，这被称为 <code>ASCII</code>，一直沿用至今。</p>
-<p><code>ASCII</code> 码一共规定了128个字符的编码，比如空格 <code>SPACE</code> 是 <code>32</code>（二进制<code>00100000</code>），大写的字母<code>A</code>是<code>65</code>（二进制<code>01000001</code>）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为<code>0</code>。</p>
-<h3 id="扩展ASCII"><a href="#扩展ASCII" class="headerlink" title="扩展ASCII"></a>扩展ASCII</h3><p>对英语来说，<code>ASCII</code> 内这 128 个字符就够用了，但是对欧洲其他一些国家来说，就不够用了；比如法国、德国等。<br>然后这些国家就对 <code>ASCII</code> 码做了扩展，利用字节中闲置的最高位编入新的符号，比如法语中的<code>é</code>的编码为<code>130</code>（二进制<code>10000010</code>），如此一来，这些欧洲国家就多出了128个字符可以存储；扩展后的 <code>ASCII</code> 码最多可以表示 <code>256</code> 个字符。<br>这些扩展编码中，比较流行的编码有 <code>latin-1</code>, <code>ISO-8859-1</code> 等。</p>
-<p>可这里也有一个问题：不同的国家有不同的字母，那么不同的扩展，势必会有同一个码点却代表不同的字母这样的情况出现。</p>
-<h3 id="其他编码"><a href="#其他编码" class="headerlink" title="其他编码"></a>其他编码</h3><p>上面说的只是欧洲这种以字母为主的语种国家，而像我们中国、日本等东亚语系的国家，需要使用的语言符号更多，只用一个字节，根本不够，如此就需要使用多个字节来表示一个字符。比如简体中文 <code>GB2312</code> 编码，就是使用两个字节表示一个汉字，所以理论上最多可以表示出 <code>256 * 256 = 65536</code> 个汉字。</p>
-<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>每个国家都有一套自己的编码方式，尤其是码点在 <code>128-255</code> 之间的字符，每套编码代表的字符都不一样；<br>如果将一个以A编码方式存储的文件，以B编码方式打开，就会出现乱码的问题。</p>
-<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>如上所说，世界上存在很多编码方式，同一个二进制数字可以被解释成不同的字符；因此，要想正常打开一个文本文件，就必须知道它的编码方式，否则就会出现乱码。<br>可以想象，如果存在一种编码，将世界上所有的字符都纳入其中；每个字符都有一个独一无二的码点，大家都使用这同一套编码，那么乱码问题就会消失。<br>这就是 <code>Unicode</code> 字符集。</p>
-<h3 id="UCS与Unicode"><a href="#UCS与Unicode" class="headerlink" title="UCS与Unicode"></a>UCS与Unicode</h3><p>人们开始迫切的需要一套统一的字符集，能够包含世界上所有的符号。<br>1988 年成立的 Unicode 团队和 1989 年成立的 UCS 团队，这两个团队就是想要搞出一套统一字符集成立的。<br>只是一开始他们并不知道彼此的存在。<br>1990 年，开发进度较快的 UCS 团队公布了第一套编码方法 <code>UCS-2</code>，使用2个字节表示已有码点的字符，同时这也是 <code>JavaScript</code> 中使用的编码方式。<br>而等到两个团队发现了对方存在之后，很快达成一致：世界上不需要两套统一字符集。在 1991 年 10 月，两个团队决定合并字符集；以后只发布一套字符集，就是 <code>Unicode</code>；并修复此前发布的字符集，使 <code>UCS</code> 的码点与 <code>Unicode</code> 完全一致。</p>
-<blockquote>
-<p>也由于 <code>JavaScript</code> 使用的是 <code>UCS-2</code> 编码，所以 <code>JavaScript</code> 的字符处理是有一些问题的，遇到4字节字符时，会当成两个2字节的字符来处理。<br>即使 ECMAScript6 扩展增强了 <code>Unicode</code> 的支持，基本解决了这个问题，但是为了兼容性，一些问题还是被保留了下来。<br>比如 <code>&quot;𝓂&quot;.length === 2</code>。<br>不过因为时间上的原因，<code>JavaScript</code> 也只能选择 <code>UCS-2</code>，而不是现在支持的 <code>UTF-16</code>。<br><code>JavaScript</code> 诞生于 1995年5月，<em>Brendan Eich</em> 用了 10 天设计了这套语言；同年10月，第一个解释引擎问世；<br>而 <code>UTF-16</code> 的发布时间却是在 1996年7月。</p>
-</blockquote>
-<h3 id="Unicode与UTF"><a href="#Unicode与UTF" class="headerlink" title="Unicode与UTF"></a>Unicode与UTF</h3><p>需要注意的是，<code>Unicode</code> 只是一个字符集，它只规定了符号的二进制代码，却没有规定这个二进制代码如何存储。<br>也就是说有许多中不同的二进制格式，可以用来表示 <code>Unicode</code>。<br>直到互联网普及，出现了几种使用较为广泛的编码方式，其中就有我们现在常用的 <code>UTF-8</code>，其他还有 <code>UTF-16</code> 和 <code>UTF-32</code>。<br><code>UTF</code> 的全称是 <em>Unicode/UCS Transformation Format</em>，亦即把 <code>Unicode</code> 字符转换为某种格式。</p>
-<h4 id="平面"><a href="#平面" class="headerlink" title="平面"></a>平面</h4><p><code>Unicode</code> 的编码空间从 <code>U+0000</code> 到 <code>U+10FFFF</code>，一共有 1,112,064 个码点可以用来映射字符。<br>这么多字符，<code>Unicode</code> 也并不是一次性定义的，而是分区定义的。<br>每个区可以存放 65536 个字符（16位，2<sup>16</sup>），这样一个分区称为一个“平面”。<br>而目前一共有 17 个平面，也就是说，整个 <code>Unicode</code> 字符集的大小是 2<sup>21</sup>。</p>
-<p>在这 17 个平面里，前 65536 个字符，也就是第一个平面，也被称为<strong>基本平面</strong>（<em>Basic Multilingual Plane,基本多语言平面</em>, <strong>BMP</strong>），其他平面称为<strong>辅助平面</strong>（<em>Supplementary Planes</em>）。</p>
-<p>你可能偷偷计算了一下，发现 2<sup>21</sup> 远大于上面说的 1,112,064 个码点。<br>其实在这 2<sup>21</sup> 个码点里，并不是每个码点都用来映射字符。<br>在基本平面内，从 <code>U+D800</code> 到 <code>U+DFFF</code> 之间的码点区段是永久保留不映射到 <code>Unicode</code> 字符的；<br>而辅助平面码点的编码就是利用这个区段的码点来进行的。</p>
-<h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>这个仅了解一些就好，因为实际上很少会使用这个编码，甚至HTML5标准中明文规定，禁止支持 <code>UTF-32</code> 编码。</p>
-<p><code>UTF-32</code> 的编解码规则简单，所有字符都用四个字节表示，并完全对应 <code>Unicode</code> 码点，查找效率很高；但是它的缺点是很浪费空间，如果是纯英文文本，<code>UTF-32</code> 编码的占用空间是 <code>ASCII</code> 编码的四倍，在以前那个空间并不充足的年代，这几乎是无法容忍的；即使是现在，这也是一个致命的缺点。</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy8jY2hhcmFjdGVyLWVuY29kaW5ncw==" title="https://html.spec.whatwg.org/#character-encodings">https://html.spec.whatwg.org/#character-encodings<i class="fa fa-external-link"></i></span><br>Note<br>The above prohibits supporting, for example, CESU-8, UTF-7, BOCU-1, SCSU, EBCDIC, and UTF-32. This specification does not make any attempt to support prohibited encodings in its algorithms; support and use of prohibited encodings would thus lead to unexpected behavior.</p>
-</blockquote>
-<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p><code>UTF-16</code> 可以说是 <code>UCS-2</code> 的一个扩展，基本平面内的字符使用 2 个字节表示，辅助平面的字符使用 4 个字节表示。</p>
-<table>
-<thead>
-<tr>
-<th>Unicode 码点</th>
-<th>UTF-16 编码</th>
-<th>注释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>U+0000</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
-<td><code>xxxxxxxx</code> <code>xxxxxxxx</code></td>
-<td>基本平面内，使用两个字节表示，<code>U+D800</code> - <code>U+DFFF</code> 是保留区段</td>
-</tr>
-<tr>
-<td><code>U+010000</code> - <code>U+10FFFF</code></td>
-<td><code>110110xx</code> <code>xxxxxxxx</code> <code>110111yy</code> <code>yyyyyyyy</code></td>
-<td>辅助平面，使用四个字节表示，并有前缀标识</td>
-</tr>
-</tbody>
-</table>
-<h5 id="从U-D800到U-DFFF"><a href="#从U-D800到U-DFFF" class="headerlink" title="从U+D800到U+DFFF"></a>从U+D800到U+DFFF</h5><p><code>Unicode</code> 标准规定从 <code>U+D800</code> 到 <code>U+DFFF</code> 的码点不对应任何字符。<br>但是在使用 <code>UCS-2</code> 的时代，这些码点是有对应字符的。因此，只要不构成代理对，许多 <code>UTF-16</code> 编码解码还是会把这些不符合 <code>Unicode</code> 标准的字符映射正确的辨识并转换成合规的码元。<br>但是按照 <code>Unicode</code> 标准来说，这种码元序列本来应该算作是编码错误。</p>
-<h5 id="代理对与UTF-16辅助平面编码方式"><a href="#代理对与UTF-16辅助平面编码方式" class="headerlink" title="代理对与UTF-16辅助平面编码方式"></a>代理对与UTF-16辅助平面编码方式</h5><p><code>Unicode</code> 辅助平面中码点，在 <code>UTF-16</code> 中被编码为<strong>一对</strong>16bit的码元（即32位，4字节），称作<em>代理对</em>（<em>Surrogate Pair</em>）。<br>具体方法是：</p>
-<ol>
-<li>码点减去 <code>0x10000</code>，得到的值的范围为 20 比特长的 <code>0...0xFFFFF</code>。</li>
-<li>高位的 10 比特的值（范围为 <code>0...0x3FF</code>）被加上 <code>0xD800</code> 得到第一个码元，称作高位代理（<em>high surrogate</em>），新值的范围是 <code>0xD800...0xDBFF</code>。【由于高位代理比低位代理的值要小，为了避免混淆使用，<code>Unicode</code> 标准现在称高位代理为<strong>前导代理</strong>（<em>lead surrogate</em>）</li>
-<li>低位的 10 比特的值（范围也是 <code>0...0x3FF</code>）被加上 <code>0xDC00</code> 得到第二个码元，称作低位代理（<em>low surrogate</em>），新值的范围是 <code>0xDC00...0xDFFF</code>。【由于低位代理比高位代理的值要大，为了避免混淆使用，<code>Unicode</code> 标准现在成低位代理为<strong>后尾代理</strong>（<em>trail surrogate</em>）</li>
-</ol>
-<p>上述算法可以这样理解：<br>辅助平面中的码点范围是 <code>U+010000</code> 到 <code>U+10FFFF</code>，共计 0xFFFFF 个，即 2<sup>20</sup>个，也就是需要 20 个二进制位来表示。<br>如果用两个 16 位长的整数组成的序列来表示，第一个整数（即前导代理）要容纳 20 位中的前 10 位，第二个整数（即后尾代理）容纳 20 位中的后 10 位。<br>因为 <code>UTF-16</code> 基本平面的字符就是由一个 16 位长的整数表示的，这里的两个 16 位整数序列就需要一个区分标识。<br>一是与基本平面码点的区分，二是前导代理与后尾代理的区分。</p>
-<p><strong>与基本平面码点的区分</strong>，就来自于之前讲的 <code>Unicode</code> 保留区段 <code>U+D800...U+DFFF</code>，因为两个整数中只容纳了 20 位中的 10 位二进制数字，也就是最大只有 <code>0x3FF</code>，那么就可以通过给这两个整数增加一个固定数字，使其位于 <code>U+D800...U+DFFF</code> 这个区段内，就可以与基本平面的码点区分开来。</p>
-<p><strong>前导代理与后尾代理的区分</strong>，则通过增加不同的数字，使二者落入 <code>U+D800...U+DFFF</code> 区段的不同部分来区分。<br>你会发现，<code>U+D800...U+DFFF</code> 的区间长度是 2047，<code>0x3FF</code> 的十进制是 1023，刚好是区段一半的大小；<br>那么以区段的初始值 <code>U+D800</code> 和中间值 <code>U+DC00</code> 分别作为前导代理和后尾代理增加的值，就可以刚好将两个值分别放入 <code>U+D800...U+DFFF</code> 区间的前半段 <code>U+D800...U+DBFF</code> 和后半段 <code>U+DC00...U+DFFF</code>。</p>
-<p>所以，<code>UTF-16</code> 遇到两个字节，码点位于 <code>U+D800...U+DBFF</code> 之间时，就可以断定，后续的两个字节码点位于 <code>U+DC00...U+DFFF</code> 之间，并将这四个字节一起解读为一个字符。</p>
-<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><code>UTF-16</code> 编码是一个很不错的编码方式，因为大部分常用字符都位于基本平面内，也就是使用2字节就可以表示大部分的常用字符。<br>可是也同样是因为使用 2 个字节存储，导致它不能兼容 <code>ASCII</code> 编码。</p>
-<p>而 <code>UTF-8</code> 就是一种可以兼容 <code>ASCII</code> 编码的<strong>变长</strong>的 <code>Unicode</code> 的编码实现。</p>
-<p><code>UTF-8</code> 是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码。<br>它可以用一至四个字节对 <code>Unicode</code> 字符集中的所有有效编码码点进行编码。<br>由于较小值的编码点一般使用频率较高，直接使用 <code>Unicode</code> 编码【此处指<code>UTF-32</code>编码】效率低下，大量浪费内存空间。<br><code>UTF-8</code> 就是为了解决向后兼容 <code>ASCII</code> 码而设计的， <code>Unicode</code> 中前 128 个字符，使用与 <code>ASCII</code> 码相同的二进制值的单个字节进行编码，这使得原来处理 <code>ASCII</code> 字符的软件无需或只需做少部分修改，即可继续使用。<br>也因此，它逐渐成为电子邮件、网页及其他存储或发送文字优先采用的编码方式。</p>
-<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><table>
-<thead>
-<tr>
-<th>Unicode 码点</th>
-<th>UTF-8 编码</th>
-<th>注释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>U+0000</code> - <code>U+007F</code></td>
-<td><code>0xxxxxxx</code></td>
-<td><code>ASCII</code> 字符范围，单字节，字节由 <code>0</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+0080</code> - <code>U+07FF</code></td>
-<td><code>110xxxxx</code> <code>10yyyyyy</code></td>
-<td>双字节字符，第一个字节由 <code>110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+0800</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
-<td><code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code></td>
-<td>三字节字符，第一个字节由 <code>1110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-<tr>
-<td><code>U+010000</code> - <code>U+10FFFF</code></td>
-<td><code>11110xxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code> <code>10wwwwww</code></td>
-<td>四字节字符，第一个字节由 <code>11110</code> 开始，后续字节由 <code>10</code> 开始</td>
-</tr>
-</tbody>
-</table>
-<p>从上面的表格中，你应该能够直观的看出来，在 <code>UTF-8</code> 编码中，从一个字节开始的二进制位，就能判断出这个字节的大致位置。</p>
-<ol>
-<li>如果字节以 <code>0</code> 开始，那么它单独表示一个 <code>ASCII</code> 字符</li>
-<li>如果字节以 <code>10</code> 开始，那么它是一个多字节字符的非首字节</li>
-<li>如果字节以 <code>110</code> 开始，那么它是一个二字节字符的首字节，且后续会有一个以 <code>10</code> 开头的字节</li>
-<li>如果字节以 <code>1110</code> 开始，那么它是一个三字节字符的首字节，且后续会有两个以 <code>10</code> 开头的字节</li>
-<li>如果字节以 <code>11110</code> 开始，那么它是一个四字节字符的首字节，且后续会有三个以 <code>10</code> 开头的字节</li>
-</ol>
-<p>可以很明显的看到，除了前面 128 个字符，跟 <code>ASCII</code> 码保持相同之外，<code>UTF-8</code> 的多字节字符，首字节起始的连续的 1 的数量就是它所占用的字节数，后续字节之所以用 <code>10</code> 开头，也是为了与单字节做区分，避免混淆。</p>
-<p>那么 <code>UTF-8</code> 具体是怎么编码的呢？</p>
-<ol>
-<li>查看字符在 <code>Unicode</code> 的码点所处区间，来确定字节数<ol>
-<li><code>U+0000</code> 至 <code>U+007F</code> 一个字节</li>
-<li><code>U+0080</code> 至 <code>U+07FF</code> 两个字节</li>
-<li><code>U+0800</code> 至 <code>U+FFFF</code> 三个字节</li>
-<li><code>U+010000</code> 至 <code>U+10FFFF</code> （即16个辅助平面）四个字符</li>
-</ol>
-</li>
-<li>如果是一个字节，直接使用码点对应的8位二进制码</li>
-<li>如果是多字节，那么将码点对应的二进制码，从右到左，一个个填充到上面表格对应字节中的待填充区域【就是表格里的 <code>x</code>,<code>y</code>,<code>z</code>,<code>w</code>的位置】，待右侧填充完毕，如果左侧还有未填充的位置，则统一填 0，就得到了 <code>UTF-8</code> 中对应的二进制码。</li>
-</ol>
-<p>比如：<code>好</code> 在 <code>Unicode</code> 中的码点是十六进制的 <code>0x597D</code>，落在区间 <code>U+0800</code> - <code>U+FFFF</code> 内，所以在 <code>UTF-8</code> 中表示是三字节：<code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code>。<br><code>0x597D</code> 转成二进制表示是 <code>0b101100101111101</code>，然后从右向左填充，切出最右边的6位 <code>111101</code> 填入第三个字节右侧 6 个 <code>z</code> 的位置，再切出余下的右侧 6 位 <code>100101</code> 填入第二个字节右侧 6 个 <code>y</code> 的位置，余下 3 位 <code>101</code> 填入首字节的最右侧，最后还有一个 <code>x</code> 未填充，补上 0，就得到了 <code>好</code> 字在 <code>UTF-8</code> 中的二进制码 <code>11100101</code> <code>10100101</code> <code>10111101</code>。</p>
-<p><img src="/images/posts/2020081101.png" alt></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">https://blog.csdn.net/yaomingyang/article/details/79374209<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTQvMTIvdW5pY29kZS5odG1s" title="http://www.ruanyifeng.com/blog/2014/12/unicode.html">http://www.ruanyifeng.com/blog/2014/12/unicode.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMDcvMTAvYXNjaWlfdW5pY29kZV9hbmRfdXRmLTguaHRtbA==" title="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8wZjVmZDkzZWZjNDY=" title="https://www.jianshu.com/p/0f5fd93efc46">https://www.jianshu.com/p/0f5fd93efc46<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3MDc1MzIzNjMyODk2" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896">https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZW5vbmcuY29tLzEwNjExNDU1Lw==" title="https://www.codenong.com/10611455/">https://www.codenong.com/10611455/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvamkud2FuZy9qYXZhc2NyaXB0LW5vdGUtMS1jaGFyYWN0ZXItZW5jb2Rpbmcv" title="https://zhaoji.wang/javascript-note-1-character-encoding/">https://zhaoji.wang/javascript-note-1-character-encoding/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTE2" title="https://zh.wikipedia.org/wiki/UTF-16">https://zh.wikipedia.org/wiki/UTF-16<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTg=" title="https://zh.wikipedia.org/wiki/UTF-8">https://zh.wikipedia.org/wiki/UTF-8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MTIwMjQxMg==" title="https://zhuanlan.zhihu.com/p/51202412">https://zhuanlan.zhihu.com/p/51202412<i class="fa fa-external-link"></i></span></p>
-]]></content>
-      <categories>
-        <category>Encoding</category>
-      </categories>
-      <tags>
-        <tag>Unicode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS之BFC</title>
-    <url>//2017/07/17/css%E4%B9%8Bbfc.html</url>
-    <content><![CDATA[<p>BFC(<em>Block Formatting Context 块级格式化上下文</em>)是一个独立的渲染区域，只有块级元素参与，它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。</p>
-<p>直白地说就是：BFC内部的任何布局都不影响其外部区域。</p>
-<a id="more"></a>
-<p>这样对前端布局来讲会非常的友好，那么哪些元素能产生 BFC 呢？</p>
-<p>只要给元素添加如下属性就可以触发 BFC</p>
-<ul>
-<li><p>float 属性不为 none</p>
-</li>
-<li><p>position 属性为 absolute 或 fixed</p>
-</li>
-<li><p>display 为 inline-block、table-cell、table-caption、flex、inline-flex</p>
-</li>
-<li><p>overflow 不为 visible</p>
-</li>
-</ul>
-<h2 id="BFC-元素所具有的特性"><a href="#BFC-元素所具有的特性" class="headerlink" title="BFC 元素所具有的特性"></a>BFC 元素所具有的特性</h2><ul>
-<li>在 BFC 中，盒子从顶端开始垂直地一个接一个地排列。</li>
-<li>盒子垂直方向的距离由margin决定，属于同一个BFC的两个相邻盒子的margin会发生重叠。</li>
-<li>在 BFC 中，每一个盒子的左外边缘（margin-left）会触碰到容器的左外边缘（border-left），对于从右到左的格式来说，则触碰到右边缘。</li>
-<li>BFC 的区域不会与浮动盒子产生交集，而是紧贴浮动边缘。</li>
-<li>计算 BFC 的高度时，自然也会检测浮动的盒子高度。</li>
-</ul>
-<h2 id="BFC-的主要用途"><a href="#BFC-的主要用途" class="headerlink" title="BFC 的主要用途"></a>BFC 的主要用途</h2><h3 id="清除元素内部浮动"><a href="#清除元素内部浮动" class="headerlink" title="清除元素内部浮动"></a>清除元素内部浮动</h3><p>只要把父元素设为 BFC 就可以清理子元素的浮动了，最常见的用法就是在父元素上设置 <code>overflow: hidden;</code> 样式，对于 IE6 加上 <code>zoom: 1;</code> 就可以了。</p>
-<p>主要用到 BFC 特性之5：<br>计算 BFC 的高度时，自然也会检测浮动的盒子高度</p>
-<h3 id="解决外边距合并问题"><a href="#解决外边距合并问题" class="headerlink" title="解决外边距合并问题"></a>解决外边距合并问题</h3><p>主要用到 BFC 特性之2：<br>盒子垂直方向的距离由margin决定，属于同一个BFC的两个相邻盒子的margin会发生重叠<br>属于同一个 BFC 的两个相邻盒子的margin会发生重叠，那么我们创建不属于同一个 BFC 的盒子，就不会发生margin重叠了。</p>
-<h3 id="制作右侧自适应的盒子"><a href="#制作右侧自适应的盒子" class="headerlink" title="制作右侧自适应的盒子"></a>制作右侧自适应的盒子</h3><p>主要用到 BFC 特性之4：<br>BFC 的区域不会与浮动盒子产生交集，而是紧贴浮动边缘<br>普通流体元素 BFC 后，为了和浮动元素不产生任何交集，顺着浮动边缘形成自己的封闭上下文</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>BFC 就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等，因此，有了这个特性，我们布局的时候就不会出现意外情况了。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>BFC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【转】Sass 与 SCSS 的异同</title>
-    <url>//2018/01/04/%E3%80%90%E8%BD%AC%E3%80%91sass-%E4%B8%8E-scss-%E7%9A%84%E5%BC%82%E5%90%8C.html</url>
-    <content><![CDATA[<p>本篇系转载文章</p>
-<p>原文：<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAwNTY0NjIwNg==" title="https://segmentfault.com/a/1190000005646206">https://segmentfault.com/a/1190000005646206<i class="fa fa-external-link"></i></span><br>作者：<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL3UvbXJkcmVhbQ==" title="https://segmentfault.com/u/mrdream">MrDream<i class="fa fa-external-link"></i></span></p>
-<p>以下是内容：</p>
-<h2 id="Sass-与-SCSS-是什么关系？"><a href="#Sass-与-SCSS-是什么关系？" class="headerlink" title="Sass 与 SCSS 是什么关系？"></a>Sass 与 SCSS 是什么关系？</h2><p>2016年06月04日发布</p>
-<p>我最近写了很多 Sass 代码，但是最近发现并不是每一个人都知道 Sass 具体是什么。下面是一个简短的说明：</p>
-<p>当我们说起 Sass ，我们经常指的是两种事物：一种 css 预处理器和一种语言。我们经常这样说，“我们正在使用 Sass”，或者 “这是一个 Sass mixin”。同时，Sass （预处理器）有两种不同的语法：</p>
-<a id="more"></a>
-<ul>
-<li>Sass,一种缩进语法</li>
-<li>SCSS,一种 CSS-like 语法</li>
-</ul>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>最开始，Sass 是Haml的一部分，Haml 是一种预处理器，由 Ruby 开发者设计和开发。因为这样，Sass 使用类似 Ruby的语法，没有花括号，没有分号，具有严格的缩进，就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Variable</span><br><span class="line">!primary-color= hotpink</span><br><span class="line"></span><br><span class="line">// Mixin</span><br><span class="line">=border-radius(!radius)</span><br><span class="line">    -webkit-border-radius= !radius</span><br><span class="line">    -moz-border-radius= !radius</span><br><span class="line">    border-radius= !radius</span><br><span class="line"></span><br><span class="line">.my-element</span><br><span class="line">    color= !primary-color</span><br><span class="line">    width= 100%</span><br><span class="line">    overflow= hidden</span><br><span class="line"></span><br><span class="line">.my-other-element</span><br><span class="line">    +border-radius(5px)</span><br></pre></td></tr></table></figure>
-<p>你可以就看到，这和CSS代码有很大的区别！即使你是一个 Sass（预处理器） 用户，你也会发现这和你正在使用的有很大的差别。变量的标志用 <code>!</code>，而不是<code>$</code>,分配符是<code>=</code>而不是<code>:</code>。非常怪异。</p>
-<p>但是在2010年五月之前，Sass 就是这个样子的。2010年5月，官方推出了一个全新的语法，被叫做 SCSS，意思是 Sassy CSS。这个语法带来了对 CSS 友好的语法，试图弥合 Sass 和 CSS 之间的鸿沟。</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Variable</span></span><br><span class="line"><span class="variable">$primary-color</span>: hotpink;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mixin</span></span><br><span class="line"><span class="keyword">@mixin</span> border-radius(<span class="variable">$radius</span>) &#123;</span><br><span class="line">    -webkit-<span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">    -moz-<span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.my-element</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="variable">$primary-color</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.my-other-element</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> border-radius(<span class="number">5px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SCSS 和 Sass 相比更加贴近 CSS 语法。也就是说，Sass 维护者做了大量的工作，把缩进语法中的<code>!</code>和<code>=</code>换成了 SCSS 中的 <code>$</code> 和 <code>:</code>。</p>
-<p>现在，在开始一个新项目时，你也许疑惑要用哪种语法。让我们来看看两种语法的优劣。</p>
-<h3 id="Sass缩进语法的优劣"><a href="#Sass缩进语法的优劣" class="headerlink" title="Sass缩进语法的优劣"></a>Sass缩进语法的优劣</h3><p>虽然语法看起来怪异，但是缩进语法有很多有趣的点。首先，它 更短并且更易于书写。没有花括号，没有分号，你完全不需要这些东西。更好的是，你甚至不需要<code>@mixin</code> 或者 <code>@include</code>, 一个字符就足够了：<code>=</code> 和 <code>+</code>。</p>
-<p>同时 Sass 通过严格的缩进来强制 <strong>clean coding standards</strong>。因为一个错误的缩进就会破坏整个.sass文件，这使得整个代码总是clean 和格式良好的。只有一种写 Sass 代码的方式：正确的方式。</p>
-<p>但是请注意！缩进在 Sass 中是有意义的。当你缩进了一个元素，这意味这你将它变为了之前元素的子元素。比如:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.element-a</span><br><span class="line">    color: hotpink</span><br><span class="line"></span><br><span class="line">    .element-b</span><br><span class="line">        float: left</span><br></pre></td></tr></table></figure>
-<p>以上会输出下面的 CSS 代码：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.element-a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: hotpink;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.element-a</span> <span class="selector-class">.element-b</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将 <code>.element-b</code> 向右一格意味着它变成了 <code>.element-a</code> 的子元素，改变了输出 CSS 代码的结果。所以一定要小心你的代码缩进。</p>
-<p>另外，我觉得基于缩进的语法适合于 Ruby/Python 团队，而不适合 PHP/Java 团队。（这是值得商榷的，我也希望听到不同的声音）</p>
-<h3 id="SCSS语法的优劣"><a href="#SCSS语法的优劣" class="headerlink" title="SCSS语法的优劣"></a>SCSS语法的优劣</h3><p>对于初学者，SCSS 是完全和 CSS 兼容的，这意味着几乎为零的学习曲线。SCSS语法即是：它只是加了一些功能的 CSS。当你和没经验的开发者一起工作时这很重要：他们可以很快开始编码而不需要首先去学习Sass。</p>
-<p>此外，SCSS 还是 <strong>易于阅读</strong> 的，因为它是有语义的，而不是用符号表示。当你读到 <code>@mixin</code>，你就会知道这是一个 mixin 声明；当你看到 <code>@include</code> ，你就是在引用一个 mixin。他并没有用任何缩写，当你大声读出来时所有的都很明了。</p>
-<p>还有，现在几乎所有 Sass 的工具，插件和 demo 都是基于 SCSS语法来开发的。随着时间过去，SCSS 会变成大家首选的选择。比如，你现在很难找到一个 Sass 缩进语法的高亮插件，通常都只有 SCSS 的可以用。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如何选择取决于你，但是除非你有很好的理由一定要使用缩进的语法，我强烈推荐使用 SCSS 。不仅仅它很简单，同时他也很方便。</p>
-<p>最后请注意 Sass 从来没有大写过，无论你指的是语法或者这个语言。同时， SCSS 一直是大写的。甚至有一个网站专门来提醒你这件事! <span class="exturl" data-url="aHR0cDovL1Nhc3Nub3RTQVNTLmNvbS8=" title="http://SassnotSASS.com/">SassnotSASS.com<i class="fa fa-external-link"></i></span></p>
-<blockquote>
-<p>翻译自 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2l0ZXBvaW50LmNvbS93aGF0cy1kaWZmZXJlbmNlLXNhc3Mtc2Nzcy8=" title="https://www.sitepoint.com/whats-difference-sass-scss/">What’s the Difference Between Sass and SCSS?<i class="fa fa-external-link"></i></span></p>
-</blockquote>
-<hr>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>Sass</tag>
-        <tag>SCSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS选择器</title>
     <url>//2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html</url>
     <content><![CDATA[<p>CSS-<em>Cascading Style Sheet(层叠样式表)</em>，给HTML元素添加各种样式的文件。CSS选择器就是用来匹配要添加样式的元素的。<br><a id="more"></a><br><span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vY3NzcmVmL2Nzc19zZWxlY3RvcnMuYXNw" title="http://www.w3school.com.cn/cssref/css_selectors.asp">W3school<i class="fa fa-external-link"></i></span></p>
@@ -355,31 +144,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS3 属性 transform 对其他元素的一些渲染影响</title>
-    <url>//2019/03/05/css3-%E5%B1%9E%E6%80%A7-transform-%E5%AF%B9%E5%85%B6%E4%BB%96%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B8%B2%E6%9F%93%E5%BD%B1%E5%93%8D.html</url>
-    <content><![CDATA[<p>一个偶然的情况下，发现了这样一个问题：</p>
-<blockquote>
-<p>给一个设置了 <em>transform</em> 属性的元素的子元素设置 <code>position: fixed</code>，实际表现却并非 <em>fixed</em> 定位的效果。</p>
-</blockquote>
-<p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="PLbMza" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="PLbMza"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9QTGJNemEv" title="https://codepen.io/moesuiga/pen/PLbMza/"><br>  PLbMza<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p><br><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br><br>之后在搜资料的时候看到了这样一篇文章 <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span><br><br>里面介绍了 <em>transform</em> 属性的多种影响，然后才知道，原来 <em>transform</em> 属性有这么多值得注意的地方。<br><br>1. transform 提升元素的垂直地位，类似添加了 <code>position: relative;</code> 的效果。<br><br>    两个元素如果有 <em>margin</em> 负值，然后出现部分重叠的时候，在没有 <em>static</em> 以外的定位时，都是后面的元素覆盖前面的元素，这样后来居上的渲染。<br><br>    可是如果这时候，给前面的元素添加了 <em>transform</em> 属性，就会发现，原本应该被覆盖的前面的元素，反而覆盖了后面的元素。<br><br>    这就是 <em>transform</em> 带来的垂直提升效果。<br><br>2. transform 限制 <code>position: fixed;</code> 的跟随效果，也就是我最初发现的问题点。<br><br>3. transform 改变 <em>overflow</em> 对 <em>absolute</em> 定位元素的限制。<br><br>    <code>position: absolute;</code> 绝对定位的元素，如果有一个 <em>overflow</em> 不为 <em>visible</em> 的祖先元素，并且这个祖先元素一直到定位的元素之间的所有嵌套元素都没有设置了非 <em>static</em> 的 <em>position</em> 属性，那么祖先元素的 <em>overflow</em> 属性对该定位元素不起作用。<br><br>    这一点是我们的一贯认知，但是加了 <em>transform</em> 的话，就会改变这一点，致使 <em>absolute</em> 定位的元素也会被 <em>overflow</em> 影响。<br><br>4. transform 限制 <em>absolute</em> 定位元素的 <em>100%</em> 宽度大小。<br><br>    我们都知道 <em>absolute</em> 定位元素的宽度百分比是基于该元素最近的带有非 <em>static</em> 定位属性的祖先元素的宽度。<br><br>    可是如果在这两个元素之间插入一个带有 <em>transform</em> 属性的元素，就会改变这一状况，使得 <em>absolute</em> 定位元素的宽度百分比基于 <em>transform</em> 元素，而非外部带有定位属性的祖先元素。<br><br>上面四点就是张鑫旭大神的文章中提到的几点影响。<br><br>然后我在实践过程中，发现了第5点影响：<br><br>&gt; 5、transform 会限制 <em>absolute</em> 定位元素的定位基准。<br><br>我们知道有那么几个方位属性是跟定位紧密结合的: <em>top</em>、<em>right</em>、<em>bottom</em> 以及 <em>left</em>。<br><br><em>absolute</em> 定位元素的方位属性就是基于其 <em>包含块</em> 的边界来处理的。<br><br>一般来说，<em>absolute</em> 定位的元素，其包含块就是距离该元素最近的带有非 <em>static</em> 定位的祖先元素。<br>然而 <em>transform</em> 就可以改变这一点，使得 <em>absolute</em> 的方位属性以 <em>transform</em> 元素的边界来处理。<br>当然，前提条件是带有 <em>transform</em> 属性的元素和带有 <em>absolute</em> 定位的元素之间没有其他带有非 <em>static</em> 定位属性的元素。<br><br>啰嗦这一堆好像有点绕，还是直接上效果看的方便。<br><br><p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="ZPLEJm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="ZPLEJm"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9aUExFSm0v" title="https://codepen.io/moesuiga/pen/ZPLEJm/"><br>  ZPLEJm<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
-
-<p>可以看到，在示例中，最里面的 <em>absolute</em> 定位元素是定位在了右上角，而中间的 <code>.transform</code> 并没有定位属性。</p>
-<p>按照常理来想，黑色方块部分应该是定位在红色边框盒子的右上角的，可实际上其却被 <em>transform</em> 属性限制在了蓝色边框的盒子里，定位在了蓝色边框的盒子右上角。</p>
-<p>结合上面第 4 点，<em>transform</em> 属性其实就是截断了 <em>absolute</em> 寻找其包含块的正常路径，使其本身成为了 <em>absolute</em> 定位元素的包含块。</p>
-<hr>
-<p>参考链接：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>transform</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS 属性 `writing-mode` 的妙用</title>
     <url>//2019/12/11/css-%E5%B1%9E%E6%80%A7-writing-mode-%E7%9A%84%E5%A6%99%E7%94%A8.html</url>
     <content><![CDATA[<p>纵向的滚动写多了，来看看横向的滚动吧。而且不是普通的一行同级元素，而是多行同级元素自上而下排列的横向滚动。</p>
@@ -413,6 +177,242 @@
       </categories>
       <tags>
         <tag>style</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【转】Sass 与 SCSS 的异同</title>
+    <url>//2018/01/04/%E3%80%90%E8%BD%AC%E3%80%91sass-%E4%B8%8E-scss-%E7%9A%84%E5%BC%82%E5%90%8C.html</url>
+    <content><![CDATA[<p>本篇系转载文章</p>
+<p>原文：<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAwNTY0NjIwNg==" title="https://segmentfault.com/a/1190000005646206">https://segmentfault.com/a/1190000005646206<i class="fa fa-external-link"></i></span><br>作者：<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL3UvbXJkcmVhbQ==" title="https://segmentfault.com/u/mrdream">MrDream<i class="fa fa-external-link"></i></span></p>
+<p>以下是内容：</p>
+<h2 id="Sass-与-SCSS-是什么关系？"><a href="#Sass-与-SCSS-是什么关系？" class="headerlink" title="Sass 与 SCSS 是什么关系？"></a>Sass 与 SCSS 是什么关系？</h2><p>2016年06月04日发布</p>
+<p>我最近写了很多 Sass 代码，但是最近发现并不是每一个人都知道 Sass 具体是什么。下面是一个简短的说明：</p>
+<p>当我们说起 Sass ，我们经常指的是两种事物：一种 css 预处理器和一种语言。我们经常这样说，“我们正在使用 Sass”，或者 “这是一个 Sass mixin”。同时，Sass （预处理器）有两种不同的语法：</p>
+<a id="more"></a>
+<ul>
+<li>Sass,一种缩进语法</li>
+<li>SCSS,一种 CSS-like 语法</li>
+</ul>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>最开始，Sass 是Haml的一部分，Haml 是一种预处理器，由 Ruby 开发者设计和开发。因为这样，Sass 使用类似 Ruby的语法，没有花括号，没有分号，具有严格的缩进，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Variable</span><br><span class="line">!primary-color= hotpink</span><br><span class="line"></span><br><span class="line">// Mixin</span><br><span class="line">=border-radius(!radius)</span><br><span class="line">    -webkit-border-radius= !radius</span><br><span class="line">    -moz-border-radius= !radius</span><br><span class="line">    border-radius= !radius</span><br><span class="line"></span><br><span class="line">.my-element</span><br><span class="line">    color= !primary-color</span><br><span class="line">    width= 100%</span><br><span class="line">    overflow= hidden</span><br><span class="line"></span><br><span class="line">.my-other-element</span><br><span class="line">    +border-radius(5px)</span><br></pre></td></tr></table></figure>
+<p>你可以就看到，这和CSS代码有很大的区别！即使你是一个 Sass（预处理器） 用户，你也会发现这和你正在使用的有很大的差别。变量的标志用 <code>!</code>，而不是<code>$</code>,分配符是<code>=</code>而不是<code>:</code>。非常怪异。</p>
+<p>但是在2010年五月之前，Sass 就是这个样子的。2010年5月，官方推出了一个全新的语法，被叫做 SCSS，意思是 Sassy CSS。这个语法带来了对 CSS 友好的语法，试图弥合 Sass 和 CSS 之间的鸿沟。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Variable</span></span><br><span class="line"><span class="variable">$primary-color</span>: hotpink;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mixin</span></span><br><span class="line"><span class="keyword">@mixin</span> border-radius(<span class="variable">$radius</span>) &#123;</span><br><span class="line">    -webkit-<span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">    -moz-<span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="variable">$radius</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.my-element</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="variable">$primary-color</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.my-other-element</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> border-radius(<span class="number">5px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SCSS 和 Sass 相比更加贴近 CSS 语法。也就是说，Sass 维护者做了大量的工作，把缩进语法中的<code>!</code>和<code>=</code>换成了 SCSS 中的 <code>$</code> 和 <code>:</code>。</p>
+<p>现在，在开始一个新项目时，你也许疑惑要用哪种语法。让我们来看看两种语法的优劣。</p>
+<h3 id="Sass缩进语法的优劣"><a href="#Sass缩进语法的优劣" class="headerlink" title="Sass缩进语法的优劣"></a>Sass缩进语法的优劣</h3><p>虽然语法看起来怪异，但是缩进语法有很多有趣的点。首先，它 更短并且更易于书写。没有花括号，没有分号，你完全不需要这些东西。更好的是，你甚至不需要<code>@mixin</code> 或者 <code>@include</code>, 一个字符就足够了：<code>=</code> 和 <code>+</code>。</p>
+<p>同时 Sass 通过严格的缩进来强制 <strong>clean coding standards</strong>。因为一个错误的缩进就会破坏整个.sass文件，这使得整个代码总是clean 和格式良好的。只有一种写 Sass 代码的方式：正确的方式。</p>
+<p>但是请注意！缩进在 Sass 中是有意义的。当你缩进了一个元素，这意味这你将它变为了之前元素的子元素。比如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.element-a</span><br><span class="line">    color: hotpink</span><br><span class="line"></span><br><span class="line">    .element-b</span><br><span class="line">        float: left</span><br></pre></td></tr></table></figure>
+<p>以上会输出下面的 CSS 代码：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.element-a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: hotpink;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.element-a</span> <span class="selector-class">.element-b</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将 <code>.element-b</code> 向右一格意味着它变成了 <code>.element-a</code> 的子元素，改变了输出 CSS 代码的结果。所以一定要小心你的代码缩进。</p>
+<p>另外，我觉得基于缩进的语法适合于 Ruby/Python 团队，而不适合 PHP/Java 团队。（这是值得商榷的，我也希望听到不同的声音）</p>
+<h3 id="SCSS语法的优劣"><a href="#SCSS语法的优劣" class="headerlink" title="SCSS语法的优劣"></a>SCSS语法的优劣</h3><p>对于初学者，SCSS 是完全和 CSS 兼容的，这意味着几乎为零的学习曲线。SCSS语法即是：它只是加了一些功能的 CSS。当你和没经验的开发者一起工作时这很重要：他们可以很快开始编码而不需要首先去学习Sass。</p>
+<p>此外，SCSS 还是 <strong>易于阅读</strong> 的，因为它是有语义的，而不是用符号表示。当你读到 <code>@mixin</code>，你就会知道这是一个 mixin 声明；当你看到 <code>@include</code> ，你就是在引用一个 mixin。他并没有用任何缩写，当你大声读出来时所有的都很明了。</p>
+<p>还有，现在几乎所有 Sass 的工具，插件和 demo 都是基于 SCSS语法来开发的。随着时间过去，SCSS 会变成大家首选的选择。比如，你现在很难找到一个 Sass 缩进语法的高亮插件，通常都只有 SCSS 的可以用。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如何选择取决于你，但是除非你有很好的理由一定要使用缩进的语法，我强烈推荐使用 SCSS 。不仅仅它很简单，同时他也很方便。</p>
+<p>最后请注意 Sass 从来没有大写过，无论你指的是语法或者这个语言。同时， SCSS 一直是大写的。甚至有一个网站专门来提醒你这件事! <span class="exturl" data-url="aHR0cDovL1Nhc3Nub3RTQVNTLmNvbS8=" title="http://SassnotSASS.com/">SassnotSASS.com<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>翻译自 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2l0ZXBvaW50LmNvbS93aGF0cy1kaWZmZXJlbmNlLXNhc3Mtc2Nzcy8=" title="https://www.sitepoint.com/whats-difference-sass-scss/">What’s the Difference Between Sass and SCSS?<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<hr>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Sass</tag>
+        <tag>SCSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符编码笔记</title>
+    <url>//2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html</url>
+    <content><![CDATA[<p>我们知道，计算机是二进制存储的，所有的内容，在计算机内存储下来的都是 <code>0</code> 和 <code>1</code> 来表示的二进制数字。<br>早期的计算机在设计时，采用 8 个二进制位 (<code>bit</code>) 作为一个字节 (<code>byte</code>)，因为每个二进制位都有 <code>0</code> 和 <code>1</code> 两种状态，所以一个字节一共可以表示 2<sup>8</sup> = 256 种状态。</p>
+<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><p>字符集，从字面上来拆解，其实就是字符的集合；就是把我们使用到的字符整合在一起，并为每一个符号指定一个唯一的编号（叫作 <code>码点</code>）。</p>
+<p>因为计算机只能处理二进制数字，那么如果要处理文本内容时，就需要先把文本转换成数字；<br>将字符集中每一个字符唯一的编号，按照某种规则映射到二进制存储，这就是所谓的 <code>字符编码</code>。<br>比如最早给英文字符、数字、标点符号等制定了一套编码的 <code>ASCII</code>（<em>American Standard Code for Information Interchange</em>, <em>美国信息交换标准代码</em>）。</p>
+<p>简单来说，字符集是一套被分配了唯一编号的字符的集合，而字符编码则是对字符集映射到二进制的一个实现方式。</p>
+<h2 id="字符编码的历史演变"><a href="#字符编码的历史演变" class="headerlink" title="字符编码的历史演变"></a>字符编码的历史演变</h2><h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>在 20 世纪 60 年代，美国制定了一套字符编码，对英语字符和二进制之间的关系，做了统一规定，这被称为 <code>ASCII</code>，一直沿用至今。</p>
+<p><code>ASCII</code> 码一共规定了128个字符的编码，比如空格 <code>SPACE</code> 是 <code>32</code>（二进制<code>00100000</code>），大写的字母<code>A</code>是<code>65</code>（二进制<code>01000001</code>）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为<code>0</code>。</p>
+<h3 id="扩展ASCII"><a href="#扩展ASCII" class="headerlink" title="扩展ASCII"></a>扩展ASCII</h3><p>对英语来说，<code>ASCII</code> 内这 128 个字符就够用了，但是对欧洲其他一些国家来说，就不够用了；比如法国、德国等。<br>然后这些国家就对 <code>ASCII</code> 码做了扩展，利用字节中闲置的最高位编入新的符号，比如法语中的<code>é</code>的编码为<code>130</code>（二进制<code>10000010</code>），如此一来，这些欧洲国家就多出了128个字符可以存储；扩展后的 <code>ASCII</code> 码最多可以表示 <code>256</code> 个字符。<br>这些扩展编码中，比较流行的编码有 <code>latin-1</code>, <code>ISO-8859-1</code> 等。</p>
+<p>可这里也有一个问题：不同的国家有不同的字母，那么不同的扩展，势必会有同一个码点却代表不同的字母这样的情况出现。</p>
+<h3 id="其他编码"><a href="#其他编码" class="headerlink" title="其他编码"></a>其他编码</h3><p>上面说的只是欧洲这种以字母为主的语种国家，而像我们中国、日本等东亚语系的国家，需要使用的语言符号更多，只用一个字节，根本不够，如此就需要使用多个字节来表示一个字符。比如简体中文 <code>GB2312</code> 编码，就是使用两个字节表示一个汉字，所以理论上最多可以表示出 <code>256 * 256 = 65536</code> 个汉字。</p>
+<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>每个国家都有一套自己的编码方式，尤其是码点在 <code>128-255</code> 之间的字符，每套编码代表的字符都不一样；<br>如果将一个以A编码方式存储的文件，以B编码方式打开，就会出现乱码的问题。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>如上所说，世界上存在很多编码方式，同一个二进制数字可以被解释成不同的字符；因此，要想正常打开一个文本文件，就必须知道它的编码方式，否则就会出现乱码。<br>可以想象，如果存在一种编码，将世界上所有的字符都纳入其中；每个字符都有一个独一无二的码点，大家都使用这同一套编码，那么乱码问题就会消失。<br>这就是 <code>Unicode</code> 字符集。</p>
+<h3 id="UCS与Unicode"><a href="#UCS与Unicode" class="headerlink" title="UCS与Unicode"></a>UCS与Unicode</h3><p>人们开始迫切的需要一套统一的字符集，能够包含世界上所有的符号。<br>1988 年成立的 Unicode 团队和 1989 年成立的 UCS 团队，这两个团队就是想要搞出一套统一字符集成立的。<br>只是一开始他们并不知道彼此的存在。<br>1990 年，开发进度较快的 UCS 团队公布了第一套编码方法 <code>UCS-2</code>，使用2个字节表示已有码点的字符，同时这也是 <code>JavaScript</code> 中使用的编码方式。<br>而等到两个团队发现了对方存在之后，很快达成一致：世界上不需要两套统一字符集。在 1991 年 10 月，两个团队决定合并字符集；以后只发布一套字符集，就是 <code>Unicode</code>；并修复此前发布的字符集，使 <code>UCS</code> 的码点与 <code>Unicode</code> 完全一致。</p>
+<blockquote>
+<p>也由于 <code>JavaScript</code> 使用的是 <code>UCS-2</code> 编码，所以 <code>JavaScript</code> 的字符处理是有一些问题的，遇到4字节字符时，会当成两个2字节的字符来处理。<br>即使 ECMAScript6 扩展增强了 <code>Unicode</code> 的支持，基本解决了这个问题，但是为了兼容性，一些问题还是被保留了下来。<br>比如 <code>&quot;𝓂&quot;.length === 2</code>。<br>不过因为时间上的原因，<code>JavaScript</code> 也只能选择 <code>UCS-2</code>，而不是现在支持的 <code>UTF-16</code>。<br><code>JavaScript</code> 诞生于 1995年5月，<em>Brendan Eich</em> 用了 10 天设计了这套语言；同年10月，第一个解释引擎问世；<br>而 <code>UTF-16</code> 的发布时间却是在 1996年7月。</p>
+</blockquote>
+<h3 id="Unicode与UTF"><a href="#Unicode与UTF" class="headerlink" title="Unicode与UTF"></a>Unicode与UTF</h3><p>需要注意的是，<code>Unicode</code> 只是一个字符集，它只规定了符号的二进制代码，却没有规定这个二进制代码如何存储。<br>也就是说有许多中不同的二进制格式，可以用来表示 <code>Unicode</code>。<br>直到互联网普及，出现了几种使用较为广泛的编码方式，其中就有我们现在常用的 <code>UTF-8</code>，其他还有 <code>UTF-16</code> 和 <code>UTF-32</code>。<br><code>UTF</code> 的全称是 <em>Unicode/UCS Transformation Format</em>，亦即把 <code>Unicode</code> 字符转换为某种格式。</p>
+<h4 id="平面"><a href="#平面" class="headerlink" title="平面"></a>平面</h4><p><code>Unicode</code> 的编码空间从 <code>U+0000</code> 到 <code>U+10FFFF</code>，一共有 1,112,064 个码点可以用来映射字符。<br>这么多字符，<code>Unicode</code> 也并不是一次性定义的，而是分区定义的。<br>每个区可以存放 65536 个字符（16位，2<sup>16</sup>），这样一个分区称为一个“平面”。<br>而目前一共有 17 个平面，也就是说，整个 <code>Unicode</code> 字符集的大小是 2<sup>21</sup>。</p>
+<p>在这 17 个平面里，前 65536 个字符，也就是第一个平面，也被称为<strong>基本平面</strong>（<em>Basic Multilingual Plane,基本多语言平面</em>, <strong>BMP</strong>），其他平面称为<strong>辅助平面</strong>（<em>Supplementary Planes</em>）。</p>
+<p>你可能偷偷计算了一下，发现 2<sup>21</sup> 远大于上面说的 1,112,064 个码点。<br>其实在这 2<sup>21</sup> 个码点里，并不是每个码点都用来映射字符。<br>在基本平面内，从 <code>U+D800</code> 到 <code>U+DFFF</code> 之间的码点区段是永久保留不映射到 <code>Unicode</code> 字符的；<br>而辅助平面码点的编码就是利用这个区段的码点来进行的。</p>
+<h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>这个仅了解一些就好，因为实际上很少会使用这个编码，甚至HTML5标准中明文规定，禁止支持 <code>UTF-32</code> 编码。</p>
+<p><code>UTF-32</code> 的编解码规则简单，所有字符都用四个字节表示，并完全对应 <code>Unicode</code> 码点，查找效率很高；但是它的缺点是很浪费空间，如果是纯英文文本，<code>UTF-32</code> 编码的占用空间是 <code>ASCII</code> 编码的四倍，在以前那个空间并不充足的年代，这几乎是无法容忍的；即使是现在，这也是一个致命的缺点。</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy8jY2hhcmFjdGVyLWVuY29kaW5ncw==" title="https://html.spec.whatwg.org/#character-encodings">https://html.spec.whatwg.org/#character-encodings<i class="fa fa-external-link"></i></span><br>Note<br>The above prohibits supporting, for example, CESU-8, UTF-7, BOCU-1, SCSU, EBCDIC, and UTF-32. This specification does not make any attempt to support prohibited encodings in its algorithms; support and use of prohibited encodings would thus lead to unexpected behavior.</p>
+</blockquote>
+<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p><code>UTF-16</code> 可以说是 <code>UCS-2</code> 的一个扩展，基本平面内的字符使用 2 个字节表示，辅助平面的字符使用 4 个字节表示。</p>
+<table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-16 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U+0000</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>xxxxxxxx</code> <code>xxxxxxxx</code></td>
+<td>基本平面内，使用两个字节表示，<code>U+D800</code> - <code>U+DFFF</code> 是保留区段</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>110110xx</code> <code>xxxxxxxx</code> <code>110111yy</code> <code>yyyyyyyy</code></td>
+<td>辅助平面，使用四个字节表示，并有前缀标识</td>
+</tr>
+</tbody>
+</table>
+<h5 id="从U-D800到U-DFFF"><a href="#从U-D800到U-DFFF" class="headerlink" title="从U+D800到U+DFFF"></a>从U+D800到U+DFFF</h5><p><code>Unicode</code> 标准规定从 <code>U+D800</code> 到 <code>U+DFFF</code> 的码点不对应任何字符。<br>但是在使用 <code>UCS-2</code> 的时代，这些码点是有对应字符的。因此，只要不构成代理对，许多 <code>UTF-16</code> 编码解码还是会把这些不符合 <code>Unicode</code> 标准的字符映射正确的辨识并转换成合规的码元。<br>但是按照 <code>Unicode</code> 标准来说，这种码元序列本来应该算作是编码错误。</p>
+<h5 id="代理对与UTF-16辅助平面编码方式"><a href="#代理对与UTF-16辅助平面编码方式" class="headerlink" title="代理对与UTF-16辅助平面编码方式"></a>代理对与UTF-16辅助平面编码方式</h5><p><code>Unicode</code> 辅助平面中码点，在 <code>UTF-16</code> 中被编码为<strong>一对</strong>16bit的码元（即32位，4字节），称作<em>代理对</em>（<em>Surrogate Pair</em>）。<br>具体方法是：</p>
+<ol>
+<li>码点减去 <code>0x10000</code>，得到的值的范围为 20 比特长的 <code>0...0xFFFFF</code>。</li>
+<li>高位的 10 比特的值（范围为 <code>0...0x3FF</code>）被加上 <code>0xD800</code> 得到第一个码元，称作高位代理（<em>high surrogate</em>），新值的范围是 <code>0xD800...0xDBFF</code>。【由于高位代理比低位代理的值要小，为了避免混淆使用，<code>Unicode</code> 标准现在称高位代理为<strong>前导代理</strong>（<em>lead surrogate</em>）</li>
+<li>低位的 10 比特的值（范围也是 <code>0...0x3FF</code>）被加上 <code>0xDC00</code> 得到第二个码元，称作低位代理（<em>low surrogate</em>），新值的范围是 <code>0xDC00...0xDFFF</code>。【由于低位代理比高位代理的值要大，为了避免混淆使用，<code>Unicode</code> 标准现在成低位代理为<strong>后尾代理</strong>（<em>trail surrogate</em>）</li>
+</ol>
+<p>上述算法可以这样理解：<br>辅助平面中的码点范围是 <code>U+010000</code> 到 <code>U+10FFFF</code>，共计 0xFFFFF 个，即 2<sup>20</sup>个，也就是需要 20 个二进制位来表示。<br>如果用两个 16 位长的整数组成的序列来表示，第一个整数（即前导代理）要容纳 20 位中的前 10 位，第二个整数（即后尾代理）容纳 20 位中的后 10 位。<br>因为 <code>UTF-16</code> 基本平面的字符就是由一个 16 位长的整数表示的，这里的两个 16 位整数序列就需要一个区分标识。<br>一是与基本平面码点的区分，二是前导代理与后尾代理的区分。</p>
+<p><strong>与基本平面码点的区分</strong>，就来自于之前讲的 <code>Unicode</code> 保留区段 <code>U+D800...U+DFFF</code>，因为两个整数中只容纳了 20 位中的 10 位二进制数字，也就是最大只有 <code>0x3FF</code>，那么就可以通过给这两个整数增加一个固定数字，使其位于 <code>U+D800...U+DFFF</code> 这个区段内，就可以与基本平面的码点区分开来。</p>
+<p><strong>前导代理与后尾代理的区分</strong>，则通过增加不同的数字，使二者落入 <code>U+D800...U+DFFF</code> 区段的不同部分来区分。<br>你会发现，<code>U+D800...U+DFFF</code> 的区间长度是 2047，<code>0x3FF</code> 的十进制是 1023，刚好是区段一半的大小；<br>那么以区段的初始值 <code>U+D800</code> 和中间值 <code>U+DC00</code> 分别作为前导代理和后尾代理增加的值，就可以刚好将两个值分别放入 <code>U+D800...U+DFFF</code> 区间的前半段 <code>U+D800...U+DBFF</code> 和后半段 <code>U+DC00...U+DFFF</code>。</p>
+<p>所以，<code>UTF-16</code> 遇到两个字节，码点位于 <code>U+D800...U+DBFF</code> 之间时，就可以断定，后续的两个字节码点位于 <code>U+DC00...U+DFFF</code> 之间，并将这四个字节一起解读为一个字符。</p>
+<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><code>UTF-16</code> 编码是一个很不错的编码方式，因为大部分常用字符都位于基本平面内，也就是使用2字节就可以表示大部分的常用字符。<br>可是也同样是因为使用 2 个字节存储，导致它不能兼容 <code>ASCII</code> 编码。</p>
+<p>而 <code>UTF-8</code> 就是一种可以兼容 <code>ASCII</code> 编码的<strong>变长</strong>的 <code>Unicode</code> 的编码实现。</p>
+<p><code>UTF-8</code> 是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码。<br>它可以用一至四个字节对 <code>Unicode</code> 字符集中的所有有效编码码点进行编码。<br>由于较小值的编码点一般使用频率较高，直接使用 <code>Unicode</code> 编码【此处指<code>UTF-32</code>编码】效率低下，大量浪费内存空间。<br><code>UTF-8</code> 就是为了解决向后兼容 <code>ASCII</code> 码而设计的， <code>Unicode</code> 中前 128 个字符，使用与 <code>ASCII</code> 码相同的二进制值的单个字节进行编码，这使得原来处理 <code>ASCII</code> 字符的软件无需或只需做少部分修改，即可继续使用。<br>也因此，它逐渐成为电子邮件、网页及其他存储或发送文字优先采用的编码方式。</p>
+<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-8 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U+0000</code> - <code>U+007F</code></td>
+<td><code>0xxxxxxx</code></td>
+<td><code>ASCII</code> 字符范围，单字节，字节由 <code>0</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0080</code> - <code>U+07FF</code></td>
+<td><code>110xxxxx</code> <code>10yyyyyy</code></td>
+<td>双字节字符，第一个字节由 <code>110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0800</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code></td>
+<td>三字节字符，第一个字节由 <code>1110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>11110xxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code> <code>10wwwwww</code></td>
+<td>四字节字符，第一个字节由 <code>11110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+</tbody>
+</table>
+<p>从上面的表格中，你应该能够直观的看出来，在 <code>UTF-8</code> 编码中，从一个字节开始的二进制位，就能判断出这个字节的大致位置。</p>
+<ol>
+<li>如果字节以 <code>0</code> 开始，那么它单独表示一个 <code>ASCII</code> 字符</li>
+<li>如果字节以 <code>10</code> 开始，那么它是一个多字节字符的非首字节</li>
+<li>如果字节以 <code>110</code> 开始，那么它是一个二字节字符的首字节，且后续会有一个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>1110</code> 开始，那么它是一个三字节字符的首字节，且后续会有两个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>11110</code> 开始，那么它是一个四字节字符的首字节，且后续会有三个以 <code>10</code> 开头的字节</li>
+</ol>
+<p>可以很明显的看到，除了前面 128 个字符，跟 <code>ASCII</code> 码保持相同之外，<code>UTF-8</code> 的多字节字符，首字节起始的连续的 1 的数量就是它所占用的字节数，后续字节之所以用 <code>10</code> 开头，也是为了与单字节做区分，避免混淆。</p>
+<p>那么 <code>UTF-8</code> 具体是怎么编码的呢？</p>
+<ol>
+<li>查看字符在 <code>Unicode</code> 的码点所处区间，来确定字节数<ol>
+<li><code>U+0000</code> 至 <code>U+007F</code> 一个字节</li>
+<li><code>U+0080</code> 至 <code>U+07FF</code> 两个字节</li>
+<li><code>U+0800</code> 至 <code>U+FFFF</code> 三个字节</li>
+<li><code>U+010000</code> 至 <code>U+10FFFF</code> （即16个辅助平面）四个字符</li>
+</ol>
+</li>
+<li>如果是一个字节，直接使用码点对应的8位二进制码</li>
+<li>如果是多字节，那么将码点对应的二进制码，从右到左，一个个填充到上面表格对应字节中的待填充区域【就是表格里的 <code>x</code>,<code>y</code>,<code>z</code>,<code>w</code>的位置】，待右侧填充完毕，如果左侧还有未填充的位置，则统一填 0，就得到了 <code>UTF-8</code> 中对应的二进制码。</li>
+</ol>
+<p>比如：<code>好</code> 在 <code>Unicode</code> 中的码点是十六进制的 <code>0x597D</code>，落在区间 <code>U+0800</code> - <code>U+FFFF</code> 内，所以在 <code>UTF-8</code> 中表示是三字节：<code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code>。<br><code>0x597D</code> 转成二进制表示是 <code>0b101100101111101</code>，然后从右向左填充，切出最右边的6位 <code>111101</code> 填入第三个字节右侧 6 个 <code>z</code> 的位置，再切出余下的右侧 6 位 <code>100101</code> 填入第二个字节右侧 6 个 <code>y</code> 的位置，余下 3 位 <code>101</code> 填入首字节的最右侧，最后还有一个 <code>x</code> 未填充，补上 0，就得到了 <code>好</code> 字在 <code>UTF-8</code> 中的二进制码 <code>11100101</code> <code>10100101</code> <code>10111101</code>。</p>
+<p><img src="/images/posts/2020081101.png" alt></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">https://blog.csdn.net/yaomingyang/article/details/79374209<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTQvMTIvdW5pY29kZS5odG1s" title="http://www.ruanyifeng.com/blog/2014/12/unicode.html">http://www.ruanyifeng.com/blog/2014/12/unicode.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMDcvMTAvYXNjaWlfdW5pY29kZV9hbmRfdXRmLTguaHRtbA==" title="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8wZjVmZDkzZWZjNDY=" title="https://www.jianshu.com/p/0f5fd93efc46">https://www.jianshu.com/p/0f5fd93efc46<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3MDc1MzIzNjMyODk2" title="https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896">https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZW5vbmcuY29tLzEwNjExNDU1Lw==" title="https://www.codenong.com/10611455/">https://www.codenong.com/10611455/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvamkud2FuZy9qYXZhc2NyaXB0LW5vdGUtMS1jaGFyYWN0ZXItZW5jb2Rpbmcv" title="https://zhaoji.wang/javascript-note-1-character-encoding/">https://zhaoji.wang/javascript-note-1-character-encoding/<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTE2" title="https://zh.wikipedia.org/wiki/UTF-16">https://zh.wikipedia.org/wiki/UTF-16<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTg=" title="https://zh.wikipedia.org/wiki/UTF-8">https://zh.wikipedia.org/wiki/UTF-8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MTIwMjQxMg==" title="https://zhuanlan.zhihu.com/p/51202412">https://zhuanlan.zhihu.com/p/51202412<i class="fa fa-external-link"></i></span></p>
+]]></content>
+      <categories>
+        <category>Encoding</category>
+      </categories>
+      <tags>
+        <tag>Unicode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS3 属性 transform 对其他元素的一些渲染影响</title>
+    <url>//2019/03/05/css3-%E5%B1%9E%E6%80%A7-transform-%E5%AF%B9%E5%85%B6%E4%BB%96%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B8%B2%E6%9F%93%E5%BD%B1%E5%93%8D.html</url>
+    <content><![CDATA[<p>一个偶然的情况下，发现了这样一个问题：</p>
+<blockquote>
+<p>给一个设置了 <em>transform</em> 属性的元素的子元素设置 <code>position: fixed</code>，实际表现却并非 <em>fixed</em> 定位的效果。</p>
+</blockquote>
+<p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="PLbMza" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="PLbMza"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9QTGJNemEv" title="https://codepen.io/moesuiga/pen/PLbMza/"><br>  PLbMza<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p><br><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br><br>之后在搜资料的时候看到了这样一篇文章 <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span><br><br>里面介绍了 <em>transform</em> 属性的多种影响，然后才知道，原来 <em>transform</em> 属性有这么多值得注意的地方。<br><br>1. transform 提升元素的垂直地位，类似添加了 <code>position: relative;</code> 的效果。<br><br>    两个元素如果有 <em>margin</em> 负值，然后出现部分重叠的时候，在没有 <em>static</em> 以外的定位时，都是后面的元素覆盖前面的元素，这样后来居上的渲染。<br><br>    可是如果这时候，给前面的元素添加了 <em>transform</em> 属性，就会发现，原本应该被覆盖的前面的元素，反而覆盖了后面的元素。<br><br>    这就是 <em>transform</em> 带来的垂直提升效果。<br><br>2. transform 限制 <code>position: fixed;</code> 的跟随效果，也就是我最初发现的问题点。<br><br>3. transform 改变 <em>overflow</em> 对 <em>absolute</em> 定位元素的限制。<br><br>    <code>position: absolute;</code> 绝对定位的元素，如果有一个 <em>overflow</em> 不为 <em>visible</em> 的祖先元素，并且这个祖先元素一直到定位的元素之间的所有嵌套元素都没有设置了非 <em>static</em> 的 <em>position</em> 属性，那么祖先元素的 <em>overflow</em> 属性对该定位元素不起作用。<br><br>    这一点是我们的一贯认知，但是加了 <em>transform</em> 的话，就会改变这一点，致使 <em>absolute</em> 定位的元素也会被 <em>overflow</em> 影响。<br><br>4. transform 限制 <em>absolute</em> 定位元素的 <em>100%</em> 宽度大小。<br><br>    我们都知道 <em>absolute</em> 定位元素的宽度百分比是基于该元素最近的带有非 <em>static</em> 定位属性的祖先元素的宽度。<br><br>    可是如果在这两个元素之间插入一个带有 <em>transform</em> 属性的元素，就会改变这一状况，使得 <em>absolute</em> 定位元素的宽度百分比基于 <em>transform</em> 元素，而非外部带有定位属性的祖先元素。<br><br>上面四点就是张鑫旭大神的文章中提到的几点影响。<br><br>然后我在实践过程中，发现了第5点影响：<br><br>&gt; 5、transform 会限制 <em>absolute</em> 定位元素的定位基准。<br><br>我们知道有那么几个方位属性是跟定位紧密结合的: <em>top</em>、<em>right</em>、<em>bottom</em> 以及 <em>left</em>。<br><br><em>absolute</em> 定位元素的方位属性就是基于其 <em>包含块</em> 的边界来处理的。<br><br>一般来说，<em>absolute</em> 定位的元素，其包含块就是距离该元素最近的带有非 <em>static</em> 定位的祖先元素。<br>然而 <em>transform</em> 就可以改变这一点，使得 <em>absolute</em> 的方位属性以 <em>transform</em> 元素的边界来处理。<br>当然，前提条件是带有 <em>transform</em> 属性的元素和带有 <em>absolute</em> 定位的元素之间没有其他带有非 <em>static</em> 定位属性的元素。<br><br>啰嗦这一堆好像有点绕，还是直接上效果看的方便。<br><br><p class="codepen" data-height="300" data-theme-id="36319" data-default-tab="css,result" data-user="moesuiga" data-slug-hash="ZPLEJm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="ZPLEJm"><br>  <span>See the Pen <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdhL3Blbi9aUExFSm0v" title="https://codepen.io/moesuiga/pen/ZPLEJm/"><br>  ZPLEJm<i class="fa fa-external-link"></i></span> by 王由伟(wangyouwei) (<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL21vZXN1aWdh" title="https://codepen.io/moesuiga">@moesuiga<i class="fa fa-external-link"></i></span>)<br>  on <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlv" title="https://codepen.io">CodePen<i class="fa fa-external-link"></i></span>.</span><br></p>
+
+<p>可以看到，在示例中，最里面的 <em>absolute</em> 定位元素是定位在了右上角，而中间的 <code>.transform</code> 并没有定位属性。</p>
+<p>按照常理来想，黑色方块部分应该是定位在红色边框盒子的右上角的，可实际上其却被 <em>transform</em> 属性限制在了蓝色边框的盒子里，定位在了蓝色边框的盒子右上角。</p>
+<p>结合上面第 4 点，<em>transform</em> 属性其实就是截断了 <em>absolute</em> 寻找其包含块的正常路径，使其本身成为了 <em>absolute</em> 定位元素的包含块。</p>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhbmd4aW54dS5jb20vd29yZHByZXNzLzIwMTUvMDUvY3NzMy10cmFuc2Zvcm0tYWZmZWN0Lw==" title="https://www.zhangxinxu.com/wordpress/2015/05/css3-transform-affect/">CSS3 transform对普通元素的N多渲染影响 «  张鑫旭-鑫空间-鑫生活<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>transform</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS之BFC</title>
+    <url>//2017/07/17/css%E4%B9%8Bbfc.html</url>
+    <content><![CDATA[<p>BFC(<em>Block Formatting Context 块级格式化上下文</em>)是一个独立的渲染区域，只有块级元素参与，它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。</p>
+<p>直白地说就是：BFC内部的任何布局都不影响其外部区域。</p>
+<a id="more"></a>
+<p>这样对前端布局来讲会非常的友好，那么哪些元素能产生 BFC 呢？</p>
+<p>只要给元素添加如下属性就可以触发 BFC</p>
+<ul>
+<li><p>float 属性不为 none</p>
+</li>
+<li><p>position 属性为 absolute 或 fixed</p>
+</li>
+<li><p>display 为 inline-block、table-cell、table-caption、flex、inline-flex</p>
+</li>
+<li><p>overflow 不为 visible</p>
+</li>
+</ul>
+<h2 id="BFC-元素所具有的特性"><a href="#BFC-元素所具有的特性" class="headerlink" title="BFC 元素所具有的特性"></a>BFC 元素所具有的特性</h2><ul>
+<li>在 BFC 中，盒子从顶端开始垂直地一个接一个地排列。</li>
+<li>盒子垂直方向的距离由margin决定，属于同一个BFC的两个相邻盒子的margin会发生重叠。</li>
+<li>在 BFC 中，每一个盒子的左外边缘（margin-left）会触碰到容器的左外边缘（border-left），对于从右到左的格式来说，则触碰到右边缘。</li>
+<li>BFC 的区域不会与浮动盒子产生交集，而是紧贴浮动边缘。</li>
+<li>计算 BFC 的高度时，自然也会检测浮动的盒子高度。</li>
+</ul>
+<h2 id="BFC-的主要用途"><a href="#BFC-的主要用途" class="headerlink" title="BFC 的主要用途"></a>BFC 的主要用途</h2><h3 id="清除元素内部浮动"><a href="#清除元素内部浮动" class="headerlink" title="清除元素内部浮动"></a>清除元素内部浮动</h3><p>只要把父元素设为 BFC 就可以清理子元素的浮动了，最常见的用法就是在父元素上设置 <code>overflow: hidden;</code> 样式，对于 IE6 加上 <code>zoom: 1;</code> 就可以了。</p>
+<p>主要用到 BFC 特性之5：<br>计算 BFC 的高度时，自然也会检测浮动的盒子高度</p>
+<h3 id="解决外边距合并问题"><a href="#解决外边距合并问题" class="headerlink" title="解决外边距合并问题"></a>解决外边距合并问题</h3><p>主要用到 BFC 特性之2：<br>盒子垂直方向的距离由margin决定，属于同一个BFC的两个相邻盒子的margin会发生重叠<br>属于同一个 BFC 的两个相邻盒子的margin会发生重叠，那么我们创建不属于同一个 BFC 的盒子，就不会发生margin重叠了。</p>
+<h3 id="制作右侧自适应的盒子"><a href="#制作右侧自适应的盒子" class="headerlink" title="制作右侧自适应的盒子"></a>制作右侧自适应的盒子</h3><p>主要用到 BFC 特性之4：<br>BFC 的区域不会与浮动盒子产生交集，而是紧贴浮动边缘<br>普通流体元素 BFC 后，为了和浮动元素不产生任何交集，顺着浮动边缘形成自己的封闭上下文</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>BFC 就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。包括浮动，和外边距合并等等，因此，有了这个特性，我们布局的时候就不会出现意外情况了。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>BFC</tag>
       </tags>
   </entry>
   <entry>
@@ -543,25 +543,6 @@
       </tags>
   </entry>
   <entry>
-    <title>清除浮动</title>
-    <url>//2017/07/17/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html</url>
-    <content><![CDATA[<p>首先需要明确的一点是：清除浮动并不是将浮动的样式清除掉，而是闭合浮动，使得添加了清除浮动样式的元素，检测其前面的浮动元素并将浮动闭合起来，让其后的元素不受影响。</p>
-<a id="more"></a>
-<p>很多人对这一样式有误解，一个是因为“清除浮动”这个名字；还有一个原因大概是因为大多数时候，清除浮动的样式是使用父元素的伪元素after（IE8中是伪类）来实现的，看起来就好像是父元素将内部的浮动样式清除了一样。</p>
-<p>但事实上并非如此，其原理正如我声明的一样，是父元素的after伪元素（伪类）将内部子元素的浮动样式“闭合”了起来，而非“清除”。</p>
-<p><code>clear: left/right/both</code> 其含义就是说，让添加了这个样式的左侧或者右侧或者两侧不能有浮动元素出现。</p>
-<p>回想一下，浮动元素是不占位置的，按照流式布局，从上到下的排列，如果某个元素浮动了，那么它原本的位置就空了出来，下面的元素就会顺势顶上去。但是如果给紧挨着浮动元素的下一个元素添加了清除浮动呢？它会检测旁边有没有浮动的元素，如果有，就不会向上占据浮动元素的位置，而是继续挨着浮动元素的底部。</p>
-<p>以下是个人见解，可能实际情况并非如此，如有错误，请指正。</p>
-<p>那么这个清除浮动的样式添加在父元素的after伪元素（伪类）上时，达成的效果就是在父元素的最后将子元素的浮动效果闭合，加上给after伪元素（伪类）添加一系列样式如：<br><code>display: block;</code>、 <code>height: 0;</code>、 <code>visibility: none;</code>等，将其可能造成的布局影响消除掉。如此在容器中的元素浮动之后，原本没设置高度的父元素本应该因为检索不到浮动子元素的高而导致高度为0，但是因为after伪元素（伪类）占据了一个位置，虽然其高度为0，但是其位置能被父元素检索到，于是父元素的高度因为这个after而变得能将浮动的子元素给包进去了。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>float</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>盒子边距百分比计算</title>
     <url>//2017/07/12/%E7%9B%92%E5%AD%90%E8%BE%B9%E8%B7%9D%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%A1%E7%AE%97.html</url>
     <content><![CDATA[<p>之前一直认为 <code>margin-top</code> 和 <code>margin-bottom</code> 设置百分比以父容器的高度计算，而 <code>margin-left</code> 和 <code>margin-right</code> 设置百分比以父容器的宽度计算，直到今天群里一个群友问：</p>
@@ -587,6 +568,61 @@
       <tags>
         <tag>margin</tag>
         <tag>padding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>清除浮动</title>
+    <url>//2017/07/17/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html</url>
+    <content><![CDATA[<p>首先需要明确的一点是：清除浮动并不是将浮动的样式清除掉，而是闭合浮动，使得添加了清除浮动样式的元素，检测其前面的浮动元素并将浮动闭合起来，让其后的元素不受影响。</p>
+<a id="more"></a>
+<p>很多人对这一样式有误解，一个是因为“清除浮动”这个名字；还有一个原因大概是因为大多数时候，清除浮动的样式是使用父元素的伪元素after（IE8中是伪类）来实现的，看起来就好像是父元素将内部的浮动样式清除了一样。</p>
+<p>但事实上并非如此，其原理正如我声明的一样，是父元素的after伪元素（伪类）将内部子元素的浮动样式“闭合”了起来，而非“清除”。</p>
+<p><code>clear: left/right/both</code> 其含义就是说，让添加了这个样式的左侧或者右侧或者两侧不能有浮动元素出现。</p>
+<p>回想一下，浮动元素是不占位置的，按照流式布局，从上到下的排列，如果某个元素浮动了，那么它原本的位置就空了出来，下面的元素就会顺势顶上去。但是如果给紧挨着浮动元素的下一个元素添加了清除浮动呢？它会检测旁边有没有浮动的元素，如果有，就不会向上占据浮动元素的位置，而是继续挨着浮动元素的底部。</p>
+<p>以下是个人见解，可能实际情况并非如此，如有错误，请指正。</p>
+<p>那么这个清除浮动的样式添加在父元素的after伪元素（伪类）上时，达成的效果就是在父元素的最后将子元素的浮动效果闭合，加上给after伪元素（伪类）添加一系列样式如：<br><code>display: block;</code>、 <code>height: 0;</code>、 <code>visibility: none;</code>等，将其可能造成的布局影响消除掉。如此在容器中的元素浮动之后，原本没设置高度的父元素本应该因为检索不到浮动子元素的高而导致高度为0，但是因为after伪元素（伪类）占据了一个位置，虽然其高度为0，但是其位置能被父元素检索到，于是父元素的高度因为这个after而变得能将浮动的子元素给包进去了。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>float</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 TextEncoder 获取字符串的字节数</title>
+    <url>//2020/05/12/%E4%BD%BF%E7%94%A8-textencoder-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E8%8A%82%E6%95%B0.html</url>
+    <content><![CDATA[<p>之前有同事因为一段文本超出规定字节数，询问过我，怎么知道一段文字有多少个字节。<br>当时只是简单的回他一般英文与数字每个字符占一个字节，而中文字符占多少个字节需要根据字符编码来判断。比如中国的GBK/GB2312/GB18030等，一个中文字符就是两个字节；而现在主流的编码方式UTF-8中，一个中文字符则是三个字节。</p>
+<a id="more"></a>
+<h2 id="TextEncoder"><a href="#TextEncoder" class="headerlink" title="TextEncoder"></a>TextEncoder</h2><p>后来无意中在 MDN 里看到这么一个方法，可以将一段文本字符生成采用UTF-8编码的字节流（它还有一个作用相反的配套方法 TextDecoder）。如此很简单的一个查询字符串字节数的方法就出来了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> encoder = <span class="keyword">new</span> TextEncoder();</span><br><span class="line"><span class="keyword">const</span> view = encoder.encode(<span class="string">'一'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(view); <span class="comment">// Uint8Array(3) [228, 184, 128]</span></span><br><span class="line"><span class="built_in">console</span>.log(view.length); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原本 TextEncoder 还应该有一个参数 encoding，可以指定编码，但是因为标准规定 encoding 始终返回 “utf-8”，所以只能获取到UTF-8编码下的字符串的字节数。<br>不过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZXhvcmFibGV0YXNoL3RleHQtZW5jb2Rpbmc=" title="https://github.com/inexorabletash/text-encoding">GitHub<i class="fa fa-external-link"></i></span> 上倒是有一个polyfill支持非utf-8的编码。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> enc = <span class="keyword">new</span> TextEncoder(<span class="string">'gbk'</span>);</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br><span class="line">enc.encoding = <span class="string">'gbk'</span>;</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br></pre></td></tr></table></figure>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><h3 id="String-property-codePointAt-String-fromCodePoint"><a href="#String-property-codePointAt-String-fromCodePoint" class="headerlink" title="String.property.codePointAt/String.fromCodePoint"></a>String.property.codePointAt/String.fromCodePoint</h3><p>随着查询字符编码，还让我了解了一个字符串的方法 <code>String.property.codePointAt</code>。</p>
+<p>这个方法的作用类似于 <code>String.property.charCodeAt</code>，都是返回字符串某一位置的字符代码点的值，用法也和 <code>String.property.charCodeAt</code> 一样。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">0</span>);  <span class="comment">// 31505</span></span><br><span class="line">str.codePointAt(<span class="number">0</span>); <span class="comment">// 31505</span></span><br></pre></td></tr></table></figure>
+<p>那么它们的区别是什么？这里就要说到<em>四字节</em>的字符了。</p>
+<p>我们平时使用的Unicode编码字符，都是 U+0000 - U+FFFF 来标识的。而 U+FFFF 则是三字节能表示的最大字符数了，那么四字节要怎么标识呢？答案是用两个Unicode字符来标识，比如上面的笑脸emoji😀，它的Unicode编码其实是 <code>\ud83d\ude00</code>，而且其长度为2。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'😀'</span>.length === <span class="number">2</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>像这样用两个Unicode字符来标识的四字节字符，是无法使用 <code>String.property.charCodeAt</code> 来获取其完整代码点的，该方法只能获取到一个Unicode代码单元的代码点，即<code>String.property.charCodeAt</code>只能获取一个长度的Unicode的字符代码点。<br>而要获取这种四字节字符的完整代码点，则要使用 <code>String.property.codePointAt</code> 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">3</span>);  <span class="comment">// 55357 =&gt; 其实就是 '\ud83d' 的代码点</span></span><br><span class="line">str.codePointAt(<span class="number">3</span>); <span class="comment">// 128512</span></span><br></pre></td></tr></table></figure>
+<p>就如同 <code>String.property.charCodeAt</code> 有一个对应的方法 <code>String.fromCharCode</code>，<code>String.property.codePointAt</code> 也有一个对应的从代码点得到对应字符的方法 <code>String.fromCodePoint</code>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCodePoint(<span class="number">128512</span>); <span class="comment">// 😀</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RW5jb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextEncoder">TextEncoder<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RGVjb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextDecoder">TextDecoder<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jb2RlUG9pbnRBdA==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt">String.property.codePointAt<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jaGFyQ29kZUF0" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">String.property.charCodeAt<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">中文汉字占二个字节还是三个字节长度<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>TextEncoder</tag>
       </tags>
   </entry>
   <entry>
@@ -642,42 +678,6 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 TextEncoder 获取字符串的字节数</title>
-    <url>//2020/05/12/%E4%BD%BF%E7%94%A8-textencoder-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E8%8A%82%E6%95%B0.html</url>
-    <content><![CDATA[<p>之前有同事因为一段文本超出规定字节数，询问过我，怎么知道一段文字有多少个字节。<br>当时只是简单的回他一般英文与数字每个字符占一个字节，而中文字符占多少个字节需要根据字符编码来判断。比如中国的GBK/GB2312/GB18030等，一个中文字符就是两个字节；而现在主流的编码方式UTF-8中，一个中文字符则是三个字节。</p>
-<a id="more"></a>
-<h2 id="TextEncoder"><a href="#TextEncoder" class="headerlink" title="TextEncoder"></a>TextEncoder</h2><p>后来无意中在 MDN 里看到这么一个方法，可以将一段文本字符生成采用UTF-8编码的字节流（它还有一个作用相反的配套方法 TextDecoder）。如此很简单的一个查询字符串字节数的方法就出来了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> encoder = <span class="keyword">new</span> TextEncoder();</span><br><span class="line"><span class="keyword">const</span> view = encoder.encode(<span class="string">'一'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(view); <span class="comment">// Uint8Array(3) [228, 184, 128]</span></span><br><span class="line"><span class="built_in">console</span>.log(view.length); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原本 TextEncoder 还应该有一个参数 encoding，可以指定编码，但是因为标准规定 encoding 始终返回 “utf-8”，所以只能获取到UTF-8编码下的字符串的字节数。<br>不过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZXhvcmFibGV0YXNoL3RleHQtZW5jb2Rpbmc=" title="https://github.com/inexorabletash/text-encoding">GitHub<i class="fa fa-external-link"></i></span> 上倒是有一个polyfill支持非utf-8的编码。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> enc = <span class="keyword">new</span> TextEncoder(<span class="string">'gbk'</span>);</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br><span class="line">enc.encoding = <span class="string">'gbk'</span>;</span><br><span class="line">enc.encoding; <span class="comment">// utf-8</span></span><br></pre></td></tr></table></figure>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><h3 id="String-property-codePointAt-String-fromCodePoint"><a href="#String-property-codePointAt-String-fromCodePoint" class="headerlink" title="String.property.codePointAt/String.fromCodePoint"></a>String.property.codePointAt/String.fromCodePoint</h3><p>随着查询字符编码，还让我了解了一个字符串的方法 <code>String.property.codePointAt</code>。</p>
-<p>这个方法的作用类似于 <code>String.property.charCodeAt</code>，都是返回字符串某一位置的字符代码点的值，用法也和 <code>String.property.charCodeAt</code> 一样。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">0</span>);  <span class="comment">// 31505</span></span><br><span class="line">str.codePointAt(<span class="number">0</span>); <span class="comment">// 31505</span></span><br></pre></td></tr></table></figure>
-<p>那么它们的区别是什么？这里就要说到<em>四字节</em>的字符了。</p>
-<p>我们平时使用的Unicode编码字符，都是 U+0000 - U+FFFF 来标识的。而 U+FFFF 则是三字节能表示的最大字符数了，那么四字节要怎么标识呢？答案是用两个Unicode字符来标识，比如上面的笑脸emoji😀，它的Unicode编码其实是 <code>\ud83d\ude00</code>，而且其长度为2。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'😀'</span>.length === <span class="number">2</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>像这样用两个Unicode字符来标识的四字节字符，是无法使用 <code>String.property.charCodeAt</code> 来获取其完整代码点的，该方法只能获取到一个Unicode代码单元的代码点，即<code>String.property.charCodeAt</code>只能获取一个长度的Unicode的字符代码点。<br>而要获取这种四字节字符的完整代码点，则要使用 <code>String.property.codePointAt</code> 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'笑一笑😀'</span>;</span><br><span class="line">str.charCodeAt(<span class="number">3</span>);  <span class="comment">// 55357 =&gt; 其实就是 '\ud83d' 的代码点</span></span><br><span class="line">str.codePointAt(<span class="number">3</span>); <span class="comment">// 128512</span></span><br></pre></td></tr></table></figure>
-<p>就如同 <code>String.property.charCodeAt</code> 有一个对应的方法 <code>String.fromCharCode</code>，<code>String.property.codePointAt</code> 也有一个对应的从代码点得到对应字符的方法 <code>String.fromCodePoint</code>。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCodePoint(<span class="number">128512</span>); <span class="comment">// 😀</span></span><br></pre></td></tr></table></figure>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RW5jb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextEncoder">TextEncoder<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0FQSS9UZXh0RGVjb2Rlcg==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextDecoder">TextDecoder<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jb2RlUG9pbnRBdA==" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt">String.property.codePointAt<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zMGRldmVsb3BlcjBtb3ppbGxhMG9yZy5pY29weS5zaXRlL2VuLVVTL2RvY3MvV2ViL0phdmFTY3JpcHQvUmVmZXJlbmNlL0dsb2JhbF9PYmplY3RzL1N0cmluZy9jaGFyQ29kZUF0" title="https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">String.property.charCodeAt<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==" title="https://blog.csdn.net/yaomingyang/article/details/79374209">中文汉字占二个字节还是三个字节长度<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>TextEncoder</tag>
       </tags>
   </entry>
   <entry>
@@ -969,34 +969,50 @@
       </tags>
   </entry>
   <entry>
-    <title>javascript之变量声明</title>
-    <url>//2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html</url>
-    <content><![CDATA[<p>JavaScript是一门弱类型语言，它并不像其他强类型语言那样有多种变量类型的声明形式，如：int, double, string… 等，在JavaScript中声明变量统一使用 var 关键字。</p>
-<p>例如想要声明一个整数来使用，可以使用 <code>var num = 1;</code> 这样的语句，声明一串字符串也一样 <code>var str = &#39;string&#39;;</code> ,<a id="more"></a>声明一个布尔值、数组、对象都是使用 <code>var</code> 这个关键字： <code>var boo = true; var arr = [1,2,3]; var obj = { x: 1, y: 2};</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>; <span class="comment">// 声明一个整数</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"string"</span>; <span class="comment">// 声明一串字符串</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>; <span class="comment">// 声明一个布尔值</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">// 声明一个数组</span></span><br><span class="line"><span class="keyword">var</span> point = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;; <span class="comment">// 声明一个对象</span></span><br></pre></td></tr></table></figure>
-<p>在ES5标准之前，只有 <code>var</code> 这一个关键字用来声明一个可以使用的变量（函数暂不讨论）。而在ES6标准中，在此之上添加了两个新的声明变量的关键字，<code>let</code> 和 <code>const</code>。严格说起来应该是一个声明变量，一个声明常量， <code>const</code> 就是用来声明常量的关键字。</p>
-<h2 id="let与var有什么不同？"><a href="#let与var有什么不同？" class="headerlink" title="let与var有什么不同？"></a>let与var有什么不同？</h2><p>这需要从变量的作用域说起。在ES5标准之前，JavaScript中只有两种作用域：全局作用域与函数作用域。全局作用域的变量可以在代码运行中的任何位置访问到，而函数作用域的变量只有在该函数内部能够访问到。而在ES6标准中新增了一个块级作用域的概念，let关键字就是对应块级作用域的概念的变量声明。通过let声明的变量只有在声明时所在的块级作用域的范围内能访问，所谓块级作用域指的是代码中被<code>{}</code>包裹起来的代码（对象除外），函数体也属于代码块。</p>
-<p><code>let</code> 与 <code>var</code> 另一个不同的地方在于：</p>
+    <title>JavaScript中undefined与null的区别</title>
+    <url>//2019/07/09/javascript%E4%B8%ADundefined%E4%B8%8Enull%E7%9A%84%E5%8C%BA%E5%88%AB.html</url>
+    <content><![CDATA[<p>前几天，朋友在看 JavaScript 关键字的时候，发现了这样一个小问题：</p>
+<blockquote>
+<p><code>undefined</code> 和 <code>null</code> 都不是关键字，但是为什么 <code>undefined</code> 可以作为变量名赋值，而 <code>null</code> 却不行？</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">1</span>;</span><br><span class="line"><span class="literal">undefined</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="literal">null</span> = <span class="number">1</span>; <span class="comment">// SyntaxError: Unexpected token null</span></span><br><span class="line"><span class="literal">null</span> = <span class="number">2</span>; <span class="comment">// ReferenceError: Invalid left-hand side in assignment</span></span><br></pre></td></tr></table></figure>
+<p>基于此，我查找了一下 MDN 文档，并记在了这里。</p>
+<p>在 JavaScript 中，<code>undefined</code> 与 <code>null</code> 都是用来表示空值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>所以上面通过 <code>==</code> 进行比较时，是相等的。可是毫无疑问的，这两者并不是完全相同的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">undefined</span> === <span class="literal">null</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-具体含义"><a href="#1-具体含义" class="headerlink" title="1. 具体含义"></a>1. 具体含义</h2><p>首先，二者在语义方面的不同。</p>
 <ul>
-<li><p><code>var</code> 声明的变量可以重复声明，但只有第一次声明有效，且有声明提升；</p>
+<li><code>undefined</code> 是表示未赋值的一个状态</li>
+<li><code>null</code> 则是表明该值被赋予了一个空值</li>
+</ul>
+<p>也就是说，一个变量 <em>x</em> 为 <code>undefined</code> 时，意为：变量 <em>x</em> 还没有被赋予某个值。<br>而变量 <em>x</em> 为 <code>null</code> 时，则意为：变量 <em>x</em> 被显式的赋予了一个空值。</p>
+<h2 id="2-类型"><a href="#2-类型" class="headerlink" title="2. 类型"></a>2. 类型</h2><ul>
+<li><p>在类型上，<code>undefined</code> 是 JavaScript 中的基础类型之一；而 <code>null</code> 则是一个值，一个常量，类似数字 1, 2, 3 …… 这样的常量。</p>
 </li>
-<li><p><code>let</code> 声明的变量不能再次声明，否则会报错，且let声明的变量并没有声明提升。</p>
+<li><p>同时，<code>undefined</code> 还是一个全局变量，其值就是 <em>undefined</em>，即 <code>window.undefined === undefined</code>。</p>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// ReferenceError: y is not defined</span></span><br><span class="line"><span class="comment">// let声明的变量在他所在的块级范围之外无法访问</span></span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="comment">// undefined: 因为var声明有变量名提升，所以运行代码时，</span></span><br><span class="line"><span class="comment">// 系统就知道a是一个变量，只是这个变量并没有被赋值，因此是undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// ReferenceError: b is not defined</span></span><br><span class="line"><span class="comment">// 因为let声明没有变量名提升，所以运行到这句代码时，</span></span><br><span class="line"><span class="comment">// b还没有定义，不能作为一个变量使用</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>; <span class="comment">// SyntaxError: Identifier 'c' has already been declared</span></span><br><span class="line"><span class="comment">// let 无法重复声明已有变量</span></span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
-<h2 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h2><p>所谓常量，与变量相反。变量就是可以改变的量，而常量则是一旦声明，就无法改变的量。有些数据在使用过程中是不会改变的，甚至有些就是固定不变的值，如圆周率PI，像这样的数据，使用 <code>var</code> 声明，之后一直不做改动自然也是不算错的，但是使用 <code>const</code> 声明的话，更能够表达出符合的语义，用 <code>const PI = 3.14;</code> 代替 <code>var PI = 3.14;</code> 更能让人清楚地知道这是一个常量。</p>
-<p>const声明的变量的作用域范围同let关键字，也是声明变量所在的块级作用域，用const声明的变量也不能重复声明，且没有变量声明提升，另外不能通过赋值来改变常量的值。</p>
-<p>基于这几点，在声明一个常量的时候就要将这个常量的值赋给它，而不能先声明一个没有值的常量，再在之后赋值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> RWBY;</span><br><span class="line">RWBY = [<span class="string">"ruby"</span>,<span class="string">"weiss"</span>,<span class="string">"blake"</span>,<span class="string">"yang"</span>]; <span class="comment">// SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"><span class="comment">// 虽然错误是在重新给常量赋值时抛出的，也就是说 const RWBY; 这一步并没有错</span></span><br><span class="line"><span class="comment">// 但是很显然这样的语句毫无意义，所以通常声明一个常量时应该直接将值赋予该常量</span></span><br></pre></td></tr></table></figure>
-<h2 id="关于变量声明提升"><a href="#关于变量声明提升" class="headerlink" title="关于变量声明提升"></a>关于变量声明提升</h2><p>JavaScript是解释型语言，解析一句执行一句，为了提高效率，在代码解析执行之前，有一个预解析的过程。在预解析时，代码并不会执行，系统只会检查当前作用域（函数内部的代码不会检查，只有在调用函数时，才会重复 <code>“预解析-&gt;执行”</code> 这样的步骤）的代码有没有语法上的错误和代码中的变量声明关键字 <code>var</code> 和函数声明的关键字 <code>function</code>。</p>
-<p>在遇到这两种声明时，系统会在内存中预先记录下声明的变量名和函数名，也就是标识符。在预解析结束后，运行代码之前，系统就得到了有哪些标识符是可以作为变量来使用的，如果使用了系统未记录的标识符，也就是没有声明的变量，这时系统就会抛出一个引用错误 <code>ReferenceError: xxx is not defined</code> 。</p>
-<p>在预解析过程中，如果遇到了同一个标识符多次声明，是不会多次记录的，只会记录第一次。如果同一个标识符既有变量声明var，又有函数声明function，最终记录下来的标识符是一个函数，遵循的原则是先有什么就记录什么，函数声明会记录两件事，一个同变量声明，记录该标识符可以使用，第二个记录该标识符指向一个函数。<br>所以有说法 <em>函数是JavaScript中的一等公民</em>。<br>但要知道该记录只保持在预解析结束，运行代码之前。<br>在运行代码过程中，需要根据实际情况判断标识符到底是一个变量还是一个函数。</p>
+<blockquote>
+<p>自ECMAScript5标准以来undefined是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。</p>
+</blockquote>
+<p>不过实际上你可以对 <code>undefined</code> 重新赋值，只是在<strong>全局作用域</strong>下并不会这并不会改变 <code>undefined</code> 的值。<br>而在块级作用域及函数作用域中，是可以改变 <code>undefined</code> 的值的。<strong>但不建议这样重写 <code>undefined</code> 的值，也应当避免这种做法。</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">1</span>;</span><br><span class="line"><span class="literal">undefined</span>; <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="literal">undefined</span> = <span class="number">2</span>;</span><br><span class="line">  <span class="literal">undefined</span>; <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeUndefined</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line">changeUndefined(); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>而 <code>null</code>，本身作为一个值，那它就无法被赋值，即 <code>null</code> 无法作为一个变量名来使用。就像你不能写 <code>var 1 = 2</code> 这样。</p>
+<hr>
+<p>参考资料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRXJyb3JzL0ludmFsaWRfYXNzaWdubWVudF9sZWZ0LWhhbmRfc2lkZQ==" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Errors/Invalid_assignment_left-hand_side">ReferenceError: invalid assignment left-hand side - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvbnVsbA==" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null">null - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvdW5kZWZpbmVk" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
+</ul>
 ]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>variable</tag>
+        <tag>undefined</tag>
+        <tag>null</tag>
       </tags>
   </entry>
   <entry>
@@ -1148,53 +1164,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript中undefined与null的区别</title>
-    <url>//2019/07/09/javascript%E4%B8%ADundefined%E4%B8%8Enull%E7%9A%84%E5%8C%BA%E5%88%AB.html</url>
-    <content><![CDATA[<p>前几天，朋友在看 JavaScript 关键字的时候，发现了这样一个小问题：</p>
-<blockquote>
-<p><code>undefined</code> 和 <code>null</code> 都不是关键字，但是为什么 <code>undefined</code> 可以作为变量名赋值，而 <code>null</code> 却不行？</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">1</span>;</span><br><span class="line"><span class="literal">undefined</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="literal">null</span> = <span class="number">1</span>; <span class="comment">// SyntaxError: Unexpected token null</span></span><br><span class="line"><span class="literal">null</span> = <span class="number">2</span>; <span class="comment">// ReferenceError: Invalid left-hand side in assignment</span></span><br></pre></td></tr></table></figure>
-<p>基于此，我查找了一下 MDN 文档，并记在了这里。</p>
-<p>在 JavaScript 中，<code>undefined</code> 与 <code>null</code> 都是用来表示空值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>所以上面通过 <code>==</code> 进行比较时，是相等的。可是毫无疑问的，这两者并不是完全相同的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">undefined</span> === <span class="literal">null</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<h2 id="1-具体含义"><a href="#1-具体含义" class="headerlink" title="1. 具体含义"></a>1. 具体含义</h2><p>首先，二者在语义方面的不同。</p>
-<ul>
-<li><code>undefined</code> 是表示未赋值的一个状态</li>
-<li><code>null</code> 则是表明该值被赋予了一个空值</li>
-</ul>
-<p>也就是说，一个变量 <em>x</em> 为 <code>undefined</code> 时，意为：变量 <em>x</em> 还没有被赋予某个值。<br>而变量 <em>x</em> 为 <code>null</code> 时，则意为：变量 <em>x</em> 被显式的赋予了一个空值。</p>
-<h2 id="2-类型"><a href="#2-类型" class="headerlink" title="2. 类型"></a>2. 类型</h2><ul>
-<li><p>在类型上，<code>undefined</code> 是 JavaScript 中的基础类型之一；而 <code>null</code> 则是一个值，一个常量，类似数字 1, 2, 3 …… 这样的常量。</p>
-</li>
-<li><p>同时，<code>undefined</code> 还是一个全局变量，其值就是 <em>undefined</em>，即 <code>window.undefined === undefined</code>。</p>
-</li>
-</ul>
-<blockquote>
-<p>自ECMAScript5标准以来undefined是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。</p>
-</blockquote>
-<p>不过实际上你可以对 <code>undefined</code> 重新赋值，只是在<strong>全局作用域</strong>下并不会这并不会改变 <code>undefined</code> 的值。<br>而在块级作用域及函数作用域中，是可以改变 <code>undefined</code> 的值的。<strong>但不建议这样重写 <code>undefined</code> 的值，也应当避免这种做法。</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">1</span>;</span><br><span class="line"><span class="literal">undefined</span>; <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="literal">undefined</span> = <span class="number">2</span>;</span><br><span class="line">  <span class="literal">undefined</span>; <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeUndefined</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line">changeUndefined(); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<p>而 <code>null</code>，本身作为一个值，那它就无法被赋值，即 <code>null</code> 无法作为一个变量名来使用。就像你不能写 <code>var 1 = 2</code> 这样。</p>
-<hr>
-<p>参考资料：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRXJyb3JzL0ludmFsaWRfYXNzaWdubWVudF9sZWZ0LWhhbmRfc2lkZQ==" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Errors/Invalid_assignment_left-hand_side">ReferenceError: invalid assignment left-hand side - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvbnVsbA==" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null">null - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvdW5kZWZpbmVk" title="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined - JavaScript | MDN<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>undefined</tag>
-        <tag>null</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>模板字符串</title>
     <url>//2019/07/01/%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2.html</url>
     <content><![CDATA[<h2 id="什么是模板字符串"><a href="#什么是模板字符串" class="headerlink" title="什么是模板字符串"></a>什么是模板字符串</h2><p>JavaScript 中，模板字符串是在 ECMAScript2015 中加入的新语法。<br>它以反引号（<code>`</code>）替代普通字符串的单引号、双引号，允许在内部使用特定语法（<code>${...}</code>）嵌入表达式，同时它还支持多行字符串。</p>
@@ -1238,6 +1207,37 @@
       </tags>
   </entry>
   <entry>
+    <title>javascript之变量声明</title>
+    <url>//2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html</url>
+    <content><![CDATA[<p>JavaScript是一门弱类型语言，它并不像其他强类型语言那样有多种变量类型的声明形式，如：int, double, string… 等，在JavaScript中声明变量统一使用 var 关键字。</p>
+<p>例如想要声明一个整数来使用，可以使用 <code>var num = 1;</code> 这样的语句，声明一串字符串也一样 <code>var str = &#39;string&#39;;</code> ,<a id="more"></a>声明一个布尔值、数组、对象都是使用 <code>var</code> 这个关键字： <code>var boo = true; var arr = [1,2,3]; var obj = { x: 1, y: 2};</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>; <span class="comment">// 声明一个整数</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"string"</span>; <span class="comment">// 声明一串字符串</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>; <span class="comment">// 声明一个布尔值</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">// 声明一个数组</span></span><br><span class="line"><span class="keyword">var</span> point = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;; <span class="comment">// 声明一个对象</span></span><br></pre></td></tr></table></figure>
+<p>在ES5标准之前，只有 <code>var</code> 这一个关键字用来声明一个可以使用的变量（函数暂不讨论）。而在ES6标准中，在此之上添加了两个新的声明变量的关键字，<code>let</code> 和 <code>const</code>。严格说起来应该是一个声明变量，一个声明常量， <code>const</code> 就是用来声明常量的关键字。</p>
+<h2 id="let与var有什么不同？"><a href="#let与var有什么不同？" class="headerlink" title="let与var有什么不同？"></a>let与var有什么不同？</h2><p>这需要从变量的作用域说起。在ES5标准之前，JavaScript中只有两种作用域：全局作用域与函数作用域。全局作用域的变量可以在代码运行中的任何位置访问到，而函数作用域的变量只有在该函数内部能够访问到。而在ES6标准中新增了一个块级作用域的概念，let关键字就是对应块级作用域的概念的变量声明。通过let声明的变量只有在声明时所在的块级作用域的范围内能访问，所谓块级作用域指的是代码中被<code>{}</code>包裹起来的代码（对象除外），函数体也属于代码块。</p>
+<p><code>let</code> 与 <code>var</code> 另一个不同的地方在于：</p>
+<ul>
+<li><p><code>var</code> 声明的变量可以重复声明，但只有第一次声明有效，且有声明提升；</p>
+</li>
+<li><p><code>let</code> 声明的变量不能再次声明，否则会报错，且let声明的变量并没有声明提升。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// ReferenceError: y is not defined</span></span><br><span class="line"><span class="comment">// let声明的变量在他所在的块级范围之外无法访问</span></span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="comment">// undefined: 因为var声明有变量名提升，所以运行代码时，</span></span><br><span class="line"><span class="comment">// 系统就知道a是一个变量，只是这个变量并没有被赋值，因此是undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// ReferenceError: b is not defined</span></span><br><span class="line"><span class="comment">// 因为let声明没有变量名提升，所以运行到这句代码时，</span></span><br><span class="line"><span class="comment">// b还没有定义，不能作为一个变量使用</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>; <span class="comment">// SyntaxError: Identifier 'c' has already been declared</span></span><br><span class="line"><span class="comment">// let 无法重复声明已有变量</span></span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
+<h2 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h2><p>所谓常量，与变量相反。变量就是可以改变的量，而常量则是一旦声明，就无法改变的量。有些数据在使用过程中是不会改变的，甚至有些就是固定不变的值，如圆周率PI，像这样的数据，使用 <code>var</code> 声明，之后一直不做改动自然也是不算错的，但是使用 <code>const</code> 声明的话，更能够表达出符合的语义，用 <code>const PI = 3.14;</code> 代替 <code>var PI = 3.14;</code> 更能让人清楚地知道这是一个常量。</p>
+<p>const声明的变量的作用域范围同let关键字，也是声明变量所在的块级作用域，用const声明的变量也不能重复声明，且没有变量声明提升，另外不能通过赋值来改变常量的值。</p>
+<p>基于这几点，在声明一个常量的时候就要将这个常量的值赋给它，而不能先声明一个没有值的常量，再在之后赋值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> RWBY;</span><br><span class="line">RWBY = [<span class="string">"ruby"</span>,<span class="string">"weiss"</span>,<span class="string">"blake"</span>,<span class="string">"yang"</span>]; <span class="comment">// SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"><span class="comment">// 虽然错误是在重新给常量赋值时抛出的，也就是说 const RWBY; 这一步并没有错</span></span><br><span class="line"><span class="comment">// 但是很显然这样的语句毫无意义，所以通常声明一个常量时应该直接将值赋予该常量</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于变量声明提升"><a href="#关于变量声明提升" class="headerlink" title="关于变量声明提升"></a>关于变量声明提升</h2><p>JavaScript是解释型语言，解析一句执行一句，为了提高效率，在代码解析执行之前，有一个预解析的过程。在预解析时，代码并不会执行，系统只会检查当前作用域（函数内部的代码不会检查，只有在调用函数时，才会重复 <code>“预解析-&gt;执行”</code> 这样的步骤）的代码有没有语法上的错误和代码中的变量声明关键字 <code>var</code> 和函数声明的关键字 <code>function</code>。</p>
+<p>在遇到这两种声明时，系统会在内存中预先记录下声明的变量名和函数名，也就是标识符。在预解析结束后，运行代码之前，系统就得到了有哪些标识符是可以作为变量来使用的，如果使用了系统未记录的标识符，也就是没有声明的变量，这时系统就会抛出一个引用错误 <code>ReferenceError: xxx is not defined</code> 。</p>
+<p>在预解析过程中，如果遇到了同一个标识符多次声明，是不会多次记录的，只会记录第一次。如果同一个标识符既有变量声明var，又有函数声明function，最终记录下来的标识符是一个函数，遵循的原则是先有什么就记录什么，函数声明会记录两件事，一个同变量声明，记录该标识符可以使用，第二个记录该标识符指向一个函数。<br>所以有说法 <em>函数是JavaScript中的一等公民</em>。<br>但要知道该记录只保持在预解析结束，运行代码之前。<br>在运行代码过程中，需要根据实际情况判断标识符到底是一个变量还是一个函数。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>variable</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript中的语句结束符</title>
     <url>//2017/12/16/javascript%E4%B8%AD%E7%9A%84%E8%AF%AD%E5%8F%A5%E7%BB%93%E6%9D%9F%E7%AC%A6.html</url>
     <content><![CDATA[<p>javascript是弱语言，很多方面都没有强语言要求严格。作为语句结束符的<code>;</code>，也是可以省略不写的。但是有些时候，省略之后是会出现问题的，而一个由于 <code>;</code> 引起的问题往往很难找到，所以为了预防这样的问题也好，规范代码的书写也罢，还是养成一个每句代码结束后加上结束符(<code>;</code>)的习惯好。</p>
@@ -1273,8 +1273,74 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux 添加环境变量的方法</title>
+    <url>//2019/03/03/linux-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
+    <content><![CDATA[<p>在 Linux 服务器上使用 NodeJS 时，明明通过 <code>npm install --global</code> 进行了包的全局安装，可是安装完了之后却发现在命令行里还是无法使用。<br>原因就是没有将其加入环境变量。</p>
+<p>我的 node 包目录为 <code>~/node-v10.9.0-linux-x64/bin/</code>，<br>那么可以通过如下三种方式来把这个目录加入环境变量。</p>
+<h2 id="1-直接在命令行通过-export-命令加入"><a href="#1-直接在命令行通过-export-命令加入" class="headerlink" title="1. 直接在命令行通过 export 命令加入"></a>1. 直接在命令行通过 export 命令加入</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls ~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">node  npm  npx  pm2  pm2-dev  pm2-docker  pm2-runtime  yarn  yarnpkg</span><br><span class="line">$ npx -v</span><br><span class="line">-bash: npx: <span class="built_in">command</span> not found</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin:/home/suiga/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ npx -v</span><br><span class="line">6.8.0</span><br></pre></td></tr></table></figure>
+<p>这种方式添加起来确实快捷，添加后直接就能使用。但是注销重新登录后，你会发现之前加入的环境变量没有了。<br>也就是说这种方式属于临时性添加的。</p>
+<p>想要永久的添加还是需要使用下面的方式。</p>
+<h2 id="2-修改-etc-profile-文件"><a href="#2-修改-etc-profile-文件" class="headerlink" title="2. 修改 /etc/profile 文件"></a>2. 修改 /etc/profile 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vi /etc/profile</span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注销重新登录后生效</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-修改-bashrc-文件"><a href="#3-修改-bashrc-文件" class="headerlink" title="3. 修改 .bashrc 文件"></a>3. 修改 .bashrc 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi ~/.bashrc <span class="comment"># 或者 sudo vi /root/.bashrc</span></span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同样需要先注销才能生效</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYW1ib3luYS9hcmNoaXZlLzIwMDgvMDMvMDgvMTA5NjAyNC5odG1s" title="https://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">在Linux里设置环境变量的方法（export PATH） - 玉米疯收 - 博客园<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>PATH</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Mac的终端添加命令别名的方法</title>
+    <url>//2020/07/14/%E5%9C%A8mac%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
+    <content><![CDATA[<p>第一次使用 Mac 电脑，在配置一些自定义的命令时遇到了问题。</p>
+<p>在网上搜索好些都是说直接在 <code>~/.bashrc</code> 或者 <code>~/.bash_profile</code> 文件中写入配置就行，可是这样并不能解决问题。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.bash_profile</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">"ls -alFG"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># command line</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>上面这种做法和直接在终端上输入 <code>alias ll=&quot;ls -alFG&quot;</code> 的结果一样，都是只能在当前进程起效果，结束进程，再启动一个终端进程，就没有 <code>ll</code> 这个别名了。</p>
+<p>后来终于找到了一篇记录博客，提到使用的 <code>zsh</code>，我才恍然。</p>
+<p>最开始打开 Mac 上的终端时，title 里是有显示 <code>zsh</code> 的，只是我以前没听过 <code>zsh</code>，不清楚这是什么意思。原来它就类似 <code>bash</code> 这样是一个命令行程序，也就是说 Mac 默认使用的命令行程序不是 <code>bash</code> 而是 <code>zsh</code>。也因此并不会在启动时运行 <code>~/.bash_profile</code> 文件，运行的是 <code>~/.zshrc</code>。</p>
+<p>如此只需在 <code>~/.zshrc</code> 文件中引入 <code>~/.bash_profile</code> 文件运行一次就能解决了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.zshrc</span></span><br><span class="line"><span class="comment"># 当有 ~/.bash_profile 文件时，才加载这个文件</span></span><br><span class="line"><span class="built_in">test</span> -f ~/.bash_profile &amp;&amp; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>之后在 <code>~/.bash_profile</code> 文件中添加的别名就可以安心使用了。</p>
+<p>参考资料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE5ODA5OTQvYXJ0aWNsZS9kZXRhaWxzLzc3OTQwMzc5" title="https://blog.csdn.net/u011980994/article/details/77940379">CSDN-fool宋-Mac下配置alias，zsh终端命令别名<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Command</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 命令行操作多个文件</title>
+    <url>//2019/02/21/linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6.html</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; cp &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; mv &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; rm &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>这里主要是通过 <em>find</em> 和 <em>xargs</em> 命令配合使用。</p>
+<p><em>find</em> 来根据范本样式查找需要操作的文件，<br>命令为 <code>find &lt;查找目录&gt; -name &lt;范本样式&gt;</code> 。</p>
+<p><code>|</code> 是管道，负责将前面的输出作为后面的输入。</p>
+<p><em>xargs</em> 命令负责将输入流转换成命令行参数，<br><code>xargs -I [替换字符串]</code> 使用 <code>-I</code> 选项指定一个替换字符串，<br>如果省略替换字符串，则默认使用 <code>{}</code> 。<br>这个字符串在后面使用时会被依次替换成输入流转换的参数。</p>
+<hr>
+<p>参考资料</p>
+<p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC9maW5k" title="http://man.linuxde.net/find">find命令<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC94YXJncw==" title="http://man.linuxde.net/xargs">xargs命令<i class="fa fa-external-link"></i></span></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Command</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CentOS 添加用户并授权 sudo</title>
-    <url>//2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html</url>
+    <url>//2018/09/01/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html</url>
     <content><![CDATA[<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHeGlhb2JhaS9hcnRpY2xlL2RldGFpbHMvNTM1MDQ5ODk=" title="https://blog.csdn.net/GGxiaobai/article/details/53504989">CentOS 7中添加一个新用户并授权<i class="fa fa-external-link"></i></span></p>
 <h1 id="CentOS-7添加用户并授权"><a href="#CentOS-7添加用户并授权" class="headerlink" title="CentOS 7添加用户并授权"></a>CentOS 7添加用户并授权</h1><h2 id="1-创建新用户"><a href="#1-创建新用户" class="headerlink" title="1. 创建新用户"></a>1. 创建新用户</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@vultr ~]<span class="comment"># adduser suiga</span></span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">[root@vultr ~]<span class="comment"># passwd suiga</span></span><br><span class="line">Changing password <span class="keyword">for</span> user suiga.</span><br><span class="line">New password:</span><br><span class="line"><span class="comment"># 初始化密码有复杂度判断，如果过于简单，会有提示</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 7 characters</span><br><span class="line">New password:</span><br></pre></td></tr></table></figure>
 <h2 id="2-授权"><a href="#2-授权" class="headerlink" title="2. 授权"></a>2. 授权</h2><p>新创建的用户并不能使用sudo命令，需要给他添加授权。</p>
@@ -1301,72 +1367,6 @@
       </categories>
       <tags>
         <tag>sudo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 添加环境变量的方法</title>
-    <url>//2019/03/03/linux-%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
-    <content><![CDATA[<p>在 Linux 服务器上使用 NodeJS 时，明明通过 <code>npm install --global</code> 进行了包的全局安装，可是安装完了之后却发现在命令行里还是无法使用。<br>原因就是没有将其加入环境变量。</p>
-<p>我的 node 包目录为 <code>~/node-v10.9.0-linux-x64/bin/</code>，<br>那么可以通过如下三种方式来把这个目录加入环境变量。</p>
-<h2 id="1-直接在命令行通过-export-命令加入"><a href="#1-直接在命令行通过-export-命令加入" class="headerlink" title="1. 直接在命令行通过 export 命令加入"></a>1. 直接在命令行通过 export 命令加入</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls ~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">node  npm  npx  pm2  pm2-dev  pm2-docker  pm2-runtime  yarn  yarnpkg</span><br><span class="line">$ npx -v</span><br><span class="line">-bash: npx: <span class="built_in">command</span> not found</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/suiga/.<span class="built_in">local</span>/bin:/home/suiga/bin:/home/suiga/node-v10.9.0-linux-x64/bin/</span><br><span class="line">$ npx -v</span><br><span class="line">6.8.0</span><br></pre></td></tr></table></figure>
-<p>这种方式添加起来确实快捷，添加后直接就能使用。但是注销重新登录后，你会发现之前加入的环境变量没有了。<br>也就是说这种方式属于临时性添加的。</p>
-<p>想要永久的添加还是需要使用下面的方式。</p>
-<h2 id="2-修改-etc-profile-文件"><a href="#2-修改-etc-profile-文件" class="headerlink" title="2. 修改 /etc/profile 文件"></a>2. 修改 /etc/profile 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vi /etc/profile</span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注销重新登录后生效</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-修改-bashrc-文件"><a href="#3-修改-bashrc-文件" class="headerlink" title="3. 修改 .bashrc 文件"></a>3. 修改 .bashrc 文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vi ~/.bashrc <span class="comment"># 或者 sudo vi /root/.bashrc</span></span><br><span class="line"><span class="comment"># 在文件中加入</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:~/node-v10.9.0-linux-x64/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同样需要先注销才能生效</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>参考链接：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYW1ib3luYS9hcmNoaXZlLzIwMDgvMDMvMDgvMTA5NjAyNC5odG1s" title="https://www.cnblogs.com/amboyna/archive/2008/03/08/1096024.html">在Linux里设置环境变量的方法（export PATH） - 玉米疯收 - 博客园<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>PATH</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 命令行操作多个文件</title>
-    <url>//2019/02/21/linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6.html</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; cp &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; mv &#123;&#125; ./target/</span><br><span class="line">find . -name <span class="string">"*.txt"</span> | xargs -I &#123;&#125; rm &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>这里主要是通过 <em>find</em> 和 <em>xargs</em> 命令配合使用。</p>
-<p><em>find</em> 来根据范本样式查找需要操作的文件，<br>命令为 <code>find &lt;查找目录&gt; -name &lt;范本样式&gt;</code> 。</p>
-<p><code>|</code> 是管道，负责将前面的输出作为后面的输入。</p>
-<p><em>xargs</em> 命令负责将输入流转换成命令行参数，<br><code>xargs -I [替换字符串]</code> 使用 <code>-I</code> 选项指定一个替换字符串，<br>如果省略替换字符串，则默认使用 <code>{}</code> 。<br>这个字符串在后面使用时会被依次替换成输入流转换的参数。</p>
-<hr>
-<p>参考资料</p>
-<p><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC9maW5k" title="http://man.linuxde.net/find">find命令<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL21hbi5saW51eGRlLm5ldC94YXJncw==" title="http://man.linuxde.net/xargs">xargs命令<i class="fa fa-external-link"></i></span></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Command</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Mac的终端添加命令别名的方法</title>
-    <url>//2020/07/13/%E5%9C%A8mac%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
-    <content><![CDATA[<p>第一次使用 Mac 电脑，在配置一些自定义的命令时遇到了问题。</p>
-<p>在网上搜索好些都是说直接在 <code>~/.bashrc</code> 或者 <code>~/.bash_profile</code> 文件中写入配置就行，可是这样并不能解决问题。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.bash_profile</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">"ls -alFG"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># command line</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>上面这种做法和直接在终端上输入 <code>alias ll=&quot;ls -alFG&quot;</code> 的结果一样，都是只能在当前进程起效果，结束进程，再启动一个终端进程，就没有 <code>ll</code> 这个别名了。</p>
-<p>后来终于找到了一篇记录博客，提到使用的 <code>zsh</code>，我才恍然。</p>
-<p>最开始打开 Mac 上的终端时，title 里是有显示 <code>zsh</code> 的，只是我以前没听过 <code>zsh</code>，不清楚这是什么意思。原来它就类似 <code>bash</code> 这样是一个命令行程序，也就是说 Mac 默认使用的命令行程序不是 <code>bash</code> 而是 <code>zsh</code>。也因此并不会在启动时运行 <code>~/.bash_profile</code> 文件，运行的是 <code>~/.zshrc</code>。</p>
-<p>如此只需在 <code>~/.zshrc</code> 文件中引入 <code>~/.bash_profile</code> 文件运行一次就能解决了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~/.zshrc</span></span><br><span class="line"><span class="comment"># 当有 ~/.bash_profile 文件时，才加载这个文件</span></span><br><span class="line"><span class="built_in">test</span> -f ~/.bash_profile &amp;&amp; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>之后在 <code>~/.bash_profile</code> 文件中添加的别名就可以安心使用了。</p>
-<p>参考资料：</p>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE5ODA5OTQvYXJ0aWNsZS9kZXRhaWxzLzc3OTQwMzc5" title="https://blog.csdn.net/u011980994/article/details/77940379">CSDN-fool宋-Mac下配置alias，zsh终端命令别名<i class="fa fa-external-link"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Command</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -1748,6 +1748,111 @@ CSI(0x9B)等同于 ESC [;
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TypeScript 类型定义入门</title>
+    <url>//2020/11/26/typescript-%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E5%85%A5%E9%97%A8.html</url>
+    <content><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本文旨在帮助新接触 TypeScript 的开发人员，能够快速了解 TypeScript 中的类型定义语法。<br>想了解更多，可以查看 <span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript 官方文档手册<i class="fa fa-external-link"></i></span><br>愿你有一段愉快的 TypeScript 开发体验。</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><blockquote>
+<p>注：这里所说的基础类型与复杂类型，是基于 JavaScript 的原始类型与引用类型来区分的，并非 TypeScript 文档中所说的基础类型</p>
+</blockquote>
+<h3 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h3><p>TypeScript 是 JavaScript 的一个超集，那么在 TypeScript 中的类型基本与 JavaScript 相同。<br>在 TypeScript 中主要有这几种基础类型：<code>number</code>, <code>string</code>, <code>boolean</code>, <code>symbol</code>, <code>bigint</code>。<br>分别对应 JavaScript 中的 <code>Number</code>, <code>String</code>, <code>Boolean</code>, <code>Symbol</code> 和 <code>BigInt</code>。<br><strong>注意大小写哦</strong></p>
+<h3 id="复杂类型"><a href="#复杂类型" class="headerlink" title="复杂类型"></a>复杂类型</h3><p>除去基础类型之外，更复杂的是其他的对应于 JavaScript 的 <code>Object</code>, <code>Array</code> 与 <code>Function</code> 的类型。<br>比如: <code>object</code>, <code>enum</code>枚举, <code>Array&lt;T&gt;</code>, <code>ArrayLike&lt;T&gt;</code>, Tuple元组, <code>Function</code> 等等，类型有很多，先不用太过关注这里列举出来的东西。</p>
+<blockquote>
+<p>enum 枚举是什么？<br>类似其他一些强类型编程语言中的枚举，当你想要一种类型，它只有有限的一些固定值时，就可以使用枚举类型。<br>它就相当于一个常量对象，内部存储了指定的有限个常量值。<br>这个类型的变量的值，只能是这些有限常量中的一个，不可能是其他任何值。<br>比如在不考虑一些特别的情况时，在我们的常识下，人类的性别只有两种：男性 和 女性。<br>此时就可以将性别作为一个枚举值来声明。<br>  <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPerson &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: Gender;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Gender &#123;</span><br><span class="line">  female = <span class="number">0</span>,</span><br><span class="line">  male = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> w: IPerson = &#123;</span><br><span class="line">  name: <span class="string">'w'</span>,</span><br><span class="line">  age: <span class="number">18</span>,</span><br><span class="line">  gender: Gender.male</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>你可能发现了，除了将声明的枚举类型作为类型定义来使用以外，这里还把它作为一个值来使用了。<br>在 TypeScript 中，<code>enum</code> 关键字，除了会产生一个枚举类型定义以外，还会被编译成一个 JavaScript 对象，它是可以在代码中作为一个值来使用的。</p>
+</blockquote>
+<blockquote>
+<p>Tuple元组是什么？<br>TypeScript中除了普通的数组类型外，还存在一种特殊的数组类型，元组。<br>用简单形象一点的说明，元组就是固定长度的数组。在这个定长数组中，可以给它的每一项来声明一个类型。<br>比如有一个长度为2的数组，它的第一项是数字，第二项是字符串。那么就可以把它声明为一个元组。<br><code>let tuple: [number, string] = [1, &#39;text&#39;];</code></p>
+</blockquote>
+<h3 id="空值类型与-any-类型"><a href="#空值类型与-any-类型" class="headerlink" title="空值类型与 any 类型"></a>空值类型与 any 类型</h3><p>在 TypeScript 中有那么几个比较特殊的类型：<code>void</code>, <code>null</code> 和 <code>never</code>。</p>
+<p>它们都是空值类型，但是也有一些区别。</p>
+<ul>
+<li><code>void</code>: 表示未定义，可以对应 JavaScript 中的 <code>undefined</code></li>
+<li><code>null</code>: 从字面就可以理解，它就是对应着 JavaScript 中的空值 <code>null</code></li>
+<li><code>never</code>: 它是用来声明一个变量绝对不会有值，或者一个函数绝对不会返回的。<br>当给一个变量声明 <code>never</code> 类型时，那么无论是什么值，即使是 <code>undefined</code> 和 <code>null</code> 也不能赋值给这个变量。<br>同样的，如果给一个函数的返回类型声明为 <code>never</code>，就说明这个函数没有可访问的终结点，同时也就不能使用这个函数的返回值。<br>如何理解函数没有可访问的终结点，也即没有返回值：要么这个函数固定会抛出异常；要么内部有一个死循环，一直不可能返回。</li>
+</ul>
+<p>除了上面几个空值类型外，TypeScript 还有一个特殊的类型: <code>any</code> 。<br>这个类型其实就是不明确类型，说明该类型的值可能是任何类型，无法判断。这也是针对 JavaScript 的灵活性做出的应对。<br>在 JavaScript 中，即使一开始声明一个变量并赋值为数字，但是在其他地方，也可能会把这个变量改成字符串，布尔值，甚至是一个函数。<br>在这种情况下，自然就无法确定这个变量的类型到底是什么了，也就是 <code>any</code> 类型。</p>
+<h2 id="如何使用这些类型定义？"><a href="#如何使用这些类型定义？" class="headerlink" title="如何使用这些类型定义？"></a>如何使用这些类型定义？</h2><h3 id="显式声明"><a href="#显式声明" class="headerlink" title="显式声明"></a>显式声明</h3><p>在变量名称后面跟上冒号 <code>:</code> 加类型来声明变量的类型。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> n: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="keyword">let</span> bool: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> sym: symbol = Symbol(<span class="string">'unique'</span>);</span><br><span class="line"><span class="keyword">let</span> bigNum: bigint = <span class="number">996n</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nums: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> fn: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">number</span> = <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IMonster &#123;</span><br><span class="line">  race: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: <span class="string">'male'</span> | <span class="string">'female'</span> | <span class="string">'unknown'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> yukari: IMonster = &#123;</span><br><span class="line">  race: <span class="string">'Interstice'</span>,</span><br><span class="line">  age: <span class="number">17</span>,</span><br><span class="line">  gender: <span class="string">'female'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><p>通过类型断言的方式来告诉 TypeScript 编译器：“我很清楚自己在干什么，相信我，它在这里就是这个类型”。</p>
+<p>有两种方式，我们推荐使用 <code>as</code> 关键字。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getNum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> n = <span class="keyword">await</span> request(&#123;...&#125;) <span class="keyword">as</span> <span class="built_in">number</span>;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 考虑到你可能会问，既然有两种类型断言的语法，那么另一种是什么？</span></span><br><span class="line"><span class="comment">// 这里就再写一个吧</span></span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">any</span> = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="comment">// &lt;string&gt; 就是另一种类型断言，写在变量前面，告诉编译器，它就是字符串</span></span><br><span class="line"><span class="keyword">let</span> [, name] = (&lt;<span class="built_in">string</span>&gt;str).split(<span class="string">' '</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>看了上面的示例，你可能会发出 “好麻烦啊~” 的感叹，但是实际项目中并不需要每个地方都这么显式的给每个变量注明类型。</p>
+<p>TypeScript 是聪明的，它可以根据上下文来自行推断一个变量的类型。</p>
+<p>举例来说，当你给一个变量初始声明并赋值一个数字时，那么 TypeScript 就可以直接推断认为它是一个 <code>number</code> 类型的数据，而不需要你再通过如上示例那样给变量标注 <code>: number</code> 来告诉 TypeScript 它是一个数字。</p>
+<p>所以在实际使用时，你尽可以这么来写：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="keyword">let</span> bool = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> sym = Symbol(<span class="string">'unique'</span>);</span><br><span class="line"><span class="keyword">let</span> bigNum = <span class="number">996n</span>;</span><br></pre></td></tr></table></figure>
+<p>TypeScript 能够准确的推断出来它们各自的类型。<br>当然，如果一开始没有赋值，那么 TypeScript 自然也就无从推断，此时还是需要显式的注明类型的。<br>另一种情况是，在声明处赋予的值的类型并不明确，那么 TypeScript 也无法推断出具体的数据类型。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> dynamic: <span class="built_in">any</span> = <span class="number">123</span>;</span><br><span class="line"><span class="comment">// 因为 dynamic 是 any，所以这里的 num 也是 any</span></span><br><span class="line"><span class="keyword">let</span> num = dynamic;</span><br></pre></td></tr></table></figure>
+<h3 id="联合类型与交叉类型"><a href="#联合类型与交叉类型" class="headerlink" title="联合类型与交叉类型"></a>联合类型与交叉类型</h3><p>就像上面介绍 <code>any</code> 类型时所说，有时一个变量可能不止一种类型，比如一个网络请求的返回数据，当服务能查到数据时，会返回一个数值类型的状态码，可是如果服务出错了，那就只能返回 <code>null</code> 了。<br>这种情况下，要怎么声明它既可能是一个数字，又可能是一个空值呢？<br>TypeScript 有提供一种联合类型: <code>A | B</code> 。<br>比如上面这种可能是数字，也可能是 <code>null</code> 的情况，就可以这样来声明：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可能是数值类型，也可能为 null</span></span><br><span class="line"><span class="keyword">let</span> status: <span class="built_in">number</span> | <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>另一种情况恰好相反，某个变量是多种类型的集合，它可能同时包含有类型A和类型B。<br>这时你需要的是交叉类型: <code>A &amp; B</code> 的形式来声明。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 既有通用区域信息，又包含热门区域信息</span></span><br><span class="line"><span class="keyword">let</span> area: ICommonArea &amp; IHotArea;</span><br></pre></td></tr></table></figure>
+<h3 id="字面量类型与类型别名"><a href="#字面量类型与类型别名" class="headerlink" title="字面量类型与类型别名"></a>字面量类型与类型别名</h3><p>在 TypeScript 中除了使用特定的类型关键字以外，还可以使用字面量作为类型，以此表示常量类型。就像上面介绍枚举类型时所做的那样。<br>而这种字面量类型在实际使用场景中，通常都是多个字面量的联合类型。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用字面量联合类型，达到枚举类型的效果</span></span><br><span class="line"><span class="keyword">let</span> gender: <span class="string">'male'</span> | <span class="string">'female'</span> = <span class="string">'male'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> privilege: <span class="number">0</span> | <span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> | <span class="number">16</span> = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>如果联合类型的数量比较多，又可能在多个地方使用的话，每次都写一长串的联合类型，是不是很烦恼？即使可以复制粘贴，也希望有一个更好的方式？<br>TypeScript 有提供一个声明类型别名的关键字 <code>type</code>，可以使用它来声明一个类型别名，使用这个别名来代替它的实际类型。<br>当然，类型别名并不只是用来给联合类型使用的，你也可以给一些特定的类型组合一个语义化别名，或者给一个自定义的函数类型加上语义化别名。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> IPrivilege = <span class="number">0</span> | <span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> | <span class="number">16</span>;</span><br><span class="line"><span class="keyword">let</span> privilege: IPrivilege = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IGetName: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>在自定义一些复杂的类型时，接口是经常被使用到的内容，我认为可以说 TypeScript 中最常用的、最重要的类型就是接口。<br>在 TypeScript 中要定义一个对象类型，如果你使用类型 <code>object</code>，那么你只能得到一个非原始类型的数据类型定义。<br>要想更详细的定义一个对象内有哪些属性，哪些方法，这些属性和方法有分别有着怎样的类型，这时候你就需要了解 <code>interface</code> 了。<br>你应该能注意到，在上面的一些示例中，已经出现过它了。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPerson &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: Gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段接口声明中，<code>interface</code> 是接口声明的关键字，<code>IPerson</code> 则是声明的接口的名字，后面的代码块中则是声明了这个接口内有哪些属性以及它们的类型。<br><code>IPerson</code> 接口有三个属性，<code>string</code> 类型的 <code>name</code> 属性、<code>number</code> 类型的 <code>age</code> 属性，<code>Gender</code> 枚举类型的 <code>gender</code> 属性。<br>当你以接口 <code>IPerson</code> 为类型声明一个对象时，它就必须包含上述三个属性，且值要符合其各自的类型。</p>
+<h4 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h4><p>并非所有的属性，在接口中都是必需的。有些属性可能一开始并不存在，或者只在某些特定条件下才会有。<br>这时候，就可以把它作为可选属性来声明。<br>只需要在正常的接口声明中，找到要设置为可选的属性，在属性名与冒号之间添加一个问号即可。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> ISquareConfig &#123;</span><br><span class="line">  color?: <span class="built_in">string</span>;</span><br><span class="line">  width?: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a>只读属性</h4><p>有些属性可能只在初始化时设置一个值，在后面就不可修改了，这时就可以通过 <code>readonly</code> 关键字来设置其为只读属性。<br>只读属性只可访问，不可修改。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPoint &#123;</span><br><span class="line">  readonly x: <span class="built_in">number</span>;</span><br><span class="line">  readonly y: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p: IPoint = &#123;</span><br><span class="line">  x: <span class="number">1</span>,</span><br><span class="line">  y: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 错误，只读属性不可修改</span></span><br><span class="line">p.x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TypeScript 中有一个 ReadonlyArray&lt;T&gt; 的类型，类似 Array&lt;T&gt;</span></span><br><span class="line"><span class="comment">// 只是将数组中的可变方法去掉了，以此来确保数组被创建后，不可更改</span></span><br><span class="line"><span class="keyword">const</span> arr: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.splice(<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 错误</span></span><br><span class="line">arr.push(<span class="number">3</span>); <span class="comment">// 错误</span></span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">10</span>; <span class="comment">// 错误</span></span><br><span class="line">arr.length = <span class="number">5</span>; <span class="comment">// 错误</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h4><p>接口能够描述 JavaScript 中对象拥有的各种各样的外形。 除了描述带有属性的普通对象外，接口也可以描述函数类型。<br>为了使用接口表示函数类型，我们需要给接口定义一个调用签名。<br>它就像是一个只有参数列表和返回值类型的函数定义。参数列表里的每个参数都需要名字和类型。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, subString: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mySearch: SearchFunc;</span><br><span class="line">mySearch = <span class="function"><span class="keyword">function</span>(<span class="params">source: <span class="built_in">string</span>, subString: <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = source.search(subString);</span><br><span class="line">  <span class="keyword">return</span> result &gt; <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="可索引的类型"><a href="#可索引的类型" class="headerlink" title="可索引的类型"></a>可索引的类型</h4><p>与使用接口描述函数类型差不多，我们也可以描述那些能够“通过索引得到”的类型，比如 <code>a[10]</code> 或 <code>ageMap[&quot;daniel&quot;]</code>。</p>
+<p>可索引类型具有一个 索引签名，它描述了对象索引的类型，还有相应的索引返回值类型。</p>
+<p>让我们看一个例子：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> StringArray &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myArray: StringArray;</span><br><span class="line">myArray = [<span class="string">"Bob"</span>, <span class="string">"Fred"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myStr: <span class="built_in">string</span> = myArray[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>TypeScript 支持两种索引签名：字符串和数字。【实际上，<code>Symbol</code> 也是可以的】<br>可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型。<br>这是因为当使用 <code>number</code> 来索引时，JavaScript 会将它转换成 <code>string</code> 然后再去索引对象。</p>
+<p>也就是说用 100（一个 <code>number</code> ）去索引等同于使用”100”（一个 <code>string</code> ）去索引，因此两者需要保持一致。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> Animal &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> Dog <span class="keyword">extends</span> Animal &#123;</span><br><span class="line">  breed: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：使用数值型的字符串索引，有时会得到完全不同的Animal!</span></span><br><span class="line"><span class="keyword">interface</span> NotOkay &#123;</span><br><span class="line">  [x: <span class="built_in">number</span>]: Animal;</span><br><span class="line">  [x: <span class="built_in">string</span>]: Dog;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> NumberDictionary &#123;</span><br><span class="line">  [index: <span class="built_in">string</span>]: <span class="built_in">number</span>;</span><br><span class="line">  length: <span class="built_in">number</span>;    <span class="comment">// 可以，length是number类型</span></span><br><span class="line">  name: <span class="built_in">string</span>       <span class="comment">// 错误，`name`的类型与索引类型返回值的类型不匹配</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，你可以将索引签名设置为只读，这样就防止了给索引赋值：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> ReadonlyStringArray &#123;</span><br><span class="line">  readonly [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> myArray: ReadonlyStringArray = [<span class="string">"Alice"</span>, <span class="string">"Bob"</span>];</span><br><span class="line"><span class="comment">// 你不能设置myArray[2]，因为索引签名是只读的。</span></span><br><span class="line">myArray[<span class="number">2</span>] = <span class="string">"Mallory"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="接口的继承与实现"><a href="#接口的继承与实现" class="headerlink" title="接口的继承与实现"></a>接口的继承与实现</h4><p>在 TypeScript 中，你可以强制一个类按照某个接口定义的描述来实现它，使用 <code>implements</code> 来实现一个接口。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">  currentTime: <span class="built_in">Date</span>;</span><br><span class="line">  setTime(d: <span class="built_in">Date</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Clock <span class="keyword">implements</span> ClockInterface &#123;</span><br><span class="line">  currentTime: <span class="built_in">Date</span>;</span><br><span class="line">  setTime(d: <span class="built_in">Date</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentTime = d;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口描述了类的公共部分，而不是公共和私有两部分。 它不会帮你检查类是否具有某些私有成员。<br>当一个类实现了一个接口时，只对其实例部分进行类型检查，而不会检查静态部分。</p>
+<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>映射类型就是从旧类型中创建新类型的一种方式。<br>比如在接口部分中我们有提到可选属性与只读属性，但是那种是对接口中的某个或某几个属性做出的说明。<br>如果现在需要一个接口，要求它的所有属性都是可选属性，或者所有属性都是只读属性的话，总不能再写一个新的接口，并且把每个属性都加上可选或只读吧？<br>TypeScript 提供了一些这方面的预置类型：<code>Partial&lt;T&gt;</code>, <code>Readonly&lt;T&gt;</code>, <code>Pick&lt;T, K extends keyof T&gt;</code>, <code>Record&lt;K extends string, T&gt;</code>。</p>
+<p>它们的实现如下：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> keyof T]?: T[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Readonly&lt;T&gt; = &#123;</span><br><span class="line">  readonly [P <span class="keyword">in</span> keyof T]: T[p];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Record&lt;K <span class="keyword">extends</span> <span class="built_in">string</span>, T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> K]: T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，你会看到一些新的内容：<code>keyof</code> 和 索引式的 <code>for ... in</code>。<br>你可以把 <code>keyof</code> 类比到 JavaScript 中的 <code>Object.keys</code> ，它是获取接口定义的属性名列表的。<br>然后再通过 <code>in</code> 操作符挨个将属性名赋给 <code>P</code>，而后把这个 <code>P</code> 作为新接口的属性。<br>这四个类型中， <code>Partial&lt;T&gt;</code>, <code>Readonly&lt;T&gt;</code> 和 <code>Pick&lt;T, K extends keyof T&gt;</code> 都是同态的。</p>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>你是否发现了上面几个映射类型在写法上有什么特别的？<br>它们在类型名称后面都有一个尖括号，内部有一个或多个名称。比如 <code>Partial&lt;T&gt;</code> 中的 <code>&lt;T&gt;</code>。<br>乍一看似乎和前面讲到的类型断言有点相似，只是一个在前，一个在后。<br>但它并不是类型断言，而是被叫作 <strong>泛型</strong>。</p>
+<p>不要从名字上理解，认为泛型与 <code>any</code> 类似。<br>泛型不同于 <code>any</code>，你可以认为它是一个未定义的类型别名，是一个函数的形参。<br>在实际使用时，必须给这个泛型一个明确的类型，可以是单例类型，也可以是交叉、联合类型。<br>而后 TypeScript 会根据实际使用时的类型，动态的得出最终结果的类型。</p>
+<h4 id="为什么要用泛型？"><a href="#为什么要用泛型？" class="headerlink" title="为什么要用泛型？"></a>为什么要用泛型？</h4><p>从上面的说明中，你应该能了解到，泛型的结果与输入有关，这就相当于一个函数，输入不同，输出也会改变。<br>有时候我们就是需要根据不同的输入，得到不同的输出类型。这就是泛型的价值。<br>假设我们有下面这样一个函数，它什么也不做，只是把传入的第一个参数返回。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我们要怎么定义它的参数arg的类型，以及函数的返回类型？<br>参数 <code>arg</code> 可以是任何类型，同样的，返回的 <code>arg</code> 自然也可以是任何类型。<br>可是如果我把它们定义为 <code>any</code> 类型，那样并不能表现出来返回类型与参数类型直接的关系，不论传入什么参数，函数的返回都是 <code>any</code> 类型。<br>可事实上，我们知道，如果传入 <code>string</code> ，它就会返回 <code>string</code>；如果传入 <code>number</code> ，它也会返回 <code>number</code>。<br>为此，我可以使用泛型来定义，先给函数声明一个泛型 A【A仅仅只是一个随便的命名，并非必须要命名为 A】，然后定义参数 <code>arg</code> 类型为 A。那么函数的返回类型自然也是 A。</p>
+<p>此时我们就能发现，函数的参数类型与返回类型有了一个关联，当我传入一个 <code>string</code> 时，TypeScript 就能知道函数的返回类型也是 <code>string</code>；传入 <code>number</code> 时，也能知道返回 <code>number</code>。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>&lt;<span class="title">A</span>&gt;(<span class="params">arg: A</span>): <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h4><p>泛型很灵活，只有在使用时才能知道具体的类型是什么，这似乎有点回到 JavaScript 中的样子。<br>如果有些地方，我需要使用到泛型，然而我还希望这个泛型是某个类型的子类型时怎么办？<br>可以通过 <code>extends</code> 继承来约束泛型。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> Lengthwise &#123;</span><br><span class="line">  length: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 extends 约束泛型必须有一个 length 属性且类型为 number</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">Lengthwise</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg.length);</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 泛型约束的默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">IPerson</span> = <span class="title">IPerson</span>&gt;(<span class="params">obj: T, key: keyof T</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="可辨识联合类型"><a href="#可辨识联合类型" class="headerlink" title="可辨识联合类型"></a>可辨识联合类型</h3><p>你可以合并单例类型，联合类型，类型保护和类型别名来创建一个叫做 可辨识联合的高级模式，它也称做 标签联合或 代数数据类型。<br>可辨识联合在函数式编程很有用处。 一些语言会自动地为你辨识联合；而TypeScript则基于已有的JavaScript模式。<br>它具有3个要素：</p>
+<ul>
+<li>具有普通的单例类型属性 — <em>可辨识的特征</em>。</li>
+<li>一个类型别名包含了那些类型的联合 — <em>联合</em>。</li>
+<li>此属性上的类型保护。</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先我们声明将要联合的接口。</span></span><br><span class="line"><span class="comment">// 每个接口都有 kind 属性但有不同的字符串字面量类型。</span></span><br><span class="line"><span class="comment">// kind属性称做 可辨识的特征 或 标签。</span></span><br><span class="line"><span class="comment">// 其它的属性则特定于各个接口。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square &#123;</span><br><span class="line">  kind: <span class="string">"square"</span>;</span><br><span class="line">  size: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Rectangle &#123;</span><br><span class="line">  kind: <span class="string">"rectangle"</span>;</span><br><span class="line">  width: <span class="built_in">number</span>;</span><br><span class="line">  height: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Circle &#123;</span><br><span class="line">  kind: <span class="string">"circle"</span>;</span><br><span class="line">  radius: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意，目前各个接口间是没有联系的。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面我们把它们联合到一起：</span></span><br><span class="line"><span class="keyword">type</span> Shape = Square | Rectangle | Circle;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在我们使用可辨识联合</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">area</span>(<span class="params">s: Shape</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (s.kind) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"square"</span>: <span class="keyword">return</span> s.size * s.size;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"rectangle"</span>: <span class="keyword">return</span> s.height * s.width;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"circle"</span>: <span class="keyword">return</span> <span class="built_in">Math</span>.PI * s.radius ** <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的示例中，我们来总结一下：<br>所谓 <strong>可辨识联合</strong> 就是多个具有相同单例属性名称但有不同字面量的类型，联合成一个类型，然后根据这个单例属性【即 <em>可辨识特征</em> 】的不同字面量来推断出它的具体类型【<em>类型保护</em>】。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上就是本文档的全部内容了，但是也只是简单介绍了一些我们项目中常用的以及实际工作中比较实用的内容；TypeScript 官方文档还有更多东西没有介绍，比如命名空间、模块、声明合并、混入等。<br>如果你对此感兴趣，想进一步了解的话，建议移步 <span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript官方文档<i class="fa fa-external-link"></i></span> 查看更多。<br>那么假如本篇文档有帮助到你的话，我会很高兴写下它。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>【我得承认一点，写到后面，我直接复制了官方文档的内容】</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript官方文档<i class="fa fa-external-link"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>入门指南</tag>
       </tags>
   </entry>
   <entry>

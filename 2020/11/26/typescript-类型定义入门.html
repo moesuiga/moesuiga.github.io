@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.7.0">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TypeScript 是 JavaScript 的一个超集，针对 JavaScript 过于灵活的一个弊端，增加了静态类型。本文将带领你初步了解 TypeScript 中一些常见的类型定义与用法。">
+<meta name="keywords" content="typescript, ts, type, interface, 类型定义, 入门指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript 类型定义入门">
+<meta property="og:url" content="https://www.childish.site/2020/11/26/typescript-类型定义入门.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="TypeScript 是 JavaScript 的一个超集，针对 JavaScript 过于灵活的一个弊端，增加了静态类型。本文将带领你初步了解 TypeScript 中一些常见的类型定义与用法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.childish.site/images/gallery/2020112601.png">
+<meta property="og:updated_time" content="2020-11-26T13:05:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript 类型定义入门">
+<meta name="twitter:description" content="TypeScript 是 JavaScript 的一个超集，针对 JavaScript 过于灵活的一个弊端，增加了静态类型。本文将带领你初步了解 TypeScript 中一些常见的类型定义与用法。">
+<meta name="twitter:image" content="https://www.childish.site/images/gallery/2020112601.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.childish.site/2020/11/26/typescript-类型定义入门.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>TypeScript 类型定义入门 | 地平线·梦</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-135498029-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">地平线·梦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">32</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2020/11/26/typescript-类型定义入门.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Suiga">
+      <meta itemprop="description" content="小小西瓜棚">
+      <meta itemprop="image" content="/images/suiga.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">TypeScript 类型定义入门
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-11-26 20:05:19 / 修改时间：21:05:27" itemprop="dateCreated datePublished" datetime="2020-11-26T20:05:19+08:00">2020-11-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/TypeScript/" itemprop="url" rel="index"><span itemprop="name">TypeScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-description">TypeScript 是 JavaScript 的一个超集，针对 JavaScript 过于灵活的一个弊端，增加了静态类型。本文将带领你初步了解 TypeScript 中一些常见的类型定义与用法。</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+          
+          
+
+      
+      
+        
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          <a href="/images/gallery/2020112601.png" class="post-gallery-img fancybox" style="background-image: url(/images/gallery/2020112601.png);" rel="gallery_ckhz471yo0032eknn4lkmttab" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
+        </div>
+      
+
+      
+        <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本文旨在帮助新接触 TypeScript 的开发人员，能够快速了解 TypeScript 中的类型定义语法。<br>想了解更多，可以查看 <span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript 官方文档手册<i class="fa fa-external-link"></i></span><br>愿你有一段愉快的 TypeScript 开发体验。</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><blockquote>
+<p>注：这里所说的基础类型与复杂类型，是基于 JavaScript 的原始类型与引用类型来区分的，并非 TypeScript 文档中所说的基础类型</p>
+</blockquote>
+<h3 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h3><p>TypeScript 是 JavaScript 的一个超集，那么在 TypeScript 中的类型基本与 JavaScript 相同。<br>在 TypeScript 中主要有这几种基础类型：<code>number</code>, <code>string</code>, <code>boolean</code>, <code>symbol</code>, <code>bigint</code>。<br>分别对应 JavaScript 中的 <code>Number</code>, <code>String</code>, <code>Boolean</code>, <code>Symbol</code> 和 <code>BigInt</code>。<br><strong>注意大小写哦</strong></p>
+<h3 id="复杂类型"><a href="#复杂类型" class="headerlink" title="复杂类型"></a>复杂类型</h3><p>除去基础类型之外，更复杂的是其他的对应于 JavaScript 的 <code>Object</code>, <code>Array</code> 与 <code>Function</code> 的类型。<br>比如: <code>object</code>, <code>enum</code>枚举, <code>Array&lt;T&gt;</code>, <code>ArrayLike&lt;T&gt;</code>, Tuple元组, <code>Function</code> 等等，类型有很多，先不用太过关注这里列举出来的东西。</p>
+<blockquote>
+<p>enum 枚举是什么？<br>类似其他一些强类型编程语言中的枚举，当你想要一种类型，它只有有限的一些固定值时，就可以使用枚举类型。<br>它就相当于一个常量对象，内部存储了指定的有限个常量值。<br>这个类型的变量的值，只能是这些有限常量中的一个，不可能是其他任何值。<br>比如在不考虑一些特别的情况时，在我们的常识下，人类的性别只有两种：男性 和 女性。<br>此时就可以将性别作为一个枚举值来声明。<br>  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPerson &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: Gender;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Gender &#123;</span><br><span class="line">  female = <span class="number">0</span>,</span><br><span class="line">  male = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> w: IPerson = &#123;</span><br><span class="line">  name: <span class="string">'w'</span>,</span><br><span class="line">  age: <span class="number">18</span>,</span><br><span class="line">  gender: Gender.male</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>你可能发现了，除了将声明的枚举类型作为类型定义来使用以外，这里还把它作为一个值来使用了。<br>在 TypeScript 中，<code>enum</code> 关键字，除了会产生一个枚举类型定义以外，还会被编译成一个 JavaScript 对象，它是可以在代码中作为一个值来使用的。</p>
+</blockquote>
+<blockquote>
+<p>Tuple元组是什么？<br>TypeScript中除了普通的数组类型外，还存在一种特殊的数组类型，元组。<br>用简单形象一点的说明，元组就是固定长度的数组。在这个定长数组中，可以给它的每一项来声明一个类型。<br>比如有一个长度为2的数组，它的第一项是数字，第二项是字符串。那么就可以把它声明为一个元组。<br><code>let tuple: [number, string] = [1, &#39;text&#39;];</code></p>
+</blockquote>
+<h3 id="空值类型与-any-类型"><a href="#空值类型与-any-类型" class="headerlink" title="空值类型与 any 类型"></a>空值类型与 any 类型</h3><p>在 TypeScript 中有那么几个比较特殊的类型：<code>void</code>, <code>null</code> 和 <code>never</code>。</p>
+<p>它们都是空值类型，但是也有一些区别。</p>
+<ul>
+<li><code>void</code>: 表示未定义，可以对应 JavaScript 中的 <code>undefined</code></li>
+<li><code>null</code>: 从字面就可以理解，它就是对应着 JavaScript 中的空值 <code>null</code></li>
+<li><code>never</code>: 它是用来声明一个变量绝对不会有值，或者一个函数绝对不会返回的。<br>当给一个变量声明 <code>never</code> 类型时，那么无论是什么值，即使是 <code>undefined</code> 和 <code>null</code> 也不能赋值给这个变量。<br>同样的，如果给一个函数的返回类型声明为 <code>never</code>，就说明这个函数没有可访问的终结点，同时也就不能使用这个函数的返回值。<br>如何理解函数没有可访问的终结点，也即没有返回值：要么这个函数固定会抛出异常；要么内部有一个死循环，一直不可能返回。</li>
+</ul>
+<p>除了上面几个空值类型外，TypeScript 还有一个特殊的类型: <code>any</code> 。<br>这个类型其实就是不明确类型，说明该类型的值可能是任何类型，无法判断。这也是针对 JavaScript 的灵活性做出的应对。<br>在 JavaScript 中，即使一开始声明一个变量并赋值为数字，但是在其他地方，也可能会把这个变量改成字符串，布尔值，甚至是一个函数。<br>在这种情况下，自然就无法确定这个变量的类型到底是什么了，也就是 <code>any</code> 类型。</p>
+<h2 id="如何使用这些类型定义？"><a href="#如何使用这些类型定义？" class="headerlink" title="如何使用这些类型定义？"></a>如何使用这些类型定义？</h2><h3 id="显式声明"><a href="#显式声明" class="headerlink" title="显式声明"></a>显式声明</h3><p>在变量名称后面跟上冒号 <code>:</code> 加类型来声明变量的类型。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="keyword">let</span> bool: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> sym: symbol = Symbol(<span class="string">'unique'</span>);</span><br><span class="line"><span class="keyword">let</span> bigNum: bigint = <span class="number">996n</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nums: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> fn: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">number</span> = <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IMonster &#123;</span><br><span class="line">  race: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: <span class="string">'male'</span> | <span class="string">'female'</span> | <span class="string">'unknown'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> yukari: IMonster = &#123;</span><br><span class="line">  race: <span class="string">'Interstice'</span>,</span><br><span class="line">  age: <span class="number">17</span>,</span><br><span class="line">  gender: <span class="string">'female'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><p>通过类型断言的方式来告诉 TypeScript 编译器：“我很清楚自己在干什么，相信我，它在这里就是这个类型”。</p>
+<p>有两种方式，我们推荐使用 <code>as</code> 关键字。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getNum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> n = <span class="keyword">await</span> request(&#123;...&#125;) <span class="keyword">as</span> <span class="built_in">number</span>;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 考虑到你可能会问，既然有两种类型断言的语法，那么另一种是什么？</span></span><br><span class="line"><span class="comment">// 这里就再写一个吧</span></span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">any</span> = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="comment">// &lt;string&gt; 就是另一种类型断言，写在变量前面，告诉编译器，它就是字符串</span></span><br><span class="line"><span class="keyword">let</span> [, name] = (&lt;<span class="built_in">string</span>&gt;str).split(<span class="string">' '</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>看了上面的示例，你可能会发出 “好麻烦啊~” 的感叹，但是实际项目中并不需要每个地方都这么显式的给每个变量注明类型。</p>
+<p>TypeScript 是聪明的，它可以根据上下文来自行推断一个变量的类型。</p>
+<p>举例来说，当你给一个变量初始声明并赋值一个数字时，那么 TypeScript 就可以直接推断认为它是一个 <code>number</code> 类型的数据，而不需要你再通过如上示例那样给变量标注 <code>: number</code> 来告诉 TypeScript 它是一个数字。</p>
+<p>所以在实际使用时，你尽可以这么来写：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str = <span class="string">'Hello TS'</span>;</span><br><span class="line"><span class="keyword">let</span> bool = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> sym = Symbol(<span class="string">'unique'</span>);</span><br><span class="line"><span class="keyword">let</span> bigNum = <span class="number">996n</span>;</span><br></pre></td></tr></table></figure>
+<p>TypeScript 能够准确的推断出来它们各自的类型。<br>当然，如果一开始没有赋值，那么 TypeScript 自然也就无从推断，此时还是需要显式的注明类型的。<br>另一种情况是，在声明处赋予的值的类型并不明确，那么 TypeScript 也无法推断出具体的数据类型。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dynamic: <span class="built_in">any</span> = <span class="number">123</span>;</span><br><span class="line"><span class="comment">// 因为 dynamic 是 any，所以这里的 num 也是 any</span></span><br><span class="line"><span class="keyword">let</span> num = dynamic;</span><br></pre></td></tr></table></figure>
+<h3 id="联合类型与交叉类型"><a href="#联合类型与交叉类型" class="headerlink" title="联合类型与交叉类型"></a>联合类型与交叉类型</h3><p>就像上面介绍 <code>any</code> 类型时所说，有时一个变量可能不止一种类型，比如一个网络请求的返回数据，当服务能查到数据时，会返回一个数值类型的状态码，可是如果服务出错了，那就只能返回 <code>null</code> 了。<br>这种情况下，要怎么声明它既可能是一个数字，又可能是一个空值呢？<br>TypeScript 有提供一种联合类型: <code>A | B</code> 。<br>比如上面这种可能是数字，也可能是 <code>null</code> 的情况，就可以这样来声明：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可能是数值类型，也可能为 null</span></span><br><span class="line"><span class="keyword">let</span> status: <span class="built_in">number</span> | <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>另一种情况恰好相反，某个变量是多种类型的集合，它可能同时包含有类型A和类型B。<br>这时你需要的是交叉类型: <code>A &amp; B</code> 的形式来声明。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 既有通用区域信息，又包含热门区域信息</span></span><br><span class="line"><span class="keyword">let</span> area: ICommonArea &amp; IHotArea;</span><br></pre></td></tr></table></figure>
+<h3 id="字面量类型与类型别名"><a href="#字面量类型与类型别名" class="headerlink" title="字面量类型与类型别名"></a>字面量类型与类型别名</h3><p>在 TypeScript 中除了使用特定的类型关键字以外，还可以使用字面量作为类型，以此表示常量类型。就像上面介绍枚举类型时所做的那样。<br>而这种字面量类型在实际使用场景中，通常都是多个字面量的联合类型。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用字面量联合类型，达到枚举类型的效果</span></span><br><span class="line"><span class="keyword">let</span> gender: <span class="string">'male'</span> | <span class="string">'female'</span> = <span class="string">'male'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> privilege: <span class="number">0</span> | <span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> | <span class="number">16</span> = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>如果联合类型的数量比较多，又可能在多个地方使用的话，每次都写一长串的联合类型，是不是很烦恼？即使可以复制粘贴，也希望有一个更好的方式？<br>TypeScript 有提供一个声明类型别名的关键字 <code>type</code>，可以使用它来声明一个类型别名，使用这个别名来代替它的实际类型。<br>当然，类型别名并不只是用来给联合类型使用的，你也可以给一些特定的类型组合一个语义化别名，或者给一个自定义的函数类型加上语义化别名。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> IPrivilege = <span class="number">0</span> | <span class="number">1</span> | <span class="number">2</span> | <span class="number">4</span> | <span class="number">8</span> | <span class="number">16</span>;</span><br><span class="line"><span class="keyword">let</span> privilege: IPrivilege = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IGetName: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>在自定义一些复杂的类型时，接口是经常被使用到的内容，我认为可以说 TypeScript 中最常用的、最重要的类型就是接口。<br>在 TypeScript 中要定义一个对象类型，如果你使用类型 <code>object</code>，那么你只能得到一个非原始类型的数据类型定义。<br>要想更详细的定义一个对象内有哪些属性，哪些方法，这些属性和方法有分别有着怎样的类型，这时候你就需要了解 <code>interface</code> 了。<br>你应该能注意到，在上面的一些示例中，已经出现过它了。</p>
+<p>比如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPerson &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  gender: Gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段接口声明中，<code>interface</code> 是接口声明的关键字，<code>IPerson</code> 则是声明的接口的名字，后面的代码块中则是声明了这个接口内有哪些属性以及它们的类型。<br><code>IPerson</code> 接口有三个属性，<code>string</code> 类型的 <code>name</code> 属性、<code>number</code> 类型的 <code>age</code> 属性，<code>Gender</code> 枚举类型的 <code>gender</code> 属性。<br>当你以接口 <code>IPerson</code> 为类型声明一个对象时，它就必须包含上述三个属性，且值要符合其各自的类型。</p>
+<h4 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h4><p>并非所有的属性，在接口中都是必需的。有些属性可能一开始并不存在，或者只在某些特定条件下才会有。<br>这时候，就可以把它作为可选属性来声明。<br>只需要在正常的接口声明中，找到要设置为可选的属性，在属性名与冒号之间添加一个问号即可。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> ISquareConfig &#123;</span><br><span class="line">  color?: <span class="built_in">string</span>;</span><br><span class="line">  width?: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a>只读属性</h4><p>有些属性可能只在初始化时设置一个值，在后面就不可修改了，这时就可以通过 <code>readonly</code> 关键字来设置其为只读属性。<br>只读属性只可访问，不可修改。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> IPoint &#123;</span><br><span class="line">  readonly x: <span class="built_in">number</span>;</span><br><span class="line">  readonly y: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p: IPoint = &#123;</span><br><span class="line">  x: <span class="number">1</span>,</span><br><span class="line">  y: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 错误，只读属性不可修改</span></span><br><span class="line">p.x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TypeScript 中有一个 ReadonlyArray&lt;T&gt; 的类型，类似 Array&lt;T&gt;</span></span><br><span class="line"><span class="comment">// 只是将数组中的可变方法去掉了，以此来确保数组被创建后，不可更改</span></span><br><span class="line"><span class="keyword">const</span> arr: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.splice(<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 错误</span></span><br><span class="line">arr.push(<span class="number">3</span>); <span class="comment">// 错误</span></span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">10</span>; <span class="comment">// 错误</span></span><br><span class="line">arr.length = <span class="number">5</span>; <span class="comment">// 错误</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h4><p>接口能够描述 JavaScript 中对象拥有的各种各样的外形。 除了描述带有属性的普通对象外，接口也可以描述函数类型。<br>为了使用接口表示函数类型，我们需要给接口定义一个调用签名。<br>它就像是一个只有参数列表和返回值类型的函数定义。参数列表里的每个参数都需要名字和类型。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, subString: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mySearch: SearchFunc;</span><br><span class="line">mySearch = <span class="function"><span class="keyword">function</span>(<span class="params">source: <span class="built_in">string</span>, subString: <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = source.search(subString);</span><br><span class="line">  <span class="keyword">return</span> result &gt; <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="可索引的类型"><a href="#可索引的类型" class="headerlink" title="可索引的类型"></a>可索引的类型</h4><p>与使用接口描述函数类型差不多，我们也可以描述那些能够“通过索引得到”的类型，比如 <code>a[10]</code> 或 <code>ageMap[&quot;daniel&quot;]</code>。</p>
+<p>可索引类型具有一个 索引签名，它描述了对象索引的类型，还有相应的索引返回值类型。</p>
+<p>让我们看一个例子：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> StringArray &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myArray: StringArray;</span><br><span class="line">myArray = [<span class="string">"Bob"</span>, <span class="string">"Fred"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myStr: <span class="built_in">string</span> = myArray[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>TypeScript 支持两种索引签名：字符串和数字。【实际上，<code>Symbol</code> 也是可以的】<br>可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型。<br>这是因为当使用 <code>number</code> 来索引时，JavaScript 会将它转换成 <code>string</code> 然后再去索引对象。</p>
+<p>也就是说用 100（一个 <code>number</code> ）去索引等同于使用”100”（一个 <code>string</code> ）去索引，因此两者需要保持一致。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Animal &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> Dog <span class="keyword">extends</span> Animal &#123;</span><br><span class="line">  breed: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：使用数值型的字符串索引，有时会得到完全不同的Animal!</span></span><br><span class="line"><span class="keyword">interface</span> NotOkay &#123;</span><br><span class="line">  [x: <span class="built_in">number</span>]: Animal;</span><br><span class="line">  [x: <span class="built_in">string</span>]: Dog;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> NumberDictionary &#123;</span><br><span class="line">  [index: <span class="built_in">string</span>]: <span class="built_in">number</span>;</span><br><span class="line">  length: <span class="built_in">number</span>;    <span class="comment">// 可以，length是number类型</span></span><br><span class="line">  name: <span class="built_in">string</span>       <span class="comment">// 错误，`name`的类型与索引类型返回值的类型不匹配</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，你可以将索引签名设置为只读，这样就防止了给索引赋值：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> ReadonlyStringArray &#123;</span><br><span class="line">  readonly [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> myArray: ReadonlyStringArray = [<span class="string">"Alice"</span>, <span class="string">"Bob"</span>];</span><br><span class="line"><span class="comment">// 你不能设置myArray[2]，因为索引签名是只读的。</span></span><br><span class="line">myArray[<span class="number">2</span>] = <span class="string">"Mallory"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="接口的继承与实现"><a href="#接口的继承与实现" class="headerlink" title="接口的继承与实现"></a>接口的继承与实现</h4><p>在 TypeScript 中，你可以强制一个类按照某个接口定义的描述来实现它，使用 <code>implements</code> 来实现一个接口。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">  currentTime: <span class="built_in">Date</span>;</span><br><span class="line">  setTime(d: <span class="built_in">Date</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Clock <span class="keyword">implements</span> ClockInterface &#123;</span><br><span class="line">  currentTime: <span class="built_in">Date</span>;</span><br><span class="line">  setTime(d: <span class="built_in">Date</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentTime = d;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口描述了类的公共部分，而不是公共和私有两部分。 它不会帮你检查类是否具有某些私有成员。<br>当一个类实现了一个接口时，只对其实例部分进行类型检查，而不会检查静态部分。</p>
+<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>映射类型就是从旧类型中创建新类型的一种方式。<br>比如在接口部分中我们有提到可选属性与只读属性，但是那种是对接口中的某个或某几个属性做出的说明。<br>如果现在需要一个接口，要求它的所有属性都是可选属性，或者所有属性都是只读属性的话，总不能再写一个新的接口，并且把每个属性都加上可选或只读吧？<br>TypeScript 提供了一些这方面的预置类型：<code>Partial&lt;T&gt;</code>, <code>Readonly&lt;T&gt;</code>, <code>Pick&lt;T, K extends keyof T&gt;</code>, <code>Record&lt;K extends string, T&gt;</code>。</p>
+<p>它们的实现如下：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> keyof T]?: T[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Readonly&lt;T&gt; = &#123;</span><br><span class="line">  readonly [P <span class="keyword">in</span> keyof T]: T[p];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Record&lt;K <span class="keyword">extends</span> <span class="built_in">string</span>, T&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> K]: T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，你会看到一些新的内容：<code>keyof</code> 和 索引式的 <code>for ... in</code>。<br>你可以把 <code>keyof</code> 类比到 JavaScript 中的 <code>Object.keys</code> ，它是获取接口定义的属性名列表的。<br>然后再通过 <code>in</code> 操作符挨个将属性名赋给 <code>P</code>，而后把这个 <code>P</code> 作为新接口的属性。<br>这四个类型中， <code>Partial&lt;T&gt;</code>, <code>Readonly&lt;T&gt;</code> 和 <code>Pick&lt;T, K extends keyof T&gt;</code> 都是同态的。</p>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>你是否发现了上面几个映射类型在写法上有什么特别的？<br>它们在类型名称后面都有一个尖括号，内部有一个或多个名称。比如 <code>Partial&lt;T&gt;</code> 中的 <code>&lt;T&gt;</code>。<br>乍一看似乎和前面讲到的类型断言有点相似，只是一个在前，一个在后。<br>但它并不是类型断言，而是被叫作 <strong>泛型</strong>。</p>
+<p>不要从名字上理解，认为泛型与 <code>any</code> 类似。<br>泛型不同于 <code>any</code>，你可以认为它是一个未定义的类型别名，是一个函数的形参。<br>在实际使用时，必须给这个泛型一个明确的类型，可以是单例类型，也可以是交叉、联合类型。<br>而后 TypeScript 会根据实际使用时的类型，动态的得出最终结果的类型。</p>
+<h4 id="为什么要用泛型？"><a href="#为什么要用泛型？" class="headerlink" title="为什么要用泛型？"></a>为什么要用泛型？</h4><p>从上面的说明中，你应该能了解到，泛型的结果与输入有关，这就相当于一个函数，输入不同，输出也会改变。<br>有时候我们就是需要根据不同的输入，得到不同的输出类型。这就是泛型的价值。<br>假设我们有下面这样一个函数，它什么也不做，只是把传入的第一个参数返回。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我们要怎么定义它的参数arg的类型，以及函数的返回类型？<br>参数 <code>arg</code> 可以是任何类型，同样的，返回的 <code>arg</code> 自然也可以是任何类型。<br>可是如果我把它们定义为 <code>any</code> 类型，那样并不能表现出来返回类型与参数类型直接的关系，不论传入什么参数，函数的返回都是 <code>any</code> 类型。<br>可事实上，我们知道，如果传入 <code>string</code> ，它就会返回 <code>string</code>；如果传入 <code>number</code> ，它也会返回 <code>number</code>。<br>为此，我可以使用泛型来定义，先给函数声明一个泛型 A【A仅仅只是一个随便的命名，并非必须要命名为 A】，然后定义参数 <code>arg</code> 类型为 A。那么函数的返回类型自然也是 A。</p>
+<p>此时我们就能发现，函数的参数类型与返回类型有了一个关联，当我传入一个 <code>string</code> 时，TypeScript 就能知道函数的返回类型也是 <code>string</code>；传入 <code>number</code> 时，也能知道返回 <code>number</code>。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>&lt;<span class="title">A</span>&gt;(<span class="params">arg: A</span>): <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h4><p>泛型很灵活，只有在使用时才能知道具体的类型是什么，这似乎有点回到 JavaScript 中的样子。<br>如果有些地方，我需要使用到泛型，然而我还希望这个泛型是某个类型的子类型时怎么办？<br>可以通过 <code>extends</code> 继承来约束泛型。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Lengthwise &#123;</span><br><span class="line">  length: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 extends 约束泛型必须有一个 length 属性且类型为 number</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnArg</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">Lengthwise</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg.length);</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 泛型约束的默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">IPerson</span> = <span class="title">IPerson</span>&gt;(<span class="params">obj: T, key: keyof T</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="可辨识联合类型"><a href="#可辨识联合类型" class="headerlink" title="可辨识联合类型"></a>可辨识联合类型</h3><p>你可以合并单例类型，联合类型，类型保护和类型别名来创建一个叫做 可辨识联合的高级模式，它也称做 标签联合或 代数数据类型。<br>可辨识联合在函数式编程很有用处。 一些语言会自动地为你辨识联合；而TypeScript则基于已有的JavaScript模式。<br>它具有3个要素：</p>
+<ul>
+<li>具有普通的单例类型属性 — <em>可辨识的特征</em>。</li>
+<li>一个类型别名包含了那些类型的联合 — <em>联合</em>。</li>
+<li>此属性上的类型保护。</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先我们声明将要联合的接口。</span></span><br><span class="line"><span class="comment">// 每个接口都有 kind 属性但有不同的字符串字面量类型。</span></span><br><span class="line"><span class="comment">// kind属性称做 可辨识的特征 或 标签。</span></span><br><span class="line"><span class="comment">// 其它的属性则特定于各个接口。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square &#123;</span><br><span class="line">  kind: <span class="string">"square"</span>;</span><br><span class="line">  size: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Rectangle &#123;</span><br><span class="line">  kind: <span class="string">"rectangle"</span>;</span><br><span class="line">  width: <span class="built_in">number</span>;</span><br><span class="line">  height: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Circle &#123;</span><br><span class="line">  kind: <span class="string">"circle"</span>;</span><br><span class="line">  radius: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意，目前各个接口间是没有联系的。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面我们把它们联合到一起：</span></span><br><span class="line"><span class="keyword">type</span> Shape = Square | Rectangle | Circle;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在我们使用可辨识联合</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">area</span>(<span class="params">s: Shape</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (s.kind) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"square"</span>: <span class="keyword">return</span> s.size * s.size;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"rectangle"</span>: <span class="keyword">return</span> s.height * s.width;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"circle"</span>: <span class="keyword">return</span> <span class="built_in">Math</span>.PI * s.radius ** <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的示例中，我们来总结一下：<br>所谓 <strong>可辨识联合</strong> 就是多个具有相同单例属性名称但有不同字面量的类型，联合成一个类型，然后根据这个单例属性【即 <em>可辨识特征</em> 】的不同字面量来推断出它的具体类型【<em>类型保护</em>】。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上就是本文档的全部内容了，但是也只是简单介绍了一些我们项目中常用的以及实际工作中比较实用的内容；TypeScript 官方文档还有更多东西没有介绍，比如命名空间、模块、声明合并、混入等。<br>如果你对此感兴趣，想进一步了解的话，建议移步 <span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript官方文档<i class="fa fa-external-link"></i></span> 查看更多。<br>那么假如本篇文档有帮助到你的话，我会很高兴写下它。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>【我得承认一点，写到后面，我直接复制了官方文档的内容】</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudHNsYW5nLmNuL2RvY3MvaG9tZS5odG1s" title="https://www.tslang.cn/docs/home.html">TypeScript官方文档<i class="fa fa-external-link"></i></span></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/入门指南/" rel="tag"># 入门指南</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html" rel="next" title="在 NodeJS 终端输出有简单样式的文本内容">
+                <i class="fa fa-chevron-left"></i> 在 NodeJS 终端输出有简单样式的文本内容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/suiga.gif" alt="Suiga">
+            
+              <p class="site-author-name" itemprop="name">Suiga</p>
+              <p class="site-description motion-element" itemprop="description">小小西瓜棚</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.childish.site/" title="Suiga &rarr; https://www.childish.site/"><i class="fa fa-fw fa-user"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub &rarr; https://github.com/moesuiga"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:moesuiga@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8=" title="https://www.google.com/">谷歌</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tLw==" title="https://segmentfault.com/">SegmentFault</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS8=" title="https://stackoverflow.com/">StackOverflow</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==" title="https://www.baidu.com/">百度</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0v" title="https://juejin.im/">掘金</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20v" title="https://www.jianshu.com/">简书</span>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tLw==" title="https://www.zhihu.com/">知乎</span>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型"><span class="nav-number">2.</span> <span class="nav-text">类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础类型"><span class="nav-number">2.1.</span> <span class="nav-text">基础类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂类型"><span class="nav-number">2.2.</span> <span class="nav-text">复杂类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空值类型与-any-类型"><span class="nav-number">2.3.</span> <span class="nav-text">空值类型与 any 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用这些类型定义？"><span class="nav-number">3.</span> <span class="nav-text">如何使用这些类型定义？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显式声明"><span class="nav-number">3.1.</span> <span class="nav-text">显式声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型断言"><span class="nav-number">3.2.</span> <span class="nav-text">类型断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推断"><span class="nav-number">3.3.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合类型与交叉类型"><span class="nav-number">3.4.</span> <span class="nav-text">联合类型与交叉类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字面量类型与类型别名"><span class="nav-number">3.5.</span> <span class="nav-text">字面量类型与类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">3.6.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可选属性"><span class="nav-number">3.6.1.</span> <span class="nav-text">可选属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#只读属性"><span class="nav-number">3.6.2.</span> <span class="nav-text">只读属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数类型"><span class="nav-number">3.6.3.</span> <span class="nav-text">函数类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可索引的类型"><span class="nav-number">3.6.4.</span> <span class="nav-text">可索引的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口的继承与实现"><span class="nav-number">3.6.5.</span> <span class="nav-text">接口的继承与实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射类型"><span class="nav-number">3.7.</span> <span class="nav-text">映射类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">3.8.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要用泛型？"><span class="nav-number">3.8.1.</span> <span class="nav-text">为什么要用泛型？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型约束"><span class="nav-number">3.8.2.</span> <span class="nav-text">泛型约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可辨识联合类型"><span class="nav-number">3.9.</span> <span class="nav-text">可辨识联合类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">豫ICP备19018274号-1 </span>&copy; 2017 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+  <script src="/js/hitokoto.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '827326488d2cde661c88',
+    clientSecret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
+    repo: 'blog-comments-by-gitalk',
+    owner: 'moesuiga',
+    admin: ['moesuiga'],
+    // id: md5(location.pathname),
+    id: md5('1606392319000'),
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "default";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,Twitter,Facebook,Tumblr,GoogleBookmarks";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>
