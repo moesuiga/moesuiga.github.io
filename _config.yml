@@ -180,8 +180,6 @@ live2d:
     # use: live2d-widget-model-nipsilon
     # use: live2d-widget-model-nietzsche
     # use: live2d-widget-model-ni-j
-    # use: live2d-widget-model-haru/01 #! package.json json parse error, need `{}` at least, 02 is the same
-    # use: live2d-widget-model-haru/02
     # use: live2d-widget-model-beigege
   display:
     position: right
