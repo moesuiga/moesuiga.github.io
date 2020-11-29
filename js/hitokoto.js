@@ -10,6 +10,7 @@ document.head.innerHTML += `
     box-sizing: border-box;
   }
   .live2d-widget-dialog-2 {
+    position: relative;
     width: 100%;
     height: 100%;
     min-height: 60px;
@@ -26,6 +27,18 @@ document.head.innerHTML += `
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
     word-break: break-all;
     font-family: STXinwei, STKaiTi, STHeiti, STLiTi, Roboto, "Open Sans", "Hiragino Sans GB", "Hannotate SC", "Hanzipen SC", "Source Han Sans CN", FZYiHei-M20S, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .live2d-widget-dialog-2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid rgb(236, 203, 180);
+    background: rgb(252, 248, 244);
+    border-right: 2px solid rgb(236, 203, 180);
+    transform: translate(-50%, -4px) rotate(45deg);
   }
 </style>
 `;

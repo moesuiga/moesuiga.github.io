@@ -1,156 +1,73 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="zh-CN">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
 
 
-  
-  
-    
-  
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
 
-
-
-
-
+<link rel="stylesheet" href="/css/main.css">
 
 
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.childish.site","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
 
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
-
-
-
-
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
-
-
-
-  
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="/css/main.css?v=6.7.0">
-
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.7.0">
-
-
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '6.7.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
-    fancybox: true,
-    fastclick: false,
-    lazyload: true,
-    tabs: true,
-    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字/布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？">
-<meta name="keywords" content="NodeJS, console, native, color, colors">
+  <meta name="description" content="在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字&#x2F;布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 NodeJS 终端输出有简单样式的文本内容">
-<meta property="og:url" content="https://www.childish.site/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html">
+<meta property="og:url" content="https://www.childish.site/2020/07/25/%E5%9C%A8-nodejs-%E7%BB%88%E7%AB%AF%E8%BE%93%E5%87%BA%E6%9C%89%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9.html">
 <meta property="og:site_name" content="地平线·梦">
-<meta property="og:description" content="在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字/布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字&#x2F;布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.childish.site/images/gallery/2020072501.png">
-<meta property="og:updated_time" content="2020-08-11T14:53:25.000Z">
+<meta property="article:published_time" content="2020-07-25T01:29:53.000Z">
+<meta property="article:modified_time" content="2020-08-11T14:53:25.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="console">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在 NodeJS 终端输出有简单样式的文本内容">
-<meta name="twitter:description" content="在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字/布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？">
 <meta name="twitter:image" content="https://www.childish.site/images/gallery/2020072501.png">
 
 
+<link rel="canonical" href="https://www.childish.site/2020/07/25/%E5%9C%A8-nodejs-%E7%BB%88%E7%AB%AF%E8%BE%93%E5%87%BA%E6%9C%89%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9.html">
 
 
-
-
-  <link rel="canonical" href="https://www.childish.site/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html">
-
-
-
-<script id="page.configurations">
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
-</script>
+</script><link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
 
   <title>在 NodeJS 终端输出有简单样式的文本内容 | 地平线·梦</title>
   
-
-
-
-
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-135498029-1');
-  </script>
-
-
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-135498029-1');
+      }
+    </script>
 
 
 
@@ -159,398 +76,343 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
 
-  .use-motion .logo,
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">地平线·梦</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-    
-      
-        <h1 class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</h1>
-      
-    
-    
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">地平线·梦</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
 
 
 
 <nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    
-    
-    
-      
-    
-
-    
-      
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
+        <li class="menu-item menu-item-about">
 
-    
-    
-    
-      
-    
-
-    
-      
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
+        <li class="menu-item menu-item-tags">
 
-    
-    
-    
-      
-    
-
-    
-      
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">32</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
+        <li class="menu-item menu-item-categories">
 
-    
-    
-    
-      
-    
-
-    
-      
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">11</span></a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-archives">
 
-    
-    
-    
-      
-    
-
-    
-      
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a>
 
   </li>
+        <li class="menu-item menu-item-sitemap">
 
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
-        </li>
-      
-    </ul>
-  
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
 
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
-  
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
 
-
+    </div>
+  </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BE%93%E5%87%BA%E9%86%92%E7%9B%AE%E9%A2%9C%E8%89%B2%E7%9A%84%E6%96%87%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">如何输出醒目颜色的文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">具体操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E7%9A%84%E9%A2%9C%E8%89%B2"><span class="nav-number">3.</span> <span class="nav-text">更多的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-Mac-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BE%93%E5%87%BA%E9%A2%9C%E8%89%B2"><span class="nav-number">4.</span> <span class="nav-text">Linux&#x2F;Mac 终端命令行输出颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%BA%8F%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">控制序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E7%B4%A2%E5%BC%95%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">颜色索引值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Suiga"
+      src="/images/suiga.gif">
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">小小西瓜棚</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  
-  
-  
-  
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
 
   
 
-  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
 
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-            
-
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
+    <div class="post-gallery-image">
+      <img src="/images/gallery/2020072501.png" itemprop="contentUrl">
+    </div>
+    </div>
 
-  
-
-  
-  
-  
-
-  
-    <div class="reading-progress-bar"></div>
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2020/07/25/%E5%9C%A8-nodejs-%E7%BB%88%E7%AB%AF%E8%BE%93%E5%87%BA%E6%9C%89%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
       <meta itemprop="name" content="Suiga">
       <meta itemprop="description" content="小小西瓜棚">
-      <meta itemprop="image" content="/images/suiga.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="地平线·梦">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 NodeJS 终端输出有简单样式的文本内容
+        </h1>
 
-        
-        
-          <h2 class="post-title" itemprop="name headline">在 NodeJS 终端输出有简单样式的文本内容
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              
-            
-          </h2>
-        
+      <time title="创建时间：2020-07-25 09:29:53" itemprop="dateCreated datePublished" datetime="2020-07-25T09:29:53+08:00">2020-07-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-11 22:53:25" itemprop="dateModified" datetime="2020-08-11T22:53:25+08:00">2020-08-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+        </span>
+    </span>
 
-        <div class="post-meta">
-          <span class="post-time">
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/25/%E5%9C%A8-nodejs-%E7%BB%88%E7%AB%AF%E8%BE%93%E5%87%BA%E6%9C%89%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-07-25 09:29:53" itemprop="dateCreated datePublished" datetime="2020-07-25T09:29:53+08:00">2020-07-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-08-11 22:53:25" itemprop="dateModified" datetime="2020-08-11T22:53:25+08:00">2020-08-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
             <div class="post-description">在 NodeJS 终端输出内容时，本身根据不同的数据类型，也有不同的默认颜色标识，比如普通文本是白色，数字/布尔值是黄色，字符串是绿色，undefined 是灰色（或者半透明的白色？）等等。可是如果想要自己输出一些特定的颜色来做一些显眼的提示，要怎么做呢？</div>
-          
-
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-          
-          
-
-      
-      
-        
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          <a href="/images/gallery/2020072501.png" class="post-gallery-img fancybox" style="background-image: url(/images/gallery/2020072501.png);" rel="gallery_ckhz471yg002oeknn438hsysh" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>
-        </div>
-      
-
-      
         <blockquote>
 <p>To: 想要在 <code>NodeJS</code> 终端输出醒目颜色文本的同学，并且你不希望引入如: <code>chalk</code>, <code>colors</code> 等第三方包。</p>
 </blockquote>
 <p>如果你是上面这样的情况，或者说虽然不是这样，但是也想了解一下的话，那就继续看下去吧~。</p>
-<h3 id="如何输出醒目颜色的文本"><a href="#如何输出醒目颜色的文本" class="headerlink" title="如何输出醒目颜色的文本"></a>如何输出醒目颜色的文本</h3><p>首先你要安装了 <code>node</code>，（😁）毕竟这是针对 <code>NodeJS</code> 的终端输出记录嘛。<br>当然这个过程中我也查到了直接在 bash 终端输出颜色的方法，如果你用的<strong>不是</strong> <em>Windows</em> 的话，也可以直接看<a href="#Linux-Mac-终端命令行输出颜色">Linux/Mac 终端输出颜色</a>。</p>
+<h3 id="如何输出醒目颜色的文本"><a href="#如何输出醒目颜色的文本" class="headerlink" title="如何输出醒目颜色的文本"></a>如何输出醒目颜色的文本</h3><p>首先你要安装了 <code>node</code>，（😁）毕竟这是针对 <code>NodeJS</code> 的终端输出记录嘛。<br>当然这个过程中我也查到了直接在 bash 终端输出颜色的方法，如果你用的<strong>不是</strong> <em>Windows</em> 的话，也可以直接看<a href="#Linux-Mac-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BE%93%E5%87%BA%E9%A2%9C%E8%89%B2">Linux/Mac 终端输出颜色</a>。</p>
 <p>如果你已经安装了 <code>node</code>，那么可以试一下直接在 <code>REPL</code> 中输入以下脚本来查看效果。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'\x1b[1;35mCongratulations!🎉 \x1b[32mYou do it!\x1b[0m'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\x1b[1;35mCongratulations!🎉 \x1b[32mYou do it!\x1b[0m&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><code>REPL</code>: <em>Read-Eval-Print-Loop</em>, <code>NodeJS</code>的可交互运行环境, 直接在命令行输入 <code>node</code> 敲击回车键即可进入, 要退出时, 可输入 <code>.exit</code> 敲击回车键。</p>
 </blockquote>
@@ -558,22 +420,27 @@
 <h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3><p>你可能会注意到，脚本输出的内容跟 <code>console.log</code> 的参数有点不一样，这不一样的地方，就是 <code>XTerm</code> 控制序列（<code>XTerm Control Sequences</code>）。</p>
 <p>但是你可能并不关心这些，所以我把这部分内容放到了后面。你可以直接查看最关心的内容，也就是都有哪些样式可以设置，以及如何设置。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">\x1b[0m: 默认样式，也可以将设置的其他样式重置为默认。</span><br><span class="line">\x1b[1m: 加粗、明亮</span><br><span class="line">\x1b[2m: 暗淡、半透明【亮度减半】</span><br><span class="line">\x1b[3m: 斜体</span><br><span class="line">\x1b[4m: 下划线</span><br><span class="line">\x1b[5m: 闪烁【xterm不能识别闪烁或者不可见模式】</span><br><span class="line">\x1b[7m: 颜色反转【前景色和背景色反过来】【前景色就是指文本颜色】</span><br><span class="line">\x1b[8m: 不可见【xterm不能识别闪烁或者不可见模式】</span><br><span class="line">\x1b[9m: 中划线【就是删除线了】</span><br><span class="line"></span><br><span class="line"># 你应该能看出来 \x1b[ 和 m 是固定的开始和结束</span><br><span class="line"># 所以下面我就只写中间的数字了，【偷个懒😋】</span><br><span class="line"></span><br><span class="line">21: 双下划线【ECMA-48 第三版，但是xterm的属性与 ECMA-48 不兼容，是显示正常亮度，同下面的 22】</span><br><span class="line">22: 正常亮度，用来取消加粗和暗淡，也就是取消 1 和 2</span><br><span class="line">23: 非斜体，用来取消 3</span><br><span class="line">24: 非下划线，用来取消 4</span><br><span class="line">25: 稳定，非闪烁，用来取消 5</span><br><span class="line">27: 正常的，非反的，用来取消 7</span><br><span class="line">28: 可见的，用来取消 8</span><br><span class="line">29: 非划线的，用来取消 9</span><br><span class="line"># 嗯，很明显，2x 是用来取消某些样式的</span><br><span class="line"># 而且除了 22 是取消 1 和 2，其他的取消也都是一一对应的</span><br><span class="line"></span><br><span class="line">30: 黑色前景 (Black)</span><br><span class="line">31: 红色前景 (Red)</span><br><span class="line">32: 绿色前景 (Green)</span><br><span class="line">33: 黄色前景 (Yellow)</span><br><span class="line">34: 蓝色前景 (Blue)</span><br><span class="line">35: 洋红色前景 (Magenta)</span><br><span class="line">36: 青色前景 (Cyan)</span><br><span class="line">37: 白色前景 (White)</span><br><span class="line">39: 默认前景 (default)</span><br><span class="line"># 3x 就是用来设置前景颜色，也就是文本颜色的</span><br><span class="line"></span><br><span class="line">40: 黑色背景 (Black)</span><br><span class="line">41: 红色背景 (Red)</span><br><span class="line">42: 绿色背景 (Green)</span><br><span class="line">43: 黄色背景 (Yellow)</span><br><span class="line">44: 蓝色背景 (Blue)</span><br><span class="line">45: 洋红色背景 (Magenta)</span><br><span class="line">46: 青色背景 (Cyan)</span><br><span class="line">47: 白色背景 (White)</span><br><span class="line">49: 默认背景 (default)</span><br><span class="line"># 4x 可以设置背景色，且颜色值与前景色一一对应</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>想要混合起来的话，只需要把数字用 <code>;</code> （分号）分隔开放入 <code>\x1b[</code> 和 <code>m</code> 之间即可。就像最开始示例中的 <code>\x1b[1;35m</code>，<br>当然你也可以完整的一个一个来，比如 <code>\x1b[1m\x1b[35m</code>，如果你不嫌麻烦的话。</p>
 </blockquote>
 <h3 id="更多的颜色"><a href="#更多的颜色" class="headerlink" title="更多的颜色"></a>更多的颜色</h3><p>想要更多的颜色展示？16位颜色支持</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">90~97: 对应着 30~37，也是设置一样的前景色，不同的是这个的颜色更加亮一些</span><br><span class="line">100~107: 对应 40~47，设置亮一些的背景色</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>如果你的系统支持的话，其实 <code>90~97</code> 的颜色和 <code>30~37;1</code> 的颜色基本是一样的，这就是最开始说 <code>1</code> 有加粗，也有明亮的作用。<br>如果同时设置 <code>1</code> 和 <code>2</code> 会怎么样？加粗+明亮+半透明，或许不同的终端效果会不一样？也许你应该自己动手试一下。</p>
 </blockquote>
 <p>如果你的终端还支持 88 或 256 位颜色的话，你甚至可以设置 rgb 颜色。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 38;2;r;g;b 使用rgb设置前景色</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'\x1b[38;2;255;165;0mOrange Text\x1b[0m'</span>);</span><br><span class="line"><span class="comment">// 38;5;index 使用颜色索引设置前景色 索引值范围 0 ~ 255</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'\x1b[38;5;215mOrange Text\x1b[0m'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 背景色类似前景色，只需要把 38 改成 48 即可</span></span><br><span class="line"><span class="comment">// 48;2;r;g;b 使用rgb设置前景色</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'\x1b[48;2;255;165;0mOrange Background\x1b[0m'</span>);</span><br><span class="line"><span class="comment">// 48;5;index 使用颜色索引设置前景色 索引值范围 0 ~ 255</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'\x1b[48;5;215mOrange Background\x1b[0m'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 38;2;r;g;b 使用rgb设置前景色</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\x1b[38;2;255;165;0mOrange Text\x1b[0m&#x27;</span>);</span><br><span class="line"><span class="comment">// 38;5;index 使用颜色索引设置前景色 索引值范围 0 ~ 255</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\x1b[38;5;215mOrange Text\x1b[0m&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 背景色类似前景色，只需要把 38 改成 48 即可</span></span><br><span class="line"><span class="comment">// 48;2;r;g;b 使用rgb设置前景色</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\x1b[48;2;255;165;0mOrange Background\x1b[0m&#x27;</span>);</span><br><span class="line"><span class="comment">// 48;5;index 使用颜色索引设置前景色 索引值范围 0 ~ 255</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\x1b[48;5;215mOrange Background\x1b[0m&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
 <h3 id="Linux-Mac-终端命令行输出颜色"><a href="#Linux-Mac-终端命令行输出颜色" class="headerlink" title="Linux/Mac 终端命令行输出颜色"></a>Linux/Mac 终端命令行输出颜色</h3><p>其实在 Linux 和 Mac 的终端命令行工具中输出带颜色的文本，和上面讲述的在 <code>NodeJS</code> 中输出几乎是一样的做法。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> -e <span class="string">"\x1b[42;37mGreen Background &amp; White Text\x1b[0m"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Mac (zsh) 的同学甚至连 -e 参数都可以不要</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"\x1b[42;37mGreen Background &amp; White Text\x1b[0m"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者用 printf</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">"\x1b[1;37;41mAlert\x1b[0m\n"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 其实开头的转义字符可以使用别的</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">"\033[1;37;42m The number 033 in octal equals 0x1b in hexadecimal. \033[0m\n"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 你甚至可以使用 `\e` 来代替（但这在 NodeJS 中行不通）</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">"\e[3;36m Backslash+e means invisible character ESC. \e[0m\n"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> -e <span class="string">&quot;\x1b[42;37mGreen Background &amp; White Text\x1b[0m&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Mac (zsh) 的同学甚至连 -e 参数都可以不要</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;\x1b[42;37mGreen Background &amp; White Text\x1b[0m&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者用 printf</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;\x1b[1;37;41mAlert\x1b[0m\n&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 其实开头的转义字符可以使用别的</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;\033[1;37;42m The number 033 in octal equals 0x1b in hexadecimal. \033[0m\n&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 你甚至可以使用 `\e` 来代替（但这在 NodeJS 中行不通）</span></span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;\e[3;36m Backslash+e means invisible character ESC. \e[0m\n&quot;</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Windows 实在没办法，<br>如果你只是想要更改整个控制台的颜色，那么倒还是有一个方法的。<br>Windows 里有个 color 命令，可以来变更控制台的输出颜色。<br>你可以运行 <code>color /?</code> 来查看具体命令<br>这里可以也给你列出来好了。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ color /?</span><br><span class="line"></span><br><span class="line">设置默认的控制台前景和背景颜色</span><br><span class="line">COLOR [attr]</span><br><span class="line"></span><br><span class="line">  attr        指定控制台输出的颜色属性</span><br><span class="line"></span><br><span class="line">颜色属性由两个十六进制数字指定 __ 第一个对应于背景，第二个对应于前景。</span><br><span class="line">每个数字可以为以下任何值：</span><br><span class="line"></span><br><span class="line">    0 = 黑色        8 = 灰色</span><br><span class="line">    1 = 蓝色        9 = 淡蓝色</span><br><span class="line">    2 = 绿色        A = 淡绿色</span><br><span class="line">    3 = 浅绿色      B = 淡浅绿色</span><br><span class="line">    4 = 红色        C = 淡红色</span><br><span class="line">    5 = 紫色        D = 淡紫色</span><br><span class="line">    6 = 黄色        E = 淡黄色</span><br><span class="line">    7 = 白色        F = 亮白色</span><br><span class="line"></span><br><span class="line">如果没有给定任何参数，此命令会将颜色还原到 CMD.EXE 启动时的颜色。</span><br><span class="line">这个值来自当前控制台窗口、/T 命令行开关或 DefaultColor 注册表值。</span><br><span class="line"></span><br><span class="line">如果尝试使用相同的前景和背景颜色来执行 COLOR 命令，</span><br><span class="line">COLOR 命令会将 ERRORLEVEL 设置为 1.</span><br><span class="line"></span><br><span class="line">示例：<span class="string">"COLOR fc"</span> 在亮白色上产生淡红色</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ color /?</span><br><span class="line"></span><br><span class="line">设置默认的控制台前景和背景颜色</span><br><span class="line">COLOR [attr]</span><br><span class="line"></span><br><span class="line">  attr        指定控制台输出的颜色属性</span><br><span class="line"></span><br><span class="line">颜色属性由两个十六进制数字指定 __ 第一个对应于背景，第二个对应于前景。</span><br><span class="line">每个数字可以为以下任何值：</span><br><span class="line"></span><br><span class="line">    0 = 黑色        8 = 灰色</span><br><span class="line">    1 = 蓝色        9 = 淡蓝色</span><br><span class="line">    2 = 绿色        A = 淡绿色</span><br><span class="line">    3 = 浅绿色      B = 淡浅绿色</span><br><span class="line">    4 = 红色        C = 淡红色</span><br><span class="line">    5 = 紫色        D = 淡紫色</span><br><span class="line">    6 = 黄色        E = 淡黄色</span><br><span class="line">    7 = 白色        F = 亮白色</span><br><span class="line"></span><br><span class="line">如果没有给定任何参数，此命令会将颜色还原到 CMD.EXE 启动时的颜色。</span><br><span class="line">这个值来自当前控制台窗口、/T 命令行开关或 DefaultColor 注册表值。</span><br><span class="line"></span><br><span class="line">如果尝试使用相同的前景和背景颜色来执行 COLOR 命令，</span><br><span class="line">COLOR 命令会将 ERRORLEVEL 设置为 1.</span><br><span class="line"></span><br><span class="line">示例：<span class="string">&quot;COLOR fc&quot;</span> 在亮白色上产生淡红色</span><br></pre></td></tr></table></figure>
+
 <h3 id="控制序列"><a href="#控制序列" class="headerlink" title="控制序列"></a>控制序列</h3><p>看过了上面的内容之后，让我们看看控制序列。</p>
 <blockquote>
 <p>当一个字符在通过字符映射表转换之前含有以下14个代码之一的时候表明它是一个控制字符.<br><code>00(NUL)</code>, <code>07(BEL)</code>, <code>08(BS)</code>, <code>09(HT)</code>, <code>0a(LF)</code>, <code>0b(VT)</code>,  <code>0c(FF)</code>, <code>0d(CR)</code>, <code>0e(SO)</code>, <code>0f(SI)</code>, <code>18(CAN)</code>, <code>1a(SUB)</code>,  <code>1b(ESC)</code>, <code>7f(DEL)</code>.<br>我们可以通过设置 <code>显示控制字符</code> 模式以允许 <code>07</code>, <code>09</code>, <code>0b</code>, <code>18</code>,<code>1a</code>, <code>7f</code> 像普通字符一样显示在屏幕上.<br>另一方面,在 <code>UTF-8</code> 模式下所有位于 <code>00-1f</code> 之间的代码都被认为是控制字符,而不管是否处于 <code>显示控制字符</code> 模式.</p>
@@ -589,11 +456,13 @@ SI(0x0F,^O)激活 G0 字符集;
 CAN(0x18,^X),SUB(0x1A,^Z)两者都表示中断转义序列;
 ESC(0x1B,^[)开始一个新的转义序列;
 DEL(0x7F)忽略;
-CSI(0x9B)等同于 ESC [;
-</code></pre><p>而这里要讲的控制序列，其实就是 <code>ESC [</code>。</p>
+CSI(0x9B)等同于 ESC [;</code></pre>
+<p>而这里要讲的控制序列，其实就是 <code>ESC [</code>。</p>
 <p><code>ESC</code> 在 ASCII 码中属于不可见字符，其十进制码点是 <code>27</code>，转换为十六进制就是 <code>0x1b</code>，当然你也可以用八进制来表示为 <code>033</code>。</p>
 <p>这就是上面提到也可以用 <code>\033</code> 来代替 <code>\x1b</code> 的原因。</p>
-<p>同时，你也可以在 <code>node</code> 的 <code>REPL</code> 中尝试一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'\033[1;35mCongratulations!🎉 \033[32mYou do it!\033[0m'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>同时，你也可以在 <code>node</code> 的 <code>REPL</code> 中尝试一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;\033[1;35mCongratulations!🎉 \033[32mYou do it!\033[0m&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>CSI Sequence (CSI 序列)<br>CSI(即 <code>ESC [</code>)序列的动作由其最后一个字符决定，而 <code>m</code> 则是 SGR(<em>Set Graphics Rendition</em>, 设置图形属性)。<br>所以我们完整的控制序列就是 <code>ESC [ &lt;parameters&gt; m</code></p>
 </blockquote>
@@ -609,1113 +478,283 @@ CSI(0x9B)等同于 ESC [;
 </li>
 </ol>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
-<li><p><span class="exturl" data-url="aHR0cDovL2p1c3RuZXdiZWUuZ2l0aHViLmlvL2Zyb250ZW5kLzIwMTQvMTIvMTcvbm9kZWpzLWNvbG9yZnVsLWNvbnNvbGUuaHRtbA==" title="http://justnewbee.github.io/frontend/2014/12/17/nodejs-colorful-console.html">nodejs-colorful-console<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cDovL2p1c3RuZXdiZWUuZ2l0aHViLmlvL2Zyb250ZW5kLzIwMTQvMTIvMTcvbm9kZWpzLWNvbG9yZnVsLWNvbnNvbGUuaHRtbA==">nodejs-colorful-console<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcndhbGwuY29tL3AveXBoeXdnL3ByaW50aW5nLWNvbG9yZnVsLXRleHQtaW4tdGVybWluYWwtd2hlbi1ydW4tbm9kZS1qcy1zY3JpcHQ=" title="https://coderwall.com/p/yphywg/printing-colorful-text-in-terminal-when-run-node-js-script">printing-colorful-text-in-terminal-when-run-node-js-script<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcndhbGwuY29tL3AveXBoeXdnL3ByaW50aW5nLWNvbG9yZnVsLXRleHQtaW4tdGVybWluYWwtd2hlbi1ydW4tbm9kZS1qcy1zY3JpcHQ=">printing-colorful-text-in-terminal-when-run-node-js-script<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXkvYXJ0aWNsZS9kZXRhaWxzLzUwNTU2Njky" title="https://blog.csdn.net/whatday/article/details/50556692">Linux命令行颜色<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXkvYXJ0aWNsZS9kZXRhaWxzLzUwNTU2Njky">Linux命令行颜色<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9xYXN0YWNrLmNuL3N1cGVydXNlci8xNTg3NTkvcmVzZXQtY29sb3JzLW9uLXdpbmRvd3MtY29tbWFuZC1saW5lLWNtZA==" title="https://qastack.cn/superuser/158759/reset-colors-on-windows-command-line-cmd">reset-colors-on-windows-command-line-cmd<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9xYXN0YWNrLmNuL3N1cGVydXNlci8xNTg3NTkvcmVzZXQtY29sb3JzLW9uLXdpbmRvd3MtY29tbWFuZC1saW5lLWNtZA==">reset-colors-on-windows-command-line-cmd<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9xYXN0YWNrLmNuL3VuaXgvMTE2MjQzL3doYXQtZG9lcy1hLWJhc2gtc2VxdWVuY2UtMDMzOTk5ZC1tZWFuLWFuZC13aGVyZS1pcy1pdC1leHBsYWluZWQ=" title="https://qastack.cn/unix/116243/what-does-a-bash-sequence-033999d-mean-and-where-is-it-explained">what-does-a-bash-sequence-033999d-mean-and-where-is-it-explained<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9xYXN0YWNrLmNuL3VuaXgvMTE2MjQzL3doYXQtZG9lcy1hLWJhc2gtc2VxdWVuY2UtMDMzOTk5ZC1tZWFuLWFuZC13aGVyZS1pcy1pdC1leHBsYWluZWQ=">what-does-a-bash-sequence-033999d-mean-and-where-is-it-explained<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvQVNDSUk=" title="https://zh.wikipedia.org/wiki/ASCII">wiki:ASCII<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvQVNDSUk=">wiki:ASCII<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbA==" title="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">xterm:ctlseqs<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbA==">xterm:ctlseqs<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbCNoMi1DMS1fOC1CaXRfLUNvbnRyb2wtQ2hhcmFjdGVycw==" title="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-C1-_8-Bit_-Control-Characters">xterm:8-bit-Control-Characters<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbCNoMi1DMS1fOC1CaXRfLUNvbnRyb2wtQ2hhcmFjdGVycw==">xterm:8-bit-Control-Characters<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbCNoNC1GdW5jdGlvbnMtdXNpbmctQ1NJLV8tb3JkZXJlZC1ieS10aGUtZmluYWwtY2hhcmFjdGVyLWxwYXJlbi1zLXJwYXJlbjpDU0ktUG0tbS4xQ0E3" title="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Pm-m.1CA7">xterm:CSI-Pm-m<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbnZpc2libGUtaXNsYW5kLm5ldC94dGVybS9jdGxzZXFzL2N0bHNlcXMuaHRtbCNoNC1GdW5jdGlvbnMtdXNpbmctQ1NJLV8tb3JkZXJlZC1ieS10aGUtZmluYWwtY2hhcmFjdGVyLWxwYXJlbi1zLXJwYXJlbjpDU0ktUG0tbS4xQ0E3">xterm:CSI-Pm-m<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5lY21hLWludGVybmF0aW9uYWwub3JnL3B1YmxpY2F0aW9ucy9maWxlcy9FQ01BLVNUL0VjbWEtMDQ4LnBkZg==" title="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf">ECMA-48<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5lY21hLWludGVybmF0aW9uYWwub3JnL3B1YmxpY2F0aW9ucy9maWxlcy9FQ01BLVNUL0VjbWEtMDQ4LnBkZg==">ECMA-48<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjcxNTkzMjIvcmdiLXZhbHVlcy1vZi10aGUtY29sb3JzLWluLXRoZS1hbnNpLWV4dGVuZGVkLWNvbG9ycy1pbmRleC0xNy0yNTUjYW5zd2Vycy1oZWFkZXI=" title="https://stackoverflow.com/questions/27159322/rgb-values-of-the-colors-in-the-ansi-extended-colors-index-17-255#answers-header">stackoverflow:colors-index<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjcxNTkzMjIvcmdiLXZhbHVlcy1vZi10aGUtY29sb3JzLWluLXRoZS1hbnNpLWV4dGVuZGVkLWNvbG9ycy1pbmRleC0xNy0yNTUjYW5zd2Vycy1oZWFkZXI=">stackoverflow:colors-index<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9teS5vc2NoaW5hLm5ldC91LzQyNTc4NjkvYmxvZy8zNDg5NTUx" title="https://my.oschina.net/u/4257869/blog/3489551">Linux 控制终端转义和控制序列（转自下面那条）<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9teS5vc2NoaW5hLm5ldC91LzQyNTc4NjkvYmxvZy8zNDg5NTUx">Linux 控制终端转义和控制序列（转自下面那条）<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZmFud2Vpc2hlbmcvcC8xMTA3Njk4Ny5odG1s" title="https://www.cnblogs.com/fanweisheng/p/11076987.html">Linux 控制终端转义和控制序列<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZmFud2Vpc2hlbmcvcC8xMTA3Njk4Ny5odG1s">Linux 控制终端转义和控制序列<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
-      
     </div>
 
     
-      
-
-
-    
-
-    
     
     
 
-    
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
 
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/console/" rel="tag"># console</a>
-          
-        </div>
-      
-
-      
-      
-        <div class="post-widgets">
-        
-
-        
-
-        
-          
-          <div class="social_share">
-            
-            
-              <div id="needsharebutton-postbottom">
-                <span class="btn">
-                  <i class="fa fa-share-alt" aria-hidden="true"></i>
-                </span>
-              </div>
-            
-          </div>
-        
-        </div>
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/07/14/在mac的终端添加命令别名的方法.html" rel="next" title="在Mac的终端添加命令别名的方法">
-                <i class="fa fa-chevron-left"></i> 在Mac的终端添加命令别名的方法
-              </a>
-            
+          <div class="post-tags">
+              <a href="/tags/console/" rel="tag"># console</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/11/26/typescript-类型定义入门.html" rel="prev" title="TypeScript 类型定义入门">
-                TypeScript 类型定义入门 <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/13/%E5%9C%A8mac%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95.html" rel="prev" title="在Mac的终端添加命令别名的方法">
+                  <i class="fa fa-chevron-left"></i> 在Mac的终端添加命令别名的方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/11/26/typescript-%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E5%85%A5%E9%97%A8.html" rel="next" title="TypeScript 类型定义入门">
+                  TypeScript 类型定义入门 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-        </div>
-      
-
-      
-      
     </footer>
-  </div>
-  
-  
-  
   </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-    <div class="comments" id="gitalk-container">
-    </div>
-
-  
+</div>
 
 
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+
 
       
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
         </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/suiga.gif" alt="Suiga">
-            
-              <p class="site-author-name" itemprop="name">Suiga</p>
-              <p class="site-description motion-element" itemprop="description">小小西瓜棚</p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
               
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">32</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">11</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">38</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                  
-                    
-                  
-                  <a href="https://www.childish.site/" title="Suiga &rarr; https://www.childish.site/"><i class="fa fa-fw fa-user"></i></a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                  
-                    
-                  
-                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub &rarr; https://github.com/moesuiga"><i class="fa fa-fw fa-github"></i></span>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                  
-                    
-                  
-                  <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:moesuiga@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
-                </span>
-              
-            </div>
-          
-
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8=" title="https://www.google.com/">谷歌</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tLw==" title="https://segmentfault.com/">SegmentFault</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS8=" title="https://stackoverflow.com/">StackOverflow</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHUuY29tLw==" title="https://www.baidu.com/">百度</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0v" title="https://juejin.im/">掘金</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20v" title="https://www.jianshu.com/">简书</span>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tLw==" title="https://www.zhihu.com/">知乎</span>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何输出醒目颜色的文本"><span class="nav-number">1.</span> <span class="nav-text">如何输出醒目颜色的文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体操作"><span class="nav-number">2.</span> <span class="nav-text">具体操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多的颜色"><span class="nav-number">3.</span> <span class="nav-text">更多的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-Mac-终端命令行输出颜色"><span class="nav-number">4.</span> <span class="nav-text">Linux/Mac 终端命令行输出颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制序列"><span class="nav-number">5.</span> <span class="nav-text">控制序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色索引值"><span class="nav-number">6.</span> <span class="nav-text">颜色索引值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
-
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">豫ICP备19018274号-1 </span>&copy; 2017 – <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Suiga</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v6.7.0</div>
-
-
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="总访客量">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="总访问量">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-
-    
-
-    
-
-    
   </div>
-
   
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+        </div>
+      </div>
 
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
-
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
-
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
-
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.ui.min.js"></script>
-
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
-
-  
-  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=6.7.0"></script>
-
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-  <script src="/js/hitokoto.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
-
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
-
-
-
-  
-  
-    
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '827326488d2cde661c88',
-    clientSecret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
-    repo: 'blog-comments-by-gitalk',
-    owner: 'moesuiga',
-    admin: ['moesuiga'],
-    // id: md5(location.pathname),
-    id: md5('1595640593000'),
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
-
-  
-
-
-
-
-
-  
-
-  <script>
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
       
 
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">豫ICP备19018274号-1 </span>
+  </div>
 
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+const galleries = document.querySelectorAll('.post-gallery-image');
+if (galleries && galleries.length) {
+  galleries.forEach((ele) => {
+    const img = ele.querySelector('img');
+    const img2 = document.createElement('img');
+    const a = document.createElement('a');
+    a.href = img.src;
+    img2.src = img.src;
+    a.classList.add('fancybox', 'fancybox.image');
+    a.setAttribute('rel', 'default');
+    a.setAttribute('data-fancybox', 'default');
+    a.setAttribute('itemscope', true);
+    a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+    a.setAttribute('itemprop', 'url');
+    a.append(img2);
+    ele.append(a);
+    img.style.display = 'none';
+  });
+}
+</script>
 
 
-
-
+    </div>
+  </footer>
 
   
-
-  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
     (function(){
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
-      if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-      }
-      else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
     })();
   </script>
 
 
-  
-
-  
-  
-
-  
-  
-
-  
 
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  
-  
-    
-  
-  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
-  <script>
-    
-      pbOptions = {};
-      
-        pbOptions.iconStyle = "default";
-      
-        pbOptions.boxForm = "horizontal";
-      
-        pbOptions.position = "bottomCenter";
-      
-        pbOptions.networks = "Weibo,Wechat,Douban,Twitter,Facebook,Tumblr,GoogleBookmarks";
-      
-      new needShareButton('#needsharebutton-postbottom', pbOptions);
-    
-    
-  </script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 
 
   
 
   
 
-  
-
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wayowe.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.childish.site/2020/07/25/%E5%9C%A8-nodejs-%E7%BB%88%E7%AB%AF%E8%BE%93%E5%87%BA%E6%9C%89%E7%AE%80%E5%8D%95%E6%A0%B7%E5%BC%8F%E7%9A%84%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9.html";
+    this.page.identifier = "/2020/07/25/在-nodejs-终端输出有简单样式的文本内容.html";
+    this.page.title = "在 NodeJS 终端输出有简单样式的文本内容";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://wayowe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
     }
+  });
+</script>
 
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function (i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
-        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-          if (result) $(this).text('复制成功');
-          else $(this).text('复制失败');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function () {
-          $b.text('复制');
-        }, 300);
-      }).append(e);
-    })
-  </script>
-
-
-  
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '827326488d2cde661c88',
+      clientSecret: '0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0',
+      repo        : 'blog-comments-by-gitalk',
+      owner       : 'moesuiga',
+      admin       : ['moesuiga'],
+      id          : '52b2f6aea8d43c84a981962574bd806f',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
 </html>
