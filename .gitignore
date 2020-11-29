@@ -5,5 +5,4 @@ db.json
 *.log
 public/
 .deploy*/
-yarn.lock
 package-lock.json

@@ -1,0 +1,10 @@
+
+if hexo-config('avatar.rounded') {
+  .site-author-image {
+    border-radius: 100%;
+    if hexo-config('avatar.clip') {
+      -webkit-clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
+      clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
+    }
+  }
+}
