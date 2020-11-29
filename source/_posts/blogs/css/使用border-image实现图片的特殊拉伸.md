@@ -2,6 +2,7 @@
 en_title: CSS_border-image
 title: 使用 border-image 实现图片的特殊拉伸
 date: 2019-3-12 16:16:26
+updated: 2020-11-30 00:32:50
 keywords: css, border-image, image, background, stretch, 图片, 拉伸
 description: 对于某些特殊样式的图片，需要拉伸图片而不影响边缘的部分时，可以使用 border-image 属性来实现
 category:
@@ -10,7 +11,7 @@ tags:
   - image
   - border-image
 photos:
-  - https://miao.su/images/2019/03/09/6000a6b8.jpg
+  - /images/gallery/2019031201.png
 ---
 
 今天设计妹子问了我一个问题：
@@ -38,7 +39,7 @@ photos:
 
 然后我就可以这样做
 
-<div style="position: relative; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
+<div style="position: relative; z-index: 0; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
 
 
 随着宽度的改变，图片也会进行拉伸，但是却不会影响到右边的圆角及内凹弧度

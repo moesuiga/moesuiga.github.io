@@ -3,13 +3,13 @@ title: 使用 TextEncoder 获取字符串的字节数
 keywords: Bytes, 字节数, TextEncoder
 description: JavaScript 获取字符串的字节数
 date: 2020-5-12 12:56:40
-updated: 2020-6-20 11:28:35
+updated: 2020-11-30 00:28:41
 category:
   - JavaScript
 tags:
   - TextEncoder
 photos:
-  - http://img.wayowe.com/5010843.png?imageView2/2/w/600/q/90
+  - /images/gallery/2020051201.png
 ---
 
 之前有同事因为一段文本超出规定字节数，询问过我，怎么知道一段文字有多少个字节。

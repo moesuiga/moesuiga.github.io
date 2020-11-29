@@ -2,7 +2,7 @@
 en_title: Forgot_MySQL_Password_And_How_To_Reset
 title: 忘记了 MySQL 8.0 密码, 如何重置
 date: 2019-11-28 17:42:48
-updated: 2020-08-11 23:07:04
+updated: 2020-11-30 00:28:32
 keywords: mysql, mysql8.0, linux, server
 description: 因为个人服务器安装的 8.0 版本的 mysql，忘记密码后查找到的大部分都是 5.x 版本，在 8.0 中已经无法使用，所以记录一下 mysql 8.0 版本的重置密码方式
 category:
@@ -12,6 +12,8 @@ tags:
 photos:
   - /images/gallery/2019112801.png
 ---
+
+## MySQL 8.0 忘记密码如何重置
 
 起因是安装了 8.0 版本的 MySQL，结果后来忘记了密码，上网查了好多 5.x 版本的重置密码方法，在 8.0 版本都不行。
 后来找到了一篇同样是 8.0 版本的文章才修改成功。
@@ -32,7 +34,7 @@ vi /etc/my.cnf
 
 找到 `[mysqld]`，在下面添加 `skip-grant-tables`。
 
-![修改my.cnf配置](https://s2.ax1x.com/2019/11/28/QiXcfP.png)
+![修改my.cnf配置](https://s2.ax1x.com/2019/11/28/QiXcfP.png "修改my.cnf配置文件")
 
 然后重启 MySQL 服务
 
