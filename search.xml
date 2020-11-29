@@ -411,7 +411,7 @@
 <p>通过 <code>border-image-source</code> 引用边框图片后，<code>border-image-slice</code> 属性会将图片分割为 9 个区域：四个角，四个边（edges）以及中心区域。<br>四条切片线，从它们各自的侧边设置给定距离，控制区域的大小。</p>
 </blockquote>
 <p>然后我就可以这样做</p>
-<div style="position: relative; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
+<div style="position: relative; z-index: 0; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
 
 
 <p>随着宽度的改变，图片也会进行拉伸，但是却不会影响到右边的圆角及内凹弧度</p>
@@ -1449,7 +1449,7 @@ CSI(0x9B)等同于 ESC [;</code></pre>
   <entry>
     <title>忘记了 MySQL 8.0 密码, 如何重置</title>
     <url>//2019/11/28/%E5%BF%98%E8%AE%B0%E4%BA%86-mysql-8-0-%E5%AF%86%E7%A0%81-%E5%A6%82%E4%BD%95%E9%87%8D%E7%BD%AE.html</url>
-    <content><![CDATA[<p>起因是安装了 8.0 版本的 MySQL，结果后来忘记了密码，上网查了好多 5.x 版本的重置密码方法，在 8.0 版本都不行。<br>后来找到了一篇同样是 8.0 版本的文章才修改成功。</p>
+    <content><![CDATA[<h2 id="MySQL-8-0-忘记密码如何重置"><a href="#MySQL-8-0-忘记密码如何重置" class="headerlink" title="MySQL 8.0 忘记密码如何重置"></a>MySQL 8.0 忘记密码如何重置</h2><p>起因是安装了 8.0 版本的 MySQL，结果后来忘记了密码，上网查了好多 5.x 版本的重置密码方法，在 8.0 版本都不行。<br>后来找到了一篇同样是 8.0 版本的文章才修改成功。</p>
 <p>链接地址: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01hbmFnZW1lbnRBbmRKYXZhL2FydGljbGUvZGV0YWlscy84MDA5ODUyNQ==">Centos7重置Mysql 8.0.1 root 密码<i class="fa fa-external-link-alt"></i></span></p>
 <a id="more"></a>
 
@@ -1458,7 +1458,7 @@ CSI(0x9B)等同于 ESC [;</code></pre>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/my.cnf</span><br></pre></td></tr></table></figure>
 
 <p>找到 <code>[mysqld]</code>，在下面添加 <code>skip-grant-tables</code>。</p>
-<p><img data-src="https://s2.ax1x.com/2019/11/28/QiXcfP.png" alt="修改my.cnf配置"></p>
+<p><img data-src="https://s2.ax1x.com/2019/11/28/QiXcfP.png" alt="修改my.cnf配置" title="修改my.cnf配置文件"></p>
 <p>然后重启 MySQL 服务</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
 
