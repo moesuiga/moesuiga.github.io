@@ -1,22 +1,25 @@
 {# gallery 添加 fancybox 支持 #}
 <script>
-const galleries = document.querySelectorAll('.post-gallery-image');
-if (galleries && galleries.length) {
-  galleries.forEach((ele) => {
-    const img = ele.querySelector('img');
-    const img2 = document.createElement('img');
-    const a = document.createElement('a');
-    a.href = img.src;
-    img2.src = img.src;
-    a.classList.add('fancybox', 'fancybox.image');
-    a.setAttribute('rel', 'default');
-    a.setAttribute('data-fancybox', 'default');
-    a.setAttribute('itemscope', true);
-    a.setAttribute('itemtype', 'http://schema.org/ImageObject');
-    a.setAttribute('itemprop', 'url');
-    a.append(img2);
-    ele.append(a);
-    img.style.display = 'none';
-  });
-}
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
 </script>
