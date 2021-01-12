@@ -140,15 +140,15 @@ document.head.innerHTML += `
           // e.dropEffect = 'move';
           // set start coordinate
           draggingWidget = true;
-          dragstartX = e.screenX;
-          dragstartY = e.screenY;
+          dragstartX = e.pageX;
+          dragstartY = e.pageY;
         });
 
         document.addEventListener('dragover', function (e) {
           e.preventDefault();
           if (draggingWidget) {
-            var movedX = e.screenX - dragstartX;
-            var movedY = e.screenY - dragstartY;
+            var movedX = e.pageX - dragstartX;
+            var movedY = e.pageY - dragstartY;
             live2dWidget.style.right = `${posXRight - movedX}px`;
             live2dWidget.style.bottom = `${posYBottom - movedY}px`;
           }
@@ -157,8 +157,8 @@ document.head.innerHTML += `
         document.addEventListener('dragend', function (e) {
           e.preventDefault();
           if (draggingWidget) {
-            posXRight -= e.screenX - dragstartX;
-            posYBottom -= e.screenY - dragstartY;
+            posXRight -= e.pageX - dragstartX;
+            posYBottom -= e.pageY - dragstartY;
             draggingWidget = false;
           }
         })
