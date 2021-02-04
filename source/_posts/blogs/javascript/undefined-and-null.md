@@ -58,7 +58,7 @@ undefined === null; // false
 
 > 自ECMAScript5标准以来undefined是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。
 
-不过实际上你可以对 `undefined` 重新赋值，只是在**全局作用域**下并不会这并不会改变 `undefined` 的值。
+不过实际上你可以对 `undefined` 重新赋值，只是在**全局作用域**下这并不会改变 `undefined` 的值。
 而在块级作用域及函数作用域中，是可以改变 `undefined` 的值的。**但不建议这样重写 `undefined` 的值，也应当避免这种做法。**
 
 ```js
