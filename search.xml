@@ -533,6 +533,22 @@
       </tags>
   </entry>
   <entry>
+    <title>git修改历史提交中的名称或邮箱地址</title>
+    <url>//2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html</url>
+    <content><![CDATA[<h2 id="如果仅修改前一次的提交"><a href="#如果仅修改前一次的提交" class="headerlink" title="如果仅修改前一次的提交"></a>如果仅修改前一次的提交</h2><p>可以在修改好配置后，使用 <code>git commit --amend</code> 命令重新提交。<br>具体如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config user.name <span class="string">&quot;新的名称&quot;</span></span><br><span class="line">$ git config user.email <span class="string">&quot;新的邮箱&quot;</span></span><br><span class="line">$ git commit --amend -m <span class="string">&quot;提交信息&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="需要修改历史中的多个提交"><a href="#需要修改历史中的多个提交" class="headerlink" title="需要修改历史中的多个提交"></a>需要修改历史中的多个提交</h2><p>将以下内容复制到一个文件中，如 change-committer.sh。<br>将文件放到要修改的git仓库中，运行 <code>bash change-committer.sh</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">git filter-branch --commit-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;将要被替换的邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新的名称&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新的邮箱地址&quot;</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">  GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">  GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">  GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">  GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">  git commit-tree &quot;$@&quot;</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">  git commit-tree &quot;$@&quot;</span></span><br><span class="line"><span class="string">fi&#x27;</span> HEAD</span><br></pre></td></tr></table></figure>
+
+<p>根据情况也可以用提交人名称来检索替换，比如用 <code>OLD_NAME=&quot;要替换的名称&quot;</code> 替换 <code>OLD_EMAIL=&quot;将要被替换的邮箱地址&quot;</code> 再用 <code>if [ &quot;$GIT_COMMITTER_NAME&quot; = &quot;$OLD_NAME&quot; ]</code> 替换 <code>if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</code>。</p>
+<p>而具体要替换 提交人(committer) 或 作者(author) 或两者都要替换，根据情况来保留下面这部分内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提交人</span></span><br><span class="line">GIT_COMMITTER_NAME=<span class="string">&quot;<span class="variable">$CORRECT_NAME</span>&quot;</span></span><br><span class="line">GIT_COMMITTER_EMAIL=<span class="string">&quot;<span class="variable">$CORRECT_EMAIL</span>&quot;</span></span><br><span class="line"><span class="comment"># 作者</span></span><br><span class="line">GIT_AUTHOR_NAME=<span class="string">&quot;<span class="variable">$CORRECT_NAME</span>&quot;</span></span><br><span class="line">GIT_AUTHOR_EMAIL=<span class="string">&quot;<span class="variable">$CORRECT_EMAIL</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>git历史记录的修改是一个较为危险的操作，尤其是多人协作，还要修改已提交到远程仓库的历史时。<br>重写历史会导致与远程的历史提交冲突，无法再正常提交到远程仓库，只能通过强制覆盖提交。<br>一旦出现问题，他人无法再撤销找回历史。<br>所以一定要慎重再慎重。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>gitlab-ci 中的 token</title>
     <url>//2021/01/21/gitlab-ci-%E4%B8%AD%E7%9A%84-token.html</url>
     <content><![CDATA[<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>在 <em>个人</em> -&gt; <em>设置</em> -&gt; <em>access token</em> 中创建 <em>CI_TAG_UPLOAD_TOKEN</em>。</p>

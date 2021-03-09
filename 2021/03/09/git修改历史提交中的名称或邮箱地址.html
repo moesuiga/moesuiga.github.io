@@ -25,23 +25,21 @@
     var CONFIG = {"hostname":"www.childish.site","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="在 Linux 系统下很多命令都需要 root 权限，一般都会使用一个非 root 用户通过 sudo 命令来调用权限。这里记录了如何添加一个用户并设置 sudo 权限。">
+  <meta name="description" content="有时候在Git提交时，配置的名称或邮箱有问题，需要修改的话，应该如何重写历史中的提交人信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS 添加用户并授权 sudo">
-<meta property="og:url" content="https://www.childish.site/2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html">
+<meta property="og:title" content="git修改历史提交中的名称或邮箱地址">
+<meta property="og:url" content="https://www.childish.site/2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html">
 <meta property="og:site_name" content="地平线·梦">
-<meta property="og:description" content="在 Linux 系统下很多命令都需要 root 权限，一般都会使用一个非 root 用户通过 sudo 命令来调用权限。这里记录了如何添加一个用户并设置 sudo 权限。">
+<meta property="og:description" content="有时候在Git提交时，配置的名称或邮箱有问题，需要修改的话，应该如何重写历史中的提交人信息">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://miao.su/images/2019/02/23/1144130.jpg">
-<meta property="article:published_time" content="2018-08-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-09T10:39:20.965Z">
+<meta property="article:published_time" content="2021-03-09T07:35:08.000Z">
+<meta property="article:modified_time" content="2021-03-09T07:55:36.000Z">
 <meta property="article:author" content="Suiga">
-<meta property="article:tag" content="sudo">
+<meta property="article:tag" content="suiga, watermelon, blog, website, front-end">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://miao.su/images/2019/02/23/1144130.jpg">
 
 
-<link rel="canonical" href="https://www.childish.site/2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html">
+<link rel="canonical" href="https://www.childish.site/2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html">
 
 
 <script class="page-configurations">
@@ -57,7 +55,7 @@
 <script src="/js/hitokoto.js"></script>
 
 
-  <title>CentOS 添加用户并授权 sudo | 地平线·梦</title>
+  <title>git修改历史提交中的名称或邮箱地址 | 地平线·梦</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
     <script>
@@ -233,7 +231,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-7%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="nav-number">1.</span> <span class="nav-text">CentOS 7添加用户并授权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.</span> <span class="nav-text">1. 创建新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8E%88%E6%9D%83"><span class="nav-number">1.2.</span> <span class="nav-text">2. 授权</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E3%80%81%E7%A6%81%E6%AD%A2%E7%99%BB%E9%99%86"><span class="nav-number">2.</span> <span class="nav-text">删除用户密码、禁止登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AF%86%E7%A0%81"><span class="nav-number">2.1.</span> <span class="nav-text">删除密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E4%B8%BA-nologin"><span class="nav-number">2.2.</span> <span class="nav-text">设置用户为 nologin</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%BB%85%E4%BF%AE%E6%94%B9%E5%89%8D%E4%B8%80%E6%AC%A1%E7%9A%84%E6%8F%90%E4%BA%A4"><span class="nav-number">1.</span> <span class="nav-text">如果仅修改前一次的提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E6%8F%90%E4%BA%A4"><span class="nav-number">2.</span> <span class="nav-text">需要修改历史中的多个提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -321,15 +319,10 @@
 
 <div class="post-block">
   
-  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-    
-    <div class="post-gallery-image">
-      <img src="https://miao.su/images/2019/02/23/1144130.jpg" itemprop="contentUrl">
-    </div>
-    </div>
+  
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html">
+    <link itemprop="mainEntityOfPage" href="https://www.childish.site/2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/suiga.gif">
@@ -342,7 +335,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CentOS 添加用户并授权 sudo
+          git修改历史提交中的名称或邮箱地址
         </h1>
 
         <div class="post-meta-container">
@@ -352,24 +345,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2018-09-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-01T00:00:00+08:00">2018-09-01</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-09 18:39:20" itemprop="dateModified" datetime="2021-03-09T18:39:20+08:00">2021-03-09</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
+      <time title="创建时间：2021-03-09 15:35:08 / 修改时间：15:55:36" itemprop="dateCreated datePublished" datetime="2021-03-09T15:35:08+08:00">2021-03-09</time>
     </span>
 
   
@@ -388,15 +366,15 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/08/31/centos-添加用户并授权-sudo.html" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2021/03/09/git修改历史提交中的名称或邮箱地址.html" itemprop="commentCount"></span>
     </a>
   </span>
   
   
 </div>
 
-            <div class="post-description">在 Linux 系统下很多命令都需要 root 权限，一般都会使用一个非 root 用户通过 sudo 命令来调用权限。这里记录了如何添加一个用户并设置 sudo 权限。</div>
+            <div class="post-description">有时候在Git提交时，配置的名称或邮箱有问题，需要修改的话，应该如何重写历史中的提交人信息</div>
         </div>
       </header>
 
@@ -404,34 +382,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHeGlhb2JhaS9hcnRpY2xlL2RldGFpbHMvNTM1MDQ5ODk=">CentOS 7中添加一个新用户并授权<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="CentOS-7添加用户并授权"><a href="#CentOS-7添加用户并授权" class="headerlink" title="CentOS 7添加用户并授权"></a>CentOS 7添加用户并授权</h1><h2 id="1-创建新用户"><a href="#1-创建新用户" class="headerlink" title="1. 创建新用户"></a>1. 创建新用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@vultr ~]<span class="comment"># adduser suiga</span></span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">[root@vultr ~]<span class="comment"># passwd suiga</span></span><br><span class="line">Changing password <span class="keyword">for</span> user suiga.</span><br><span class="line">New password:</span><br><span class="line"><span class="comment"># 初始化密码有复杂度判断，如果过于简单，会有提示</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 7 characters</span><br><span class="line">New password:</span><br></pre></td></tr></table></figure>
+        <h2 id="如果仅修改前一次的提交"><a href="#如果仅修改前一次的提交" class="headerlink" title="如果仅修改前一次的提交"></a>如果仅修改前一次的提交</h2><p>可以在修改好配置后，使用 <code>git commit --amend</code> 命令重新提交。<br>具体如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name <span class="string">&quot;新的名称&quot;</span></span><br><span class="line">$ git config user.email <span class="string">&quot;新的邮箱&quot;</span></span><br><span class="line">$ git commit --amend -m <span class="string">&quot;提交信息&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="2-授权"><a href="#2-授权" class="headerlink" title="2. 授权"></a>2. 授权</h2><p>新创建的用户并不能使用sudo命令，需要给他添加授权。</p>
-<p>sudo命令的授权管理是在sudoers文件里的。可以看看sudoers：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># sudoers</span></span><br><span class="line">-bash: sudoers: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># whereis 查找位置</span></span><br><span class="line">[root@vultr ~]<span class="comment"># whereis sudoers</span></span><br><span class="line">sudoers: /etc/sudoers /etc/sudoers.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># ls -l 查看权限</span></span><br><span class="line">[root@vultr ~]<span class="comment"># ls -l /etc/sudoers</span></span><br><span class="line">-r--r----- 1 root root 3938 Apr 10 20:27 /etc/sudoers</span><br></pre></td></tr></table></figure>
+<h2 id="需要修改历史中的多个提交"><a href="#需要修改历史中的多个提交" class="headerlink" title="需要修改历史中的多个提交"></a>需要修改历史中的多个提交</h2><p>将以下内容复制到一个文件中，如 change-committer.sh。<br>将文件放到要修改的git仓库中，运行 <code>bash change-committer.sh</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">git filter-branch --commit-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;将要被替换的邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新的名称&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新的邮箱地址&quot;</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">  GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">  GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">  GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">  GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">  git commit-tree &quot;$@&quot;</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">  git commit-tree &quot;$@&quot;</span></span><br><span class="line"><span class="string">fi&#x27;</span> HEAD</span><br></pre></td></tr></table></figure>
 
-<p>只有只读权限，如果想要修改，需要先添加<code>w</code>权限。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u+w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0440 (r--r-----) to 0640 (rw-r-----)</span><br></pre></td></tr></table></figure>
+<p>根据情况也可以用提交人名称来检索替换，比如用 <code>OLD_NAME=&quot;要替换的名称&quot;</code> 替换 <code>OLD_EMAIL=&quot;将要被替换的邮箱地址&quot;</code> 再用 <code>if [ &quot;$GIT_COMMITTER_NAME&quot; = &quot;$OLD_NAME&quot; ]</code> 替换 <code>if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</code>。</p>
+<p>而具体要替换 提交人(committer) 或 作者(author) 或两者都要替换，根据情况来保留下面这部分内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交人</span></span><br><span class="line">GIT_COMMITTER_NAME=<span class="string">&quot;<span class="variable">$CORRECT_NAME</span>&quot;</span></span><br><span class="line">GIT_COMMITTER_EMAIL=<span class="string">&quot;<span class="variable">$CORRECT_EMAIL</span>&quot;</span></span><br><span class="line"><span class="comment"># 作者</span></span><br><span class="line">GIT_AUTHOR_NAME=<span class="string">&quot;<span class="variable">$CORRECT_NAME</span>&quot;</span></span><br><span class="line">GIT_AUTHOR_EMAIL=<span class="string">&quot;<span class="variable">$CORRECT_EMAIL</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>然后就可以添加内容了，在下面一行追加新增的用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># vi /etc/sudoers</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">root    ALL=(ALL)       ALL</span><br><span class="line">suiga   ALL=(ALL)       ALL <span class="comment"># 这个是新增的用户</span></span><br></pre></td></tr></table></figure>
-
-<p>保存退出(<code>:x</code>/<code>:wq</code>)，记得将之前加的写入权限收回：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># chmod -v u-w /etc/sudoers</span></span><br><span class="line">mode of ‘/etc/sudoers’ changed from 0640 (rw-r-----) to 0440 (r--r-----)</span><br></pre></td></tr></table></figure>
-
-<p>切换新用户，使用sudo</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]<span class="comment"># su suiga</span></span><br><span class="line">[suiga@vultr root]$ sudo cat /etc/passwd</span><br><span class="line"></span><br><span class="line">We trust you have received the usual lecture from the <span class="built_in">local</span> System</span><br><span class="line">Administrator. It usually boils down to these three things:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#1) Respect the privacy of others.</span></span><br><span class="line">    <span class="comment">#2) Think before you type.</span></span><br><span class="line">    <span class="comment">#3) With great power comes great responsibility.</span></span><br><span class="line"></span><br><span class="line">[sudo] password <span class="keyword">for</span> suiga:</span><br></pre></td></tr></table></figure>
-
-<p>第一次使用会有提示，且需要输入用户密码，如果想不需要输入密码，可以将之前设置的最后一个<code>ALL</code>改为<code>NOPASSWD: ALL</code>。</p>
-<h1 id="删除用户密码、禁止登陆"><a href="#删除用户密码、禁止登陆" class="headerlink" title="删除用户密码、禁止登陆"></a>删除用户密码、禁止登陆</h1><h2 id="删除密码"><a href="#删除密码" class="headerlink" title="删除密码"></a>删除密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd --delete &lt;username&gt;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ sudo passwd -d &lt;username&gt;</span><br></pre></td></tr></table></figure>
-
-<p>没有密码就无法登录，对于有些不应该有密码、不允许登录的账户就可以这样来禁止。</p>
-<p>还有一种更安全的方式，设置用户为nologin。</p>
-<h2 id="设置用户为-nologin"><a href="#设置用户为-nologin" class="headerlink" title="设置用户为 nologin"></a>设置用户为 nologin</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
-
-<p>可以结合两种方式来禁止用户的登录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd -d &lt;username&gt;</span><br><span class="line">$ sudo usermod -s /sbin/nologin &lt;username&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>git历史记录的修改是一个较为危险的操作，尤其是多人协作，还要修改已提交到远程仓库的历史时。<br>重写历史会导致与远程的历史提交冲突，无法再正常提交到远程仓库，只能通过强制覆盖提交。<br>一旦出现问题，他人无法再撤销找回历史。<br>所以一定要慎重再慎重。</p>
 
     </div>
 
@@ -442,22 +403,16 @@
     <footer class="post-footer"><hr>
 <span id="jinrishici-sentence">正在加载今日诗词....</span>
 
-          <div class="post-tags">
-              <a href="/tags/sudo/" rel="tag"># sudo</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2018/05/22/%E5%85%B3%E4%BA%8E-nth-child-%E5%92%8C-nth-of-type-%E9%80%89%E6%8B%A9%E5%99%A8.html" rel="prev" title="关于 nth-child 和 nth-of-type 选择器">
-                  <i class="fa fa-chevron-left"></i> 关于 nth-child 和 nth-of-type 选择器
+                <a href="/2021/01/21/gitlab-ci-%E4%B8%AD%E7%9A%84-token.html" rel="prev" title="gitlab-ci 中的 token">
+                  <i class="fa fa-chevron-left"></i> gitlab-ci 中的 token
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2018/12/04/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B8%A9%E5%9D%91%E4%B9%8B-swiper-%E7%BB%84%E4%BB%B6.html" rel="next" title="小程序踩坑之 swiper 组件">
-                  小程序踩坑之 swiper 组件 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -645,9 +600,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://www.childish.site/2018/08/31/centos-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-sudo.html";
-    this.page.identifier = "/2018/08/31/centos-添加用户并授权-sudo.html";
-    this.page.title = "CentOS 添加用户并授权 sudo";
+    this.page.url = "https://www.childish.site/2021/03/09/git%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2%E6%8F%90%E4%BA%A4%E4%B8%AD%E7%9A%84%E5%90%8D%E7%A7%B0%E6%88%96%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80.html";
+    this.page.identifier = "/2021/03/09/git修改历史提交中的名称或邮箱地址.html";
+    this.page.title = "git修改历史提交中的名称或邮箱地址";
     };
   NexT.utils.loadComments('#disqus_thread', () => {
     if (window.DISQUS) {
@@ -675,7 +630,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
       repo        : 'blog-comments-by-gitalk',
       owner       : 'moesuiga',
       admin       : ['moesuiga'],
-      id          : 'e428b998a5ff7a6dafc5f57124a365f5',
+      id          : 'c0a3f75f9a3097d9c91beb824f46a783',
         language: '',
       distractionFreeMode: true
     });
