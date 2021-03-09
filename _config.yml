@@ -62,7 +62,7 @@ permalink_defaults:
   year: ""
   month: ""
   day: ""
-  en_title: 404
+  post_title: 404
 
 # Sitemap
 sitemap:
