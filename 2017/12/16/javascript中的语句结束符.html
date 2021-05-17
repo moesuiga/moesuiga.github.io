@@ -409,7 +409,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a,b,c</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">a.forEach(<span class="function">(<span class="params">n</span>) =&gt;</span> &#123;</span><br><span class="line">  n *= n;</span><br><span class="line">&#125;)</span><br><span class="line">[b, c] = a</span><br></pre></td></tr></table></figure>
 
 <p>以上代码，乍看之下似乎没什么问题，除了最上面两行的声明与赋值之外，就是将数组a的每一项元素平方操作，然后通过数组解构赋值的方法给变量 <code>b</code> 和 <code>c</code> 分别赋值为数组 <code>a</code> 的前两个元素。</p>
-<p>但是运行起来就会发现<br><img data-src="https://miao.su/images/2019/01/07/error875ae.png" alt="运行报错"></p>
+<p>但是运行起来就会发现<br><img data-src="/images/posts/error875ae.png" alt="运行报错"></p>
 <p>神马？！居然报错了？！</p>
 <p>不要慌，来分析下报错信息：<code>Cannot set property &#39;undefined&#39; of undefined</code> 无法在undefined上设置属性’undefined’。这种错误熟悉不熟悉？</p>
 <p>很明显，这种错误一般发生在给对象添加属性，而要添加属性的对象却是一个undefined值的时候。</p>
@@ -418,7 +418,7 @@
 <p>不过这里并不是要讨论这些，在看到关联数组语法的时候，有没有眼前一亮？没错，问题就出在这里。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a,b,c</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">a.forEach(<span class="function">(<span class="params">n</span>) =&gt;</span> &#123;</span><br><span class="line">  n *= n;</span><br><span class="line">&#125;);</span><br><span class="line">[b, c] = a</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://miao.su/images/2019/01/07/ok11918.png" alt="加上分号就没错了"></p>
+<p><img data-src="/images/posts/ok11918.png" alt="加上分号就没错了"></p>
 <p>那么原因呢？</p>
 <p>JavaScript中之所以可以不加语句结束符，是因为你不加，系统会自动帮你加上。但是系统并不能知道你的一条完整语句具体到哪里结束，因此系统只能根据语句是否完整、能否继续等条件来判断。</p>
 <p>很显然，<code>a.forEach()</code> 这条遍历语句是完整的；但是在后面的数组解构依然可以跟它连起来成为一条对象属性的赋值语句，因此系统并没有在遍历语句结束时自动地加上语句结束符。</p>
