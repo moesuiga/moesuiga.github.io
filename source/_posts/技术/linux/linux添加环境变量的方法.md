@@ -10,7 +10,7 @@ category:
 tags:
   - Linux
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_007.jpg@gallery
+  - /images/gallery/0125.jpg
 ---
 
 在 Linux 服务器上使用 NodeJS 时，明明通过 `npm install --global` 进行了包的全局安装，可是安装完了之后却发现在命令行里还是无法使用。

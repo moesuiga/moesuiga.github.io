@@ -9,7 +9,7 @@ category:
 tags:
   - 小程序
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_004.png@gallery
+  - /images/gallery/0062.jpg
 ---
 
 之前小程序测试出来一个bug。在管理车型页面删除一辆车型后，在点击第一辆车型返回到车型档案页时，最上面的车型卡片消失了。

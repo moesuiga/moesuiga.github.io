@@ -10,7 +10,7 @@ tags:
 date: 2017-08-26 09:33:22
 updated: 2021-5-11 21:27:24
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_013.jpg@gallery
+  - /images/gallery/0092.jpg
 ---
 
 JavaScript是一门弱类型语言，它并不像其他强类型语言那样有多种变量类型的声明形式，如：int, double, string… 等，在JavaScript中声明变量统一使用 var 关键字。

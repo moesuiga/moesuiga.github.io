@@ -9,7 +9,7 @@ category:
 tags:
   - CSS
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_005.png@gallery
+  - /images/gallery/ab_005.png
 ---
 
 ## 首先是二者的区别

@@ -10,7 +10,7 @@ tags:
 date: 2017-07-17 20:40:21
 updated: 2021-5-11 21:25:35
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_008.jpg@gallery
+  - /images/gallery/0108.jpg
 ---
 
 BFC(*Block Formatting Context 块级格式化上下文*)是一个独立的渲染区域，只有块级元素参与，它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。

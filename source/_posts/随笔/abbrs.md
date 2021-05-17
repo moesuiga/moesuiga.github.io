@@ -7,7 +7,7 @@ description: abbr, abbreviation 意味缩写，缩写词。这里用来记录一
 tags:
   - abbr
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_012.png@gallery
+  - /images/gallery/0074.jpg
 ---
 
 abbr: abbreviation [noun], 缩写，缩写词。下面记录一些英文缩写及其对应的全拼和含义。

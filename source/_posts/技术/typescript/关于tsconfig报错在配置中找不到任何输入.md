@@ -10,7 +10,7 @@ category:
 tags:
   - TypeScript
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_002.jpg@gallery
+  - /images/gallery/0082.jpg
 ---
 
 `tsconfig.json` 文件内容如下，这种情况下很可能就会出现错误

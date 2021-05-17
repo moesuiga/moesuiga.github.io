@@ -10,7 +10,7 @@ category:
 tags:
   - CSS
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_018.jpg@gallery
+  - /images/gallery/0100.jpg
 ---
 
 CSS-*Cascading Style Sheet(层叠样式表)*，给HTML元素添加各种样式的文件。CSS选择器就是用来匹配要添加样式的元素的。

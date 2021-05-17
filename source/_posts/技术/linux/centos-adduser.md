@@ -10,7 +10,7 @@ category:
 tags:
   - Linux
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_023.jpg@gallery
+  - /images/gallery/0114.jpg
 ---
 
 原文地址：[CentOS 7中添加一个新用户并授权](https://blog.csdn.net/GGxiaobai/article/details/53504989)

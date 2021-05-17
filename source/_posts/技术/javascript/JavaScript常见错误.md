@@ -9,7 +9,7 @@ category:
 tags:
   - JavaScript
 photos:
-  - http://img.wayowe.com/blog_gallery/0002.jpeg@gallery
+  - /images/gallery/0061.jpg
 ---
 
 ## 目的

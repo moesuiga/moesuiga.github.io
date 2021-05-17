@@ -6,7 +6,7 @@ updated: 2021-5-17 17:43:30
 sitemap: false
 comments: false
 photos:
-  - http://img.wayowe.com/accelerator-20001.png@gallery
+  - /images/gallery/0058.jpg
 ---
 
 ……

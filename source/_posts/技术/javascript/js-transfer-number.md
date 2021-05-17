@@ -10,7 +10,7 @@ category:
 tags:
   - JavaScript
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_022.jpg@gallery
+  - /images/gallery/0063.jpg
 ---
 
 一般情况下，在 JavaScript 中把其他类型转换为数字类型时，遵循以下规则。

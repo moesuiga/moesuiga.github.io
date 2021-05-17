@@ -10,7 +10,7 @@ tags:
 date: 2018-1-7 18:11:53
 updated: 2021-5-11 21:33:06
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_014.jpg@gallery
+  - /images/gallery/ab_016.jpg
 ---
 
 一般我们要在控制台输出一些信息的时候，大多数情况都只是使用 `console.log` 来输出。但是，你知道吗？其实 `console` 还有很多其他的方法。

@@ -10,7 +10,7 @@ category:
 tags:
   - CSS
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_019.jpg@gallery
+  - /images/gallery/ab_017.jpg
 ---
 
 一个偶然的情况下，发现了这样一个问题：

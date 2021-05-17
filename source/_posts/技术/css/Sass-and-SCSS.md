@@ -12,7 +12,7 @@ tags:
   - Sass
   - SCSS
 photos:
-  - http://img.wayowe.com/blog_gallery/ab_020.jpg@gallery
+  - /images/gallery/0099.jpg
 ---
 
 本篇系转载文章
