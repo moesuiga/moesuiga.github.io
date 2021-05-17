@@ -5,8 +5,8 @@
 # Site
 title: 地平线·梦
 subtitle: 与其临渊羡鱼，不如退而结网
-description: 小小西瓜棚
-keywords: suiga, watermelon, blog, website, front-end
+description: 我把脑子丢了
+keywords: suiga, blog, front-end, 地平线, 梦
 author: Suiga
 language: zh-CN
 timezone: Asia/ShangHai
@@ -92,10 +92,10 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 5
   order_by: -date
 archive_generator:
-  per_page: 20
+  per_page: 10
   yearly: true
   monthly: true
 tag_generator:
