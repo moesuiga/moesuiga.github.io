@@ -3,11 +3,13 @@ title: JavaScript中的常见错误
 keywords: JavaScript, Error, 错误, 常见错误类型, SyntaxError, TypeError, ReferenceError
 description: 鉴于一部分新人不懂得如何根据 JavaScript 中的报错信息来查找错误，本文列举了一些在 JavaScript 中比较常见的错误信息模式，并附上讲解。<br>希望能帮助新人在 JavaScript 查错方面的能力上有所提升。
 date: 2020-12-07 09:52:34
-updated: 2021-5-11 08:53:32
+updated: 2021-5-17 17:58:16
 category:
   - 技术文章
 tags:
   - JavaScript
+photos:
+  - http://img.wayowe.com/blog_gallery/0002.jpeg@gallery
 ---
 
 ## 目的
