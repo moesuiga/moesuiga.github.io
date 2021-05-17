@@ -3072,3 +3072,12 @@ input[type=button],
 input[type=file] {
   cursor: url("https://wayowe.com/s/mouse/angelo_black/Hand.cur"), auto;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0,0,0,0.5);
+}

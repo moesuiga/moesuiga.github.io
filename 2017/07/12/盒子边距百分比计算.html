@@ -25,21 +25,20 @@
     var CONFIG = {"hostname":"www.childish.site","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。">
+  <meta name="description" content="CSS盒模型边距设置百分比的值, 不论是左右还是上下都是以父容器的宽度计算的，要记住上下边距（padding-top&#x2F;padding-bottom&#x2F;margin-top&#x2F;margin-bottom）并不是以父容器的高度为基础计算的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="盒子边距百分比计算">
 <meta property="og:url" content="https://www.childish.site/2017/07/12/%E7%9B%92%E5%AD%90%E8%BE%B9%E8%B7%9D%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%A1%E7%AE%97.html">
 <meta property="og:site_name" content="地平线·梦">
-<meta property="og:description" content="盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。">
+<meta property="og:description" content="CSS盒模型边距设置百分比的值, 不论是左右还是上下都是以父容器的宽度计算的，要记住上下边距（padding-top&#x2F;padding-bottom&#x2F;margin-top&#x2F;margin-bottom）并不是以父容器的高度为基础计算的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://miao.su/images/2019/03/03/568333bb8.jpg">
+<meta property="og:image" content="http://img.wayowe.com/blog_gallery/ab_003.png@gallery">
 <meta property="article:published_time" content="2017-07-12T05:57:58.000Z">
-<meta property="article:modified_time" content="2021-03-09T10:39:20.965Z">
+<meta property="article:modified_time" content="2021-05-11T05:32:45.000Z">
 <meta property="article:author" content="Suiga">
-<meta property="article:tag" content="margin">
-<meta property="article:tag" content="padding">
+<meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://miao.su/images/2019/03/03/568333bb8.jpg">
+<meta name="twitter:image" content="http://img.wayowe.com/blog_gallery/ab_003.png@gallery">
 
 
 <link rel="canonical" href="https://www.childish.site/2017/07/12/%E7%9B%92%E5%AD%90%E8%BE%B9%E8%B7%9D%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%A1%E7%AE%97.html">
@@ -159,17 +158,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">39</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -242,27 +241,27 @@
     <img class="site-author-image" itemprop="image" alt="Suiga"
       src="/images/suiga.gif">
   <p class="site-author-name" itemprop="name">Suiga</p>
-  <div class="site-description" itemprop="description">小小西瓜棚</div>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -324,7 +323,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://miao.su/images/2019/03/03/568333bb8.jpg" itemprop="contentUrl">
+      <img src="http://img.wayowe.com/blog_gallery/ab_003.png@gallery" itemprop="contentUrl">
     </div>
     </div>
 
@@ -334,7 +333,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/suiga.gif">
       <meta itemprop="name" content="Suiga">
-      <meta itemprop="description" content="小小西瓜棚">
+      <meta itemprop="description" content="我把脑子丢了">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -360,7 +359,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-09 18:39:20" itemprop="dateModified" datetime="2021-03-09T18:39:20+08:00">2021-03-09</time>
+        <time title="修改时间：2021-05-11 13:32:45" itemprop="dateModified" datetime="2021-05-11T13:32:45+08:00">2021-05-11</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -368,7 +367,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">技术文章</span></a>
         </span>
     </span>
 
@@ -396,7 +395,7 @@
   
 </div>
 
-            <div class="post-description">盒子的边距百分比, 不论是左右还是上下都是以父容器的宽度计算的，上下边距并不是以高度为基础计算的。</div>
+            <div class="post-description">CSS盒模型边距设置百分比的值, 不论是左右还是上下都是以父容器的宽度计算的，要记住上下边距（padding-top/padding-bottom/margin-top/margin-bottom）并不是以父容器的高度为基础计算的。</div>
         </div>
       </header>
 
@@ -406,7 +405,7 @@
     <div class="post-body" itemprop="articleBody">
         <p>之前一直认为 <code>margin-top</code> 和 <code>margin-bottom</code> 设置百分比以父容器的高度计算，而 <code>margin-left</code> 和 <code>margin-right</code> 设置百分比以父容器的宽度计算，直到今天群里一个群友问：</p>
 <blockquote>
-<p>boostrap 中的栅格系统是如何设置 margin-top 百分比以宽度计算的?</p>
+<p>bootstrap 中的栅格系统是如何设置 margin-top 百分比以宽度计算的?</p>
 </blockquote>
 <p>原因是他发现设置的 <code>margin: 10% 10%;</code> 中 <code>top</code> 和 <code>bottom</code> 值是以父容器的宽度计算得到的结果。</p>
 <p>经过一番测试及网上查找，才发现：原来 <code>margin-top</code> 和 <code>margin-bottom</code> 并不是以父容器的高度计算百分比的，而是同样以父容器宽度来计算，同样的 <code>padding</code> 内边距也是一样。</p>
@@ -434,8 +433,7 @@
 <span id="jinrishici-sentence">正在加载今日诗词....</span>
 
           <div class="post-tags">
-              <a href="/tags/margin/" rel="tag"># margin</a>
-              <a href="/tags/padding/" rel="tag"># padding</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
           </div>
 
         
