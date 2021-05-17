@@ -15,7 +15,7 @@ photos:
 
 今天设计妹子问了我一个问题：
 
-![优惠券图片](https://miao.su/images/2019/03/12/0af1f1da3d377c2d4405b.png)
+![优惠券图片](/images/posts/0af1f1da3d377c2d4405b.png)
 
 > 图片里左边的部分定宽，右边的部分需要根据内容文字来加长或缩短，但是又不能致使图片变形，只能从中间部分加长。不知道要怎么配合切图。
 
@@ -23,7 +23,7 @@ photos:
 
 但是实际效果很明显不符合设计妹子的要求。
 
-<div style="width: 80px; height: 68px; line-height: 68px; text-align: center; background: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) no-repeat 0 0 / 100% 100%;">10元</div>
+<div style="width: 80px; height: 68px; line-height: 68px; text-align: center; background: url(/images/posts/d22ea6dd07ce2041566cc.png) no-repeat 0 0 / 100% 100%;">10元</div>
 
 ## border-image
 
@@ -38,7 +38,7 @@ photos:
 
 然后我就可以这样做
 
-<div style="position: relative; z-index: 0; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(https://miao.su/images/2019/03/12/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
+<div style="position: relative; z-index: 0; width: 80px; height: 68px; line-height: 68px; text-align: center;"><div style="width: 100%; height: 100%;">10元</div><div style="width: 100%; height: 100%; box-sizing: border-box; position: absolute; left: 0; top: 0; z-index: -1; border-width: 34px; border-style: solid; -webkit-border-image: url(/images/posts/d22ea6dd07ce2041566cc.png) 50% 34 repeat;border-image: url(/images/posts/d22ea6dd07ce2041566cc.png) 50% 34 repeat;"></div></div>
 
 
 随着宽度的改变，图片也会进行拉伸，但是却不会影响到右边的圆角及内凹弧度
@@ -50,7 +50,7 @@ photos:
 
 ### CanIUse
 
-![CanIUse-border-image](https://miao.su/images/2019/03/12/caniuse-border-image5eb44.png)
+![CanIUse-border-image](/images/posts/caniuse-border-image5eb44.png)
 
 时间：2019年3月12日
 
