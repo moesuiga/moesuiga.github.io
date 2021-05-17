@@ -7,3 +7,15 @@ input[type=button],
 input[type=file] {
   cursor: $cursor-pointer, auto;
 }
+
+::-webkit-scrollbar {
+  $w = 5px;
+  width: $w;
+  height: $w;
+  background: #f5f5f5;
+
+  &-thumb {
+    border-radius: $w * 2;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
