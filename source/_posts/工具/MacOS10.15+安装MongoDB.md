@@ -1,13 +1,15 @@
 ---
 title: MacOS 10.15+安装MongoDB的方法
 date: 2021-07-01 11:05:19
-updated: 2021-07-01 13:00:52
+updated: 2021-7-1 19:18:24
 keywords: Mac, MacOS 10.15+, Mac Catalina, Mac Big Sur, MongoDB, MongoDB安装
 description: 记录下在 MacOS 10.15+ 版本以上的系统中，安装 MongoDB 的流程方法。
 category:
   - 工具
 tags:
   - Mac
+photos:
+  - /images/gallery/0123.jpg
 ---
 
 方法来源于[MongoDB官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x-tarball/)
