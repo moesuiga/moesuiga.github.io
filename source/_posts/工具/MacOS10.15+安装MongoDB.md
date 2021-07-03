@@ -1,7 +1,7 @@
 ---
 title: MacOS 10.15+安装MongoDB的方法
 date: 2021-07-01 11:05:19
-updated: 2021-7-1 19:18:24
+updated: 2021-7-3 23:08:47
 keywords: Mac, MacOS 10.15+, Mac Catalina, Mac Big Sur, MongoDB, MongoDB安装
 description: 记录下在 MacOS 10.15+ 版本以上的系统中，安装 MongoDB 的流程方法。
 category:
@@ -55,7 +55,7 @@ use admin;
 # 创建不受限的超级用户
 db.createUser({user: 'root', pwd: '123456', roles: ['root']})
 # 创建所有库的管理员
-db.createUser({user: 'admin', pwd: '123456', roles: ['adAdminAnyDatabase']});
+db.createUser({user: 'admin', pwd: '123456', roles: ['dbAdminAnyDatabase']});
 # 创建某个库的管理员
 db.createUser({user: 'admin', pwd: '123456', roles: [{role: 'dbAdmin', db: 'my_db'}]});
 # 查看已有用户列表
