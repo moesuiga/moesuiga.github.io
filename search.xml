@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MacOS 10.15+安装MongoDB的方法</title>
+    <url>//2021/07/01/macos-10-15-%E5%AE%89%E8%A3%85mongodb%E7%9A%84%E6%96%B9%E6%B3%95.html</url>
+    <content><![CDATA[<p>方法来源于<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1vbmdvZGIuY29tL21hbnVhbC90dXRvcmlhbC9pbnN0YWxsLW1vbmdvZGItb24tb3MteC10YXJiYWxsLw==">MongoDB官方文档<i class="fa fa-external-link-alt"></i></span></p>
+<p>主要是MacOS Catalina之后，无法操作根目录，也就无法创建MongoDB的默认存储目录<code>/data/db</code>，因此需要创建一个其他的目录来存放。</p>
+<ol>
+<li><p>下载 MongoDB Community tgz压缩文件: <span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vdHJ5L2Rvd25sb2FkL2NvbW11bml0eQ==">官方下载地址<i class="fa fa-external-link-alt"></i></span>；然后解压到合适的位置</p>
+</li>
+<li><p>软链或复制其中的 <code>bin</code> 目录下的内容到 <code>/usr/local/bin</code> 之下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 复制</span></span><br><span class="line">sudo cp /path/to/the/mongodb-directory/bin/* /usr/<span class="built_in">local</span>/bin/</span><br><span class="line"><span class="comment"># 软链</span></span><br><span class="line">sudo ln -s /path/to/the/mongodb-directory/bin/* /usr/<span class="built_in">local</span>/bin/</span><br></pre></td></tr></table></figure></li>
+<li><p>创建目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># data目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/var/mongodb</span><br><span class="line"><span class="comment"># log目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/var/<span class="built_in">log</span>/mongodb</span><br><span class="line"><span class="comment"># 如果不是当前管理员用户，还需要给对应用户添加读写权限</span></span><br><span class="line">sudo chown my_mongodb_user /usr/<span class="built_in">local</span>/var/mongodb</span><br><span class="line">sudo chown my_mongodb_user /usr/<span class="built_in">local</span>/var/<span class="built_in">log</span>/mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动MongoDB</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过命令行</span></span><br><span class="line">mongod --dbpath /usr/<span class="built_in">local</span>/var/mongodb --logpath /usr/<span class="built_in">local</span>/var/<span class="built_in">log</span>/mongodb/mongo.log --fork</span><br><span class="line"><span class="comment"># 通过配置文件，默认没有该文件，需要自己创建或者从别处下载或复制</span></span><br><span class="line">mongod --config /usr/<span class="built_in">local</span>/etc/mongod.conf</span><br><span class="line"><span class="comment"># 检查是否启动成功</span></span><br><span class="line">ps aux | grep -v grep | grep mongod</span><br><span class="line"><span class="comment"># 启动成功之后即可开始使用了</span></span><br><span class="line">mongo</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>创建用户</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">use admin;</span><br><span class="line"><span class="comment"># 创建不受限的超级用户</span></span><br><span class="line">db.createUser(&#123;user: <span class="string">&#x27;root&#x27;</span>, <span class="built_in">pwd</span>: <span class="string">&#x27;123456&#x27;</span>, roles: [<span class="string">&#x27;root&#x27;</span>]&#125;)</span><br><span class="line"><span class="comment"># 创建所有库的管理员</span></span><br><span class="line">db.createUser(&#123;user: <span class="string">&#x27;admin&#x27;</span>, <span class="built_in">pwd</span>: <span class="string">&#x27;123456&#x27;</span>, roles: [<span class="string">&#x27;adAdminAnyDatabase&#x27;</span>]&#125;);</span><br><span class="line"><span class="comment"># 创建某个库的管理员</span></span><br><span class="line">db.createUser(&#123;user: <span class="string">&#x27;admin&#x27;</span>, <span class="built_in">pwd</span>: <span class="string">&#x27;123456&#x27;</span>, roles: [&#123;role: <span class="string">&#x27;dbAdmin&#x27;</span>, db: <span class="string">&#x27;my_db&#x27;</span>&#125;]&#125;);</span><br><span class="line"><span class="comment"># 查看已有用户列表</span></span><br><span class="line">db.system.users.find().pretty();</span><br><span class="line"><span class="comment"># 删除某个用户</span></span><br><span class="line">db.dropUser(<span class="string">&#x27;user&#x27;</span>);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac中好用的工具</title>
     <url>//2020/12/10/mac%E4%B8%AD%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7.html</url>
     <content><![CDATA[<ul>
@@ -15,6 +43,42 @@
       </categories>
       <tags>
         <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WSL中npm命令错误</title>
+    <url>//2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html</url>
+    <content><![CDATA[<p>在 Windows 的 WSL 终端下，运行 npm 命令提示错误</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">: not foundram Files/nodejs/npm: 3: /mnt/c/Program Files/nodejs/npm:</span><br><span class="line">: not foundram Files/nodejs/npm: 5: /mnt/c/Program Files/nodejs/npm:</span><br><span class="line">/mnt/c/Program Files/nodejs/npm: 6: /mnt/c/Program Files/nodejs/npm: Syntax error: word unexpected (expecting <span class="string">&quot;in&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>原因是回车符号，使用 <code>vim -b npm</code> 打开 npm 文件，可以看到每行后面多了个 <code>^M</code> 的符号；这个符号代表的是 Windows 系统下的回车符 <code>\r</code>。<br>一般地，Unix 类系统的换行采用的是 <code>LF</code>，即 <code>\n</code>；<br>而 Windows 系统的换行则是 <code>CRLF</code>，即 <code>\r\n</code>；<br>这多出来的 <code>\r</code> 就是上述错误的罪魁祸首。</p>
+<p>通过命令 <code>dos2unix npm</code> 把文件转换为 Unix 系的文件格式即可解决这个问题。</p>
+<p>但是转换之后再次运行，又出现了错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">module.js:472</span><br><span class="line">    throw err;</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">Error: Cannot find module <span class="string">&#x27;C:\mnt\c\Program Files\nodejs\node_modules\npm\bin\npm-cli.js&#x27;</span></span><br><span class="line">    at Function.Module._resolveFilename (module.js:470:15)</span><br><span class="line">    at Function.Module._load (module.js:418:25)</span><br><span class="line">    at Module.runMain (module.js:605:10)</span><br><span class="line">    at run (bootstrap_node.js:420:7)</span><br><span class="line">    at startup (bootstrap_node.js:139:9)</span><br><span class="line">    at bootstrap_node.js:535:3</span><br></pre></td></tr></table></figure>
+
+<p>具体原因不清楚，猜测大概是在 Windows 系统中 <code>/mnt/c/...</code> 不被认为是绝对路径，然后在前面加了个盘符，结果导致路径查找错误。</p>
+<p>最后使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC9XU0wvaXNzdWVzLzE1MTIjaXNzdWVjb21tZW50LTMwNTk0NDQ3Ni1wZXJtYWxpbms=">WSL issues/1512 felipemanga 提供的方法<i class="fa fa-external-link-alt"></i></span> 解决了这个问题。</p>
+<p>思路就是修改 npm 文件中的 NODE_EXE 文件路径，然后新建一个 node 文件，并在其中把路径改为 Windows 路径。</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"># npm 文件</span><br><span class="line"># 修改 NODE_EXE 文件路径</span><br><span class="line"><span class="deletion">- NODE_EXE=&quot;$basedir/node.exe&quot;</span></span><br><span class="line"><span class="addition">+ NODE_EXE=&quot;$basedir/node&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新的文件 node，写入内容</span></span><br><span class="line">vim node</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 遍历参数</span></span><br><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 如果参数是一个存在的文件路径</span></span><br><span class="line">  <span class="keyword">if</span> [ -e <span class="string">&quot;<span class="variable">$var</span>&quot;</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 修改文件路径 /mnt/c/path/to/file =&gt; c:\path\to\file</span></span><br><span class="line">    var=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$var</span>&quot;</span> | sed -e <span class="string">&#x27;s,^/mnt/\([a-z]\)/,\1:/,&#x27;</span> | sed -e <span class="string">&#x27;s,/,\\,g&#x27;</span>)</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="comment"># 收集参数</span></span><br><span class="line">  Args=(<span class="string">&quot;<span class="variable">$&#123;Args[@]&#125;</span>&quot;</span> <span class="string">&quot;<span class="variable">$var</span>&quot;</span>)</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把收集的修改过的路径参数传递给 node.exe</span></span><br><span class="line">node.exe <span class="string">&quot;<span class="variable">$&#123;Args[@]&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为我之前用惯了 Cmder 的 bash，而上面这种方式修改之后的路径在 Cmder 中运行反而会出现错误，因此我在此基础上进行了些微修改，使其仅在 WSL 终端生效。</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"># node 文件</span><br><span class="line"><span class="addition">+ # 是否在 WSL 中运行</span></span><br><span class="line"><span class="addition">+ inWSL=&quot;$(uname -a | grep Linux | grep Microsoft)&quot;</span></span><br><span class="line">  for var in &quot;$@&quot;</span><br><span class="line">  do</span><br><span class="line"><span class="deletion">-   if [ -e &quot;$var&quot; ]</span></span><br><span class="line">    # 仅在 WSL 中时，修改文件路径格式</span><br><span class="line"><span class="addition">+   if [[ $inWSL &amp;&amp; -e &quot;$var&quot; ]]</span></span><br><span class="line">    then</span><br><span class="line">      var=$(echo &quot;$var&quot; | sed -e &#x27;s,^/mnt/\([a-z]\)/,\1:/,&#x27; | sed -e &#x27;s,/,\\,g&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>对 npm 文件的操作，再对 npx 文件来一遍，也可以使用 npx 了。</p>
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC9XU0wvaXNzdWVzLzE1MTI=">Issue running npm command · Issue #1512 · microsoft/WSL<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9hc2svMjcxMTA3">告诉我们是否在WSL中运行linux吗？-问答-阿里云开发者社区-阿里云<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9saW51eC9saW51eC1zaGVsbC1iYXNpYy1vcGVyYXRvcnMuaHRtbA==">Shell 基本运算符 | 菜鸟教程<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>WSL</tag>
       </tags>
   </entry>
   <entry>
