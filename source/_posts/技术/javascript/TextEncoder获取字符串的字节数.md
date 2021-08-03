@@ -77,8 +77,8 @@ String.fromCodePoint(128512); // 😀
 
 ## 参考链接
 
-- [TextEncoder](https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextEncoder)
-- [TextDecoder](https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/API/TextDecoder)
-- [String.property.codePointAt](https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
-- [String.property.charCodeAt](https://s0developer0mozilla0org.icopy.site/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
+- [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder)
+- [TextDecoder](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder)
+- [String.property.codePointAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
+- [String.property.charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 - [中文汉字占二个字节还是三个字节长度](https://blog.csdn.net/yaomingyang/article/details/79374209)
