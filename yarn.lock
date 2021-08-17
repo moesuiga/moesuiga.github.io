@@ -2144,10 +2144,10 @@ hexo-server@2.0.0:
     open "^7.0.0"
     serve-static "^1.14.1"
 
-hexo-theme-next@8.0.2:
-  version "8.0.2"
-  resolved "https://registry.npm.taobao.org/hexo-theme-next/download/hexo-theme-next-8.0.2.tgz#6f9ee15e231241c209ac2fe687b764ed00a926e7"
-  integrity sha1-b57hXiMSQcIJrC/mh7dk7QCpJuc=
+hexo-theme-next@8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/hexo-theme-next/-/hexo-theme-next-8.7.0.tgz#c0710d797a5746ccf0a8693c7a1cd9ec2e8d0697"
+  integrity sha512-lTrXk3kDBSy645iPImiPHieSIvZPzZDDbQZypD4O96ZlVIb9/PO9z7xzSNxROFm4LCyZMF2a8bJEuq5nVkxZRQ==
 
 hexo-util@^0.6.3:
   version "0.6.3"
