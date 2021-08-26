@@ -66,6 +66,30 @@ By default, flex items won’t shrink below their minimum content size (the leng
 
 而设置了 `min-width:0;` 之后，改变了 `flex-shrink:1` 的默认行为，说明可以通过 `flex-shrink` 收缩最小宽度到 `0`。这时候 `flex-shrink:1` 就可以把元素收缩到与父元素同宽度了，内容也就出现了溢出省略的情况。
 
+## 其他方法
+
+除了 `min-width` 外，根据上面引用的 CSS 规范描述来看，其实还有一种方式可以解决上面示例的问题——*固定尺寸*。给 flex 子元素添加宽度设置 `width:100%;`，如此它就有了一个与父容器相同宽度的*固定尺寸*了，这个尺寸还比强制文字不换行之后的文本内容要小，所以此时它的最小尺寸就是这个固定尺寸，同时还符合了文本溢出的条件【内容比尺寸大】。
+
+```html
+<div style="width:150px;display:flex;background:skyblue;">
+  <div style="flex:1;width:100%">
+    <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+      这是一段很长又不让换行的文字
+    </p>
+  </div>
+</div>
+```
+
+<div style="width:150px;display:flex;background:skyblue;">
+  <div style="flex:1;width:100%">
+    <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+      这是一段很长又不让换行的文字
+    </p>
+  </div>
+</div>
+
+具体要采用哪种方式可以根据实际情况来。
+
 ## 参考链接
 
 - [Flex items and min-width:0](https://dfmcphee.com/flex-items-and-min-width-0/)
