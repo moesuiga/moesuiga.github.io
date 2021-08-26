@@ -16,36 +16,36 @@ photos:
 
 ```html
 <!-- 无法溢出省略 -->
-<div style="width:150px;display:flex;">
+<div style="width:150px;display:flex;background:skyblue;">
   <div style="flex:1;">
     <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-      这是一段很长很长的文字这是一段很长很长的文字
+      这是一段很长又不让换行的文字
     </p>
   </div>
 </div>
 
 <!-- 添加了min-width后，可以溢出省略 -->
-<div style="width:150px;display:flex;">
+<div style="width:150px;display:flex;background:skyblue;">
   <div style="flex:1;min-width:0;">
     <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-      这是一段很长很长的文字这是一段很长很长的文字
+      这是一段很长又不让换行的文字
     </p>
   </div>
 </div>
 ```
 
-<div style="width:150px;display:flex;">
+<div style="width:150px;display:flex;background:skyblue;">
   <div style="flex:1;">
     <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-      这是一段很长很长的文字这是一段很长很长的文字
+      这是一段很长又不让换行的文字
     </p>
   </div>
 </div>
 
-<div style="width:150px;display:flex;">
+<div style="width:150px;display:flex;background:skyblue;">
   <div style="flex:1;min-width:0;">
     <p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-      这是一段很长很长的文字这是一段很长很长的文字
+      这是一段很长又不让换行的文字
     </p>
   </div>
 </div>
