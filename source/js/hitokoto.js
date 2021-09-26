@@ -147,8 +147,8 @@ document.head.innerHTML += `
 
         // document.addEventListener('dragover', function (e) {
         document.addEventListener('mousemove', function (e) {
-          e.preventDefault();
           if (draggingWidget) {
+            e.preventDefault();
             var movedX = e.pageX - dragstartX;
             var movedY = e.pageY - dragstartY;
             live2dWidget.style.right = `${posXRight - movedX}px`;
@@ -158,8 +158,8 @@ document.head.innerHTML += `
 
         // document.addEventListener('drop', function (e) {
         document.addEventListener('mouseup', function (e) {
-          e.preventDefault();
           if (draggingWidget) {
+            e.preventDefault();
             posXRight -= e.pageX - dragstartX;
             posYBottom -= e.pageY - dragstartY;
             draggingWidget = false;
