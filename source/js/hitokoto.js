@@ -135,16 +135,18 @@ document.head.innerHTML += `
 
         var dragstartX, dragstartY;
         var draggingWidget = false;
-        live2dWidget.addEventListener('dragstart', function (e) {
-          // e.preventDefault();
-          // e.dropEffect = 'move';
+        // live2dWidget.addEventListener('dragstart', function (e) {
+        live2dWidget.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+          // e.dataTransfer.dropEffect = 'move';
           // set start coordinate
           draggingWidget = true;
           dragstartX = e.pageX;
           dragstartY = e.pageY;
         });
 
-        document.addEventListener('dragover', function (e) {
+        // document.addEventListener('dragover', function (e) {
+        document.addEventListener('mousemove', function (e) {
           e.preventDefault();
           if (draggingWidget) {
             var movedX = e.pageX - dragstartX;
@@ -154,7 +156,8 @@ document.head.innerHTML += `
           }
         });
 
-        document.addEventListener('drop', function (e) {
+        // document.addEventListener('drop', function (e) {
+        document.addEventListener('mouseup', function (e) {
           e.preventDefault();
           if (draggingWidget) {
             posXRight -= e.pageX - dragstartX;
