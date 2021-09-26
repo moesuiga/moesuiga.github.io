@@ -154,7 +154,7 @@ document.head.innerHTML += `
           }
         });
 
-        document.addEventListener('dragend', function (e) {
+        document.addEventListener('drop', function (e) {
           e.preventDefault();
           if (draggingWidget) {
             posXRight -= e.pageX - dragstartX;
