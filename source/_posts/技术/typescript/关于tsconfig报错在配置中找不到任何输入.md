@@ -4,7 +4,7 @@ title: 在 tsconfig.json 配置中找不到任何输入
 keywords: typescript, ts, tslint, tsconfig, vscode, no inputs, 找不到输入
 description: 记录一下关于 vscode 中，tsconfig.json 报错 “在配置文件 tsconfig.json 中找不到任何输入” 的情况
 date: 2019-3-12 08:59:18
-updated: 2021-5-11 11:11:38
+updated: 2021-12-3 22:04:36
 category:
   - 技术文章
 tags:
@@ -62,6 +62,7 @@ photos:
 
 但是不能设置为一个空数组，`"include": []` 这样还是会找不到任何输入的，同样的，如果设置的路径不对，依然有这个错误。
 
+另有一种情况：项目内没有 typescript 文件，此时即使有 `include` 属性也依然会有错误提示。这时候要么删除 `tsconfig.json` 文件，毕竟在项目没有 typescript 文件时，有 `tsconfig.json` 文件本身就有些奇怪；但如果因为各种各样的原因，不能/不想删除它的话，也可以在项目中随便写一个 ts 文件，包含在 `include` 或 `files` 属性中。
 
 附带一提，`tslint.json` 文件可以用 `tslint.js` 替代，使用 `module.exports` 导出。
 这样可以根据环境配置来设置不同的 lint 规则。
