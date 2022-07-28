@@ -55,7 +55,7 @@ bszCaller = {
                     if (!scriptTag.parentElement) {
                       scriptTag = document.getElementById('BusuanziScriptId');
                     }
-                    scriptTag.parentElement.removeChild(scriptTag)
+                    scriptTag && scriptTag.parentElement && scriptTag.parentElement.removeChild(scriptTag)
                 } catch (c) {
                     bszTag.hides()
                 }
