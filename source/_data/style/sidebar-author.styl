@@ -5,6 +5,17 @@ if hexo-config('avatar.rounded') {
     if hexo-config('avatar.clip') {
       -webkit-clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
       clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
+      img {
+        -webkit-clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
+        clip-path: unquote(hexo-config('avatar.clip') || 'circle(50%)');
+      }
     }
   }
 }
+
+.site-author-image
+  img
+    transform: rotateY(0turn);
+    transition: transform 4s;
+  &:hover img
+    transform: rotateY(5turn);
