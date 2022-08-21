@@ -40,11 +40,20 @@ document.head.innerHTML += `
     border-right: 2px solid rgb(236, 203, 180);
     transform: translate(-50%, -4px) rotate(45deg);
   }
+  .live2d-widget-dialog-container-2 p {
+    margin: 0;
+  }
+  .live2d-widget-dialog-true {
+    display: none;
+  }
+  .live2d-widget-dialog-container-2:active .live2d-widget-dialog-true {
+    display: block;
+  }
 </style>
 `;
 
 (function myLive2dWidgetDialog() {
-  var containerElement,dialogElement,closeTimer,timer;
+  var containerElement,dialogElement,dialogContent,dialogTrueContent,closeTimer,timer;
   var dialogShowTime = 10000;
 
   /**
@@ -57,6 +66,11 @@ document.head.innerHTML += `
     // containerElement.style.transform = `scale(${config.display.width / 250})`
     dialogElement = document.createElement('div');
     dialogElement.className = 'live2d-widget-dialog-2';
+    dialogContent = document.createElement('p');
+    dialogTrueContent = document.createElement('p');
+    dialogTrueContent.className = 'live2d-widget-dialog-true';
+    dialogElement.appendChild(dialogContent);
+    dialogElement.appendChild(dialogTrueContent);
     containerElement.appendChild(dialogElement);
     root.appendChild(containerElement);
 
@@ -71,13 +85,19 @@ document.head.innerHTML += `
     dialogElement.style.opacity = 0;
   }
 
+  function cnLangIsDead(s) {
+    return s.replace(/[\u4e00-\u9fd5]/g, '口');
+  }
+
   function alertText(text) {
     displayDialog();
     var sep = '|';
     var interval = 300;
     var i = 0;
     var len = text.length;
-    dialogElement.innerText = sep;
+    var deadText = cnLangIsDead(text);
+    dialogContent.innerText = sep;
+    dialogTrueContent.innerText = sep;
     clearInterval(timer);
     clearTimeout(closeTimer);
     timer = setInterval(() => {
@@ -90,11 +110,18 @@ document.head.innerHTML += `
         }, dialogShowTime);
         return;
       }
-      dialogElement.innerText =
-        dialogElement.innerText.slice(0, -1) +
-        // (i > 0 && /\s/.test(text[i - 1]) ? ' ' : '') +
-        text[i] +
-        ( i === len - 1 ? '' : sep);
+      dialogContent.innerText =
+        dialogContent.innerText.slice(0, -1) +
+        deadText[i] +
+        (i === len - 1 ? '' : sep);
+      if (deadText !== text) {
+        dialogTrueContent.innerText =
+          dialogTrueContent.innerText.slice(0, -1) +
+          text[i] +
+          (i === len - 1 ? '' : sep);
+      } else if (dialogTrueContent.innerText) {
+        dialogTrueContent.innerText = '';
+      }
       i++;
     }, interval);
   }
