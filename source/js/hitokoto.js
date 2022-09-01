@@ -86,7 +86,7 @@ document.head.innerHTML += `
   }
 
   function cnLangIsDead(s) {
-    return s.replace(/[\u4e00-\u9fd5]/g, '口');
+    return s.replace(/[\u4e00-\u9fd5]/g, '￿');
   }
 
   function alertText(text) {
