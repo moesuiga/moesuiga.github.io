@@ -172,7 +172,7 @@ abbr: abbreviation [noun], 缩写，缩写词。下面记录一些英文缩写�
 
 ### TCP
 
-- Transmission Control Protocol: 传输控制协议，是一种面向连接的、可靠的、基于字节流的传输层通信协议，由[IETF](#IETF)的RFC 793定义。
+- Transmission Control Protocol: 传输控制协议，是一种面向连接的、可靠的、基于字节流的传输层通信协议，由[IETF](#IETF)的[RFC](#RFC) 793定义。
 
 ### TE
 - True Ending: 【游戏】真结局。可以说是作者心目中最应该达成的结局。TE 不一定就是 [HE](#HE)
