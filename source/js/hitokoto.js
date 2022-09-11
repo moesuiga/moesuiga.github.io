@@ -43,6 +43,9 @@ document.head.innerHTML += `
   .live2d-widget-dialog-container-2 p {
     margin: 0;
   }
+  .live2d-widget-dialog-hide-content {
+    font-family: Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji,emoji,sans-serif;
+  }
   .live2d-widget-dialog-true {
     display: none;
   }
@@ -67,6 +70,7 @@ document.head.innerHTML += `
     dialogElement = document.createElement('div');
     dialogElement.className = 'live2d-widget-dialog-2';
     dialogContent = document.createElement('p');
+    dialogContent.className = 'live2d-widget-dialog-hide-content';
     dialogTrueContent = document.createElement('p');
     dialogTrueContent.className = 'live2d-widget-dialog-true';
     dialogElement.appendChild(dialogContent);
