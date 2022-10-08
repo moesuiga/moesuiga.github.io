@@ -90,7 +90,8 @@ document.head.innerHTML += `
   }
 
   function cnLangIsDead(s) {
-    return s.replace(/[\u4e00-\u9fd5]/g, '￿');
+    // return s.replace(/[\u4e00-\u9fd5]/g, '￿');
+    return s.replace(/[\u4e00-\u9fd5]/g, '☐');
   }
 
   function alertText(text) {
