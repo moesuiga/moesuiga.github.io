@@ -199,7 +199,7 @@ live2d:
 ## 百度统计 代码地址后面的字符串
 # baidu_tongji: 05bd41e919685f4690c3df329812250d
 ## Google Analytics 谷歌分析
-google_analytics: UA-135498029-1
+# google_analytics: UA-135498029-1
 
 #======================================
 # hexo server默认端口是4000
@@ -220,8 +220,8 @@ browsersync:
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-# deploy:
-#   type: git
-#   # repo: git@github.com:moesuiga/moesuiga.github.io.git
-#   repo: https://github.com/moesuiga/moesuiga.github.io.git
-#   branch: master
+deploy:
+  type: git
+  repo: git@github.com:moesuiga/moesuiga.github.io.git
+  # repo: https://github.com/moesuiga/moesuiga.github.io.git
+  branch: master

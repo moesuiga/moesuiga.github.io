@@ -10,11 +10,13 @@
     "build": "hexo generate",
     "build:nocache": "npm run clean && hexo generate",
     "draft": "hexo server --draft --open",
-    "clean": "hexo clean"
+    "clean": "hexo clean",
+    "deploy": "hexo deploy"
   },
   "dependencies": {
     "hexo": "5.2.0",
     "hexo-autoprefixer": "2.0.0",
+    "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "1.0.0",
     "hexo-generator-baidu-sitemap": "0.1.9",
     "hexo-generator-category": "1.0.0",
