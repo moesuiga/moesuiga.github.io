@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"moesuiga.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JavaScript变量声明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript之变量声明">
+<meta property="og:url" content="https://moesuiga.github.io/2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="JavaScript变量声明">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moesuiga.github.io/images/gallery/0092.jpg">
+<meta property="article:published_time" content="2017-08-26T01:33:22.000Z">
+<meta property="article:modified_time" content="2021-05-11T13:27:24.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moesuiga.github.io/images/gallery/0092.jpg">
+
+
+<link rel="canonical" href="https://moesuiga.github.io/2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://moesuiga.github.io/2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html","path":"/2017/08/26/javascript之变量声明.html","title":"javascript之变量声明"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javascript之变量声明 | 地平线·梦</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-135498029-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">地平线·梦</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#let%E4%B8%8Evar%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">let与var有什么不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const%E5%B8%B8%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">const常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%E6%8F%90%E5%8D%87"><span class="nav-number">3.</span> <span class="nav-text">关于变量声明提升</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <div class="site-author-image">
+      <img itemprop="image" alt="Suiga" src="/images/suiga.gif">
+    </div>
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/images/gallery/0092.jpg" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://moesuiga.github.io/2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
+      <meta itemprop="name" content="Suiga">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+      <meta itemprop="description" content="我把脑子丢了">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javascript之变量声明 | 地平线·梦">
+      <meta itemprop="description" content="JavaScript变量声明">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javascript之变量声明
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-08-26 09:33:22" itemprop="dateCreated datePublished" datetime="2017-08-26T09:33:22+08:00">2017-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-11 21:27:24" itemprop="dateModified" datetime="2021-05-11T21:27:24+08:00">2021-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">技术文章</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2017/08/26/javascript%E4%B9%8B%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2017/08/26/javascript之变量声明.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">JavaScript变量声明</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>JavaScript是一门弱类型语言，它并不像其他强类型语言那样有多种变量类型的声明形式，如：int, double, string… 等，在JavaScript中声明变量统一使用 var 关键字。</p>
+<p>例如想要声明一个整数来使用，可以使用 <code>var num = 1;</code> 这样的语句，声明一串字符串也一样 <code>var str = &#39;string&#39;;</code> ,<a id="more"></a>声明一个布尔值、数组、对象都是使用 <code>var</code> 这个关键字： <code>var boo = true; var arr = [1,2,3]; var obj = &#123; x: 1, y: 2&#125;;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>; <span class="comment">// 声明一个整数</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;string&quot;</span>; <span class="comment">// 声明一串字符串</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>; <span class="comment">// 声明一个布尔值</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]; <span class="comment">// 声明一个数组</span></span><br><span class="line"><span class="keyword">var</span> point = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;; <span class="comment">// 声明一个对象</span></span><br></pre></td></tr></table></figure>
+
+<p>在ES5标准之前，只有 <code>var</code> 这一个关键字用来声明一个可以使用的变量（函数暂不讨论）。而在ES6标准中，在此之上添加了两个新的声明变量的关键字，<code>let</code> 和 <code>const</code>。严格说起来应该是一个声明变量，一个声明常量， <code>const</code> 就是用来声明常量的关键字。</p>
+<h2 id="let与var有什么不同？"><a href="#let与var有什么不同？" class="headerlink" title="let与var有什么不同？"></a>let与var有什么不同？</h2><p>这需要从变量的作用域说起。在ES5标准之前，JavaScript中只有两种作用域：全局作用域与函数作用域。全局作用域的变量可以在代码运行中的任何位置访问到，而函数作用域的变量只有在该函数内部能够访问到。而在ES6标准中新增了一个块级作用域的概念，let关键字就是对应块级作用域的概念的变量声明。通过let声明的变量只有在声明时所在的块级作用域的范围内能访问，所谓块级作用域指的是代码中被<code>&#123;&#125;</code>包裹起来的代码（对象除外），函数体也属于代码块。</p>
+<p><code>let</code> 与 <code>var</code> 另一个不同的地方在于：</p>
+<ul>
+<li><p><code>var</code> 声明的变量可以重复声明，但只有第一次声明有效，且有声明提升；</p>
+</li>
+<li><p><code>let</code> 声明的变量不能再次声明，否则会报错，且let声明的变量并没有声明提升。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// ReferenceError: y is not defined</span></span><br><span class="line"><span class="comment">// let声明的变量在他所在的块级范围之外无法访问</span></span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="comment">// undefined: 因为var声明有变量名提升，所以运行代码时，</span></span><br><span class="line"><span class="comment">// 系统就知道a是一个变量，只是这个变量并没有被赋值，因此是undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// ReferenceError: b is not defined</span></span><br><span class="line"><span class="comment">// 因为let声明没有变量名提升，所以运行到这句代码时，</span></span><br><span class="line"><span class="comment">// b还没有定义，不能作为一个变量使用</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/* --------------------------------------- */</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>; <span class="comment">// SyntaxError: Identifier &#x27;c&#x27; has already been declared</span></span><br><span class="line"><span class="comment">// let 无法重复声明已有变量</span></span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
+
+<h2 id="const常量"><a href="#const常量" class="headerlink" title="const常量"></a>const常量</h2><p>所谓常量，与变量相反。变量就是可以改变的量，而常量则是一旦声明，就无法改变的量。有些数据在使用过程中是不会改变的，甚至有些就是固定不变的值，如圆周率PI，像这样的数据，使用 <code>var</code> 声明，之后一直不做改动自然也是不算错的，但是使用 <code>const</code> 声明的话，更能够表达出符合的语义，用 <code>const PI = 3.14;</code> 代替 <code>var PI = 3.14;</code> 更能让人清楚地知道这是一个常量。</p>
+<p>const声明的变量的作用域范围同let关键字，也是声明变量所在的块级作用域，用const声明的变量也不能重复声明，且没有变量声明提升，另外不能通过赋值来改变常量的值。</p>
+<p>基于这几点，在声明一个常量的时候就要将这个常量的值赋给它，而不能先声明一个没有值的常量，再在之后赋值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> RWBY;</span><br><span class="line">RWBY = [<span class="string">&quot;ruby&quot;</span>,<span class="string">&quot;weiss&quot;</span>,<span class="string">&quot;blake&quot;</span>,<span class="string">&quot;yang&quot;</span>]; <span class="comment">// SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"><span class="comment">// 虽然错误是在重新给常量赋值时抛出的，也就是说 const RWBY; 这一步并没有错</span></span><br><span class="line"><span class="comment">// 但是很显然这样的语句毫无意义，所以通常声明一个常量时应该直接将值赋予该常量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于变量声明提升"><a href="#关于变量声明提升" class="headerlink" title="关于变量声明提升"></a>关于变量声明提升</h2><p>JavaScript是解释型语言，解析一句执行一句，为了提高效率，在代码解析执行之前，有一个预解析的过程。在预解析时，代码并不会执行，系统只会检查当前作用域（函数内部的代码不会检查，只有在调用函数时，才会重复 <code>“预解析-&gt;执行”</code> 这样的步骤）的代码有没有语法上的错误和代码中的变量声明关键字 <code>var</code> 和函数声明的关键字 <code>function</code>。</p>
+<p>在遇到这两种声明时，系统会在内存中预先记录下声明的变量名和函数名，也就是标识符。在预解析结束后，运行代码之前，系统就得到了有哪些标识符是可以作为变量来使用的，如果使用了系统未记录的标识符，也就是没有声明的变量，这时系统就会抛出一个引用错误 <code>ReferenceError: xxx is not defined</code> 。</p>
+<p>在预解析过程中，如果遇到了同一个标识符多次声明，是不会多次记录的，只会记录第一次。如果同一个标识符既有变量声明var，又有函数声明function，最终记录下来的标识符是一个函数，遵循的原则是先有什么就记录什么，函数声明会记录两件事，一个同变量声明，记录该标识符可以使用，第二个记录该标识符指向一个函数。<br>所以有说法 <em>函数是JavaScript中的一等公民</em>。<br>但要知道该记录只保持在预解析结束，运行代码之前。<br>在运行代码过程中，需要根据实际情况判断标识符到底是一个变量还是一个函数。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/17/css%E4%B9%8Bbfc.html" rel="prev" title="CSS之BFC">
+                  <i class="fa fa-chevron-left"></i> CSS之BFC
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/12/16/javascript%E4%B8%AD%E7%9A%84%E8%AF%AD%E5%8F%A5%E7%BB%93%E6%9D%9F%E7%AC%A6.html" rel="next" title="JavaScript中的语句结束符">
+                  JavaScript中的语句结束符 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"wayowe","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moesuiga","repo":"blog-comments-by-gitalk","client_id":"827326488d2cde661c88","client_secret":"0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0","admin_user":"moesuiga","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"066c1241f6c0e7c0a1b1a342ba3cc20d"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>

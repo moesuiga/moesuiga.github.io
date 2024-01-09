@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"moesuiga.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="控制台console的一些方法记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="console in web">
+<meta property="og:url" content="https://moesuiga.github.io/2018/01/07/console-in-web.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="控制台console的一些方法记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moesuiga.github.io/images/gallery/ab_016.jpg">
+<meta property="article:published_time" content="2018-01-07T10:11:53.000Z">
+<meta property="article:modified_time" content="2021-05-11T13:33:06.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moesuiga.github.io/images/gallery/ab_016.jpg">
+
+
+<link rel="canonical" href="https://moesuiga.github.io/2018/01/07/console-in-web.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://moesuiga.github.io/2018/01/07/console-in-web.html","path":"/2018/01/07/console-in-web.html","title":"console in web"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>console in web | 地平线·梦</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-135498029-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">地平线·梦</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">1.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug-info"><span class="nav-number">2.</span> <span class="nav-text">debug&#x2F;info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#warn-error"><span class="nav-number">3.</span> <span class="nav-text">warn&#x2F;error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trace"><span class="nav-number">4.</span> <span class="nav-text">trace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time-timeLog-timeEnd"><span class="nav-number">5.</span> <span class="nav-text">time&#x2F;timeLog&#x2F;timeEnd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-groupEnd-groupCollapsed"><span class="nav-number">6.</span> <span class="nav-text">group&#x2F;groupEnd&#x2F;groupCollapsed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#profile-profileEnd"><span class="nav-number">7.</span> <span class="nav-text">profile&#x2F;profileEnd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#table"><span class="nav-number">8.</span> <span class="nav-text">table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count-countReset"><span class="nav-number">9.</span> <span class="nav-text">count&#x2F;countReset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dir-dirxml"><span class="nav-number">10.</span> <span class="nav-text">dir&#x2F;dirxml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assert"><span class="nav-number">11.</span> <span class="nav-text">assert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memory"><span class="nav-number">12.</span> <span class="nav-text">memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">13.</span> <span class="nav-text">clear</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#console-%E7%9A%84%E5%85%B6%E4%BB%96%E5%B0%8F%E7%9F%A5%E8%AF%86"><span class="nav-number">14.</span> <span class="nav-text">console 的其他小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.1.</span> <span class="nav-text">打印对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">14.2.</span> <span class="nav-text">格式化占位符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-%E4%B8%AD%E7%9A%84-await"><span class="nav-number">14.3.</span> <span class="nav-text">console 中的 await</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <div class="site-author-image">
+      <img itemprop="image" alt="Suiga" src="/images/suiga.gif">
+    </div>
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/images/gallery/ab_016.jpg" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://moesuiga.github.io/2018/01/07/console-in-web.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
+      <meta itemprop="name" content="Suiga">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+      <meta itemprop="description" content="我把脑子丢了">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="console in web | 地平线·梦">
+      <meta itemprop="description" content="控制台console的一些方法记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          console in web
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-07 18:11:53" itemprop="dateCreated datePublished" datetime="2018-01-07T18:11:53+08:00">2018-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-11 21:33:06" itemprop="dateModified" datetime="2021-05-11T21:33:06+08:00">2021-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">技术文章</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2018/01/07/console-in-web.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/01/07/console-in-web.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">控制台console的一些方法记录</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>一般我们要在控制台输出一些信息的时候，大多数情况都只是使用 <code>console.log</code> 来输出。但是，你知道吗？其实 <code>console</code> 还有很多其他的方法。</p>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><p>在控制台打印内容，一般的用法——也是我们常用的用法——就是<code>console.log(info[,info,...])</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;c.c.&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;I like &#x27;</span>, name);</span><br><span class="line"><span class="comment">// =&gt; I like c.c.</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h2 id="debug-info"><a href="#debug-info" class="headerlink" title="debug/info"></a>debug/info</h2><p><code>info</code> 是 <code>log</code> 的别名，在某些地方见有人说过 <code>console.info</code> 会在输出的文本前加上一个小三角标示，但我在浏览器控制台实测并没有小三角标示。</p>
+<p><code>debug</code> 也类似 <code>log</code>，不同的是在分级上 <code>debug</code> 属于调试信息，一般在控制台会被过滤掉，需要在控制台选中 <code>Verbose</code> 来查看。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">&#x27;Without a date&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.debug(<span class="string">&#x27;debug: %s&#x27;</span>, text);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&#x27;info: %s&#x27;</span>, text);</span><br></pre></td></tr></table></figure>
+
+<h2 id="warn-error"><a href="#warn-error" class="headerlink" title="warn/error"></a>warn/error</h2><p><code>warn</code> 在控制台输出一条带有 “警告” 图标的消息和一个指向该代码调用的追溯引用信息，文字与背景颜色为黄色。<br><code>error</code> 在控制台输出一条带有“错误”图标的消息和一个指向该代码调用的追溯引用信息，文字与背景颜色为红色。</p>
+<p><code>warn</code>, <code>error</code> 除了上面的说明外，还有一个输出级别的区分，我们可以通过不同的条件来过滤，只查看 <code>warn</code> 级别或者 <code>error</code> 级别的输出信息。这在一些具有较多输出日志的情况下，能更快速的找到自己需要的一些信息。</p>
+<h2 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h2><p>在控制台输出该代码调用的追溯引用信息。</p>
+<p>实际项目中，一个函数可能在多个地方有调用，还有多个函数嵌套。<br>有时候想要知道这个函数在某时刻具体是在哪个函数调用的，就可以通过追溯找到嵌套的调用函数路径。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.trace(<span class="string">&#x27;追溯调用位置&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1();</span><br></pre></td></tr></table></figure>
+
+<h2 id="time-timeLog-timeEnd"><a href="#time-timeLog-timeEnd" class="headerlink" title="time/timeLog/timeEnd"></a>time/timeLog/timeEnd</h2><p>想知道某段代码的运行时间？你还在用下面这种方式吗？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"><span class="comment">// ... codes</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;cost: &#x27;</span>, <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() - start);</span><br></pre></td></tr></table></figure>
+
+<p>快来试试 <code>console.time/console.timeEnd</code> 组合吧。</p>
+<p><code>console.time(label)</code> 创建一个索引为 <code>label</code> 的计时器，<br><code>console.timeLog(label)</code> 输出索引为 <code>label</code> 的计时器经历的时间，<br><code>console.timeEnd(label)</code> 停止索引为 <code>label</code> 的计时器，并输出从创建到停止所耗的时间（毫秒）。常用来查看代码运行的效率性能。</p>
+<blockquote>
+<p>使用 <code>timeLog/timeEnd</code> 时，必须有一个通过 <code>time</code> 创建了的定时器。<br>如果没有创建或 label 参数错误无法找到创建的定时器，会输出一个警告 <code>Timer &#39;default(or input label)&#39; does not exist</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;Sum&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> end = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; end; i++) &#123;</span><br><span class="line">  sum += i;</span><br><span class="line">  <span class="keyword">if</span> (i === end / <span class="number">2</span>) <span class="built_in">console</span>.timeLog(<span class="string">&#x27;Sum&#x27;</span>); <span class="comment">// =&gt; Sum: 0.06396484375ms</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1~1000之和: &#x27;</span>, sum); <span class="comment">// =&gt; 1~1000之和:  499500</span></span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;Sum&#x27;</span>); <span class="comment">// =&gt; Sum: 0.26708984375ms</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="group-groupEnd-groupCollapsed"><a href="#group-groupEnd-groupCollapsed" class="headerlink" title="group/groupEnd/groupCollapsed"></a>group/groupEnd/groupCollapsed</h2><p><code>group</code>方法输出一条消息，并打开一个分组的嵌套块，块中的内容都会缩进，调用<code>console.groupEnd()</code>关闭嵌套块。<br><code>groupCollapsed</code> 方法与 <code>group</code> 方法一样，唯一的区别是该组的内容，在第一次显示时是收起而非展开的。</p>
+<p>通过这个方法，我们可以很清楚的了解到代码的运行顺序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.group(<span class="string">&#x27;group demo&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;program start ...&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.groupCollapsed(<span class="string">&#x27;loop&#x27;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.groupEnd();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;program end ...&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.groupEnd();</span><br></pre></td></tr></table></figure>
+
+<h2 id="profile-profileEnd"><a href="#profile-profileEnd" class="headerlink" title="profile/profileEnd"></a>profile/profileEnd</h2><p><code>console.profile([title])</code> 打开JavaScript性能测试开关，可选参数title会在打印性能测试报告时在报告的开头输出。这两个 API 尚未标准化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTask</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  doTaskA(<span class="number">1000</span>);</span><br><span class="line">  doTaskA(<span class="number">100000</span>);</span><br><span class="line">  doTaskB(<span class="number">10000</span>);</span><br><span class="line">  doTaskC(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskA</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskB</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doTaskC</span>(<span class="params">count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; count; i++)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.profile(<span class="string">&#x27;testTitle&#x27;</span>);</span><br><span class="line">doTask();</span><br><span class="line"><span class="built_in">console</span>.profileEnd(<span class="string">&#x27;testTitle&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><p>对于某些复合类型的数据，<code>console.table(object)</code>方法可以将其转为表格显示。条件是必须拥有主键。<br>对于数组来说，主键就是数字键；对于对象来说，主键就是它的最外层键。</p>
+<p>表格可以用于数据统计，如果要查看一个结构相同或类似的列表时，就可以使用 <code>console.table</code> 。另外 <code>console.table</code> 还可以根据第二个参数，来过滤要展示的属性列表，在 Chrome 浏览器中还能够点击第一行的索引来重新排序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [&#123;</span><br><span class="line">  name: <span class="string">&#x27;RWBY&#x27;</span>,</span><br><span class="line">  year: <span class="number">2013</span>,</span><br><span class="line">  series: <span class="number">6</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">&#x27;OVERLORD&#x27;</span>,</span><br><span class="line">  year: <span class="number">2015</span>,</span><br><span class="line">  series: <span class="number">3</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">&#x27;狐妖小红娘&#x27;</span>,</span><br><span class="line">  year: <span class="number">2015</span>,</span><br><span class="line">  series: <span class="number">5</span>,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  name: <span class="string">&#x27;JOJO&#x27;</span>,</span><br><span class="line">  year: <span class="number">2012</span>,</span><br><span class="line">  series: <span class="number">6</span>,</span><br><span class="line">&#125;];</span><br><span class="line"><span class="built_in">console</span>.table(arr);</span><br><span class="line"><span class="built_in">console</span>.table(arr, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;year&#x27;</span>])</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    -----------------------------------------</span></span><br><span class="line"><span class="comment">    | (index) | name       | year | series  |</span></span><br><span class="line"><span class="comment">    |---------------------------------------|</span></span><br><span class="line"><span class="comment">    | 0      | &quot;RWBY&quot;      | 2013 | 6       |</span></span><br><span class="line"><span class="comment">    | 1      | &quot;OVERLORD&quot;  | 2015 | 3       |</span></span><br><span class="line"><span class="comment">    | 2      | &quot;狐妖小红娘&quot; | 2015 | 5       |</span></span><br><span class="line"><span class="comment">    | 3      | &quot;JOJO&quot;      | 2012 | 6       |</span></span><br><span class="line"><span class="comment">    ----------------------------------------</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="count-countReset"><a href="#count-countReset" class="headerlink" title="count/countReset"></a>count/countReset</h2><p><code>count</code> 计数器，输出它被调用了多少次，有一个可选参数，会在显示计数时在开头输出，并用于区分不同的计数器。</p>
+<p><code>countReset</code> 重置 <code>count</code> 计数器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i % <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.count(<span class="string">&#x27;odd&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.count(<span class="string">&#x27;even&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.countReset(<span class="string">&#x27;odd&#x27;</span>); <span class="comment">// in FireFox =&gt; odd: 0  in Chrome: no output</span></span><br><span class="line"><span class="built_in">console</span>.countReset(<span class="string">&#x27;even&#x27;</span>); <span class="comment">// in FireFox =&gt; even: 0  in Chrome: no output</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="dir-dirxml"><a href="#dir-dirxml" class="headerlink" title="dir/dirxml"></a>dir/dirxml</h2><p><code>dir</code> 方法用于显示指定对象的属性，并以易于阅读的格式——类似文件树样式的交互列表——显示，该方法对于输出DOM对象非常有用。(在 FireFox 中会直接展开)<br><code>dirxml</code> 方法主要用于显示一个明确的 XML/HTML 元素的 DOM 节点对象，可以让你看到该节点的所有子节点内容。如果参数不是 DOM 节点，而是普通的JavaScript对象，<code>console.dirxml</code> 等同于 <code>console.dir</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;header&#x27;</span>));</span><br><span class="line"><span class="built_in">console</span>.dirxml(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;header&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h2><p><code>assert</code>方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序的执行。这样就相当于提示用户，内部状态不正确。</p>
+<p>它接收两个参数，第一个是表达式，第二个是字符串。只有当第一个参数为<code>false</code>时，才会提示有错误，在控制台输出第二个参数，否则不会有任何结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.assert(<span class="number">1</span> &gt; <span class="number">2</span>, <span class="string">&#x27;判断错误&#x27;</span>);</span><br><span class="line"><span class="comment">//=&gt; Assertion failed: 判断错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="number">1</span> &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;判断错误&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>console.assert()</code>方法在 Node.js 中的实现和浏览器中可用的 <code>console.assert()</code> 方法实现是不同的。<br>在<strong>浏览器</strong>中当 <code>console.assert()</code> 方法接受到一个值为假断言（assertion）的时候，会向控制台输出传入的内容，但是<strong>并不会中断代码的执行</strong>，而在 <strong>Node.js v10.0.0</strong> 之前，一个值为假的断言也将<strong>会导致一个AssertionError被抛出，使得代码执行被打断</strong>。<br>v10.0.0修复了此差异，所以现在console.assert()在node和浏览器中执行行为相同。<br>引自: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQVBJL0NvbnNvbGUvYXNzZXJ0">MDN-Console.assert<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h2><p>一个可以查看 JS 堆栈内存使用情况的对象，Chrome 浏览器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.momery;</span><br><span class="line"><span class="comment">// MemoryInfo&#123;totalJSHeapSize: 35100000, usedJSHeapSize: 29400000, jsHeapSizeLimit: 1136000000&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h2><p>clear方法用于清除当前控制台的所有输出，将光标回置到第一行。</p>
+<h2 id="console-的其他小知识"><a href="#console-的其他小知识" class="headerlink" title="console 的其他小知识"></a>console 的其他小知识</h2><h3 id="打印对象"><a href="#打印对象" class="headerlink" title="打印对象"></a>打印对象</h3><p>以前遇到过好些人问，用 <code>console.log</code> 去调试的时候，打印一个对象，查看发现某个属性明明是有值的，可是代码运行却是按照无值来运行的。这是怎么回事？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> yakumo = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Yukari&#x27;</span>,</span><br><span class="line">  age: <span class="literal">Infinity</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(yakumo); <span class="comment">// You think: &#123; name: &#x27;Yukari&#x27;, age: Infinity &#125;, in fact: ??</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (yakumo.age &gt; <span class="number">18</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;before changed&#x27;</span>); <span class="comment">// this will be output</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;after changed&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 👁👁 Spell Card: 年长与年轻的境界 😏</span></span><br><span class="line">yakumo.age = <span class="number">17</span>;</span><br></pre></td></tr></table></figure>
+
+<p>把上面的代码复制，放到浏览器的控制台中运行一遍，你可能会说：我这边输出的是 <code>&#123; name: &#39;Yukari&#39;, age: Infinity &#125;</code> 啊。<br>但是接下来，点击一下对象左侧的三角，展开对象，你会发现该对象 <code>age</code> 的值成了 <code>17</code>。</p>
+<p>其实 <code>console.log</code> 打印出来的对象并非该对象的当时值(深拷贝)，打印出来的其实是对象的一个地址引用。<br>在展开对象之前以文本形式展示出来的，是对象被打印时刻的状态转成字符串的输出。<br>当你<strong>第一次</strong>展开对象时，会获取到最新的对象属性进行查看，之后关闭再展开时，则固定成了第一次的属性了（排除使用 getter 或类似的属性）。<br>我们都知道代码运行时很快的，所以当你在控制台上看到这个被打印出来的对象时，这个对象内的一些属性也许早已在某些地方被改变了。</p>
+<h3 id="格式化占位符"><a href="#格式化占位符" class="headerlink" title="格式化占位符"></a>格式化占位符</h3><p><code>console.log</code> 第一个参数中还支持 <code>printf</code> 的占位符哦，后续参数根据位置对应填入占位符的位置输出。</p>
+<p>支持的格式化占位符列表：</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%d, %i</td>
+<td>整型（暂不支持数字型字符串）</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点型（暂不支持数字型字符串）</td>
+</tr>
+<tr>
+<td>%o, %O</td>
+<td>链接对象</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>CSS格式字符串</td>
+</tr>
+</tbody></table>
+<p><code>%s</code> 是字符串的占位符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%s placeholder&#x27;</span>, <span class="string">&#x27;hello&#x27;</span>); <span class="comment">// =&gt; hello placeholder</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%s&#x27;</span>, &#123;&#125;); <span class="comment">// Chrome =&gt; Object</span></span><br><span class="line"><span class="comment">// FireFox =&gt; [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%s&#x27;</span>, []); <span class="comment">// Chrome =&gt; Array(0)</span></span><br><span class="line"><span class="comment">// FireFox =&gt; &lt;null character&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>%d</code>、<code>%i</code>、<code>%f</code>, 虽然在 JS 中不区分整型与浮点型，只有 <code>Number</code>。但是在占位符中，<code>%d</code> 与 <code>%i</code> 只会输出整数部分，而 <code>%f</code> 则能输出浮点数。如果对应占位符的参数不是 <code>Number</code> 类型，则会输出 <code>NaN</code>。</p>
+<blockquote>
+<p>在 Chrome 中的表现：<code>%d</code>,<code>%i</code>,<code>%f</code> 只能作为 <code>Number</code> 的占位符，即使是数字型的字符串(e.g. “123”) 也会输出成 NaN<br>在 FireFox 中可以输出 numeric 的字符串，如果是不能转成数字的字符串，则会输出 0，另 <code>%f</code> 固定会输出一个 6 位小数位的浮点数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1 + 2 = %d&#x27;</span>, <span class="number">1</span> + <span class="number">2</span>); <span class="comment">// =&gt; 1 + 2 = 3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1 + 2 = %f&#x27;</span>, <span class="number">1</span> + <span class="number">2</span>); <span class="comment">// Chrome =&gt; 1 + 2 = 3</span></span><br><span class="line"><span class="comment">// FireFox =&gt; 1 + 2 = 3.000000</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;0.1 + 0.2 = %f&#x27;</span>, <span class="number">0.1</span> + <span class="number">0.2</span>); <span class="comment">// Chrome =&gt; 0.1 + 0.2 = 0.30000000000000004</span></span><br><span class="line"><span class="comment">// FireFox =&gt; 0.1 + 0.2 =  0.300000</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1.2 + 1.3 &gt; %i&#x27;</span>, <span class="number">1.2</span> + <span class="number">1.3</span>); <span class="comment">// =&gt; 1.2 + 1.3 &gt; 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;numeric will be %d&#x27;</span>, <span class="string">&#x27;123&#x27;</span>); <span class="comment">// Chrome =&gt; numeric will be NaN</span></span><br><span class="line"><span class="comment">// FireFox =&gt; numeric will be 123</span></span><br></pre></td></tr></table></figure>
+
+<p><code>%o</code>, <code>%O</code> 都是对象的占位符。</p>
+<p>在 FireFox 浏览器中表现相同，在 Chrome 浏览器中的表现则不同。</p>
+<p>Chrome 中的不同之处在于：<code>%o</code> 是对象引用，会直接将对象内的属性展示出来，对于 DOM 节点对象则是展示类似 Element 的节点；而 <code>%O</code> 则是折叠起来的对象，在不点击展开的情况下，无法看到对象内的属性，对于 DOM 节点对象也是如此。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in Chrome</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%o&#x27;</span>, &#123;<span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>&#125;); <span class="comment">// =&gt; &#123;name: &#x27;obj&#x27;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%O&#x27;</span>, &#123;<span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>&#125;); <span class="comment">// =&gt; Object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%o&#x27;</span>, <span class="built_in">document</span>.getElementById(<span class="string">&#x27;header&#x27;</span>)); <span class="comment">// =&gt; &lt;header id=&quot;header&quot;&gt;...&lt;/header&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%O&#x27;</span>, <span class="built_in">document</span>.getElementById(<span class="string">&#x27;header&#x27;</span>)); <span class="comment">// =&gt; header#header&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的情况不清楚是怎么回事，有兴趣的可以深入研究一下</span></span><br><span class="line"><span class="comment">// 后面的圆括号备注的类型，是根据 Chrome 的输出颜色得出的判断，也不一定准确</span></span><br><span class="line"><span class="comment">// 欢迎有了解的人解惑</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%d&#x27;</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (string)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%o&#x27;</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (number)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%O&#x27;</span>, <span class="number">123</span>); <span class="comment">// =&gt; 123 (string)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%s&#x27;</span>, <span class="string">&#x27;string&#x27;</span>); <span class="comment">// =&gt; string</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%o&#x27;</span>, <span class="string">&#x27;string&#x27;</span>); <span class="comment">// =&gt; &quot;string&quot; (注意这里的双引号是输出的)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%O&#x27;</span>, <span class="string">&#x27;string&#x27;</span>); <span class="comment">// =&gt; string</span></span><br></pre></td></tr></table></figure>
+
+<p><code>%c</code> 是 CSS 格式字符串的占位符。可以通过 <code>%c</code> 占位符给输出的文本添加一些样式，比如更大的字号、更醒目的颜色、添加背景色等，使得输出更加醒目。</p>
+<p>因为每个浏览器的具体实现不同，更多的 CSS 效果可以自己动手试试看。</p>
+<blockquote>
+<p>每个输出默认是 <code>inline</code> 盒子，且无法使用 <code>display</code> 转换成 <code>block</code>。<br>也因此，<code>width</code>, <code>height</code> 属性无效，但可以通过 <code>line-height</code> 来撑起高度。<br><code>padding/margin</code> 的 <code>top</code>/<code>bottom</code> 在 FireFox 下没有效果，但 <code>left</code> 与 <code>right</code> 有效<br><code>-webkit-background-clip: text;</code> 在 FireFox 中有效，但在 Chrome 中无效<br>… 还有其他很多属性等你探索</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%cRainbowGirl&#x27;</span>, <span class="string">&#x27;font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%c3D TEXT&#x27;</span>, <span class="string">&#x27;padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;&#x27;</span>);</span><br><span class="line"><span class="comment">// FireFox</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;%cRainbowGirl&#x27;</span>, <span class="string">&#x27;font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="console-中的-await"><a href="#console-中的-await" class="headerlink" title="console 中的 await"></a>console 中的 await</h3><p>我们知道在 ES2017 中新增了 <code>async/await</code> 两个关键字，用于更方便的异步操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> n = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(<span class="number">123</span>), <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line">fn().then(<span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">console</span>.log(n));</span><br></pre></td></tr></table></figure>
+
+<p><code>async/await</code> 是成对使用的。<code>await</code> 只能使用在 <code>async</code> 声明的异步函数中。</p>
+<p>但是，浏览器中的 <code>console</code> 对象下的方法内其实也可以使用 <code>await</code>，不过这种用法只能用于直接在控制台中调试时。</p>
+<p>如果用在 script 脚本中的话，会报语法错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in browser console</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), <span class="number">1000</span>)).then(<span class="function">() =&gt;</span> <span class="number">123</span>)); <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- in web script --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), <span class="number">1000</span>)).then(<span class="function">() =&gt;</span> <span class="number">123</span>)); <span class="comment">// Syntax Error</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<!-- console demo script -->
+<script>
+(function () {
+  // log
+  var name = 'c.c.';
+  console.log('I like ', name);
+
+  // debug info
+  var text = 'Without a date';
+  console.debug('debug: %s', text);
+  console.info('info: %s', text);
+
+  // warn error
+  var loser = '人生的败犬';
+  console.warn('I am really a ', loser);
+  var error = '注孤生';
+  console.error('%cMy Error: %c%s', 'color: purple;', 'color: black; font: 700 22px "方正舒体", "华文行楷", simsun;', error);
+
+  // trace
+  function fn1() {
+    function fn2() {
+      console.trace('追溯调用位置');
+    }
+    fn2();
+  }
+  fn1();
+
+  // time timeEnd
+  console.time('Sum');
+  var sum = 0;
+  var end = 1000;
+  for (var i = 1; i < end; i++) {
+    sum += i;
+    if (i === end / 2) console.timeLog('Sum');
+  }
+  console.log('1~1000之和: ', sum);
+  console.timeEnd('Sum');
+
+  // group groupEnd groupCollapsed
+  console.group('group demo');
+    console.log('program start ...');
+    console.groupCollapsed('loop');
+    for (var i = 0; i < 10; i++) {
+      console.log(i);
+    }
+    console.groupEnd();
+    console.log('program end ...');
+  console.groupEnd();
+
+  // profile
+  function doTask() {
+    doTaskA(1000);
+    doTaskA(100000);
+    doTaskB(10000);
+    doTaskC(1000);
+  }
+  function doTaskA(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  function doTaskB(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  function doTaskC(count) {
+    for(var i = 1; i < count; i++){}
+  }
+  console.profile('testTitle');
+  doTask();
+  console.profileEnd('testTitle');
+
+  // table
+  var arr = [{
+    name: 'RWBY',
+    year: 2013,
+    series: 6,
+  }, {
+    name: 'OVERLORD',
+    year: 2015,
+    series: 3,
+  }, {
+    name: '狐妖小红娘',
+    year: 2015,
+    series: 5,
+  }, {
+    name: 'JOJO',
+    year: 2012,
+    series: 6,
+  }];
+  console.table(arr);
+  console.table(arr, ['name', 'year']);
+
+  // count countReset
+  console.log('%c%s', 'font-size: 20px; color: gold; background:  DarkSlateGrey;', '记录0~10之间的奇偶数的个数')
+  for (var i = 0; i < 10; i++) {
+    if (i % 2) {
+      console.count('odd');
+    } else {
+      console.count('even');
+    }
+  }
+  console.countReset('odd');
+  console.countReset('even');
+
+  // dir dirxml
+  console.dir(document.getElementById('header'));
+  console.dirxml(document.getElementById('header'));
+
+  // assert
+  console.assert(1 < 2, '正确');
+  console.assert(1 > 2, '判断错误');
+
+  // memory
+  console.log('memory', console.memory);
+
+  // console object
+  console.log('%c%s', 'font-size: 17px; padding: 17px; background: #888; color: purple;', 'Yakumo Yukari')
+  var yakumo = {
+    name: 'Yukari',
+    age: Infinity,
+  };
+  console.log(yakumo); // You think: { name: 'Yukari', age: Infinity }, in fact: { name: 'Yukari', age: 17 }
+
+  if (yakumo.age > 18) {
+    console.log('before changed'); // this will be output
+  } else {
+    console.log('after changed');
+  }
+  yakumo.age = 17;
+
+  // placeholder
+  console.log('%s placeholder', 'hello');
+  console.log('%s', {}); // => Object
+  console.log('%s', []); // => Array(0)
+  console.log('1 + 2 = %d', 1 + 2);
+  console.log('1 + 2 = %f', 1 + 2); // 1 + 2 = 3 (FireFox: 3.000000)
+  console.log('0.1 + 0.2 = %f', 0.1 + 0.2);
+  console.log('1.2 + 1.3 > %i', 1.2 + 1.3);
+  console.log('numeric will be %d', '123');
+
+  console.log('小o %o', {name: 'obj'});
+  console.log('大O %O', {name: 'obj'});
+  console.log('小o %o', document.getElementById('header'));
+  console.log('大O %O', document.getElementById('header'));
+  console.log('整型d %d', 123);
+  console.log('小o %o', 123);
+  console.log('大O %O', 123);
+  console.log('字符串s %s', 'string');
+  console.log('小o %o', 'string');
+  console.log('大O %O', 'string');
+
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: #fff; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%)');
+
+  // rainbow in Chrome
+  console.log('%cRainbowGirl', 'font-size: 40px; padding: 100px 80px 50px; color: #bdbdbd; background: radial-gradient(at 50% 100%, transparent 0%, transparent 35%, #8b00ff 40%, #0000ff 45%, #00ffff 50%, #00ff00 55%, #ffff00 60%, #ff7f00 65%, #ff0000 70%); background-repeat: no-repeat;background-position: 0 0; border-radius: 200px 200px 0 0;');
+  // rainbow text in FireFox
+  console.log('%cRainbowGirl', 'font-size: 40px; line-height: 60px; padding: 0 10px; color: transparent; background: linear-gradient(90deg, red 0%, orange 15%, yellow 45%, green 60%, cyan 75%, blue 90%, purple 100%);-webkit-background-clip: text;text-fill-color:transparent;');
+
+  console.log('%c3D TEXT', 'padding: 20px; background: #fff; color: #000; font-size: 50px; font-weight: bold; text-shadow: 1px 1px #999, 3px 3px #666;');
+  console.log('%c%s', 'color: white; font-size: 20px;', 'you cant see me.');
+
+})()
+</script>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/04/%E3%80%90%E8%BD%AC%E3%80%91sass-%E4%B8%8E-scss-%E7%9A%84%E5%BC%82%E5%90%8C.html" rel="prev" title="【转】Sass 与 SCSS 的异同">
+                  <i class="fa fa-chevron-left"></i> 【转】Sass 与 SCSS 的异同
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html" rel="next" title="CSS选择器">
+                  CSS选择器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"wayowe","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moesuiga","repo":"blog-comments-by-gitalk","client_id":"827326488d2cde661c88","client_secret":"0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0","admin_user":"moesuiga","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b2b5d4a72851188fb4e25b0969e85fd5"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>

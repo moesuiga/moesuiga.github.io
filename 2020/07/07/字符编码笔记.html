@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"moesuiga.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="什么是字符编码？编码与字符集有什么关系？现在常说的 Unicode 和 UTF-8 分别是编码还是字符集？想了解这些的话，那就继续看下去吧。这是一篇有关字符编码的笔记，记录了本人查找了解的一些内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符编码笔记">
+<meta property="og:url" content="https://moesuiga.github.io/2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="什么是字符编码？编码与字符集有什么关系？现在常说的 Unicode 和 UTF-8 分别是编码还是字符集？想了解这些的话，那就继续看下去吧。这是一篇有关字符编码的笔记，记录了本人查找了解的一些内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moesuiga.github.io/images/gallery/2020070702.png">
+<meta property="article:published_time" content="2020-07-07T10:18:49.000Z">
+<meta property="article:modified_time" content="2021-05-11T00:39:34.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="Encoding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moesuiga.github.io/images/gallery/2020070702.png">
+
+
+<link rel="canonical" href="https://moesuiga.github.io/2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://moesuiga.github.io/2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html","path":"/2020/07/07/字符编码笔记.html","title":"字符编码笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>字符编码笔记 | 地平线·梦</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-135498029-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">地平线·梦</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">字符集和字符编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E5%8E%86%E5%8F%B2%E6%BC%94%E5%8F%98"><span class="nav-number">2.</span> <span class="nav-text">字符编码的历史演变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ASCII"><span class="nav-number">2.1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95ASCII"><span class="nav-number">2.2.</span> <span class="nav-text">扩展ASCII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BC%96%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">其他编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B1%E7%A0%81"><span class="nav-number">2.4.</span> <span class="nav-text">乱码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode"><span class="nav-number">3.</span> <span class="nav-text">Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UCS%E4%B8%8EUnicode"><span class="nav-number">3.1.</span> <span class="nav-text">UCS与Unicode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode%E4%B8%8EUTF"><span class="nav-number">3.2.</span> <span class="nav-text">Unicode与UTF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2"><span class="nav-number">3.2.1.</span> <span class="nav-text">平面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UTF-32"><span class="nav-number">3.2.2.</span> <span class="nav-text">UTF-32</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UTF-16"><span class="nav-number">3.2.3.</span> <span class="nav-text">UTF-16</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8EU-D800%E5%88%B0U-DFFF"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">从U+D800到U+DFFF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E5%AF%B9%E4%B8%8EUTF-16%E8%BE%85%E5%8A%A9%E5%B9%B3%E9%9D%A2%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">代理对与UTF-16辅助平面编码方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UTF-8"><span class="nav-number">3.2.4.</span> <span class="nav-text">UTF-8</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">实现方式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <div class="site-author-image">
+      <img itemprop="image" alt="Suiga" src="/images/suiga.gif">
+    </div>
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/images/gallery/2020070702.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://moesuiga.github.io/2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
+      <meta itemprop="name" content="Suiga">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+      <meta itemprop="description" content="我把脑子丢了">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="字符编码笔记 | 地平线·梦">
+      <meta itemprop="description" content="什么是字符编码？编码与字符集有什么关系？现在常说的 Unicode 和 UTF-8 分别是编码还是字符集？想了解这些的话，那就继续看下去吧。这是一篇有关字符编码的笔记，记录了本人查找了解的一些内容。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符编码笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-07 18:18:49" itemprop="dateCreated datePublished" datetime="2020-07-07T18:18:49+08:00">2020-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-11 08:39:34" itemprop="dateModified" datetime="2021-05-11T08:39:34+08:00">2021-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">技术文章</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/07/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2020/07/07/字符编码笔记.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">什么是字符编码？编码与字符集有什么关系？现在常说的 Unicode 和 UTF-8 分别是编码还是字符集？想了解这些的话，那就继续看下去吧。这是一篇有关字符编码的笔记，记录了本人查找了解的一些内容。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>我们知道，计算机是二进制存储的，所有的内容，在计算机内存储下来的都是 <code>0</code> 和 <code>1</code> 来表示的二进制数字。<br>早期的计算机在设计时，采用 8 个二进制位 (<code>bit</code>) 作为一个字节 (<code>byte</code>)，因为每个二进制位都有 <code>0</code> 和 <code>1</code> 两种状态，所以一个字节一共可以表示 2<sup>8</sup> = 256 种状态。</p>
+<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><p>字符集，从字面上来拆解，其实就是字符的集合；就是把我们使用到的字符整合在一起，并为每一个符号指定一个唯一的编号（叫作 <code>码点</code>）。</p>
+<p>因为计算机只能处理二进制数字，那么如果要处理文本内容时，就需要先把文本转换成数字；<br>将字符集中每一个字符唯一的编号，按照某种规则映射到二进制存储，这就是所谓的 <code>字符编码</code>。<br>比如最早给英文字符、数字、标点符号等制定了一套编码的 <code>ASCII</code>（<em>American Standard Code for Information Interchange</em>, <em>美国信息交换标准代码</em>）。</p>
+<p>简单来说，字符集是一套被分配了唯一编号的字符的集合，而字符编码则是对字符集映射到二进制的一个实现方式。</p>
+<h2 id="字符编码的历史演变"><a href="#字符编码的历史演变" class="headerlink" title="字符编码的历史演变"></a>字符编码的历史演变</h2><h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>在 20 世纪 60 年代，美国制定了一套字符编码，对英语字符和二进制之间的关系，做了统一规定，这被称为 <code>ASCII</code>，一直沿用至今。</p>
+<p><code>ASCII</code> 码一共规定了128个字符的编码，比如空格 <code>SPACE</code> 是 <code>32</code>（二进制<code>00100000</code>），大写的字母<code>A</code>是<code>65</code>（二进制<code>01000001</code>）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为<code>0</code>。</p>
+<h3 id="扩展ASCII"><a href="#扩展ASCII" class="headerlink" title="扩展ASCII"></a>扩展ASCII</h3><p>对英语来说，<code>ASCII</code> 内这 128 个字符就够用了，但是对欧洲其他一些国家来说，就不够用了；比如法国、德国等。<br>然后这些国家就对 <code>ASCII</code> 码做了扩展，利用字节中闲置的最高位编入新的符号，比如法语中的<code>é</code>的编码为<code>130</code>（二进制<code>10000010</code>），如此一来，这些欧洲国家就多出了128个字符可以存储；扩展后的 <code>ASCII</code> 码最多可以表示 <code>256</code> 个字符。<br>这些扩展编码中，比较流行的编码有 <code>latin-1</code>, <code>ISO-8859-1</code> 等。</p>
+<p>可这里也有一个问题：不同的国家有不同的字母，那么不同的扩展，势必会有同一个码点却代表不同的字母这样的情况出现。</p>
+<h3 id="其他编码"><a href="#其他编码" class="headerlink" title="其他编码"></a>其他编码</h3><p>上面说的只是欧洲这种以字母为主的语种国家，而像我们中国、日本等东亚语系的国家，需要使用的语言符号更多，只用一个字节，根本不够，如此就需要使用多个字节来表示一个字符。比如简体中文 <code>GB2312</code> 编码，就是使用两个字节表示一个汉字，所以理论上最多可以表示出 <code>256 * 256 = 65536</code> 个汉字。</p>
+<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>每个国家都有一套自己的编码方式，尤其是码点在 <code>128-255</code> 之间的字符，每套编码代表的字符都不一样；<br>如果将一个以A编码方式存储的文件，以B编码方式打开，就会出现乱码的问题。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>如上所说，世界上存在很多编码方式，同一个二进制数字可以被解释成不同的字符；因此，要想正常打开一个文本文件，就必须知道它的编码方式，否则就会出现乱码。<br>可以想象，如果存在一种编码，将世界上所有的字符都纳入其中；每个字符都有一个独一无二的码点，大家都使用这同一套编码，那么乱码问题就会消失。<br>这就是 <code>Unicode</code> 字符集。</p>
+<h3 id="UCS与Unicode"><a href="#UCS与Unicode" class="headerlink" title="UCS与Unicode"></a>UCS与Unicode</h3><p>人们开始迫切的需要一套统一的字符集，能够包含世界上所有的符号。<br>1988 年成立的 Unicode 团队和 1989 年成立的 UCS 团队，这两个团队就是想要搞出一套统一字符集成立的。<br>只是一开始他们并不知道彼此的存在。<br>1990 年，开发进度较快的 UCS 团队公布了第一套编码方法 <code>UCS-2</code>，使用2个字节表示已有码点的字符，同时这也是 <code>JavaScript</code> 中使用的编码方式。<br>而等到两个团队发现了对方存在之后，很快达成一致：世界上不需要两套统一字符集。在 1991 年 10 月，两个团队决定合并字符集；以后只发布一套字符集，就是 <code>Unicode</code>；并修复此前发布的字符集，使 <code>UCS</code> 的码点与 <code>Unicode</code> 完全一致。</p>
+<blockquote>
+<p>也由于 <code>JavaScript</code> 使用的是 <code>UCS-2</code> 编码，所以 <code>JavaScript</code> 的字符处理是有一些问题的，遇到4字节字符时，会当成两个2字节的字符来处理。<br>即使 ECMAScript6 扩展增强了 <code>Unicode</code> 的支持，基本解决了这个问题，但是为了兼容性，一些问题还是被保留了下来。<br>比如 <code>&quot;𝓂&quot;.length === 2</code>。<br>不过因为时间上的原因，<code>JavaScript</code> 也只能选择 <code>UCS-2</code>，而不是现在支持的 <code>UTF-16</code>。<br><code>JavaScript</code> 诞生于 1995年5月，<em>Brendan Eich</em> 用了 10 天设计了这套语言；同年10月，第一个解释引擎问世；<br>而 <code>UTF-16</code> 的发布时间却是在 1996年7月。</p>
+</blockquote>
+<h3 id="Unicode与UTF"><a href="#Unicode与UTF" class="headerlink" title="Unicode与UTF"></a>Unicode与UTF</h3><p>需要注意的是，<code>Unicode</code> 只是一个字符集，它只规定了符号的二进制代码，却没有规定这个二进制代码如何存储。<br>也就是说有许多中不同的二进制格式，可以用来表示 <code>Unicode</code>。<br>直到互联网普及，出现了几种使用较为广泛的编码方式，其中就有我们现在常用的 <code>UTF-8</code>，其他还有 <code>UTF-16</code> 和 <code>UTF-32</code>。<br><code>UTF</code> 的全称是 <em>Unicode/UCS Transformation Format</em>，亦即把 <code>Unicode</code> 字符转换为某种格式。</p>
+<h4 id="平面"><a href="#平面" class="headerlink" title="平面"></a>平面</h4><p><code>Unicode</code> 的编码空间从 <code>U+0000</code> 到 <code>U+10FFFF</code>，一共有 1,112,064 个码点可以用来映射字符。<br>这么多字符，<code>Unicode</code> 也并不是一次性定义的，而是分区定义的。<br>每个区可以存放 65536 个字符（16位，2<sup>16</sup>），这样一个分区称为一个“平面”。<br>而目前一共有 17 个平面，也就是说，整个 <code>Unicode</code> 字符集的大小是 2<sup>21</sup>。</p>
+<p>在这 17 个平面里，前 65536 个字符，也就是第一个平面，也被称为<strong>基本平面</strong>（<em>Basic Multilingual Plane,基本多语言平面</em>, <strong>BMP</strong>），其他平面称为<strong>辅助平面</strong>（<em>Supplementary Planes</em>）。</p>
+<p>你可能偷偷计算了一下，发现 2<sup>21</sup> 远大于上面说的 1,112,064 个码点。<br>其实在这 2<sup>21</sup> 个码点里，并不是每个码点都用来映射字符。<br>在基本平面内，从 <code>U+D800</code> 到 <code>U+DFFF</code> 之间的码点区段是永久保留不映射到 <code>Unicode</code> 字符的；<br>而辅助平面码点的编码就是利用这个区段的码点来进行的。</p>
+<h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>这个仅了解一些就好，因为实际上很少会使用这个编码，甚至HTML5标准中明文规定，禁止支持 <code>UTF-32</code> 编码。</p>
+<p><code>UTF-32</code> 的编解码规则简单，所有字符都用四个字节表示，并完全对应 <code>Unicode</code> 码点，查找效率很高；但是它的缺点是很浪费空间，如果是纯英文文本，<code>UTF-32</code> 编码的占用空间是 <code>ASCII</code> 编码的四倍，在以前那个空间并不充足的年代，这几乎是无法容忍的；即使是现在，这也是一个致命的缺点。</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy8jY2hhcmFjdGVyLWVuY29kaW5ncw==">https://html.spec.whatwg.org/#character-encodings<i class="fa fa-external-link-alt"></i></span><br>Note<br>The above prohibits supporting, for example, CESU-8, UTF-7, BOCU-1, SCSU, EBCDIC, and UTF-32. This specification does not make any attempt to support prohibited encodings in its algorithms; support and use of prohibited encodings would thus lead to unexpected behavior.</p>
+</blockquote>
+<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p><code>UTF-16</code> 可以说是 <code>UCS-2</code> 的一个扩展，基本平面内的字符使用 2 个字节表示，辅助平面的字符使用 4 个字节表示。</p>
+<table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-16 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>U+0000</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>xxxxxxxx</code> <code>xxxxxxxx</code></td>
+<td>基本平面内，使用两个字节表示，<code>U+D800</code> - <code>U+DFFF</code> 是保留区段</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>110110xx</code> <code>xxxxxxxx</code> <code>110111yy</code> <code>yyyyyyyy</code></td>
+<td>辅助平面，使用四个字节表示，并有前缀标识</td>
+</tr>
+</tbody></table>
+<h5 id="从U-D800到U-DFFF"><a href="#从U-D800到U-DFFF" class="headerlink" title="从U+D800到U+DFFF"></a>从U+D800到U+DFFF</h5><p><code>Unicode</code> 标准规定从 <code>U+D800</code> 到 <code>U+DFFF</code> 的码点不对应任何字符。<br>但是在使用 <code>UCS-2</code> 的时代，这些码点是有对应字符的。因此，只要不构成代理对，许多 <code>UTF-16</code> 编码解码还是会把这些不符合 <code>Unicode</code> 标准的字符映射正确的辨识并转换成合规的码元。<br>但是按照 <code>Unicode</code> 标准来说，这种码元序列本来应该算作是编码错误。</p>
+<h5 id="代理对与UTF-16辅助平面编码方式"><a href="#代理对与UTF-16辅助平面编码方式" class="headerlink" title="代理对与UTF-16辅助平面编码方式"></a>代理对与UTF-16辅助平面编码方式</h5><p><code>Unicode</code> 辅助平面中码点，在 <code>UTF-16</code> 中被编码为<strong>一对</strong>16bit的码元（即32位，4字节），称作<em>代理对</em>（<em>Surrogate Pair</em>）。<br>具体方法是：</p>
+<ol>
+<li>码点减去 <code>0x10000</code>，得到的值的范围为 20 比特长的 <code>0...0xFFFFF</code>。</li>
+<li>高位的 10 比特的值（范围为 <code>0...0x3FF</code>）被加上 <code>0xD800</code> 得到第一个码元，称作高位代理（<em>high surrogate</em>），新值的范围是 <code>0xD800...0xDBFF</code>。【由于高位代理比低位代理的值要小，为了避免混淆使用，<code>Unicode</code> 标准现在称高位代理为<strong>前导代理</strong>（<em>lead surrogate</em>）</li>
+<li>低位的 10 比特的值（范围也是 <code>0...0x3FF</code>）被加上 <code>0xDC00</code> 得到第二个码元，称作低位代理（<em>low surrogate</em>），新值的范围是 <code>0xDC00...0xDFFF</code>。【由于低位代理比高位代理的值要大，为了避免混淆使用，<code>Unicode</code> 标准现在成低位代理为<strong>后尾代理</strong>（<em>trail surrogate</em>）</li>
+</ol>
+<p>上述算法可以这样理解：<br>辅助平面中的码点范围是 <code>U+010000</code> 到 <code>U+10FFFF</code>，共计 0xFFFFF 个，即 2<sup>20</sup>个，也就是需要 20 个二进制位来表示。<br>如果用两个 16 位长的整数组成的序列来表示，第一个整数（即前导代理）要容纳 20 位中的前 10 位，第二个整数（即后尾代理）容纳 20 位中的后 10 位。<br>因为 <code>UTF-16</code> 基本平面的字符就是由一个 16 位长的整数表示的，这里的两个 16 位整数序列就需要一个区分标识。<br>一是与基本平面码点的区分，二是前导代理与后尾代理的区分。</p>
+<p><strong>与基本平面码点的区分</strong>，就来自于之前讲的 <code>Unicode</code> 保留区段 <code>U+D800...U+DFFF</code>，因为两个整数中只容纳了 20 位中的 10 位二进制数字，也就是最大只有 <code>0x3FF</code>，那么就可以通过给这两个整数增加一个固定数字，使其位于 <code>U+D800...U+DFFF</code> 这个区段内，就可以与基本平面的码点区分开来。</p>
+<p><strong>前导代理与后尾代理的区分</strong>，则通过增加不同的数字，使二者落入 <code>U+D800...U+DFFF</code> 区段的不同部分来区分。<br>你会发现，<code>U+D800...U+DFFF</code> 的区间长度是 2047，<code>0x3FF</code> 的十进制是 1023，刚好是区段一半的大小；<br>那么以区段的初始值 <code>U+D800</code> 和中间值 <code>U+DC00</code> 分别作为前导代理和后尾代理增加的值，就可以刚好将两个值分别放入 <code>U+D800...U+DFFF</code> 区间的前半段 <code>U+D800...U+DBFF</code> 和后半段 <code>U+DC00...U+DFFF</code>。</p>
+<p>所以，<code>UTF-16</code> 遇到两个字节，码点位于 <code>U+D800...U+DBFF</code> 之间时，就可以断定，后续的两个字节码点位于 <code>U+DC00...U+DFFF</code> 之间，并将这四个字节一起解读为一个字符。</p>
+<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><code>UTF-16</code> 编码是一个很不错的编码方式，因为大部分常用字符都位于基本平面内，也就是使用2字节就可以表示大部分的常用字符。<br>可是也同样是因为使用 2 个字节存储，导致它不能兼容 <code>ASCII</code> 编码。</p>
+<p>而 <code>UTF-8</code> 就是一种可以兼容 <code>ASCII</code> 编码的<strong>变长</strong>的 <code>Unicode</code> 的编码实现。</p>
+<p><code>UTF-8</code> 是一种针对 <code>Unicode</code> 的可变长度字符编码，也是一种前缀码。<br>它可以用一至四个字节对 <code>Unicode</code> 字符集中的所有有效编码码点进行编码。<br>由于较小值的编码点一般使用频率较高，直接使用 <code>Unicode</code> 编码【此处指<code>UTF-32</code>编码】效率低下，大量浪费内存空间。<br><code>UTF-8</code> 就是为了解决向后兼容 <code>ASCII</code> 码而设计的， <code>Unicode</code> 中前 128 个字符，使用与 <code>ASCII</code> 码相同的二进制值的单个字节进行编码，这使得原来处理 <code>ASCII</code> 字符的软件无需或只需做少部分修改，即可继续使用。<br>也因此，它逐渐成为电子邮件、网页及其他存储或发送文字优先采用的编码方式。</p>
+<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><table>
+<thead>
+<tr>
+<th>Unicode 码点</th>
+<th>UTF-8 编码</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>U+0000</code> - <code>U+007F</code></td>
+<td><code>0xxxxxxx</code></td>
+<td><code>ASCII</code> 字符范围，单字节，字节由 <code>0</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0080</code> - <code>U+07FF</code></td>
+<td><code>110xxxxx</code> <code>10yyyyyy</code></td>
+<td>双字节字符，第一个字节由 <code>110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+0800</code> - <code>U+D7FF</code>, <code>U+E000</code> - <code>U+FFFF</code></td>
+<td><code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code></td>
+<td>三字节字符，第一个字节由 <code>1110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+<tr>
+<td><code>U+010000</code> - <code>U+10FFFF</code></td>
+<td><code>11110xxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code> <code>10wwwwww</code></td>
+<td>四字节字符，第一个字节由 <code>11110</code> 开始，后续字节由 <code>10</code> 开始</td>
+</tr>
+</tbody></table>
+<p>从上面的表格中，你应该能够直观的看出来，在 <code>UTF-8</code> 编码中，从一个字节开始的二进制位，就能判断出这个字节的大致位置。</p>
+<ol>
+<li>如果字节以 <code>0</code> 开始，那么它单独表示一个 <code>ASCII</code> 字符</li>
+<li>如果字节以 <code>10</code> 开始，那么它是一个多字节字符的非首字节</li>
+<li>如果字节以 <code>110</code> 开始，那么它是一个二字节字符的首字节，且后续会有一个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>1110</code> 开始，那么它是一个三字节字符的首字节，且后续会有两个以 <code>10</code> 开头的字节</li>
+<li>如果字节以 <code>11110</code> 开始，那么它是一个四字节字符的首字节，且后续会有三个以 <code>10</code> 开头的字节</li>
+</ol>
+<p>可以很明显的看到，除了前面 128 个字符，跟 <code>ASCII</code> 码保持相同之外，<code>UTF-8</code> 的多字节字符，首字节起始的连续的 1 的数量就是它所占用的字节数，后续字节之所以用 <code>10</code> 开头，也是为了与单字节做区分，避免混淆。</p>
+<p>那么 <code>UTF-8</code> 具体是怎么编码的呢？</p>
+<ol>
+<li>查看字符在 <code>Unicode</code> 的码点所处区间，来确定字节数<ol>
+<li><code>U+0000</code> 至 <code>U+007F</code> 一个字节</li>
+<li><code>U+0080</code> 至 <code>U+07FF</code> 两个字节</li>
+<li><code>U+0800</code> 至 <code>U+FFFF</code> 三个字节</li>
+<li><code>U+010000</code> 至 <code>U+10FFFF</code> （即16个辅助平面）四个字符</li>
+</ol>
+</li>
+<li>如果是一个字节，直接使用码点对应的8位二进制码</li>
+<li>如果是多字节，那么将码点对应的二进制码，从右到左，一个个填充到上面表格对应字节中的待填充区域【就是表格里的 <code>x</code>,<code>y</code>,<code>z</code>,<code>w</code>的位置】，待右侧填充完毕，如果左侧还有未填充的位置，则统一填 0，就得到了 <code>UTF-8</code> 中对应的二进制码。</li>
+</ol>
+<p>比如：<code>好</code> 在 <code>Unicode</code> 中的码点是十六进制的 <code>0x597D</code>，落在区间 <code>U+0800</code> - <code>U+FFFF</code> 内，所以在 <code>UTF-8</code> 中表示是三字节：<code>1110xxxx</code> <code>10yyyyyy</code> <code>10zzzzzz</code>。<br><code>0x597D</code> 转成二进制表示是 <code>0b101100101111101</code>，然后从右向左填充，切出最右边的6位 <code>111101</code> 填入第三个字节右侧 6 个 <code>z</code> 的位置，再切出余下的右侧 6 位 <code>100101</code> 填入第二个字节右侧 6 个 <code>y</code> 的位置，余下 3 位 <code>101</code> 填入首字节的最右侧，最后还有一个 <code>x</code> 未填充，补上 0，就得到了 <code>好</code> 字在 <code>UTF-8</code> 中的二进制码 <code>11100101</code> <code>10100101</code> <code>10111101</code>。</p>
+<p><img data-src="/images/posts/2020081101.png"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhb21pbmd5YW5nL2FydGljbGUvZGV0YWlscy83OTM3NDIwOQ==">https://blog.csdn.net/yaomingyang/article/details/79374209<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTQvMTIvdW5pY29kZS5odG1s">http://www.ruanyifeng.com/blog/2014/12/unicode.html<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMDcvMTAvYXNjaWlfdW5pY29kZV9hbmRfdXRmLTguaHRtbA==">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8wZjVmZDkzZWZjNDY=">https://www.jianshu.com/p/0f5fd93efc46<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMTAxNjk1OTY2MzYwMjQwMC8xMDE3MDc1MzIzNjMyODk2">https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuY29kZW5vbmcuY29tLzEwNjExNDU1Lw==">https://www.codenong.com/10611455/<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvamkud2FuZy9qYXZhc2NyaXB0LW5vdGUtMS1jaGFyYWN0ZXItZW5jb2Rpbmcv">https://zhaoji.wang/javascript-note-1-character-encoding/<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTE2">https://zh.wikipedia.org/wiki/UTF-16<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvVVRGLTg=">https://zh.wikipedia.org/wiki/UTF-8<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MTIwMjQxMg==">https://zhuanlan.zhihu.com/p/51202412<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+
+          <div class="post-tags">
+              <a href="/tags/Encoding/" rel="tag"># Encoding</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/07/z-index%E4%B8%8E%E5%A0%86%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87.html" rel="prev" title="z-index与堆叠上下文">
+                  <i class="fa fa-chevron-left"></i> z-index与堆叠上下文
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/13/%E5%9C%A8mac%E7%9A%84%E7%BB%88%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95.html" rel="next" title="在Mac的终端添加命令别名的方法">
+                  在Mac的终端添加命令别名的方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"wayowe","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moesuiga","repo":"blog-comments-by-gitalk","client_id":"827326488d2cde661c88","client_secret":"0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0","admin_user":"moesuiga","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"88716396cadfa76adf3f4187ff7aa2a4"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"moesuiga.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CSS选择器的大致整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS选择器">
+<meta property="og:url" content="https://moesuiga.github.io/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="CSS选择器的大致整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moesuiga.github.io/images/gallery/0100.jpg">
+<meta property="article:published_time" content="2018-01-11T08:57:12.000Z">
+<meta property="article:modified_time" content="2021-05-11T13:35:00.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moesuiga.github.io/images/gallery/0100.jpg">
+
+
+<link rel="canonical" href="https://moesuiga.github.io/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://moesuiga.github.io/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html","path":"/2018/01/11/css选择器.html","title":"CSS选择器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS选择器 | 地平线·梦</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-135498029-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">地平线·梦</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">基础选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">属性选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#attribute-value-%E4%B8%8E-attribute-value-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">[attribute~&#x3D;value]与[attribute*&#x3D;value]的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E7%B1%BB%E3%80%81%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">伪类、伪元素选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">组合选择器</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <div class="site-author-image">
+      <img itemprop="image" alt="Suiga" src="/images/suiga.gif">
+    </div>
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/images/gallery/0100.jpg" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://moesuiga.github.io/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
+      <meta itemprop="name" content="Suiga">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+      <meta itemprop="description" content="我把脑子丢了">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CSS选择器 | 地平线·梦">
+      <meta itemprop="description" content="CSS选择器的大致整理">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS选择器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-11 16:57:12" itemprop="dateCreated datePublished" datetime="2018-01-11T16:57:12+08:00">2018-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-11 21:35:00" itemprop="dateModified" datetime="2021-05-11T21:35:00+08:00">2021-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">技术文章</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2018/01/11/css%E9%80%89%E6%8B%A9%E5%99%A8.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/01/11/css选择器.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">CSS选择器的大致整理</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>CSS-*Cascading Style Sheet(层叠样式表)*，给HTML元素添加各种样式的文件。CSS选择器就是用来匹配要添加样式的元素的。</p>
+<a id="more"></a>
+<p><span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vY3NzcmVmL2Nzc19zZWxlY3RvcnMuYXNw">W3school<i class="fa fa-external-link-alt"></i></span></p>
+<p>按照我个人的理解，将其分为：</p>
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8">基础选择器</a></li>
+<li><a href="#%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8">属性选择器</a></li>
+<li><a href="#%E4%BC%AA%E7%B1%BB%E3%80%81%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8">伪类、伪元素选择器</a></li>
+<li><a href="#%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8">组合选择器</a></li>
+</ul>
+<h3 id="基础选择器"><a href="#基础选择器" class="headerlink" title="基础选择器"></a>基础选择器</h3><p>基础选择器就相当于选择器的基础组成部分一样。</p>
+<ul>
+<li><p>通配符选择器(*)<br>匹配所有的标签，但权重最低(比继承高)</p>
+</li>
+<li><p>标签(元素)选择器(tag/element)<br>匹配对应的标签。<br><em>tips</em>: 标签就是元素，元素就是标签，不同的叫法而已</p>
+</li>
+<li><p>类选择器(.class)<br>选择属性<code>class</code>中有对应名称的元素</p>
+</li>
+<li><p>ID选择器(#id)<br>选择属性<code>id</code>中有对应名称的元素</p>
+</li>
+</ul>
+<p>其实属性选择器应该也可以归为基础选择器，但是因为属性选择器里有多种匹配模式，所以单独提出来了。</p>
+<h3 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h3><p>属性选择器一般都会与其他选择器组合使用。</p>
+<ul>
+<li><p>[attribute]<br>选择具有<code>attribute</code>属性的元素</p>
+</li>
+<li><p>[attribute=value]<br>选择具有属性<code>attribute</code>且值为<code>value</code>的元素</p>
+</li>
+<li><p>[attribute~=value]<br>选择属性<code>attribute</code>中含有单词<code>value</code>的元素</p>
+</li>
+<li><p>[attribute|=value]<br>选择属性<code>attribute</code>以单词<code>value</code>开头的元素</p>
+</li>
+<li><p>[attribute*=value]<br>选择属性<code>attribute</code>中包含字符串<code>value</code>的元素</p>
+</li>
+<li><p>[attribute^=value]<br>选择属性<code>attribute</code>以字符串<code>value</code>开头的元素</p>
+</li>
+<li><p>[attribute$=value]<br>选择属性<code>attribute</code>以字符串<code>value</code>结尾的元素</p>
+</li>
+</ul>
+<h4 id="attribute-value-与-attribute-value-的区别"><a href="#attribute-value-与-attribute-value-的区别" class="headerlink" title="[attribute~=value]与[attribute*=value]的区别"></a>[attribute~=value]与[attribute*=value]的区别</h4><p><code>[attribute~=value]</code>匹配的是<em>单词</em>，表示的是某个属性attribute的值里有value这个词，而<code>[attribute*=value]</code>匹配的是<em>字符串</em>，表示attribute的值里包含value这串字符。</p>
+<p>举个例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[class~=err]</span> &#123;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-attr">[class*=err]</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;error&quot;</span>&gt;</span></span><br><span class="line">  错误信息</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;err or&quot;</span>&gt;</span></span><br><span class="line">  另一条</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的例子中<code>[class~=err]</code>并不会选中<code>class=&quot;error&quot;</code>只会选中<code>class=&quot;err or&quot;</code>，而<code>[class*=err]</code>则两个都能选中。</p>
+<p>也就是说<code>[attribute~=value]</code>是以<em>单词</em>为度量进行匹配，而<code>[attribute*=value]</code>则以<em>字符串</em>的形式进行匹配，不论是否是完整的一个单词。</p>
+<blockquote>
+<p>同样的<code>[attribute|=value]</code>与<code>[attribute^=value]</code>的区别也是如此。</p>
+</blockquote>
+<h3 id="伪类、伪元素选择器"><a href="#伪类、伪元素选择器" class="headerlink" title="伪类、伪元素选择器"></a>伪类、伪元素选择器</h3><p><code>伪类/伪元素</code>就是一种拥有类似<code>类/元素</code>的性质却又不是<code>类/元素</code>的东西。一般的，伪类选择器以<code>:</code>开头，伪元素选择器以<code>::</code>开头。</p>
+<blockquote>
+<p>伪类、伪元素选择器一般不会单独使用，而是与其他选择器组合在一起使用。</p>
+</blockquote>
+<ul>
+<li><p><code>:before/:after/::before/::after</code></p>
+<blockquote>
+<p>tips: <code>:before/:after</code>与<code>::before/::after</code>实际上的用法完全相同，之所以一个是伪类一个是伪元素只是不同时期的归类不同而已。<br>早期将其归类为<em>伪类</em>，而后来则归为了<em>伪元素</em>。<br>不过现代浏览器也支持伪类写法，所以如果需要兼容旧版浏览器的话，可以直接以伪类形式书写。<br>另外该选择器有一个必须的样式属性<code>content</code>，否则该选择器不生效。</p>
+</blockquote>
+<ul>
+<li><code>:before/::before</code>在某个元素的内容之前插入</li>
+<li><code>:after/::after</code>在某个元素的内容之后插入</li>
+</ul>
+</li>
+<li><p><code>:link/:visited/:active/:hover/:focus</code></p>
+<ul>
+<li><code>:link</code>用于选择未被访问过的链接</li>
+<li><code>:visited</code>用于选择已被访问过的链接</li>
+<li><code>:active</code>用于选择活动<strong>元素</strong>(即当前选中的元素，直观点表达就是按下鼠标不松开的状态)</li>
+<li><code>:hover</code>用于选择鼠标悬浮于其上的<strong>元素</strong>(即鼠标指针指向的元素)</li>
+<li><code>:focus</code>用于选择获得焦点的<strong>可获取焦点的元素</strong>(一般是表单元素和超链接)</li>
+</ul>
+</li>
+<li><p><code>:first-letter/:first-line</code></p>
+<ul>
+<li><code>:first-letter</code>选择首字母，中文下选择首字</li>
+<li><code>:first-line</code>选择首行</li>
+</ul>
+</li>
+<li><p>子元素伪类(需要有父元素)</p>
+<ul>
+<li><code>:first-child</code>选择首个子元素</li>
+<li><code>:last-child</code>选择最后一个子元素</li>
+<li><code>:nth-child(n)</code>选择第n个子元素<blockquote>
+<p>可以使用数学表达式来选择多个子元素。<br>如：<code>:nth-child(n + 2)</code>选择第2个以后的子元素，<code>nth-child(2n)</code>选择偶数子元素<br>还可以使用负数表示：`nth-child(-n + 2)选择最后两个</p>
+</blockquote>
+</li>
+<li><code>nth-last-child(n)</code>同上，从最后一个开始计数</li>
+<li><code>:only-child</code>选择唯一的子元素</li>
+<li><code>:first-of-type</code>选择首个(某一类型的)子元素</li>
+<li><code>:last-of-type</code>选择最后一个(某一类型的)子元素</li>
+<li><code>:nth-of-type(n)</code>选择第n个(某一类型的)子元素</li>
+<li><code>:nth-last-of-type(n)</code>同上，从最后一个开始计数</li>
+<li><code>:only-of-type</code>选择唯一的(某一类型的)子元素</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>child</code>与<code>of-type</code>的区别：<br><code>child</code>是包含所有子元素进行计算的，<br>而<code>of-type</code>则只包含先通过与其组合的其他选择器匹配后得到的子元素，而非全部子元素。</p>
+</blockquote>
+<ul>
+<li>其他<ul>
+<li><code>:root</code>选择根元素，HTML里的根元素就是<code>html</code>标签</li>
+<li><code>:lang(language)</code>选择带有以<code>language</code>开头的<code>lang</code>属性值的元素<blockquote>
+<p>如：<code>p:lang(it)</code>表示选择带有以<code>it</code>开头的<code>lang</code>属性的p元素</p>
+</blockquote>
+</li>
+<li><code>:empty</code>选择没有子元素(包括文本节点)的元素</li>
+<li><code>:target</code>选择当前活动的元素(url中的锚点指向的ID元素)</li>
+<li><code>:enabled</code>选择启用的元素</li>
+<li><code>:disabled</code>选择禁用的元素</li>
+<li><code>:checked</code>选择被选中的元素</li>
+<li><code>:not(selector)</code>选择不是selector选中的元素</li>
+<li><code>::selection</code>选择被用户选取的元素部分<blockquote>
+<p>应用了<code>:first-letter</code>样式的元素，不会应用<code>::selection</code>的样式</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合选择器"><a href="#组合选择器" class="headerlink" title="组合选择器"></a>组合选择器</h3><p>顾名思义，组合选择器就是由两个或多个基础选择器组合成的选择器。</p>
+<blockquote>
+<p>以下用a, b, … 等表示基础选择器</p>
+</blockquote>
+<ul>
+<li>并集选择器(a, b)</li>
+<li>交集选择器(ab)</li>
+<li>兄弟选择器(a ~ b)</li>
+<li>直接兄弟选择器(a + b)</li>
+<li>父子选择器(a &gt; b)</li>
+<li>后代选择器(a b)</li>
+<li>其他由以上多种选择器进行组合的选择器(a &gt; b c, d + e f ~ g)</li>
+</ul>
+<blockquote>
+<p>注意后代选择器之间是<strong>有空格</strong>的，而交集选择器之间是<strong>没有空格</strong>的<br><code>a ~ b</code>是选择与a元素同级的后面所有的b元素，<br>而<code>a + b</code>则是选择紧跟着a元素后面的b元素，如果a元素后面的元素不是b，则不匹配</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/07/console-in-web.html" rel="prev" title="console in web">
+                  <i class="fa fa-chevron-left"></i> console in web
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/02/angel-with-a-shotgun-the-cab.html" rel="next" title="ANGEL WITH A SHOTGUN - THE CAB">
+                  ANGEL WITH A SHOTGUN - THE CAB <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"wayowe","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moesuiga","repo":"blog-comments-by-gitalk","client_id":"827326488d2cde661c88","client_secret":"0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0","admin_user":"moesuiga","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c694a6a8282313c76f5b3278453488b3"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>

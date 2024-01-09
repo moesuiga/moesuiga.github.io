@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/images/avatar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"moesuiga.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Windows 系统的 cmd 工具饱受开发人员的非议，后来 Windows 内置了 Linux 子系统 WSL (Windows subsystem for Linux)，并推出了 Windows Terminal 工具，其中可打开 Ubuntu bash 终端，并且可访问 Windows 系统的文件，虽然我以前已经习惯了使用 Cmder 终端提供的 bash，但还是想试试 WSL。但是在使用时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL中npm命令错误">
+<meta property="og:url" content="https://moesuiga.github.io/2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html">
+<meta property="og:site_name" content="地平线·梦">
+<meta property="og:description" content="Windows 系统的 cmd 工具饱受开发人员的非议，后来 Windows 内置了 Linux 子系统 WSL (Windows subsystem for Linux)，并推出了 Windows Terminal 工具，其中可打开 Ubuntu bash 终端，并且可访问 Windows 系统的文件，虽然我以前已经习惯了使用 Cmder 终端提供的 bash，但还是想试试 WSL。但是在使用时">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moesuiga.github.io/images/gallery/0027.jpeg">
+<meta property="article:published_time" content="2021-07-03T03:56:46.000Z">
+<meta property="article:modified_time" content="2021-07-03T05:23:59.000Z">
+<meta property="article:author" content="Suiga">
+<meta property="article:tag" content="WSL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moesuiga.github.io/images/gallery/0027.jpeg">
+
+
+<link rel="canonical" href="https://moesuiga.github.io/2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://moesuiga.github.io/2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html","path":"/2021/07/03/wsl中npm命令错误.html","title":"WSL中npm命令错误"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>WSL中npm命令错误 | 地平线·梦</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135498029-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-135498029-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shrikhand&family=Recursive&display=swap" rel="stylesheet">
+
+<script src="/js/hitokoto.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">地平线·梦</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">与其临渊羡鱼，不如退而结网</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <div class="site-author-image">
+      <img itemprop="image" alt="Suiga" src="/images/suiga.gif">
+    </div>
+  <p class="site-author-name" itemprop="name">Suiga</p>
+  <div class="site-description" itemprop="description">我把脑子丢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moesuiga"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vZXN1aWdhQGdtYWlsLmNvbQ==" title="E-Mail → mailto:moesuiga@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YXlvd2UuY29tL3JlYWN0L3Rvb2wv" title="https:&#x2F;&#x2F;wayowe.com&#x2F;react&#x2F;tool&#x2F;">Tools</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vZXN1aWdh" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/images/gallery/0027.jpeg" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://moesuiga.github.io/2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/suiga.gif">
+      <meta itemprop="name" content="Suiga">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="地平线·梦">
+      <meta itemprop="description" content="我把脑子丢了">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="WSL中npm命令错误 | 地平线·梦">
+      <meta itemprop="description" content="Windows 系统的 cmd 工具饱受开发人员的非议，后来 Windows 内置了 Linux 子系统 <b>WSL</b> (<em>Windows subsystem for Linux</em>)，并推出了 Windows Terminal 工具，其中可打开 Ubuntu bash 终端，并且可访问 Windows 系统的文件，虽然我以前已经习惯了使用 Cmder 终端提供的 bash，但还是想试试 WSL。<br>但是在使用时发现，在这个 bash 终端中使用 node/npm/npx 命令会出现错误，无法使用。搜索发现不少人遇到这个问题，在 microsoft/WSL 的仓库中提了 issue。查看下来发现多数人的解决方法是在子系统中重新安装 node，但我不想把同一样工具安装两个，之后终于找到了解决方法，并在这里记录下整个过程。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WSL中npm命令错误
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-03 11:56:46 / 修改时间：13:23:59" itemprop="dateCreated datePublished" datetime="2021-07-03T11:56:46+08:00">2021-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/07/03/wsl%E4%B8%ADnpm%E5%91%BD%E4%BB%A4%E9%94%99%E8%AF%AF.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2021/07/03/wsl中npm命令错误.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">Windows 系统的 cmd 工具饱受开发人员的非议，后来 Windows 内置了 Linux 子系统 <b>WSL</b> (<em>Windows subsystem for Linux</em>)，并推出了 Windows Terminal 工具，其中可打开 Ubuntu bash 终端，并且可访问 Windows 系统的文件，虽然我以前已经习惯了使用 Cmder 终端提供的 bash，但还是想试试 WSL。<br>但是在使用时发现，在这个 bash 终端中使用 node/npm/npx 命令会出现错误，无法使用。搜索发现不少人遇到这个问题，在 microsoft/WSL 的仓库中提了 issue。查看下来发现多数人的解决方法是在子系统中重新安装 node，但我不想把同一样工具安装两个，之后终于找到了解决方法，并在这里记录下整个过程。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在 Windows 的 WSL 终端下，运行 npm 命令提示错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">: not foundram Files/nodejs/npm: 3: /mnt/c/Program Files/nodejs/npm:</span><br><span class="line">: not foundram Files/nodejs/npm: 5: /mnt/c/Program Files/nodejs/npm:</span><br><span class="line">/mnt/c/Program Files/nodejs/npm: 6: /mnt/c/Program Files/nodejs/npm: Syntax error: word unexpected (expecting <span class="string">&quot;in&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>原因是回车符号，使用 <code>vim -b npm</code> 打开 npm 文件，可以看到每行后面多了个 <code>^M</code> 的符号；这个符号代表的是 Windows 系统下的回车符 <code>\r</code>。<br>一般地，Unix 类系统的换行采用的是 <code>LF</code>，即 <code>\n</code>；<br>而 Windows 系统的换行则是 <code>CRLF</code>，即 <code>\r\n</code>；<br>这多出来的 <code>\r</code> 就是上述错误的罪魁祸首。</p>
+<p>通过命令 <code>dos2unix npm</code> 把文件转换为 Unix 系的文件格式即可解决这个问题。</p>
+<p>但是转换之后再次运行，又出现了错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">module.js:472</span><br><span class="line">    throw err;</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">Error: Cannot find module <span class="string">&#x27;C:\mnt\c\Program Files\nodejs\node_modules\npm\bin\npm-cli.js&#x27;</span></span><br><span class="line">    at Function.Module._resolveFilename (module.js:470:15)</span><br><span class="line">    at Function.Module._load (module.js:418:25)</span><br><span class="line">    at Module.runMain (module.js:605:10)</span><br><span class="line">    at run (bootstrap_node.js:420:7)</span><br><span class="line">    at startup (bootstrap_node.js:139:9)</span><br><span class="line">    at bootstrap_node.js:535:3</span><br></pre></td></tr></table></figure>
+
+<p>具体原因不清楚，猜测大概是在 Windows 系统中 <code>/mnt/c/...</code> 不被认为是绝对路径，然后在前面加了个盘符，结果导致路径查找错误。</p>
+<p>最后使用 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC9XU0wvaXNzdWVzLzE1MTIjaXNzdWVjb21tZW50LTMwNTk0NDQ3Ni1wZXJtYWxpbms=">WSL issues/1512 felipemanga 提供的方法<i class="fa fa-external-link-alt"></i></span> 解决了这个问题。</p>
+<p>思路就是修改 npm 文件中的 NODE_EXE 文件路径，然后新建一个 node 文件，并在其中把路径改为 Windows 路径。</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># npm 文件</span><br><span class="line"># 修改 NODE_EXE 文件路径</span><br><span class="line"><span class="deletion">- NODE_EXE=&quot;$basedir/node.exe&quot;</span></span><br><span class="line"><span class="addition">+ NODE_EXE=&quot;$basedir/node&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新的文件 node，写入内容</span></span><br><span class="line">vim node</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 遍历参数</span></span><br><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 如果参数是一个存在的文件路径</span></span><br><span class="line">  <span class="keyword">if</span> [ -e <span class="string">&quot;<span class="variable">$var</span>&quot;</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 修改文件路径 /mnt/c/path/to/file =&gt; c:\path\to\file</span></span><br><span class="line">    var=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$var</span>&quot;</span> | sed -e <span class="string">&#x27;s,^/mnt/\([a-z]\)/,\1:/,&#x27;</span> | sed -e <span class="string">&#x27;s,/,\\,g&#x27;</span>)</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="comment"># 收集参数</span></span><br><span class="line">  Args=(<span class="string">&quot;<span class="variable">$&#123;Args[@]&#125;</span>&quot;</span> <span class="string">&quot;<span class="variable">$var</span>&quot;</span>)</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把收集的修改过的路径参数传递给 node.exe</span></span><br><span class="line">node.exe <span class="string">&quot;<span class="variable">$&#123;Args[@]&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为我之前用惯了 Cmder 的 bash，而上面这种方式修改之后的路径在 Cmder 中运行反而会出现错误，因此我在此基础上进行了些微修改，使其仅在 WSL 终端生效。</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># node 文件</span><br><span class="line"><span class="addition">+ # 是否在 WSL 中运行</span></span><br><span class="line"><span class="addition">+ inWSL=&quot;$(uname -a | grep Linux | grep Microsoft)&quot;</span></span><br><span class="line">  for var in &quot;$@&quot;</span><br><span class="line">  do</span><br><span class="line"><span class="deletion">-   if [ -e &quot;$var&quot; ]</span></span><br><span class="line">    # 仅在 WSL 中时，修改文件路径格式</span><br><span class="line"><span class="addition">+   if [[ $inWSL &amp;&amp; -e &quot;$var&quot; ]]</span></span><br><span class="line">    then</span><br><span class="line">      var=$(echo &quot;$var&quot; | sed -e &#x27;s,^/mnt/\([a-z]\)/,\1:/,&#x27; | sed -e &#x27;s,/,\\,g&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>对 npm 文件的操作，再对 npx 文件来一遍，也可以使用 npx 了。</p>
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC9XU0wvaXNzdWVzLzE1MTI=">Issue running npm command · Issue #1512 · microsoft/WSL<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9hc2svMjcxMTA3">告诉我们是否在WSL中运行linux吗？-问答-阿里云开发者社区-阿里云<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVub29iLmNvbS9saW51eC9saW51eC1zaGVsbC1iYXNpYy1vcGVyYXRvcnMuaHRtbA==">Shell 基本运算符 | 菜鸟教程<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><hr>
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+
+          <div class="post-tags">
+              <a href="/tags/WSL/" rel="tag"># WSL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/01/macos-10-15-%E5%AE%89%E8%A3%85mongodb%E7%9A%84%E6%96%B9%E6%B3%95.html" rel="prev" title="MacOS 10.15+安装MongoDB的方法">
+                  <i class="fa fa-chevron-left"></i> MacOS 10.15+安装MongoDB的方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/25/safari%E4%B8%AD3d%E5%8F%98%E6%8D%A2%E7%9A%84%E9%97%AE%E9%A2%98.html" rel="next" title="Safari中3D变换的问题">
+                  Safari中3D变换的问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Suiga</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+<script>
+  (function () {
+    // 更改 gallery 结构，支持 fancybox 点击查看
+    var galleries = document.querySelectorAll('.post-gallery-image');
+    if (galleries && galleries.length) {
+      galleries.forEach((ele) => {
+        var img = ele.querySelector('img');
+        var img2 = document.createElement('img');
+        var a = document.createElement('a');
+        a.href = img.src;
+        img2.src = img.src;
+        a.classList.add('fancybox', 'fancybox.image');
+        a.setAttribute('rel', 'default');
+        a.setAttribute('data-fancybox', 'default');
+        a.setAttribute('itemscope', true);
+        a.setAttribute('itemtype', 'http://schema.org/ImageObject');
+        a.setAttribute('itemprop', 'url');
+        a.append(img2);
+        ele.append(a);
+        img.style.display = 'none';
+      });
+    }
+  })();
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"wayowe","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moesuiga","repo":"blog-comments-by-gitalk","client_id":"827326488d2cde661c88","client_secret":"0c5e5b3b38ce84cc8c7efd8aad0d450f5dd549b0","admin_user":"moesuiga","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"109496b7bcc91d6b53631003f0136b1e"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+<!-- 今日诗词 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/rem.model.json"},"display":{"position":"right","width":300,"height":400,"hOffset":0,"vOffset":0},"mobile":{"show":false},"dialog":{"enable":false,"hitokoto":true}});</script></body>
+</html>
