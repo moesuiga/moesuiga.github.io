@@ -16,7 +16,7 @@ jobs:
       - name: Cache Deps
         uses: actions/setup-node@v4
         with:
-          version: 20
+          node-version: lts/*
           cache: 'yarn'
       - name: Setup hexo
         env:
